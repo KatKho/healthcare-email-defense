@@ -22,7 +22,7 @@ A web-based demo for an AI Email Defense Agent designed for healthcare organizat
    - Generate an API key (free tier available)
 
 2. **Configure Environment**:
-   - Copy `env.example` to `.env`
+   - Copy `.env.example` to `.env`
    - Add your OpenRouter API key: `OPENROUTER_API_KEY=your_key_here`
 
 3. **Install Dependencies**:

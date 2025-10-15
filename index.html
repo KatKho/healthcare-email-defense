@@ -454,6 +454,191 @@
             font-size: 0.8rem;
         }
 
+        .role-warning {
+            margin-top: 5px;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .role-warning.high {
+            background: #fed7d7;
+            border-left: 3px solid #e53e3e;
+            color: #742a2a;
+        }
+
+        .role-warning.moderate {
+            background: #fef5e7;
+            border-left: 3px solid #d69e2e;
+            color: #744210;
+        }
+
+        .role-info {
+            margin-top: 5px;
+            padding: 4px;
+            background: #f0fff4;
+            border-radius: 4px;
+            border-left: 3px solid #38a169;
+        }
+
+        .role-info small {
+            color: #2f855a;
+            font-size: 0.8rem;
+        }
+
+        .reasoning-report-btn {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .reasoning-report-btn:hover {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1a365d 100%);
+            transform: translateY(-1px);
+        }
+
+        .reasoning-report-btn:hover {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1a365d 100%);
+            transform: translateY(-1px);
+        }
+
+        .reasoning-modal-content {
+            max-width: 900px;
+            width: 90vw;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .reasoning-report-modal {
+            font-size: 0.95rem;
+        }
+
+        .email-context {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .email-context h3 {
+            margin: 0 0 12px 0;
+            color: #1e3a8a;
+            font-size: 1.1rem;
+        }
+
+        .context-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .context-grid div {
+            color: #374151;
+        }
+
+        .recipient-details-modal {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #bfdbfe;
+        }
+
+        .recipient-details-modal h4 {
+            margin: 0 0 10px 0;
+            color: #1e40af;
+            font-size: 1rem;
+        }
+
+        .no-threats {
+            color: #059669;
+            font-style: italic;
+        }
+
+        .reasoning-section {
+            margin-bottom: 15px;
+        }
+
+        .reasoning-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .reasoning-section h4 {
+            color: #2d3748;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #2c5aa0;
+            padding-bottom: 4px;
+        }
+
+        .reasoning-section p {
+            color: #4a5568;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .reasoning-section ul {
+            color: #4a5568;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .reasoning-section li {
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .brief-comment {
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .reasoning-section.recommendation {
+            background: linear-gradient(135deg, #fef5e7 0%, #fed7d7 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #d69e2e;
+            margin-top: 20px;
+        }
+
+        .reasoning-section.recommendation h4 {
+            color: #744210;
+            border-bottom-color: #d69e2e;
+        }
+
+        .reasoning-section.recommendation p {
+            color: #744210;
+            font-size: 1rem;
+        }
+
+        .recipient-info {
+            margin-top: 8px;
+            padding: 10px;
+            background: #f0f9ff;
+            border-radius: 6px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .recipient-details {
+            font-size: 0.9rem;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .unknown-user-warning {
+            display: block;
+            margin-top: 5px;
+            color: #d69e2e;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
         .history-section {
             margin-top: 30px;
         }
@@ -697,6 +882,21 @@
             <div class="input-section">
                 <h2>📧 Email Analysis</h2>
                 
+                <div class="form-group">
+                    <label for="recipientEmail">Recipient Email:</label>
+                    <input type="text" id="recipientEmail" placeholder="e.g., dr.smith@generalhospital.org" 
+                           oninput="updateRecipientInfo()" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                    <div id="recipientInfo" class="recipient-info" style="display: none;">
+                        <div class="recipient-details">
+                            <span id="recipientName"></span> • 
+                            <span id="recipientRole"></span> • 
+                            <span id="recipientDepartment"></span>
+                            <span id="unknownUserWarning" class="unknown-user-warning" style="display: none;">
+                                ⚠️ Unknown user - role inferred from email pattern
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="sender">Sender Email:</label>
@@ -790,16 +990,36 @@
                 </div>
 
                 <div class="modal-actions">
-                    <button class="feedback-btn correct" onclick="setFeedbackFromModal('correct')">
-                        ✓ Correct
+                    <button class="feedback-btn correct" onclick="confirmFeedbackFromModal('correct')">
+                        🛡️ Quarantine
                     </button>
-                    <button class="feedback-btn incorrect" onclick="setFeedbackFromModal('incorrect')">
-                        ✗ Incorrect
+                    <button class="feedback-btn incorrect" onclick="confirmFeedbackFromModal('incorrect')">
+                        📧 Send Email
                     </button>
                     <button class="modal-close-btn" onclick="closeModal()">
                         Close
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reasoning Report Modal -->
+    <div id="reasoningModal" class="modal" style="display: none;">
+        <div class="modal-content reasoning-modal-content">
+            <div class="modal-header">
+                <h2>📊 Detailed Reasoning Report</h2>
+                <span class="close" onclick="closeReasoningModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="reasoningModalContent">
+                    <!-- Content will be dynamically populated -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-close-btn" onclick="closeReasoningModal()">
+                    Close Report
+                </button>
             </div>
         </div>
     </div>
@@ -816,6 +1036,10 @@
             learnedPatterns: {},
             feedbackHistory: [],
             threatIntelligence: {},
+            rolePatterns: {
+                // Store role-specific pattern learning
+                // Structure: role -> pattern -> { count, classification, lastSeen }
+            },
             performanceMetrics: {
                 totalAnalyzed: 0,
                 correctPredictions: 0,
@@ -823,7 +1047,8 @@
                 phishingCaught: 0,
                 falsePositives: 0,
                 securityThreatsBlocked: 0,
-                highThreatEmails: 0
+                highThreatEmails: 0,
+                roleMismatches: 0
             },
             autoActions: {
                 quarantineThreshold: 85,
@@ -831,6 +1056,113 @@
                 autoQuarantineEnabled: true
             }
         };
+
+        // Internal User Directory - Maps email addresses to roles
+        const userDirectory = {
+            // Medical Staff
+            'dr.smith@generalhospital.org': { role: 'doctor', name: 'Dr. Sarah Smith', department: 'Cardiology' },
+            'dr.johnson@generalhospital.org': { role: 'doctor', name: 'Dr. Michael Johnson', department: 'Emergency Medicine' },
+            'dr.patel@generalhospital.org': { role: 'doctor', name: 'Dr. Priya Patel', department: 'Pediatrics' },
+            'dr.chen@generalhospital.org': { role: 'doctor', name: 'Dr. Lisa Chen', department: 'Surgery' },
+            
+            // Nursing Staff
+            'nurse.williams@generalhospital.org': { role: 'nurse', name: 'Rebecca Williams, RN', department: 'ICU' },
+            'nurse.davis@generalhospital.org': { role: 'nurse', name: 'James Davis, RN', department: 'Emergency' },
+            'nurse.garcia@generalhospital.org': { role: 'nurse', name: 'Maria Garcia, RN', department: 'Pediatrics' },
+            'nurse.brown@generalhospital.org': { role: 'nurse', name: 'Ashley Brown, RN', department: 'Surgery' },
+            'charge.nurse@generalhospital.org': { role: 'nurse', name: 'Patricia Martinez, RN', department: 'Charge Nurse' },
+            
+            // Administrative Staff
+            'admin.thompson@generalhospital.org': { role: 'admin', name: 'Robert Thompson', department: 'Hospital Administration' },
+            'admin.wilson@generalhospital.org': { role: 'admin', name: 'Jennifer Wilson', department: 'Patient Services' },
+            'hr@generalhospital.org': { role: 'admin', name: 'HR Department', department: 'Human Resources' },
+            'compliance@generalhospital.org': { role: 'admin', name: 'Compliance Office', department: 'Regulatory Affairs' },
+            'admin.lee@generalhospital.org': { role: 'admin', name: 'David Lee', department: 'Medical Records' },
+            
+            // IT Staff
+            'it.support@generalhospital.org': { role: 'it', name: 'IT Support Team', department: 'Information Technology' },
+            'it.security@generalhospital.org': { role: 'it', name: 'IT Security Team', department: 'Cybersecurity' },
+            'sysadmin@generalhospital.org': { role: 'it', name: 'System Administrator', department: 'IT Infrastructure' },
+            'it.miller@generalhospital.org': { role: 'it', name: 'Kevin Miller', department: 'Network Administration' },
+            
+            // Maintenance/Janitorial
+            'maintenance.supervisor@generalhospital.org': { role: 'janitor', name: 'Maintenance Supervisor', department: 'Facilities' },
+            'janitor.lopez@generalhospital.org': { role: 'janitor', name: 'Carlos Lopez', department: 'Environmental Services' },
+            'facilities@generalhospital.org': { role: 'janitor', name: 'Facilities Management', department: 'Building Operations' },
+            'cleaning.crew@generalhospital.org': { role: 'janitor', name: 'Cleaning Crew', department: 'Housekeeping' },
+            
+            // Security Personnel
+            'security.chief@generalhospital.org': { role: 'security', name: 'Security Chief', department: 'Hospital Security' },
+            'security.desk@generalhospital.org': { role: 'security', name: 'Security Desk', department: 'Access Control' },
+            'guard.adams@generalhospital.org': { role: 'security', name: 'John Adams', department: 'Security Patrol' },
+            
+            // Billing Department
+            'billing@generalhospital.org': { role: 'billing', name: 'Billing Department', department: 'Revenue Cycle' },
+            'billing.manager@generalhospital.org': { role: 'billing', name: 'Billing Manager', department: 'Financial Services' },
+            'insurance.claims@generalhospital.org': { role: 'billing', name: 'Insurance Claims', department: 'Claims Processing' },
+            'billing.rodriguez@generalhospital.org': { role: 'billing', name: 'Ana Rodriguez', department: 'Patient Billing' },
+            
+            // Pharmacy Staff
+            'pharmacy.chief@generalhospital.org': { role: 'pharmacy', name: 'Chief Pharmacist', department: 'Hospital Pharmacy' },
+            'pharmacy.tech@generalhospital.org': { role: 'pharmacy', name: 'Pharmacy Technician', department: 'Medication Services' },
+            'pharmacist.white@generalhospital.org': { role: 'pharmacy', name: 'Dr. Susan White, PharmD', department: 'Clinical Pharmacy' },
+            
+            // Lab Technicians
+            'lab.supervisor@generalhospital.org': { role: 'lab', name: 'Lab Supervisor', department: 'Laboratory Services' },
+            'lab.tech@generalhospital.org': { role: 'lab', name: 'Lab Technician', department: 'Clinical Lab' },
+            'pathology@generalhospital.org': { role: 'lab', name: 'Pathology Department', department: 'Anatomical Pathology' },
+            'lab.jones@generalhospital.org': { role: 'lab', name: 'Michelle Jones, MLT', department: 'Blood Bank' },
+            
+            // Radiology Staff
+            'radiology.chief@generalhospital.org': { role: 'radiology', name: 'Chief Radiologist', department: 'Imaging Services' },
+            'xray.tech@generalhospital.org': { role: 'radiology', name: 'X-Ray Technician', department: 'Diagnostic Imaging' },
+            'mri.tech@generalhospital.org': { role: 'radiology', name: 'MRI Technician', department: 'Advanced Imaging' },
+            'radiology.clark@generalhospital.org': { role: 'radiology', name: 'Dr. Mark Clark', department: 'Interventional Radiology' }
+        };
+
+        // Function to detect recipient role from email address
+        function detectRecipientRole(recipientEmail) {
+            if (!recipientEmail || typeof recipientEmail !== 'string') {
+                return null;
+            }
+            
+            const email = recipientEmail.toLowerCase().trim();
+            const userInfo = userDirectory[email];
+            
+            if (userInfo) {
+                return {
+                    role: userInfo.role,
+                    name: userInfo.name,
+                    department: userInfo.department,
+                    isKnownUser: true
+                };
+            }
+            
+            // Fallback: Try to infer role from email patterns
+            if (email.includes('dr.') || email.includes('doctor')) {
+                return { role: 'doctor', name: 'Unknown Doctor', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('nurse')) {
+                return { role: 'nurse', name: 'Unknown Nurse', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('admin')) {
+                return { role: 'admin', name: 'Unknown Admin', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('it.') || email.includes('tech')) {
+                return { role: 'it', name: 'Unknown IT Staff', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('maintenance') || email.includes('janitor') || email.includes('facilities')) {
+                return { role: 'janitor', name: 'Unknown Maintenance', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('security')) {
+                return { role: 'security', name: 'Unknown Security', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('billing') || email.includes('finance')) {
+                return { role: 'billing', name: 'Unknown Billing Staff', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('pharmacy') || email.includes('pharm')) {
+                return { role: 'pharmacy', name: 'Unknown Pharmacy Staff', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('lab')) {
+                return { role: 'lab', name: 'Unknown Lab Staff', department: 'Unknown', isKnownUser: false };
+            } else if (email.includes('radiology') || email.includes('xray') || email.includes('imaging')) {
+                return { role: 'radiology', name: 'Unknown Radiology Staff', department: 'Unknown', isKnownUser: false };
+            }
+            
+            return null;
+        }
 
         // Load API key from server on page load
         async function loadApiKey() {
@@ -900,16 +1232,26 @@
             const sender = document.getElementById('sender').value.trim();
             const subject = document.getElementById('subject').value.trim();
             const body = document.getElementById('body').value.trim();
+            const recipientEmail = document.getElementById('recipientEmail').value.trim();
 
             if (!openrouterApiKey) {
                 alert('OpenRouter API key not configured. Please ensure OPENROUTER_API_KEY is set in environment variables.');
                 return;
             }
 
-            if (!sender || !subject || !body) {
-                alert('Please fill in all fields: sender, subject, and email body.');
+            if (!sender || !subject || !body || !recipientEmail) {
+                alert('Please fill in all fields: sender, recipient, subject, and email body.');
                 return;
             }
+
+            // Detect recipient role automatically
+            const recipientInfo = detectRecipientRole(recipientEmail);
+            if (!recipientInfo) {
+                alert('Unable to determine recipient role. Please check the recipient email address.');
+                return;
+            }
+
+            const userRole = recipientInfo.role;
 
             const analyzeBtn = document.querySelector('.analyze-btn');
             const loading = document.getElementById('loading');
@@ -919,7 +1261,7 @@
 
             try {
                 // Multi-step agentic analysis
-                const result = await performAgenticAnalysis(openrouterApiKey, sender, subject, body);
+                const result = await performAgenticAnalysis(openrouterApiKey, sender, subject, body, userRole);
                 
                 // Add to results array
                 const analysisResult = {
@@ -927,14 +1269,19 @@
                     sender: sender,
                     subject: subject,
                     body: body,
+                    recipientEmail: recipientEmail,
+                    recipientInfo: recipientInfo,
                     classification: result.classification,
                     confidence: result.confidence,
                     comment: result.comment,
+                    reasoningReport: result.reasoningReport || null,
                     feedback: null,
                     timestamp: new Date().toLocaleString(),
                     agentActions: result.agentActions || [],
                     learningApplied: result.learningApplied || false,
-                    threatIntel: result.threatIntel || null
+                    threatIntel: result.threatIntel || null,
+                    roleCheck: result.roleCheck || null,
+                    userRole: result.userRole || userRole
                 };
                 
                 analysisResults.unshift(analysisResult);
@@ -972,9 +1319,11 @@
                 saveAgentMemory();
                 
                 // Clear form
+                document.getElementById('recipientEmail').value = '';
                 document.getElementById('sender').value = '';
                 document.getElementById('subject').value = '';
                 document.getElementById('body').value = '';
+                document.getElementById('recipientInfo').style.display = 'none';
 
             } catch (error) {
                 console.error('Analysis error:', error);
@@ -986,23 +1335,27 @@
         }
 
         // Multi-step agentic analysis with learning and autonomous actions
-        async function performAgenticAnalysis(apiKey, sender, subject, body) {
+        async function performAgenticAnalysis(apiKey, sender, subject, body, userRole) {
             console.log('🤖 Agent starting multi-step analysis...');
             
-            // Step 1: Pattern Recognition - Check learned patterns
+            // Step 1: Role-based Context Check
+            const roleCheck = checkRoleAlignment(userRole, sender, subject, body);
+            console.log('👤 Role alignment result:', roleCheck);
+            
+            // Step 2: Pattern Recognition - Check learned patterns
             const patternMatch = checkLearnedPatterns(sender, subject, body);
             console.log('📊 Pattern recognition result:', patternMatch);
             
-            // Step 2: Threat Intelligence Check
+            // Step 3: Threat Intelligence Check
             const threatIntel = await checkThreatIntelligence(sender, subject, body);
             console.log('🔍 Threat intelligence result:', threatIntel);
             
-            // Step 3: AI Analysis with context
-            const aiResult = await analyzeWithAI(apiKey, sender, subject, body, patternMatch, threatIntel);
+            // Step 4: AI Analysis with context
+            const aiResult = await analyzeWithAI(apiKey, sender, subject, body, patternMatch, threatIntel, roleCheck, userRole);
             console.log('🧠 AI analysis result:', aiResult);
             
-            // Step 4: Autonomous Decision Making
-            const agentActions = determineAutonomousActions(aiResult, patternMatch, threatIntel);
+            // Step 5: Autonomous Decision Making
+            const agentActions = determineAutonomousActions(aiResult, patternMatch, threatIntel, roleCheck);
             console.log('⚡ Autonomous actions:', agentActions);
             
             // Step 5: Apply Learning Context
@@ -1013,7 +1366,9 @@
                 agentActions,
                 learningApplied,
                 patternMatch,
-                threatIntel
+                threatIntel,
+                roleCheck,
+                userRole
             };
         }
 
@@ -1056,6 +1411,122 @@
                 }
             }
             
+            return null;
+        }
+
+        // Role-based context validation
+        function checkRoleAlignment(userRole, sender, subject, body) {
+            const rolePatterns = {
+                'nurse': {
+                    expected: ['patient', 'medication', 'schedule', 'shift', 'care plan', 'nursing', 'treatment', 'vital signs'],
+                    suspicious: ['financial', 'billing', 'payroll', 'hr policy', 'employee benefits', 'maintenance request'],
+                    highRisk: ['presurgery information', 'surgical procedure', 'anesthesia protocol']
+                },
+                'doctor': {
+                    expected: ['patient', 'diagnosis', 'treatment', 'medical record', 'consultation', 'surgery', 'prescription', 'clinical'],
+                    suspicious: ['maintenance', 'janitorial', 'facilities', 'parking', 'cafeteria'],
+                    highRisk: ['billing dispute', 'insurance claim', 'employee termination']
+                },
+                'admin': {
+                    expected: ['policy', 'meeting', 'schedule', 'announcement', 'form', 'procedure', 'administrative'],
+                    suspicious: ['patient diagnosis', 'medical procedure', 'surgery details', 'medication dosage'],
+                    highRisk: ['clinical protocol', 'patient treatment plan', 'medical emergency']
+                },
+                'it': {
+                    expected: ['system', 'network', 'software', 'security', 'update', 'maintenance', 'backup', 'technical'],
+                    suspicious: ['patient care', 'medical diagnosis', 'nursing shift', 'surgery schedule'],
+                    highRisk: ['clinical decision', 'patient treatment', 'medical emergency']
+                },
+                'janitor': {
+                    expected: ['cleaning', 'maintenance', 'supplies', 'schedule', 'safety', 'facilities', 'equipment'],
+                    suspicious: ['patient information', 'medical record', 'treatment plan', 'diagnosis'],
+                    highRisk: ['presurgery information', 'patient data', 'medical records', 'clinical protocol', 'surgery details']
+                },
+                'security': {
+                    expected: ['incident', 'safety', 'access', 'patrol', 'emergency', 'visitor', 'security protocol'],
+                    suspicious: ['patient treatment', 'medical procedure', 'clinical decision', 'medication'],
+                    highRisk: ['patient diagnosis', 'surgery details', 'medical records']
+                },
+                'billing': {
+                    expected: ['invoice', 'payment', 'insurance', 'claim', 'billing', 'financial', 'account'],
+                    suspicious: ['clinical protocol', 'patient care', 'medical treatment', 'nursing'],
+                    highRisk: ['patient diagnosis', 'medical procedure', 'treatment plan']
+                },
+                'pharmacy': {
+                    expected: ['medication', 'prescription', 'drug', 'pharmacy', 'dosage', 'pharmaceutical'],
+                    suspicious: ['maintenance', 'facilities', 'security incident', 'administrative policy'],
+                    highRisk: ['surgery details', 'non-medication medical procedures']
+                },
+                'lab': {
+                    expected: ['lab result', 'test', 'specimen', 'analysis', 'laboratory', 'sample'],
+                    suspicious: ['billing', 'administrative', 'maintenance', 'security'],
+                    highRisk: ['surgery details', 'treatment planning', 'non-diagnostic procedures']
+                },
+                'radiology': {
+                    expected: ['imaging', 'scan', 'x-ray', 'mri', 'ct', 'radiology', 'image'],
+                    suspicious: ['billing dispute', 'maintenance', 'administrative', 'security'],
+                    highRisk: ['non-imaging medical procedures', 'surgery details']
+                }
+            };
+
+            const roleConfig = rolePatterns[userRole];
+            if (!roleConfig) {
+                return null;
+            }
+
+            const emailText = `${subject} ${body}`.toLowerCase();
+            
+            // Check for high-risk content (strong role mismatch)
+            const highRiskMatches = roleConfig.highRisk.filter(keyword => 
+                emailText.includes(keyword.toLowerCase())
+            );
+            
+            if (highRiskMatches.length > 0) {
+                return {
+                    type: 'role_mismatch',
+                    severity: 'high',
+                    confidence: 85,
+                    reason: `High-risk content for ${userRole}: Contains "${highRiskMatches.join(', ')}" which is inappropriate for this role`,
+                    classification: 'Suspicious',
+                    roleMismatch: true,
+                    matchedKeywords: highRiskMatches
+                };
+            }
+
+            // Check for suspicious content (moderate role mismatch)
+            const suspiciousMatches = roleConfig.suspicious.filter(keyword => 
+                emailText.includes(keyword.toLowerCase())
+            );
+            
+            if (suspiciousMatches.length > 1) {
+                return {
+                    type: 'role_mismatch',
+                    severity: 'moderate',
+                    confidence: 65,
+                    reason: `Content may be inappropriate for ${userRole}: Contains "${suspiciousMatches.join(', ')}"`,
+                    classification: 'Suspicious',
+                    roleMismatch: true,
+                    matchedKeywords: suspiciousMatches
+                };
+            }
+
+            // Check for expected content (role alignment)
+            const expectedMatches = roleConfig.expected.filter(keyword => 
+                emailText.includes(keyword.toLowerCase())
+            );
+            
+            if (expectedMatches.length > 0) {
+                return {
+                    type: 'role_alignment',
+                    severity: 'good',
+                    confidence: 75,
+                    reason: `Content appropriate for ${userRole}: Contains expected keywords "${expectedMatches.join(', ')}"`,
+                    classification: null, // Don't override classification for good alignment
+                    roleMismatch: false,
+                    matchedKeywords: expectedMatches
+                };
+            }
+
             return null;
         }
 
@@ -1160,7 +1631,7 @@
         }
 
         // Determine autonomous actions based on analysis
-        function determineAutonomousActions(aiResult, patternMatch, threatIntel) {
+        function determineAutonomousActions(aiResult, patternMatch, threatIntel, roleCheck) {
             const actions = [];
             
             // Auto-quarantine high-confidence phishing
@@ -1188,6 +1659,23 @@
                     reason: patternMatch.reason,
                     timestamp: new Date().toISOString()
                 });
+            }
+            
+            // Role-based escalation
+            if (roleCheck && roleCheck.roleMismatch) {
+                if (roleCheck.severity === 'high') {
+                    actions.push({
+                        type: 'role_escalate',
+                        reason: `ROLE MISMATCH: ${roleCheck.reason}`,
+                        timestamp: new Date().toISOString()
+                    });
+                } else if (roleCheck.severity === 'moderate') {
+                    actions.push({
+                        type: 'role_review',
+                        reason: `Role Review: ${roleCheck.reason}`,
+                        timestamp: new Date().toISOString()
+                    });
+                }
             }
             
             return actions;
@@ -1223,55 +1711,114 @@
             return text.toLowerCase().split(/\W+/).filter(word => word.length > 3);
         }
 
-        async function analyzeWithAI(apiKey, sender, subject, body, patternMatch = null, threatIntel = null) {
+        async function analyzeWithAI(apiKey, sender, subject, body, patternMatch = null, threatIntel = null, roleCheck = null, userRole = null) {
+            // Try multiple free models in order of preference
+            const freeModels = [
+                'microsoft/wizardlm-2-8x22b:free',
+                'meta-llama/llama-3.1-8b-instruct:free', 
+                'google/gemma-2-9b-it:free',
+                'qwen/qwen-2-7b-instruct:free',
+                'huggingfaceh4/zephyr-7b-beta:free'
+            ];
             const emailContent = `Subject: ${subject}\nFrom: ${sender}\n\n${body}`;
             
-            const prompt = `You are a healthcare email security analyst. Analyze this email and respond with ONLY valid JSON.
+            // Build role context information
+            let roleContext = '';
+            if (userRole && roleCheck) {
+                roleContext = `
+Recipient Role: ${userRole}
+Role Analysis: ${roleCheck ? roleCheck.reason : 'No role issues detected'}
+${roleCheck && roleCheck.roleMismatch ? 'WARNING: This email content may be inappropriate for the recipient\'s role!' : ''}
+`;
+            }
 
-Email:
-Subject: ${subject}
+            // Build threat context for detailed analysis
+            let threatContext = '';
+            if (threatIntel) {
+                threatContext = `
+Previous Analysis Context:
+- Threat Score: ${threatIntel.threatScore}/100
+- Suspicious Links: ${threatIntel.suspiciousLinks}
+- Header Issues: ${threatIntel.headerIssues.join(', ')}
+- Attachment Issues: ${threatIntel.attachmentIssues.join(', ')}
+`;
+            }
+
+            // Create optimized prompt with clearer instructions
+            const prompt = `Healthcare email security analysis. Respond with valid JSON only.
+
+EMAIL DATA:
 From: ${sender}
+To: ${userRole || 'staff'} 
+Subject: ${subject}
 Body: ${body}
+${roleCheck ? `Role Issue: ${roleCheck.reason}` : ''}
+${threatIntel ? `Threats: ${threatIntel.threatScore}/100, ${threatIntel.suspiciousLinks} suspicious links` : ''}
 
-IMPORTANT: Respond with ONLY this exact JSON format (no other text):
+REQUIRED JSON OUTPUT:
 {
   "classification": "Safe",
-  "confidence": 75,
-  "comment": "Brief explanation"
+  "confidence": 85,
+  "comment": "Brief explanation",
+  "reasoningReport": {
+    "summary": "2-sentence analysis summary",
+    "threatIndicators": ["threat1", "threat2"],
+    "roleAnalysis": "Role appropriateness explanation", 
+    "technicalFindings": ["finding1", "finding2"],
+    "recommendation": "Clear action recommendation"
+  }
 }
 
-Classification rules:
-- "Safe": Legitimate healthcare communications, normal business emails
-- "Suspicious": Unusual requests, unclear sources, potentially harmful
-- "Phishing": Clear malicious intent, fake urgency, credential theft attempts
+RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Role mismatches = Suspicious.`;
 
-Confidence: Use realistic scores (50-95). Higher confidence for clearer threats.
-Comment: Brief 1-2 sentence explanation of your decision.
-
-Respond with ONLY the JSON object:`;
-
-            console.log('Making API request to OpenRouter...');
-            console.log('Using model: alibaba/tongyi-deepresearch-30b-a3b:free');
+            // Try models in sequence until one works
+            let response = null;
+            let lastError = null;
             
-            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`,
-                    'HTTP-Referer': window.location.origin,
-                    'X-Title': 'Healthcare Email Defense Demo'
-                },
-                body: JSON.stringify({
-                    model: 'alibaba/tongyi-deepresearch-30b-a3b:free',
-                    max_tokens: 200,
-                    messages: [
-                        {
-                            role: 'user',
-                            content: prompt
-                        }
-                    ]
-                })
-            });
+            for (const model of freeModels) {
+                console.log(`Trying model: ${model}`);
+                
+                try {
+                    response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${apiKey}`,
+                            'HTTP-Referer': window.location.origin,
+                            'X-Title': 'Healthcare Email Defense Demo'
+                        },
+                        body: JSON.stringify({
+                            model: model,
+                            max_tokens: 800,
+                            temperature: 0.1,
+                            messages: [
+                                {
+                                    role: 'user',
+                                    content: prompt
+                                }
+                            ]
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        console.log(`✅ Successfully using model: ${model}`);
+                        break;
+                    } else {
+                        const errorData = await response.json();
+                        console.log(`❌ Model ${model} failed:`, errorData);
+                        lastError = errorData;
+                        response = null;
+                    }
+                } catch (error) {
+                    console.log(`❌ Model ${model} error:`, error);
+                    lastError = error;
+                    response = null;
+                }
+            }
+            
+            if (!response) {
+                throw new Error(`All models failed. Last error: ${JSON.stringify(lastError)}`);
+            }
 
             console.log('API Response status:', response.status);
             console.log('API Response headers:', response.headers);
@@ -1283,12 +1830,20 @@ Respond with ONLY the JSON object:`;
             }
 
             const data = await response.json();
+            console.log('Full API response:', data);
             const content = data.choices[0].message.content;
+            
+            // Check if response was truncated
+            if (data.choices[0].finish_reason === 'length') {
+                console.warn('⚠️ AI response was truncated due to length limits');
+            }
             
             try {
                 // Clean the response content
                 const cleanContent = content.trim();
                 console.log('AI Response:', cleanContent);
+                console.log('Response length:', cleanContent.length);
+                console.log('Contains reasoningReport?', cleanContent.includes('reasoningReport'));
                 
                 // Try multiple JSON extraction methods
                 let result;
@@ -1337,7 +1892,14 @@ Respond with ONLY the JSON object:`;
                     return {
                         classification: finalClassification,
                         confidence: finalConfidence,
-                        comment: comment
+                        comment: comment,
+                        reasoningReport: result.reasoningReport || {
+                            summary: `AI analysis completed. Email classified as ${finalClassification} with ${finalConfidence}% confidence.`,
+                            threatIndicators: result.threatIndicators || [],
+                            roleAnalysis: result.roleAnalysis || `Content analyzed for ${userRole || 'healthcare worker'} role.`,
+                            technicalFindings: result.technicalFindings || ['AI-based content analysis performed'],
+                            recommendation: result.recommendation || `${finalClassification === 'Phishing' ? 'Quarantine immediately' : finalClassification === 'Safe' ? 'Allow delivery' : 'Manual review recommended'}`
+                        }
                     };
                 } else {
                     throw new Error('Invalid result structure');
@@ -1413,10 +1975,36 @@ Respond with ONLY the JSON object:`;
                 // Ensure confidence stays within bounds
                 confidence = Math.max(50, Math.min(95, confidence));
                 
+                // Generate reasoning report for fallback analysis
+                const foundPhishingKeywords = phishingKeywords.filter(keyword => emailLower.includes(keyword));
+                const foundSafeKeywords = safeKeywords.filter(keyword => emailLower.includes(keyword));
+                
+                const reasoningReport = {
+                    summary: `Fallback analysis completed due to AI unavailability. Email classified as ${classification} with ${confidence}% confidence based on content pattern analysis.`,
+                    threatIndicators: [
+                        ...(foundPhishingKeywords.length > 0 ? [`Phishing keywords detected: ${foundPhishingKeywords.join(', ')}`] : []),
+                        ...(phishingScore >= 2 ? ['Multiple urgency indicators present'] : []),
+                        ...(!isLegitimateDomain ? ['Sender domain not in trusted healthcare domain list'] : [])
+                    ],
+                    roleAnalysis: roleCheck ? roleCheck.reason : `Content analyzed for ${userRole || 'healthcare worker'} role - no specific role concerns detected in fallback mode`,
+                    technicalFindings: [
+                        `Phishing keyword score: ${phishingScore}`,
+                        `Healthcare keyword score: ${safeScore}`,
+                        `Domain legitimacy: ${isLegitimateDomain ? 'Trusted healthcare domain' : 'External domain'}`,
+                        'Note: Technical analysis limited in fallback mode'
+                    ],
+                    recommendation: classification === 'Phishing' ? 
+                        'Quarantine immediately and alert security team due to multiple threat indicators' :
+                        classification === 'Safe' ?
+                        'Allow delivery - content appears legitimate for healthcare environment' :
+                        'Manual review recommended - unclear threat level requires human analysis'
+                };
+                
                 return {
                     classification,
                     confidence,
-                    comment
+                    comment,
+                    reasoningReport
                 };
             }
         }
@@ -1457,13 +2045,30 @@ Respond with ONLY the JSON object:`;
                                     <span class="confidence">${result.confidence}%</span>
                                 </td>
                                 <td>
-                                    <div class="ai-comment">${result.comment}</div>
+                                    <div class="ai-comment">
+                                        <div class="brief-comment">${result.comment}</div>
+                                        ${result.reasoningReport ? `
+                                            <button class="reasoning-report-btn" onclick="openReasoningReport(${result.id})" title="View detailed analysis">
+                                                📊 View Reasoning Report
+                                            </button>
+                                        ` : ''}
+                                    </div>
                                     ${result.threatIntel ? `
                                         <div class="security-details">
                                             <small>Threat Score: ${result.threatIntel.threatScore}/100</small>
                                             ${result.threatIntel.suspiciousLinks > 0 ? `<br><small>⚠️ ${result.threatIntel.suspiciousLinks} suspicious links</small>` : ''}
                                             ${result.threatIntel.headerIssues.length > 0 ? `<br><small>⚠️ ${result.threatIntel.headerIssues.length} header issues</small>` : ''}
                                             ${result.threatIntel.attachmentIssues.length > 0 ? `<br><small>⚠️ ${result.threatIntel.attachmentIssues.length} attachment issues</small>` : ''}
+                                        </div>
+                                    ` : ''}
+                                    ${result.roleCheck && result.roleCheck.roleMismatch ? `
+                                        <div class="role-warning ${result.roleCheck.severity}">
+                                            <strong>⚠️ ROLE MISMATCH:</strong> ${result.roleCheck.reason}
+                                            <br><small>Recipient: ${result.userRole}</small>
+                                        </div>
+                                    ` : result.userRole ? `
+                                        <div class="role-info">
+                                            <small>👤 Recipient: ${result.userRole}</small>
                                         </div>
                                     ` : ''}
                                 </td>
@@ -1484,12 +2089,12 @@ Respond with ONLY the JSON object:`;
                                         </button>
                                         <div class="feedback-buttons">
                                             <button class="feedback-btn correct ${result.feedback === 'correct' ? 'selected' : ''}" 
-                                                    onclick="setFeedback(parseInt('${result.id}'), 'correct')">
-                                                ✓ Correct
+                                                    onclick="confirmFeedback(${result.id}, 'correct', '${result.classification}');">
+                                                🛡️ Quarantine
                                             </button>
                                             <button class="feedback-btn incorrect ${result.feedback === 'incorrect' ? 'selected' : ''}" 
-                                                    onclick="setFeedback(parseInt('${result.id}'), 'incorrect')">
-                                                ✗ Incorrect
+                                                    onclick="confirmFeedback(${result.id}, 'incorrect', '${result.classification}');">
+                                                📧 Send Email
                                             </button>
                                         </div>
                                     </div>
@@ -1504,7 +2109,13 @@ Respond with ONLY the JSON object:`;
         }
 
         function setFeedback(resultId, feedback) {
-            const result = analysisResults.find(r => r.id === resultId);
+            console.log('setFeedback called with:', { resultId, feedback });
+            console.log('Type of resultId:', typeof resultId);
+            console.log('Current analysisResults:', analysisResults.map(r => ({ id: r.id, type: typeof r.id })));
+            
+            const result = analysisResults.find(r => r.id == resultId); // Use == instead of === to handle type coercion
+            console.log('Found result:', result);
+            
             if (result) {
                 // Only update metrics if this is the first feedback for this email
                 const isFirstFeedback = !result.feedback;
@@ -1533,6 +2144,10 @@ Respond with ONLY the JSON object:`;
                 updateResultsDisplay();
                 updateHistoryDisplay();
                 updateAgentStatus();
+            } else {
+                console.error('Result not found for ID:', resultId);
+                console.error('Available IDs:', analysisResults.map(r => r.id));
+                alert('Error: Could not find email to update. Please refresh the page.');
             }
         }
 
@@ -1575,6 +2190,44 @@ Respond with ONLY the JSON object:`;
                 agentMemory.learnedPatterns[keywordKey].count++;
             });
             
+            // Store role-specific patterns
+            if (result.userRole) {
+                if (!agentMemory.rolePatterns[result.userRole]) {
+                    agentMemory.rolePatterns[result.userRole] = {};
+                }
+                
+                // Learn role-specific sender patterns
+                const roleSenderKey = `${result.userRole}:sender:${sender}`;
+                if (!agentMemory.rolePatterns[result.userRole][roleSenderKey]) {
+                    agentMemory.rolePatterns[result.userRole][roleSenderKey] = {
+                        classification: result.classification,
+                        count: 0,
+                        feedback: feedback,
+                        lastSeen: new Date().toISOString()
+                    };
+                }
+                agentMemory.rolePatterns[result.userRole][roleSenderKey].count++;
+                agentMemory.rolePatterns[result.userRole][roleSenderKey].lastSeen = new Date().toISOString();
+                
+                // Learn role-specific content patterns for role mismatches
+                if (result.roleCheck && result.roleCheck.roleMismatch) {
+                    const roleMismatchKey = `${result.userRole}:mismatch:${result.roleCheck.severity}`;
+                    if (!agentMemory.rolePatterns[result.userRole][roleMismatchKey]) {
+                        agentMemory.rolePatterns[result.userRole][roleMismatchKey] = {
+                            classification: result.classification,
+                            count: 0,
+                            feedback: feedback,
+                            lastSeen: new Date().toISOString()
+                        };
+                    }
+                    agentMemory.rolePatterns[result.userRole][roleMismatchKey].count++;
+                    agentMemory.rolePatterns[result.userRole][roleMismatchKey].lastSeen = new Date().toISOString();
+                    
+                    // Track role mismatch metrics
+                    agentMemory.performanceMetrics.roleMismatches++;
+                }
+            }
+            
             // Store feedback history
             agentMemory.feedbackHistory.push({
                 id: result.id,
@@ -1582,10 +2235,12 @@ Respond with ONLY the JSON object:`;
                 feedback: feedback,
                 timestamp: new Date().toISOString(),
                 sender: sender,
-                subject: subject
+                subject: subject,
+                userRole: result.userRole || null,
+                roleMismatch: result.roleCheck ? result.roleCheck.roleMismatch : false
             });
             
-            console.log('🧠 Learning from feedback:', feedback, 'for', result.classification);
+            console.log('🧠 Learning from feedback:', feedback, 'for', result.classification, 'role:', result.userRole);
         }
 
         // Move email to history log
@@ -1645,7 +2300,7 @@ Respond with ONLY the JSON object:`;
                                     <span class="history-status ${result.moveReason}">
                                         ${result.moveReason === 'auto_safe' ? 'Auto-Safe' : 
                                           result.moveReason === 'auto_learned' ? 'Auto-Learned' :
-                                          result.feedback === 'correct' ? 'Approved' : 'Rejected'}
+                                          result.feedback === 'correct' ? 'IT Quarantined' : 'IT Sent'}
                                     </span>
                                 </td>
                                 <td>
@@ -1711,6 +2366,10 @@ Respond with ONLY the JSON object:`;
                         <div class="status-item">
                             <span class="status-label">False Positives:</span>
                             <span class="status-value">${metrics.falsePositives}</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Role Mismatches:</span>
+                            <span class="status-value">${metrics.roleMismatches || 0}</span>
                         </div>
                     </div>
                     <div class="last-updated">
@@ -1821,6 +2480,43 @@ Respond with ONLY the JSON object:`;
             }
         }
 
+        // Update recipient info display based on email input
+        function updateRecipientInfo() {
+            const emailInput = document.getElementById('recipientEmail');
+            const recipientInfo = document.getElementById('recipientInfo');
+            const recipientName = document.getElementById('recipientName');
+            const recipientRole = document.getElementById('recipientRole');
+            const recipientDepartment = document.getElementById('recipientDepartment');
+            const unknownUserWarning = document.getElementById('unknownUserWarning');
+            
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                recipientInfo.style.display = 'none';
+                return;
+            }
+            
+            const userInfo = detectRecipientRole(email);
+            
+            if (userInfo) {
+                recipientInfo.style.display = 'block';
+                recipientName.textContent = userInfo.name;
+                recipientRole.textContent = userInfo.role.charAt(0).toUpperCase() + userInfo.role.slice(1);
+                recipientDepartment.textContent = userInfo.department;
+                
+                if (userInfo.isKnownUser) {
+                    unknownUserWarning.style.display = 'none';
+                    recipientInfo.style.background = '#f0f9ff';
+                    recipientInfo.style.borderColor = '#bfdbfe';
+                } else {
+                    unknownUserWarning.style.display = 'block';
+                    recipientInfo.style.background = '#fef5e7';
+                    recipientInfo.style.borderColor = '#f6cc8f';
+                }
+            } else {
+                recipientInfo.style.display = 'none';
+            }
+        }
 
         // Modal Functions
         function openReview(resultId) {
@@ -1864,11 +2560,131 @@ Respond with ONLY the JSON object:`;
             closeModal();
         }
 
+        // Confirmation dialogs for feedback actions
+        function confirmFeedback(resultId, feedback, classification) {
+            const result = analysisResults.find(r => r.id === resultId);
+            if (!result) return;
+
+            let message, actionText;
+            
+            if (feedback === 'correct') {
+                // IT chooses to quarantine
+                if (classification === 'Phishing' || classification === 'Suspicious') {
+                    message = `You are choosing to QUARANTINE this email (agreeing with AI's ${classification} assessment).\n\n🛡️ This will INDEFINITELY STORE this email in quarantine and prevent delivery to the recipient.\n\nConfirm quarantine?`;
+                    actionText = "Quarantine Email";
+                } else {
+                    message = `You are choosing to QUARANTINE this email (overriding AI's ${classification} assessment).\n\n🛡️ This will move the email to quarantine for security review instead of allowing delivery.\n\nConfirm quarantine?`;
+                    actionText = "Quarantine Email";
+                }
+            } else {
+                // IT chooses to send email
+                if (classification === 'Phishing' || classification === 'Suspicious') {
+                    message = `You are choosing to SEND this email (overriding AI's ${classification} assessment).\n\n📧 This will DELIVER this email to the intended recipient (${result.recipientEmail || 'recipient'}).\n\nAre you sure this email is safe to send?`;
+                    actionText = "Send Email";
+                } else {
+                    message = `You are choosing to SEND this email (agreeing with AI's ${classification} assessment).\n\n📧 This email will be delivered to the recipient and marked as reviewed.\n\nConfirm sending?`;
+                    actionText = "Send Email";
+                }
+            }
+
+            if (confirm(message)) {
+                console.log(`${actionText} confirmed for email ID: ${resultId}`);
+                setFeedback(resultId, feedback);
+            }
+        }
+
+        function confirmFeedbackFromModal(feedback) {
+            const resultId = parseInt(document.getElementById('emailModal').dataset.resultId);
+            const result = analysisResults.find(r => r.id === resultId);
+            if (!result) return;
+
+            confirmFeedback(resultId, feedback, result.classification);
+        }
+
+        // Open reasoning report modal
+        function openReasoningReport(resultId) {
+            const result = analysisResults.find(r => r.id === resultId);
+            if (!result || !result.reasoningReport) {
+                console.error('Reasoning report not found for result ID:', resultId);
+                return;
+            }
+
+            const modal = document.getElementById('reasoningModal');
+            const content = document.getElementById('reasoningModalContent');
+            
+            content.innerHTML = `
+                <div class="reasoning-report-modal">
+                    <div class="email-context">
+                        <h3>📧 Email Context</h3>
+                        <div class="context-grid">
+                            <div><strong>From:</strong> ${result.sender}</div>
+                            <div><strong>To:</strong> ${result.recipientEmail || 'Unknown Recipient'}</div>
+                            <div><strong>Subject:</strong> ${result.subject}</div>
+                            <div><strong>Classification:</strong> <span class="classification ${result.classification.toLowerCase()}">${result.classification}</span></div>
+                        </div>
+                        ${result.recipientInfo ? `
+                            <div class="recipient-details-modal">
+                                <h4>👤 Recipient Details</h4>
+                                <div class="context-grid">
+                                    <div><strong>Name:</strong> ${result.recipientInfo.name}</div>
+                                    <div><strong>Role:</strong> ${result.recipientInfo.role.charAt(0).toUpperCase() + result.recipientInfo.role.slice(1)}</div>
+                                    <div><strong>Department:</strong> ${result.recipientInfo.department}</div>
+                                    <div><strong>User Status:</strong> ${result.recipientInfo.isKnownUser ? '✅ Known User' : '⚠️ Unknown User (Role Inferred)'}</div>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>📋 Analysis Summary</h4>
+                        <p>${result.reasoningReport.summary}</p>
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>⚠️ Threat Indicators</h4>
+                        ${result.reasoningReport.threatIndicators.length > 0 ? `
+                            <ul>
+                                ${result.reasoningReport.threatIndicators.map(indicator => `<li>${indicator}</li>`).join('')}
+                            </ul>
+                        ` : '<p class="no-threats">No specific threat indicators detected.</p>'}
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>👤 Role Analysis</h4>
+                        <p>${result.reasoningReport.roleAnalysis}</p>
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>🔧 Technical Findings</h4>
+                        <ul>
+                            ${result.reasoningReport.technicalFindings.map(finding => `<li>${finding}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="reasoning-section recommendation">
+                        <h4>💡 Recommendation</h4>
+                        <p><strong>${result.reasoningReport.recommendation}</strong></p>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        // Close reasoning report modal
+        function closeReasoningModal() {
+            document.getElementById('reasoningModal').style.display = 'none';
+        }
+
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('emailModal');
-            if (event.target === modal) {
+            const emailModal = document.getElementById('emailModal');
+            const reasoningModal = document.getElementById('reasoningModal');
+            
+            if (event.target === emailModal) {
                 closeModal();
+            } else if (event.target === reasoningModal) {
+                closeReasoningModal();
             }
         }
 
@@ -2051,7 +2867,7 @@ Make the email detailed, believable, and completely unique.`;
                     'X-Title': 'Healthcare Email Defense Demo'
                 },
                 body: JSON.stringify({
-                    model: 'alibaba/tongyi-deepresearch-30b-a3b:free',
+                    model: 'microsoft/wizardlm-2-8x22b:free',
                     max_tokens: 300,
                     messages: [
                         {

@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Email Defense Agent - Demo #2 Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .demo-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #2c5aa0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .metric-title {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .metric-change {
+            font-size: 0.8rem;
+            color: #059669;
+        }
+
+        .metric-change.negative {
+            color: #dc2626;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: #2c5aa0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .input-section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .email-prioritization {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .priority-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .priority-option:hover {
+            border-color: #2c5aa0;
+            background: #f0f4ff;
+        }
+
+        .priority-option.selected {
+            border-color: #2c5aa0;
+            background: #e0e7ff;
+        }
+
+        .priority-option.urgent {
+            border-color: #dc2626;
+        }
+
+        .priority-option.urgent.selected {
+            background: #fef2f2;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #2c5aa0;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+        }
+
+        .analyze-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .results-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .confidence-score {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #059669;
+        }
+
+        .confidence-bar {
+            flex: 1;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+            transition: width 0.3s ease;
+        }
+
+        .confidence-fill.medium {
+            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+        }
+
+        .confidence-fill.low {
+            background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+        }
+
+        .classification {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .classification-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .classification-safe {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .classification-suspicious {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .classification-phishing {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        .patterns-learned {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .pattern-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .pattern-item:last-child {
+            border-bottom: none;
+        }
+
+        .pattern-text {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .pattern-confidence {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .system-alerts {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #fed7d7;
+        }
+
+        .alert-item:last-child {
+            border-bottom: none;
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+        }
+
+        .alert-text {
+            flex: 1;
+            color: #991b1b;
+            font-weight: 500;
+        }
+
+        .alert-time {
+            font-size: 0.8rem;
+            color: #991b1b;
+            opacity: 0.7;
+        }
+
+        .threat-intel {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .threat-source {
+            font-size: 0.8rem;
+            color: #0369a1;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .threat-description {
+            color: #0c4a6e;
+            line-height: 1.6;
+        }
+
+        .feedback-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feedback-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .feedback-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-btn.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .feedback-btn.incorrect {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        .feedback-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2c5aa0;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .rate-limit-warning {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 20px;
+            color: #92400e;
+            font-size: 0.9rem;
+        }
+
+        .ddos-protection {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 20px;
+            color: #166534;
+            font-size: 0.9rem;
+        }
+
+        .category-filter-btn {
+            background: #f1f5f9;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .category-filter-btn:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+        .category-filter-btn.active {
+            background: #2c5aa0;
+            color: white;
+            border-color: #2c5aa0;
+        }
+
+        .email-item {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid #e2e8f0;
+        }
+
+        .email-item:hover {
+            background: #f1f5f9;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .email-item.urgent {
+            border-left-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .email-item.internal {
+            border-left-color: #2c5aa0;
+            background: #f0f4ff;
+        }
+
+        .email-item.vendor {
+            border-left-color: #059669;
+            background: #f0fdf4;
+        }
+
+        .email-item.external {
+            border-left-color: #7c3aed;
+            background: #faf5ff;
+        }
+
+        .email-item.marketing {
+            border-left-color: #ea580c;
+            background: #fff7ed;
+        }
+
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+
+        .email-subject {
+            font-weight: 600;
+            color: #1e293b;
+            flex: 1;
+        }
+
+        .email-time {
+            font-size: 0.8rem;
+            color: #64748b;
+            opacity: 0.7;
+        }
+
+        .email-from {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .email-status {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Email Modal */
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .email-modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .email-modal-header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .email-modal-body {
+            padding: 30px;
+        }
+
+        .email-meta {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .email-meta-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .email-meta-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-meta-label {
+            font-weight: 600;
+            color: #374151;
+            width: 120px;
+            flex-shrink: 0;
+        }
+
+        .email-meta-value {
+            color: #6b7280;
+            flex: 1;
+        }
+
+        .email-content {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .email-analysis {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .email-prioritization {
+                grid-template-columns: 1fr;
+            }
+
+            .category-filter-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .email-modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+
+            .email-modal-body {
+                padding: 20px;
+            }
+
+            .email-meta-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .email-meta-label {
+                width: auto;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Healthcare Email Defense Agent</h1>
+            <p>AI-Powered Email Security with Advanced Pattern Learning & System-Level Detection</p>
+            <div class="demo-badge">Demo #2 - Enhanced Features</div>
+        </div>
+
+        <div class="main-content">
+            <!-- Performance Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Emails Analyzed</div>
+                    <div class="metric-value" id="totalAnalyzed">1,247</div>
+                    <div class="metric-change">+23 today</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Accuracy Rate</div>
+                    <div class="metric-value" id="accuracyRate">94.2%</div>
+                    <div class="metric-change">+2.1% this week</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Threats Blocked</div>
+                    <div class="metric-value" id="threatsBlocked">47</div>
+                    <div class="metric-change">+8 this week</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Avg Confidence</div>
+                    <div class="metric-value" id="avgConfidence">87.3%</div>
+                    <div class="metric-change">+1.5% improvement</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">System Alerts</div>
+                    <div class="metric-value" id="systemAlerts">3</div>
+                    <div class="metric-change negative">Active monitoring</div>
+                </div>
+            </div>
+
+            <!-- Rate Limiting & DDoS Protection -->
+            <div class="rate-limit-warning">
+                ⚡ Rate Limiting Active: Max 100 emails/minute per user to prevent abuse
+            </div>
+            <div class="ddos-protection">
+                🛡️ DDoS Protection: IP-based throttling and token cost monitoring enabled
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('analysis')">Email Analysis</button>
+                <button class="tab" onclick="showTab('patterns')">Pattern Learning</button>
+                <button class="tab" onclick="showTab('system')">System Monitoring</button>
+                <button class="tab" onclick="showTab('intel')">Threat Intelligence</button>
+                <button class="tab" onclick="showTab('evaluation')">Performance</button>
+            </div>
+
+            <!-- Email Analysis Tab -->
+            <div id="analysis" class="tab-content active">
+                <div class="input-section">
+                    <h2>📧 Email Analysis with Prioritization</h2>
+                    
+                    <div class="form-group">
+                        <label>Email Priority Classification:</label>
+                        <div class="email-prioritization">
+                            <div class="priority-option urgent" onclick="selectPriority(this, 'urgent')">
+                                <div style="font-size: 1.5rem; margin-bottom: 5px;">🚨</div>
+                                <div>Urgent Medical</div>
+                                <div style="font-size: 0.8rem; color: #666;">Never delay</div>
+                            </div>
+                            <div class="priority-option" onclick="selectPriority(this, 'internal')">
+                                <div style="font-size: 1.5rem; margin-bottom: 5px;">🏥</div>
+                                <div>Internal</div>
+                                <div style="font-size: 0.8rem; color: #666;">Staff/System</div>
+                            </div>
+                            <div class="priority-option" onclick="selectPriority(this, 'vendor')">
+                                <div style="font-size: 1.5rem; margin-bottom: 5px;">📦</div>
+                                <div>Vendor</div>
+                                <div style="font-size: 0.8rem; color: #666;">Suppliers/Partners</div>
+                            </div>
+                            <div class="priority-option" onclick="selectPriority(this, 'external')">
+                                <div style="font-size: 1.5rem; margin-bottom: 5px;">🌐</div>
+                                <div>External</div>
+                                <div style="font-size: 0.8rem; color: #666;">Public/Unknown</div>
+                            </div>
+                            <div class="priority-option" onclick="selectPriority(this, 'marketing')">
+                                <div style="font-size: 1.5rem; margin-bottom: 5px;">📢</div>
+                                <div>Marketing</div>
+                                <div style="font-size: 0.8rem; color: #666;">Newsletters/Ads</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Category Filter -->
+                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 25px; border: 1px solid #e2e8f0;">
+                        <h3 style="color: #2c5aa0; margin-bottom: 15px;">📋 Recent Email Analysis Examples</h3>
+                        <p style="color: #64748b; margin-bottom: 20px; font-size: 0.9rem;">Click on any category below to view analyzed emails from that category:</p>
+                        
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                            <button class="category-filter-btn" onclick="showEmailCategory('urgent')" data-category="urgent">
+                                🚨 Urgent Medical (3)
+                            </button>
+                            <button class="category-filter-btn" onclick="showEmailCategory('internal')" data-category="internal">
+                                🏥 Internal (12)
+                            </button>
+                            <button class="category-filter-btn" onclick="showEmailCategory('vendor')" data-category="vendor">
+                                📦 Vendor (7)
+                            </button>
+                            <button class="category-filter-btn" onclick="showEmailCategory('external')" data-category="external">
+                                🌐 External (15)
+                            </button>
+                            <button class="category-filter-btn" onclick="showEmailCategory('marketing')" data-category="marketing">
+                                📢 Marketing (8)
+                            </button>
+                            <button class="category-filter-btn active" onclick="showEmailCategory('all')" data-category="all">
+                                📊 All Categories (45)
+                            </button>
+                        </div>
+
+                        <!-- Email List Container -->
+                        <div id="emailListContainer">
+                            <!-- Emails will be dynamically loaded here -->
+                        </div>
+                    </div>
+
+            </div>
+
+            <!-- Pattern Learning Tab -->
+            <div id="patterns" class="tab-content">
+                <div class="input-section">
+                    <h2>🧠 AI Pattern Learning Dashboard</h2>
+                    
+                    <div class="patterns-learned">
+                        <h3>Recognized Threat Patterns</h3>
+                        <div class="pattern-item">
+                            <div class="pattern-text">"URGENT" + "verify credentials" + external domain</div>
+                            <div class="pattern-confidence">95%</div>
+                        </div>
+                        <div class="pattern-item">
+                            <div class="pattern-text">"HIPAA violation" + "immediate action" + suspicious link</div>
+                            <div class="pattern-confidence">92%</div>
+                        </div>
+                        <div class="pattern-item">
+                            <div class="pattern-text">Medical jargon + "update patient info" + urgent tone</div>
+                            <div class="pattern-confidence">88%</div>
+                        </div>
+                        <div class="pattern-item">
+                            <div class="pattern-text">Generic greeting + "surgery postponed" + external sender</div>
+                            <div class="pattern-confidence">91%</div>
+                        </div>
+                        <div class="pattern-item">
+                            <div class="pattern-text">"Password expired" + healthcare context + suspicious domain</div>
+                            <div class="pattern-confidence">94%</div>
+                        </div>
+                    </div>
+
+                    <div class="patterns-learned">
+                        <h3>Safe Pattern Recognition</h3>
+                        <div class="pattern-item">
+                            <div class="pattern-text">Internal domain + staff name + meeting reminder</div>
+                            <div class="pattern-confidence">98%</div>
+                        </div>
+                        <div class="pattern-item">
+                            <div class="pattern-text">Known vendor + invoice/order confirmation</div>
+                            <div class="pattern-confidence">96%</div>
+                        </div>
+                        <div class="pattern-item">
+                            <div class="pattern-text">Medical journal + newsletter + unsubscribe option</div>
+                            <div class="pattern-confidence">93%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Monitoring Tab -->
+            <div id="system" class="tab-content">
+                <div class="input-section">
+                    <h2>🔍 System-Level Threat Detection</h2>
+                    
+                    <div class="system-alerts">
+                        <h3>🚨 Active System Alerts</h3>
+                        <div class="alert-item">
+                            <div class="alert-icon">🔐</div>
+                            <div class="alert-text">Suspicious login attempt from IP 192.168.1.100 after phishing email detection</div>
+                            <div class="alert-time">2 min ago</div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-icon">📊</div>
+                            <div class="alert-text">Unusual data access spike: 500+ patient records accessed in 5 minutes</div>
+                            <div class="alert-time">15 min ago</div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-icon">🌐</div>
+                            <div class="alert-text">Multiple failed authentication attempts from unknown location</div>
+                            <div class="alert-time">1 hour ago</div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 20px;">
+                        <h3>Network Activity Timeline</h3>
+                        <div style="margin-top: 15px; padding: 15px; background: #f8fafc; border-radius: 6px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <span>📧 Phishing email detected</span>
+                                <span style="color: #dc2626; font-weight: 600;">14:23</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <span>🔐 Credential harvest attempt blocked</span>
+                                <span style="color: #dc2626; font-weight: 600;">14:24</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <span>🚨 Suspicious login from compromised account</span>
+                                <span style="color: #dc2626; font-weight: 600;">14:25</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>🛡️ Automated account lockout initiated</span>
+                                <span style="color: #059669; font-weight: 600;">14:26</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Threat Intelligence Tab -->
+            <div id="intel" class="tab-content">
+                <div class="input-section">
+                    <h2>🌐 Threat Intelligence Integration</h2>
+                    
+                    <div class="threat-intel">
+                        <div class="threat-source">Source: vxunderground • Healthcare Ransomware Campaign</div>
+                        <div class="threat-description">
+                            <strong>Active Campaign Detected:</strong> Threat actors are targeting healthcare organizations with sophisticated phishing emails that appear to be from medical device vendors. The emails contain malicious attachments disguised as firmware updates. Our AI has been updated to recognize these specific patterns including the use of medical device terminology and spoofed vendor domains.
+                        </div>
+                    </div>
+
+                    <div class="threat-intel">
+                        <div class="threat-source">Source: CISA • Healthcare Sector Alert</div>
+                        <div class="threat-description">
+                            <strong>Pattern Match Found:</strong> Recent emails matching the "URGENT: HIPAA Compliance Update" pattern have been flagged. This aligns with CISA's warning about healthcare-targeted social engineering campaigns. Our pattern recognition has been enhanced to detect variations of this attack vector.
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 20px;">
+                        <h3>🧬 Synthetic Email Dataset</h3>
+                        <p style="margin-bottom: 15px; color: #64748b;">
+                            For safe testing and training, we use synthetic email data that mimics real-world healthcare threats without exposing sensitive information.
+                        </p>
+                        <button class="analyze-btn" onclick="loadSyntheticEmail()">
+                            Load Synthetic Test Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Evaluation Tab -->
+            <div id="evaluation" class="tab-content">
+                <div class="input-section">
+                    <h2>📊 Agent Performance & Evaluation</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div style="background: white; border-radius: 8px; padding: 20px; border: 1px solid #e2e8f0;">
+                            <h3>Accuracy Metrics</h3>
+                            <div style="margin-top: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>True Positives (Threats Correctly Identified):</span>
+                                    <span style="font-weight: 600; color: #059669;">89%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>True Negatives (Safe Emails Correctly Identified):</span>
+                                    <span style="font-weight: 600; color: #059669;">96%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>False Positives (Safe Emails Flagged):</span>
+                                    <span style="font-weight: 600; color: #dc2626;">4%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>False Negatives (Threats Missed):</span>
+                                    <span style="font-weight: 600; color: #dc2626;">11%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: white; border-radius: 8px; padding: 20px; border: 1px solid #e2e8f0;">
+                            <h3>Confidence Calibration</h3>
+                            <div style="margin-top: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>High Confidence (>90%) Accuracy:</span>
+                                    <span style="font-weight: 600; color: #059669;">97%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>Medium Confidence (70-90%) Accuracy:</span>
+                                    <span style="font-weight: 600; color: #f59e0b;">85%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>Low Confidence (<70%) Accuracy:</span>
+                                    <span style="font-weight: 600; color: #dc2626;">72%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Human Review Required:</span>
+                                    <span style="font-weight: 600; color: #6b7280;">15%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 20px; border: 1px solid #e2e8f0;">
+                        <h3>Learning Progress</h3>
+                        <div style="margin-top: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Total User Feedback Corrections:</span>
+                                <span style="font-weight: 600; color: #2c5aa0;">127</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Pattern Recognition Improvements:</span>
+                                <span style="font-weight: 600; color: #059669;">+23 this month</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Confidence Score Improvements:</span>
+                                <span style="font-weight: 600; color: #059669;">+5.2% this week</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Reinforcement Learning Updates:</span>
+                                <span style="font-weight: 600; color: #059669;">Daily</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Modal -->
+    <div id="emailModal" class="email-modal">
+        <div class="email-modal-content">
+            <div class="email-modal-header">
+                <h3 id="modalTitle">Email Analysis Details</h3>
+                <button class="close-modal" onclick="closeEmailModal()">&times;</button>
+            </div>
+            <div class="email-modal-body">
+                <div class="email-meta">
+                    <div class="email-meta-row">
+                        <div class="email-meta-label">From:</div>
+                        <div class="email-meta-value" id="modalFrom"></div>
+                    </div>
+                    <div class="email-meta-row">
+                        <div class="email-meta-label">Subject:</div>
+                        <div class="email-meta-value" id="modalSubject"></div>
+                    </div>
+                    <div class="email-meta-row">
+                        <div class="email-meta-label">Category:</div>
+                        <div class="email-meta-value" id="modalCategory"></div>
+                    </div>
+                    <div class="email-meta-row">
+                        <div class="email-meta-label">Classification:</div>
+                        <div class="email-meta-value" id="modalClassification"></div>
+                    </div>
+                    <div class="email-meta-row">
+                        <div class="email-meta-label">Confidence:</div>
+                        <div class="email-meta-value" id="modalConfidence"></div>
+                    </div>
+                    <div class="email-meta-row">
+                        <div class="email-meta-label">Action Taken:</div>
+                        <div class="email-meta-value" id="modalAction"></div>
+                    </div>
+                </div>
+                
+                <h4 style="color: #2c5aa0; margin-bottom: 15px;">Email Content:</h4>
+                <div class="email-content" id="modalContent"></div>
+                
+                <h4 style="color: #2c5aa0; margin-bottom: 15px;">AI Analysis:</h4>
+                <div class="email-analysis" id="modalAnalysis"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let selectedPriority = null;
+        let totalAnalyzed = 1247;
+        let threatsBlocked = 47;
+        let accuracyRate = 94.2;
+        let avgConfidence = 87.3;
+        let systemAlerts = 3;
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Priority selection
+        function selectPriority(element, priority) {
+            // Remove selected class from all options
+            document.querySelectorAll('.priority-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            selectedPriority = priority;
+        }
+
+        // Email analysis
+        async function analyzeEmail() {
+            const sender = document.getElementById('sender').value;
+            const subject = document.getElementById('subject').value;
+            const emailBody = document.getElementById('emailBody').value;
+
+            if (!sender || !subject || !emailBody) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (!selectedPriority) {
+                alert('Please select an email priority classification');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            // Simulate AI analysis delay
+            setTimeout(() => {
+                const analysis = performAIAnalysis(sender, subject, emailBody, selectedPriority);
+                displayResults(analysis);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+            }, 2000);
+        }
+
+        // AI Analysis Logic
+        function performAIAnalysis(sender, subject, body, priority) {
+            // Simulate AI analysis based on patterns
+            const threatPatterns = [
+                /urgent.*verify/i,
+                /hipaa.*violation/i,
+                /immediate.*action/i,
+                /click.*here/i,
+                /password.*expired/i,
+                /update.*info/i
+            ];
+
+            const safePatterns = [
+                /meeting.*reminder/i,
+                /newsletter/i,
+                /invoice/i,
+                /appointment.*confirmation/i
+            ];
+
+            let threatScore = 0;
+            let confidence = 0;
+
+            // Check for threat patterns
+            threatPatterns.forEach(pattern => {
+                if (pattern.test(subject) || pattern.test(body)) {
+                    threatScore += 20;
+                }
+            });
+
+            // Check for safe patterns
+            safePatterns.forEach(pattern => {
+                if (pattern.test(subject) || pattern.test(body)) {
+                    threatScore -= 15;
+                }
+            });
+
+            // Domain analysis
+            const domain = sender.split('@')[1];
+            const internalDomains = ['hospital.org', 'medicalcenter.com', 'healthcare.net'];
+            const suspiciousDomains = ['medical-alert.net', 'healthcare-security.com', 'hospital-security.com'];
+
+            if (internalDomains.some(d => domain.includes(d))) {
+                threatScore -= 25;
+            } else if (suspiciousDomains.some(d => domain.includes(d))) {
+                threatScore += 30;
+            }
+
+            // Priority adjustment
+            if (priority === 'urgent') {
+                threatScore -= 10; // Urgent medical emails are less likely to be threats
+            } else if (priority === 'external') {
+                threatScore += 15;
+            }
+
+            // Calculate final classification and confidence
+            let classification = 'Safe';
+            if (threatScore > 40) {
+                classification = 'Phishing';
+                confidence = Math.min(95, 70 + threatScore);
+            } else if (threatScore > 20) {
+                classification = 'Suspicious';
+                confidence = Math.min(85, 60 + threatScore);
+            } else {
+                classification = 'Safe';
+                confidence = Math.min(90, 75 + Math.abs(threatScore));
+            }
+
+            return {
+                classification,
+                confidence,
+                threatScore,
+                reasoning: generateReasoning(classification, threatScore, domain, priority)
+            };
+        }
+
+        function generateReasoning(classification, threatScore, domain, priority) {
+            const reasons = [];
+            
+            if (classification === 'Phishing') {
+                reasons.push('High threat indicators detected');
+                reasons.push('Suspicious domain pattern');
+                reasons.push('Urgent language with external sender');
+            } else if (classification === 'Suspicious') {
+                reasons.push('Some concerning patterns detected');
+                reasons.push('Requires manual review');
+            } else {
+                reasons.push('No threat indicators found');
+                reasons.push('Appears to be legitimate communication');
+            }
+
+            if (priority === 'urgent') {
+                reasons.push('Marked as urgent medical priority - fast-tracked for review');
+            }
+
+            return reasons.join('. ') + '.';
+        }
+
+        function displayResults(analysis) {
+            // Update confidence score
+            const confidenceBar = document.getElementById('confidenceBar');
+            const confidenceValue = document.getElementById('confidenceValue');
+            
+            confidenceBar.style.width = analysis.confidence + '%';
+            confidenceValue.textContent = analysis.confidence + '%';
+            
+            // Update confidence bar color
+            confidenceBar.className = 'confidence-fill';
+            if (analysis.confidence < 70) {
+                confidenceBar.classList.add('low');
+            } else if (analysis.confidence < 85) {
+                confidenceBar.classList.add('medium');
+            }
+
+            // Update classification
+            const classificationBadge = document.getElementById('classificationBadge');
+            classificationBadge.textContent = analysis.classification;
+            classificationBadge.className = 'classification-badge';
+            
+            if (analysis.classification === 'Safe') {
+                classificationBadge.classList.add('classification-safe');
+            } else if (analysis.classification === 'Suspicious') {
+                classificationBadge.classList.add('classification-suspicious');
+            } else {
+                classificationBadge.classList.add('classification-phishing');
+            }
+
+            // Update reasoning
+            document.getElementById('reasoningText').textContent = analysis.reasoning;
+
+            // Update metrics
+            totalAnalyzed++;
+            if (analysis.classification !== 'Safe') {
+                threatsBlocked++;
+            }
+            
+            updateMetrics();
+        }
+
+        function provideFeedback(isCorrect) {
+            if (isCorrect) {
+                alert('✅ Thank you for the feedback! This helps improve our AI accuracy.');
+                accuracyRate += 0.1;
+            } else {
+                alert('❌ Thank you for the correction! This will help the AI learn from this pattern.');
+                accuracyRate -= 0.5;
+            }
+            
+            updateMetrics();
+        }
+
+        function updateMetrics() {
+            document.getElementById('totalAnalyzed').textContent = totalAnalyzed.toLocaleString();
+            document.getElementById('threatsBlocked').textContent = threatsBlocked;
+            document.getElementById('accuracyRate').textContent = accuracyRate.toFixed(1) + '%';
+            document.getElementById('avgConfidence').textContent = avgConfidence.toFixed(1) + '%';
+        }
+
+        function loadSyntheticEmail() {
+            const syntheticEmails = [
+                {
+                    sender: 'urgent@medical-alert.net',
+                    subject: 'URGENT: HIPAA Compliance Verification Required',
+                    body: 'Your healthcare facility has been flagged for HIPAA violations. Immediate action required to avoid legal penalties. Click here to verify your compliance status and update your security protocols.'
+                },
+                {
+                    sender: 'noreply@hospital.org',
+                    subject: 'Monthly Staff Meeting Reminder',
+                    body: 'Dear Staff, This is a reminder about our monthly staff meeting scheduled for next Friday at 2 PM in the main conference room. Please confirm your attendance by replying to this email.'
+                },
+                {
+                    sender: 'security@healthcare-security.com',
+                    subject: 'Password Expiration Notice',
+                    body: 'Your healthcare system password will expire in 24 hours. To avoid account suspension, please update your credentials immediately by clicking this link.'
+                }
+            ];
+
+            const randomEmail = syntheticEmails[Math.floor(Math.random() * syntheticEmails.length)];
+            
+            document.getElementById('sender').value = randomEmail.sender;
+            document.getElementById('subject').value = randomEmail.subject;
+            document.getElementById('emailBody').value = randomEmail.body;
+            
+            // Auto-select priority based on sender
+            if (randomEmail.sender.includes('hospital.org')) {
+                selectPriority(document.querySelector('.priority-option:nth-child(2)'), 'internal');
+            } else {
+                selectPriority(document.querySelector('.priority-option:first-child'), 'urgent');
+            }
+        }
+
+        // Email data
+        const emailExamples = {
+            urgent: [
+                {
+                    subject: "Emergency Surgery Update Required",
+                    from: "dr.johnson@emergency.hospital.org",
+                    category: "Urgent Medical",
+                    classification: "Safe",
+                    confidence: "96%",
+                    action: "✅ Auto-approved",
+                    time: "2 min ago",
+                    content: `Dear Dr. Smith,
+
+We have an emergency surgical case that requires immediate attention. Patient John Doe (MRN: 1234567) was admitted through the ER with acute appendicitis.
+
+URGENT: The surgery has been scheduled for 3:00 PM today in OR 2. Please confirm your availability immediately.
+
+Patient Details:
+- Age: 34
+- Allergies: Penicillin
+- Vital Signs: Stable but deteriorating
+- Estimated Surgery Time: 45 minutes
+
+Please respond ASAP as we need to finalize the surgical team.
+
+Best regards,
+Dr. Johnson
+Emergency Department`,
+                    analysis: "This email contains legitimate medical urgency indicators including patient details, medical record numbers, and specific clinical information. The sender domain matches internal hospital systems and the content follows proper medical communication protocols."
+                },
+                {
+                    subject: "CRITICAL: Patient Code Blue - ICU",
+                    from: "nurse.smith@icu.hospital.org",
+                    category: "Urgent Medical",
+                    classification: "Safe",
+                    confidence: "98%",
+                    action: "✅ Auto-approved",
+                    time: "5 min ago",
+                    content: `CODE BLUE ALERT - ICU UNIT 3
+
+Patient: Mary Johnson (MRN: 1234568)
+Room: ICU-312
+Time: 14:23
+
+CRITICAL SITUATION:
+- Cardiac arrest
+- Resuscitation in progress
+- Family notified
+- Dr. Wilson en route
+
+Immediate action required. All available staff please report to ICU-312.
+
+Nurse Smith
+ICU Charge Nurse`,
+                    analysis: "This is a legitimate medical emergency alert with proper hospital protocols. Contains specific patient information, room numbers, and follows standard emergency communication procedures. No threat indicators detected."
+                }
+            ],
+            internal: [
+                {
+                    subject: "Monthly Staff Meeting - Cardiology Dept",
+                    from: "admin@hospital.org",
+                    category: "Internal",
+                    classification: "Safe",
+                    confidence: "97%",
+                    action: "✅ Auto-approved",
+                    time: "8 min ago",
+                    content: `Subject: Monthly Cardiology Department Meeting
+
+Dear Cardiology Team,
+
+This is a reminder about our monthly department meeting scheduled for next Friday, March 15th at 2:00 PM in the main conference room (Room 204).
+
+Agenda:
+1. Monthly performance metrics review
+2. New equipment installation updates
+3. Staff scheduling for next month
+4. Q&A session
+
+Please confirm your attendance by replying to this email by Wednesday.
+
+Best regards,
+Department Administration`,
+                    analysis: "Standard internal communication with legitimate meeting details, proper agenda structure, and appropriate sender domain. No suspicious elements detected."
+                },
+                {
+                    subject: "IT System Maintenance Notice",
+                    from: "it-admin@hospital.org",
+                    category: "Internal",
+                    classification: "Safe",
+                    confidence: "95%",
+                    action: "✅ Auto-approved",
+                    time: "15 min ago",
+                    content: `SYSTEM MAINTENANCE NOTICE
+
+Date: March 10, 2024
+Time: 2:00 AM - 4:00 AM EST
+Affected Systems: Email, Patient Records, Billing
+
+Dear Staff,
+
+We will be performing scheduled maintenance on our core systems this weekend. During this time, some services may be temporarily unavailable.
+
+What to expect:
+- Brief email delays (up to 15 minutes)
+- Patient record system may be read-only
+- Billing system will be offline
+
+All systems will be fully restored by 4:00 AM.
+
+If you experience any issues, please contact the IT helpdesk.
+
+IT Administration`,
+                    analysis: "Legitimate IT maintenance notification with proper scheduling information, clear impact assessment, and appropriate contact information. Follows standard IT communication protocols."
+                }
+            ],
+            vendor: [
+                {
+                    subject: "Medical Supply Order Confirmation",
+                    from: "orders@medsupply.com",
+                    category: "Vendor",
+                    classification: "Safe",
+                    confidence: "94%",
+                    action: "✅ Auto-approved",
+                    time: "22 min ago",
+                    content: `ORDER CONFIRMATION - #MS-2024-0310
+
+Dear Hospital Purchasing Department,
+
+Thank you for your recent order. We have received and processed your request for medical supplies.
+
+Order Details:
+- Order Number: MS-2024-0310
+- Date: March 10, 2024
+- Total Amount: $2,450.00
+- Expected Delivery: March 12, 2024
+
+Items Ordered:
+- 50 boxes of surgical gloves (size M)
+- 25 boxes of sterile gauze pads
+- 10 boxes of disposable syringes
+
+Tracking information will be sent once the order ships.
+
+Best regards,
+Medical Supply Co.
+Customer Service`,
+                    analysis: "Legitimate vendor communication with proper order details, tracking information, and professional formatting. No suspicious elements or urgent language that would indicate phishing."
+                },
+                {
+                    subject: "URGENT: Equipment Update Required",
+                    from: "support@medical-devices.net",
+                    category: "Vendor",
+                    classification: "Suspicious",
+                    confidence: "78%",
+                    action: "⚠️ Manual review",
+                    time: "45 min ago",
+                    content: `URGENT SECURITY UPDATE REQUIRED
+
+Dear Hospital Administrator,
+
+We have detected a critical security vulnerability in your medical equipment software that requires immediate attention.
+
+ACTION REQUIRED:
+Click here to download the security patch immediately to prevent unauthorized access to your systems.
+
+This update must be installed within 24 hours or your equipment may be compromised.
+
+Download Link: http://medical-devices-security.net/update
+
+If you have any questions, please contact our support team immediately.
+
+Medical Device Support`,
+                    analysis: "This email raises several red flags: urgent language combined with external domain, generic greeting, and request to click a link for a 'security update'. The domain 'medical-devices.net' is suspicious and the urgent tone without specific device information is concerning. Flagged for manual review."
+                }
+            ],
+            external: [
+                {
+                    subject: "HIPAA Compliance Violation Alert",
+                    from: "security@healthcare-compliance.org",
+                    category: "External",
+                    classification: "Phishing",
+                    confidence: "94%",
+                    action: "🚫 Blocked",
+                    time: "1 hour ago",
+                    content: `HIPAA COMPLIANCE VIOLATION ALERT
+
+Your healthcare facility has been flagged for potential HIPAA violations. Immediate action is required to avoid legal penalties and regulatory sanctions.
+
+VIOLATIONS DETECTED:
+- Unauthorized patient data access
+- Inadequate security protocols
+- Missing compliance documentation
+
+IMMEDIATE ACTION REQUIRED:
+Click here to verify your compliance status and update your security protocols.
+
+Failure to respond within 48 hours will result in:
+- Regulatory investigation
+- Potential fines up to $50,000
+- Legal action
+
+Verify Compliance: http://hipaa-compliance-verify.org/login
+
+Healthcare Compliance Bureau`,
+                    analysis: "This is a classic phishing attempt targeting healthcare organizations. Red flags include: urgent language about legal consequences, generic threats, request to click suspicious link, fake regulatory authority, and spoofed compliance organization. The domain 'healthcare-compliance.org' is not a legitimate regulatory body."
+                },
+                {
+                    subject: "Password Expiration - Immediate Action",
+                    from: "admin@hospital-security.net",
+                    category: "External",
+                    classification: "Phishing",
+                    confidence: "96%",
+                    action: "🚫 Blocked",
+                    time: "2 hours ago",
+                    content: `PASSWORD EXPIRATION NOTICE
+
+Your hospital system password will expire in 24 hours. To avoid account suspension and potential security breaches, please update your credentials immediately.
+
+ACCOUNT DETAILS:
+- Username: [Your Email]
+- Expiration: March 11, 2024
+- System: Hospital Management Portal
+
+SECURITY ALERT: Multiple failed login attempts detected from your account. Immediate password change required.
+
+Click here to update your password: http://hospital-security-update.net/password
+
+If you do not update your password within 24 hours:
+- Your account will be suspended
+- You will lose access to patient records
+- Security team will be notified
+
+Hospital IT Security Department`,
+                    analysis: "This is a sophisticated phishing attempt using healthcare-specific language. Warning signs include: urgent password expiration claims, fake security alerts, suspicious external domain, generic threats about account suspension, and request to click a link. No legitimate hospital would use an external domain for password updates."
+                },
+                {
+                    subject: "Medical Conference Invitation",
+                    from: "info@medconference.org",
+                    category: "External",
+                    classification: "Suspicious",
+                    confidence: "72%",
+                    action: "⚠️ Manual review",
+                    time: "3 hours ago",
+                    content: `INVITATION: 2024 Healthcare Innovation Summit
+
+Dear Healthcare Professional,
+
+You are cordially invited to attend the 2024 Healthcare Innovation Summit, the premier event for medical professionals and healthcare administrators.
+
+EVENT DETAILS:
+- Date: April 15-17, 2024
+- Location: Las Vegas Convention Center
+- Registration Fee: $299 (Early Bird: $199)
+- CME Credits Available
+
+SPEAKERS INCLUDE:
+- Dr. Sarah Johnson (Mayo Clinic)
+- Dr. Michael Chen (Johns Hopkins)
+- Dr. Emily Rodriguez (Cleveland Clinic)
+
+Register now at: www.medconference2024.org/register
+
+Limited seats available. Register by March 20th to secure your spot.
+
+Best regards,
+Conference Organizing Committee`,
+                    analysis: "This email has mixed signals. While it appears to be a legitimate conference invitation with proper details and speakers, several factors raise concerns: external domain, generic greeting, registration fee request, and potential for credential harvesting through registration. The content seems legitimate but the approach is suspicious enough to warrant manual review."
+                }
+            ],
+            marketing: [
+                {
+                    subject: "New Medical Equipment Newsletter",
+                    from: "newsletter@medequipment.com",
+                    category: "Marketing",
+                    classification: "Safe",
+                    confidence: "89%",
+                    action: "✅ Auto-approved",
+                    time: "4 hours ago",
+                    content: `MEDICAL EQUIPMENT NEWS - March 2024
+
+Dear Healthcare Professional,
+
+Welcome to our monthly newsletter featuring the latest in medical technology and equipment innovations.
+
+THIS MONTH'S HIGHLIGHTS:
+- New MRI Technology Reduces Scan Time by 40%
+- Portable Ultrasound Devices for Emergency Care
+- AI-Powered Diagnostic Tools
+- Cost-Effective Solutions for Small Practices
+
+FEATURED PRODUCTS:
+- Advanced X-Ray Machines
+- Digital Stethoscopes
+- Patient Monitoring Systems
+- Surgical Instruments
+
+SPECIAL OFFER:
+Get 15% off your next equipment purchase when you mention this newsletter.
+
+To unsubscribe from future emails, click here.
+
+Medical Equipment Solutions`,
+                    analysis: "Standard marketing newsletter with legitimate content, clear unsubscribe option, and appropriate formatting. Contains relevant medical information without suspicious elements or urgent language. Safe for delivery."
+                },
+                {
+                    subject: "Healthcare Software Solutions",
+                    from: "sales@healthtech-solutions.net",
+                    category: "Marketing",
+                    classification: "Safe",
+                    confidence: "92%",
+                    action: "✅ Auto-approved",
+                    time: "6 hours ago",
+                    content: `REVOLUTIONIZE YOUR HEALTHCARE PRACTICE
+
+Dear Healthcare Administrator,
+
+Are you looking to streamline your practice operations and improve patient care? Our comprehensive healthcare software solutions can help.
+
+WHAT WE OFFER:
+- Electronic Health Records (EHR)
+- Patient Scheduling Systems
+- Billing and Insurance Management
+- Telemedicine Platforms
+- Practice Analytics
+
+BENEFITS:
+- Reduce administrative time by 50%
+- Improve patient satisfaction
+- Ensure HIPAA compliance
+- Increase revenue by 25%
+
+SCHEDULE A FREE DEMO:
+Contact us at 1-800-HEALTH-TECH or visit our website to schedule a personalized demonstration.
+
+Our team of healthcare IT experts is ready to help you transform your practice.
+
+Best regards,
+HealthTech Solutions
+Customer Success Team`,
+                    analysis: "Professional marketing email with legitimate business offerings, clear contact information, and appropriate healthcare industry focus. Contains standard marketing language without suspicious elements or urgent demands. Safe for delivery."
+                }
+            ]
+        };
+
+        // Show email category
+        function showEmailCategory(category) {
+            // Update active button
+            document.querySelectorAll('.category-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+
+            // Clear container
+            const container = document.getElementById('emailListContainer');
+            container.innerHTML = '';
+
+            // Show emails based on category
+            if (category === 'all') {
+                // Show all emails
+                Object.keys(emailExamples).forEach(cat => {
+                    emailExamples[cat].forEach(email => {
+                        container.appendChild(createEmailItem(email, cat));
+                    });
+                });
+            } else {
+                // Show specific category
+                if (emailExamples[category]) {
+                    emailExamples[category].forEach(email => {
+                        container.appendChild(createEmailItem(email, category));
+                    });
+                }
+            }
+        }
+
+        // Create email item element
+        function createEmailItem(email, category) {
+            const div = document.createElement('div');
+            div.className = `email-item ${category}`;
+            div.onclick = () => showEmailModal(email);
+            
+            div.innerHTML = `
+                <div class="email-header">
+                    <div class="email-subject">${email.subject}</div>
+                    <div class="email-time">${email.time}</div>
+                </div>
+                <div class="email-from">From: ${email.from}</div>
+                <div class="email-status">
+                    <span class="classification-badge classification-${email.classification.toLowerCase()}">${email.classification}</span>
+                    <span style="font-size: 0.8rem; color: ${getConfidenceColor(email.confidence)};">Confidence: ${email.confidence}</span>
+                    <span style="font-size: 0.8rem; color: #64748b;">${email.action}</span>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // Get confidence color
+        function getConfidenceColor(confidence) {
+            const score = parseInt(confidence);
+            if (score >= 90) return '#059669';
+            if (score >= 75) return '#f59e0b';
+            return '#dc2626';
+        }
+
+        // Show email modal
+        function showEmailModal(email) {
+            document.getElementById('modalTitle').textContent = email.subject;
+            document.getElementById('modalFrom').textContent = email.from;
+            document.getElementById('modalSubject').textContent = email.subject;
+            document.getElementById('modalCategory').textContent = email.category;
+            document.getElementById('modalClassification').innerHTML = `<span class="classification-badge classification-${email.classification.toLowerCase()}">${email.classification}</span>`;
+            document.getElementById('modalConfidence').textContent = email.confidence;
+            document.getElementById('modalAction').textContent = email.action;
+            document.getElementById('modalContent').textContent = email.content;
+            document.getElementById('modalAnalysis').textContent = email.analysis;
+            
+            document.getElementById('emailModal').style.display = 'block';
+        }
+
+        // Close email modal
+        function closeEmailModal() {
+            document.getElementById('emailModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('emailModal');
+            if (event.target === modal) {
+                closeEmailModal();
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Healthcare Email Defense Agent Demo #2 loaded');
+            updateMetrics();
+            showEmailCategory('all'); // Show all emails by default
+        });
+    </script>
+</body>
+</html>

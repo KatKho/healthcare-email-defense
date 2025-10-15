@@ -806,37 +806,88 @@
                         </div>
                     </div>
 
-                    <!-- Email Category Filter -->
-                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 25px; border: 1px solid #e2e8f0;">
-                        <h3 style="color: #2c5aa0; margin-bottom: 15px;">📋 Recent Email Analysis Examples</h3>
-                        <p style="color: #64748b; margin-bottom: 20px; font-size: 0.9rem;">Click on any category below to view analyzed emails from that category:</p>
-                        
-                        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                            <button class="category-filter-btn" onclick="showEmailCategory('urgent')" data-category="urgent">
-                                🚨 Urgent Medical (3)
-                            </button>
-                            <button class="category-filter-btn" onclick="showEmailCategory('internal')" data-category="internal">
-                                🏥 Internal (12)
-                            </button>
-                            <button class="category-filter-btn" onclick="showEmailCategory('vendor')" data-category="vendor">
-                                📦 Vendor (7)
-                            </button>
-                            <button class="category-filter-btn" onclick="showEmailCategory('external')" data-category="external">
-                                🌐 External (15)
-                            </button>
-                            <button class="category-filter-btn" onclick="showEmailCategory('marketing')" data-category="marketing">
-                                📢 Marketing (8)
-                            </button>
-                            <button class="category-filter-btn active" onclick="showEmailCategory('all')" data-category="all">
-                                📊 All Categories (45)
-                            </button>
-                        </div>
+                    <div class="form-group">
+                        <label for="sender">Sender Email:</label>
+                        <input type="text" id="sender" placeholder="e.g., dr.smith@generalhospital.org">
+                    </div>
 
-                        <!-- Email List Container -->
-                        <div id="emailListContainer">
-                            <!-- Emails will be dynamically loaded here -->
+                    <div class="form-group">
+                        <label for="subject">Subject Line:</label>
+                        <input type="text" id="subject" placeholder="e.g., URGENT: Patient Surgery Update Required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailBody">Email Body:</label>
+                        <textarea id="emailBody" placeholder="Enter the email content here..."></textarea>
+                    </div>
+
+                    <button class="analyze-btn" onclick="analyzeEmail()">
+                        🔍 Analyze Email Security
+                    </button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>AI Agent analyzing email patterns...</p>
+                </div>
+
+                <div class="results-section" id="results" style="display: none;">
+                    <h3>Analysis Results</h3>
+                    
+                    <div class="confidence-score">
+                        <span>Confidence Score:</span>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceBar"></div>
+                        </div>
+                        <span id="confidenceValue">0%</span>
+                    </div>
+
+                    <div class="classification">
+                        <div class="classification-badge" id="classificationBadge">Safe</div>
+                        <div id="reasoningText"></div>
+                    </div>
+
+                    <div class="feedback-section">
+                        <h4>Help Improve Our AI:</h4>
+                        <p>Was this classification correct?</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-btn correct" onclick="provideFeedback(true)">✅ Correct</button>
+                            <button class="feedback-btn incorrect" onclick="provideFeedback(false)">❌ Incorrect</button>
                         </div>
                     </div>
+                </div>
+
+                <!-- Email Category Filter -->
+                <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 25px; border: 1px solid #e2e8f0;">
+                    <h3 style="color: #2c5aa0; margin-bottom: 15px;">📋 Recent Email Analysis Examples</h3>
+                    <p style="color: #64748b; margin-bottom: 20px; font-size: 0.9rem;">Click on any category below to view analyzed emails from that category:</p>
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <button class="category-filter-btn" onclick="showEmailCategory('urgent')" data-category="urgent">
+                            🚨 Urgent Medical (3)
+                        </button>
+                        <button class="category-filter-btn" onclick="showEmailCategory('internal')" data-category="internal">
+                            🏥 Internal (12)
+                        </button>
+                        <button class="category-filter-btn" onclick="showEmailCategory('vendor')" data-category="vendor">
+                            📦 Vendor (7)
+                        </button>
+                        <button class="category-filter-btn" onclick="showEmailCategory('external')" data-category="external">
+                            🌐 External (15)
+                        </button>
+                        <button class="category-filter-btn" onclick="showEmailCategory('marketing')" data-category="marketing">
+                            📢 Marketing (8)
+                        </button>
+                        <button class="category-filter-btn active" onclick="showEmailCategory('all')" data-category="all">
+                            📊 All Categories (45)
+                        </button>
+                    </div>
+
+                    <!-- Email List Container -->
+                    <div id="emailListContainer">
+                        <!-- Emails will be dynamically loaded here -->
+                    </div>
+                </div>
 
             </div>
 

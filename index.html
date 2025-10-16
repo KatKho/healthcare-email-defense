@@ -167,11 +167,13 @@
 
         .results-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             background: white;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .results-table th {
@@ -257,33 +259,43 @@
         }
 
         .feedback-btn {
-            padding: 6px 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
             background: white;
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s ease;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .feedback-btn.correct {
-            border-color: #38a169;
-            color: #38a169;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
         }
 
         .feedback-btn.correct:hover {
-            background: #38a169;
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
         }
 
         .feedback-btn.incorrect {
-            border-color: #e53e3e;
-            color: #e53e3e;
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 101, 101, 0.3);
         }
 
         .feedback-btn.incorrect:hover {
-            background: #e53e3e;
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 101, 101, 0.4);
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+
+        .feedback-btn:active {
+            transform: translateY(0);
         }
 
         .feedback-btn.selected {
@@ -656,6 +668,15 @@
         .history-table th,
         .history-table td {
             padding: 12px 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .history-table tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .history-table tr:last-child {
+            border-bottom: none;
         }
 
         .history-status {
@@ -823,17 +844,51 @@
         }
 
         .modal-close-btn {
-            background: #718096;
+            background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
             color: white;
             border: none;
             padding: 10px 20px;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(113, 128, 150, 0.3);
+            font-size: 14px;
         }
 
         .modal-close-btn:hover {
-            background: #4a5568;
+            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(113, 128, 150, 0.4);
+        }
+
+        .modal-close-btn:active {
+            transform: translateY(0);
+        }
+
+        .reasoning-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .reasoning-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+
+        .reasoning-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
         }
 
         /* Investigation Features */
@@ -1062,6 +1117,18 @@
             font-size: 0.9rem;
         }
 
+        .metric-formula {
+            display: block;
+            margin: 3px 0 0 0;
+            color: #a0aec0;
+            font-size: 0.75rem;
+            font-family: 'Courier New', monospace;
+            background: #f7fafc;
+            padding: 2px 4px;
+            border-radius: 3px;
+            border-left: 2px solid #e2e8f0;
+        }
+
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1090,6 +1157,18 @@
             border-radius: 6px;
             border: 1px dashed #cbd5e0;
         }
+
+        /* Ensure Threat Trends content stays inside and scrolls instead of overflowing */
+        #threatTrends {
+            align-items: flex-start; /* top align */
+            justify-content: flex-start; /* left align */
+            overflow-y: auto; /* scroll vertically if needed */
+            overflow-x: hidden; /* prevent horizontal overflow */
+            padding: 6px; /* inner padding so items don't touch border */
+        }
+
+        .threat-list { width: 100%; }
+        .threat-item { width: 100%; box-sizing: border-box; }
 
         .chart-placeholder {
             color: #718096;
@@ -1191,18 +1270,23 @@
         .threat-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             padding: 10px;
         }
 
         .threat-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px;
+            gap: 8px;
+            padding: 10px;
             background: #f7fafc;
-            border-radius: 4px;
-            border-left: 3px solid #e2e8f0;
+            border-radius: 6px;
+            border-left: 4px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-width: 0;
         }
 
         .threat-type {
@@ -1226,12 +1310,28 @@
         .threat-sender {
             flex: 1;
             font-size: 12px;
-            color: #2d3748;
+            color: #4a5568;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 2px 4px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 3px;
+            min-width: 0;
         }
 
         .threat-date {
             font-size: 11px;
             color: #718096;
+            font-weight: 500;
+            min-width: 65px;
+            max-width: 65px;
+            text-align: right;
+            padding: 2px 4px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 3px;
+            flex-shrink: 0;
         }
 
         /* User Activity */
@@ -1274,19 +1374,30 @@
 
         .review-btn,
         .reasoning-btn {
-            background: #2c5aa0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 4px 8px;
-            border-radius: 3px;
+            padding: 8px 14px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 12px;
+            font-weight: 600;
             text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            margin: 2px;
         }
 
         .review-btn:hover,
         .reasoning-btn:hover {
-            background: #1e3a8a;
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .review-btn:active,
+        .reasoning-btn:active {
+            transform: translateY(0);
         }
 
         /* IT Review Dashboard Styles */
@@ -1364,41 +1475,305 @@
         .review-queue-table {
             width: 100%;
             margin-top: 15px;
+            table-layout: fixed;
+        }
+
+        .review-queue-container {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        .review-queue-table td {
+            max-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 8px 12px;
+        }
+
+        .review-queue-table td:nth-child(2) { /* Sender column */
+            max-width: 160px;
+        }
+
+        .review-queue-table td:nth-child(3) { /* Recipient column */
+            max-width: 160px;
+        }
+
+        .review-queue-table td:nth-child(4) { /* Subject column */
+            max-width: 200px;
+        }
+
+        .review-queue-table td:nth-child(5) { /* Classification column */
+            max-width: 100px;
+        }
+
+        .review-queue-table td:nth-child(6) { /* Confidence column */
+            max-width: 60px;
+        }
+
+        .review-queue-table td:nth-child(7) { /* Actions column */
+            max-width: 140px;
+            white-space: normal;
+            min-width: 140px;
+            vertical-align: top;
+        }
+
+        /* Responsive design for review queue table */
+        @media (max-width: 1200px) {
+            .review-queue-table td:nth-child(2) { /* Sender column */
+                max-width: 130px;
+            }
+            .review-queue-table td:nth-child(3) { /* Recipient column */
+                max-width: 130px;
+            }
+            .review-queue-table td:nth-child(4) { /* Subject column */
+                max-width: 160px;
+            }
+            .review-queue-table td:nth-child(7) { /* Actions column */
+                max-width: 130px;
+                min-width: 130px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .review-queue-table {
+                font-size: 12px;
+                overflow-x: auto;
+                display: block;
+                white-space: nowrap;
+            }
+            .review-queue-table thead,
+            .review-queue-table tbody,
+            .review-queue-table tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+            .review-queue-table td {
+                padding: 6px 8px;
+            }
+            .review-queue-table td:nth-child(2) { /* Sender column */
+                max-width: 100px;
+            }
+            .review-queue-table td:nth-child(3) { /* Recipient column */
+                max-width: 100px;
+            }
+            .review-queue-table td:nth-child(4) { /* Subject column */
+                max-width: 120px;
+            }
+            .review-queue-table td:nth-child(7) { /* Actions column */
+                max-width: 120px;
+                min-width: 120px;
+            }
+            .review-actions {
+                gap: 3px;
+            }
+            .review-actions button {
+                font-size: 9px;
+                padding: 5px 10px;
+                min-width: 80px;
+            }
         }
 
         .review-actions {
             display: flex;
-            gap: 8px;
+            flex-direction: column;
+            gap: 4px;
             justify-content: center;
+            align-items: center;
+        }
+
+        .review-actions button {
+            font-size: 10px;
+            padding: 6px 12px;
+            width: 100%;
+            min-width: 100px;
+            white-space: nowrap;
+            text-align: center;
         }
 
         .approve-btn,
         .reject-btn {
-            padding: 6px 12px;
+            padding: 10px 16px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
-            font-weight: 500;
-            transition: background 0.2s ease;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 2px;
         }
 
         .approve-btn {
-            background: #38a169;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
         }
 
         .approve-btn:hover {
-            background: #2f855a;
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
         }
 
         .reject-btn {
-            background: #e53e3e;
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(245, 101, 101, 0.3);
         }
 
         .reject-btn:hover {
-            background: #c53030;
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 101, 101, 0.4);
+        }
+
+        .approve-btn:active,
+        .reject-btn:active {
+            transform: translateY(0);
+        }
+
+        .quarantine-date {
+            color: #666;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Urgency Badges */
+        .urgency-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .urgency-badge.urgent {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            animation: urgentPulse 2s infinite;
+        }
+
+        .urgency-badge.normal {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(116, 185, 255, 0.3);
+        }
+
+        @keyframes urgentPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Urgent Row Styling */
+        .urgent-row {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .urgent-row:hover {
+            background: linear-gradient(135deg, #fff0f0 0%, #ffe0e0 100%);
+        }
+
+        /* Test Email Examples */
+        .test-email-examples {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .test-email-examples h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .example-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .example-select-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            min-height: 80px;
+        }
+
+        .example-select-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-select-btn.safe {
+            border-color: #48bb78;
+        }
+
+        .example-select-btn.safe:hover {
+            border-color: #38a169;
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+        }
+
+        .example-select-btn.suspicious {
+            border-color: #ed8936;
+        }
+
+        .example-select-btn.suspicious:hover {
+            border-color: #dd6b20;
+            background: linear-gradient(135deg, #fffaf0 0%, #fbd38d 100%);
+        }
+
+        .example-select-btn.phishing {
+            border-color: #f56565;
+        }
+
+        .example-select-btn.phishing:hover {
+            border-color: #e53e3e;
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+        }
+
+        .example-select-btn.urgent {
+            border-width: 3px;
+            animation: urgentGlow 2s infinite;
+        }
+
+        @keyframes urgentGlow {
+            0%, 100% { box-shadow: 0 0 0 rgba(255, 107, 107, 0.3); }
+            50% { box-shadow: 0 0 10px rgba(255, 107, 107, 0.6); }
+        }
+
+        .example-type {
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .example-urgency {
+            font-size: 11px;
+            color: #718096;
+            font-weight: 500;
         }
 
         .recent-decision {
@@ -1616,14 +1991,7 @@
                             <div class="metric-icon">⚠️</div>
                             <div class="metric-info">
                                 <h3 id="threatsBlockedMetric">0</h3>
-                                <p>Threats Blocked</p>
-                            </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-icon">🕒</div>
-                            <div class="metric-info">
-                                <h3 id="avgProcessingTimeMetric">0ms</h3>
-                                <p>Avg Processing Time</p>
+                                <p>Threats Detected</p>
                             </div>
                         </div>
                     </div>
@@ -1644,20 +2012,10 @@
                             </div>
                         </div>
                         
-                        <div class="dashboard-widget">
-                            <h3>👤 User Activity</h3>
-                            <div id="userActivity" class="chart-container">
-                                <div class="chart-placeholder">User activity data will appear here</div>
-                            </div>
-                        </div>
                         
                         <div class="dashboard-widget">
                             <h3>🤖 AI Performance</h3>
                             <div id="aiPerformance" class="performance-metrics">
-                                <div class="performance-item">
-                                    <span class="perf-label">Confidence Score:</span>
-                                    <span id="avgConfidenceScore">0%</span>
-                                </div>
                                 <div class="performance-item">
                                     <span class="perf-label">False Positives:</span>
                                     <span id="falsePositiveRate">0%</span>
@@ -1665,10 +2023,6 @@
                                 <div class="performance-item">
                                     <span class="perf-label">False Negatives:</span>
                                     <span id="falseNegativeRate">0%</span>
-                                </div>
-                                <div class="performance-item">
-                                    <span class="perf-label">Learning Rate:</span>
-                                    <span id="learningEfficiency">Good</span>
                                 </div>
                             </div>
                         </div>
@@ -1690,13 +2044,6 @@
                                 <div class="stat-info">
                                     <h3 id="pendingReviewCount">0</h3>
                                     <p>Pending Review</p>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">⏱️</div>
-                                <div class="stat-info">
-                                    <h3 id="avgReviewTime">0m</h3>
-                                    <p>Avg Review Time</p>
                                 </div>
                             </div>
                             <div class="stat-card">
@@ -1742,7 +2089,7 @@
 
             <!-- Test Email Generator Tab -->
             <div id="analyze-tab" class="tab-content">
-                <div class="input-section">
+            <div class="input-section">
                     <h2>🧪 Test Email Generator</h2>
                     <p class="section-description">Generate and analyze test emails to evaluate the AI defense system</p>
                 
@@ -1777,32 +2124,67 @@
                     <textarea id="body" placeholder="Paste the email content here..."></textarea>
                 </div>
 
-                    <div style="display: flex; gap: 10px; margin-top: 20px;">
-                        <button class="analyze-btn" onclick="analyzeEmail()">🧪 Test Email</button>
-                        <button class="example-btn" onclick="generateExample()">🎲 Generate Example</button>
-                    </div>
+                <!-- Pre-written Test Emails -->
+                <div class="test-email-examples">
+                    <h3>📋 Quick Test Examples</h3>
+                    <p class="section-description">Select from pre-written test emails for consistent testing</p>
                     
-                    <div class="loading" id="loading">
-                        <div class="spinner"></div>
-                        <p>Testing email with AI...</p>
+                    <div class="example-buttons-grid">
+                        <button class="example-select-btn safe" onclick="selectTestEmail('safe1')">
+                            <span class="example-type">🟢 Safe</span>
+                            <span class="example-title">Staff Meeting Reminder</span>
+                            <span class="example-urgency">Normal</span>
+                        </button>
+                        
+                        <button class="example-select-btn safe urgent" onclick="selectTestEmail('safe2')">
+                            <span class="example-type">🟢 Safe</span>
+                            <span class="example-title">HIPAA Training Required</span>
+                            <span class="example-urgency">Urgent</span>
+                        </button>
+                        
+                        <button class="example-select-btn suspicious" onclick="selectTestEmail('suspicious1')">
+                            <span class="example-type">🟡 Suspicious</span>
+                            <span class="example-title">Unusual Access Request</span>
+                            <span class="example-urgency">Normal</span>
+                        </button>
+                        
+                        <button class="example-select-btn suspicious urgent" onclick="selectTestEmail('suspicious2')">
+                            <span class="example-type">🟡 Suspicious</span>
+                            <span class="example-title">Urgent Policy Change</span>
+                            <span class="example-urgency">Urgent</span>
+                        </button>
+                        
+                        <button class="example-select-btn phishing" onclick="selectTestEmail('phishing1')">
+                            <span class="example-type">🔴 Phishing</span>
+                            <span class="example-title">Account Suspension Alert</span>
+                            <span class="example-urgency">Normal</span>
+                        </button>
+                        
+                        <button class="example-select-btn phishing urgent" onclick="selectTestEmail('phishing2')">
+                            <span class="example-type">🔴 Phishing</span>
+                            <span class="example-title">Emergency Security Breach</span>
+                            <span class="example-urgency">Urgent</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="results-section">
-                    <h2>🧪 Test Results</h2>
-                    <p class="section-description">Results from AI testing - flagged emails will be sent to IT Review for decision</p>
-                    <div id="results-container">
-                        <div class="no-results">
-                            No emails tested yet. Generate and test an email above to see results.
-                        </div>
-                    </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button class="analyze-btn" onclick="analyzeEmail()">🧪 Test Email</button>
+                    <button class="example-btn" onclick="generateExample()">🎲 Generate Example</button>
                 </div>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                        <p>Testing email with AI...</p>
+                </div>
+            </div>
+
             </div>
 
             <!-- History Log Tab -->
             <div id="history-tab" class="tab-content">
-                <div class="history-section">
-                    <h2>📋 History Log</h2>
+            <div class="history-section">
+                <h2>📋 History Log</h2>
                     <p class="section-description">View processed emails and investigate past decisions</p>
                     
                     <!-- Search and Filter Controls -->
@@ -1829,9 +2211,9 @@
                         </div>
                     </div>
                     
-                    <div id="history-container">
-                        <div class="no-results">
-                            No emails in history yet. Reviewed emails and safe emails will appear here.
+                <div id="history-container">
+                    <div class="no-results">
+                        No emails in history yet. Reviewed emails and safe emails will appear here.
                         </div>
                     </div>
                 </div>
@@ -1841,10 +2223,10 @@
             <div id="quarantine-tab" class="tab-content">
                 <div class="quarantine-section">
                     <h2>⚠️ Quarantine</h2>
-                    <p class="section-description">Emails flagged as suspicious or phishing that require investigation</p>
+                    <p class="section-description">Emails that have been quarantined by IT staff decisions</p>
                     <div id="quarantine-container">
                         <div class="no-results">
-                            No emails in quarantine. Suspicious emails will appear here for investigation.
+                            No emails have been quarantined yet. IT decisions will appear here.
                         </div>
                     </div>
                 </div>
@@ -1864,6 +2246,10 @@
                     <div class="email-field">
                         <div class="field-label">From:</div>
                         <div class="email-value" id="modalSender"></div>
+                    </div>
+                    <div class="email-field">
+                        <div class="field-label">To:</div>
+                        <div class="email-value" id="modalRecipient"></div>
                     </div>
                     <div class="email-field">
                         <div class="field-label">Subject:</div>
@@ -1887,10 +2273,6 @@
                             <span id="modalConfidence"></span>
                         </div>
                         <div class="analysis-item">
-                            <div class="field-label">Threat Score:</div>
-                            <span id="modalThreatScore"></span>
-                        </div>
-                        <div class="analysis-item">
                             <div class="field-label">AI Comment:</div>
                             <span id="modalComment"></span>
                         </div>
@@ -1903,6 +2285,9 @@
                     </button>
                     <button class="feedback-btn incorrect" onclick="confirmFeedbackFromModal('incorrect')">
                         📧 Send Email
+                    </button>
+                    <button class="reasoning-btn" id="modalReasoningBtn" onclick="openReasoningFromModal()" style="display: none;">
+                        📊 Reasoning Report
                     </button>
                     <button class="modal-close-btn" onclick="closeModal()">
                         Close
@@ -2152,14 +2537,9 @@
                 return;
             }
 
-            // Detect recipient role automatically
+            // Detect recipient role automatically (optional)
             const recipientInfo = detectRecipientRole(recipientEmail);
-            if (!recipientInfo) {
-                alert('Unable to determine recipient role. Please check the recipient email address.');
-                return;
-            }
-
-            const userRole = recipientInfo.role;
+            const userRole = recipientInfo ? recipientInfo.role : 'healthcare worker'; // Default role if unknown
 
             const analyzeBtn = document.querySelector('.analyze-btn');
             const loading = document.getElementById('loading');
@@ -2180,6 +2560,7 @@
                     recipientEmail: recipientEmail,
                     recipientInfo: recipientInfo,
                     classification: result.classification,
+                    urgency: result.urgency,
                     confidence: result.confidence,
                     comment: result.comment,
                     reasoningReport: result.reasoningReport || null,
@@ -2197,14 +2578,21 @@
                 // Update agent performance metrics
                 agentMemory.performanceMetrics.totalAnalyzed++;
                 
-                // Track security metrics
+                // Track security metrics (avoid double counting)
+                let threatBlocked = false;
                 if (result.classification === 'Phishing') {
                     agentMemory.performanceMetrics.phishingCaught++;
+                    threatBlocked = true;
                 }
                 if (result.threatIntel && result.threatIntel.threatLevel === 'HIGH') {
                     agentMemory.performanceMetrics.highThreatEmails++;
+                    if (!threatBlocked) {
+                        agentMemory.performanceMetrics.securityThreatsBlocked++;
+                        threatBlocked = true;
+                    }
                 }
-                if (result.threatIntel && result.threatIntel.threatScore > 0) {
+                // Only count securityThreatsBlocked if no other threat was already counted
+                if (!threatBlocked && result.threatIntel && result.threatIntel.threatScore > 0) {
                     agentMemory.performanceMetrics.securityThreatsBlocked++;
                 }
                 
@@ -2218,10 +2606,14 @@
                 
                 saveAgentMemory();
 
-                // Update display
-                updateResultsDisplay();
-                updateHistoryDisplay();
-                updateAgentStatus();
+                // Update display with error handling
+                try {
+                    updateResultsDisplay();
+                    updateHistoryDisplay();
+                    updateAgentStatus();
+                } catch (displayError) {
+                    console.log('Display update error (non-critical):', displayError);
+                }
                 
                 // Save active results to persist review queue
                 saveAgentMemory();
@@ -2259,7 +2651,7 @@
             console.log('🔍 Threat intelligence result:', threatIntel);
             
             // Step 4: AI Analysis with context
-            const aiResult = await analyzeWithAI(apiKey, sender, subject, body, patternMatch, threatIntel, roleCheck, userRole);
+            const aiResult = await analyzeWithAI(apiKey, sender, subject, body, patternMatch, threatIntel, roleCheck, userRole, recipientInfo);
             console.log('🧠 AI analysis result:', aiResult);
             
             // Step 5: Autonomous Decision Making
@@ -2434,7 +2826,7 @@
                     matchedKeywords: expectedMatches
                 };
             }
-
+            
             return null;
         }
 
@@ -2485,7 +2877,7 @@
                 attachmentIssues: attachmentAnalysis.issues,
                 threatScore,
                 threatLevel,
-                confidence: Math.min(95, threatScore + 10)
+                confidence: threatScore + 10
             };
         }
 
@@ -2572,7 +2964,7 @@
             // Role-based escalation
             if (roleCheck && roleCheck.roleMismatch) {
                 if (roleCheck.severity === 'high') {
-                    actions.push({
+                actions.push({
                         type: 'role_escalate',
                         reason: `ROLE MISMATCH: ${roleCheck.reason}`,
                         timestamp: new Date().toISOString()
@@ -2581,8 +2973,8 @@
                     actions.push({
                         type: 'role_review',
                         reason: `Role Review: ${roleCheck.reason}`,
-                        timestamp: new Date().toISOString()
-                    });
+                    timestamp: new Date().toISOString()
+                });
                 }
             }
             
@@ -2595,7 +2987,7 @@
             
             if (patternMatch && patternMatch.confidence > 70) {
                 // Boost confidence if pattern matches
-                aiResult.confidence = Math.min(95, aiResult.confidence + 10);
+                aiResult.confidence = aiResult.confidence + 10;
                 aiResult.comment = `[Learning Applied] ${aiResult.comment}`;
                 learningApplied = true;
                 
@@ -2619,7 +3011,7 @@
             return text.toLowerCase().split(/\W+/).filter(word => word.length > 3);
         }
 
-        async function analyzeWithAI(apiKey, sender, subject, body, patternMatch = null, threatIntel = null, roleCheck = null, userRole = null) {
+        async function analyzeWithAI(apiKey, sender, subject, body, patternMatch = null, threatIntel = null, roleCheck = null, userRole = null, recipientInfo = null) {
             // Try multiple free models in order of preference
             const freeModels = [
                 'microsoft/wizardlm-2-8x22b:free',
@@ -2652,12 +3044,12 @@ Previous Analysis Context:
 `;
             }
 
-            // Create optimized prompt with clearer instructions
-            const prompt = `Healthcare email security analysis. Respond with valid JSON only.
+            // Create optimized prompt with clearer instructions including urgency detection
+            const prompt = `Healthcare email security analysis with urgency detection. Respond with valid JSON only.
 
 EMAIL DATA:
 From: ${sender}
-To: ${userRole || 'staff'} 
+To: ${userRole || 'staff'} ${recipientInfo ? `(${recipientInfo.name} - ${recipientInfo.role})` : '(Unknown recipient - using default healthcare worker role)'}
 Subject: ${subject}
 Body: ${body}
 ${roleCheck ? `Role Issue: ${roleCheck.reason}` : ''}
@@ -2666,6 +3058,7 @@ ${threatIntel ? `Threats: ${threatIntel.threatScore}/100, ${threatIntel.suspicio
 REQUIRED JSON OUTPUT:
 {
   "classification": "Safe",
+  "urgency": "Normal",
   "confidence": 85,
   "comment": "Brief explanation",
   "reasoningReport": {
@@ -2673,11 +3066,23 @@ REQUIRED JSON OUTPUT:
     "threatIndicators": ["threat1", "threat2"],
     "roleAnalysis": "Role appropriateness explanation", 
     "technicalFindings": ["finding1", "finding2"],
-    "recommendation": "Clear action recommendation"
+    "recommendation": "Clear action recommendation",
+    "urgencyReason": "Why this email is urgent or normal"
   }
 }
 
-RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Role mismatches = Suspicious.`;
+CLASSIFICATION RULES:
+- Safe: legitimate healthcare communication
+- Suspicious: unclear/inappropriate content
+- Phishing: malicious intent
+
+URGENCY RULES (CRITICAL - ALWAYS DETECT URGENCY):
+- Urgent: medical emergencies, critical alerts, time-sensitive patient care, urgent requests, any email with urgency keywords
+- Normal: routine communications, general updates, non-critical information
+
+IMPORTANT: If ANY urgency indicator is present in the email (subject OR body), classify as "Urgent". Err on the side of urgency for healthcare communications.
+
+URGENCY INDICATORS: "emergency", "urgent", "critical", "immediate", "stat", "asap", "patient in distress", "code blue", "time sensitive", "deadline", "urgent response needed", "life threatening", "emergency room", "trauma", "cardiac arrest", "immediately", "as soon as possible", "right away", "without delay", "expires", "deadline", "due today", "must complete", "action required", "response needed"`;
 
             // Try models in sequence until one works
             let response = null;
@@ -2688,25 +3093,25 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 
                 try {
                     response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${apiKey}`,
-                            'HTTP-Referer': window.location.origin,
-                            'X-Title': 'Healthcare Email Defense Demo'
-                        },
-                        body: JSON.stringify({
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
+                    'HTTP-Referer': window.location.origin,
+                    'X-Title': 'Healthcare Email Defense Demo'
+                },
+                body: JSON.stringify({
                             model: model,
                             max_tokens: 800,
                             temperature: 0.1,
-                            messages: [
-                                {
-                                    role: 'user',
-                                    content: prompt
-                                }
-                            ]
-                        })
-                    });
+                    messages: [
+                        {
+                            role: 'user',
+                            content: prompt
+                        }
+                    ]
+                })
+            });
                     
                     if (response.ok) {
                         console.log(`✅ Successfully using model: ${model}`);
@@ -2785,6 +3190,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 // Validate and normalize the result structure
                 if (result && typeof result === 'object') {
                     const classification = result.classification || 'Suspicious';
+                    const urgency = result.urgency || 'Normal';
                     const confidence = Math.round(Number(result.confidence) || 70);
                     const comment = result.comment || 'Analysis completed';
                     
@@ -2794,18 +3200,36 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                         ? classification 
                         : 'Suspicious';
                     
-                    // Ensure confidence is within reasonable bounds
-                    const finalConfidence = Math.max(50, Math.min(95, confidence));
+                    // Ensure urgency is one of the valid values
+                    const validUrgencies = ['Normal', 'Urgent'];
+                    const finalUrgency = validUrgencies.includes(urgency) ? urgency : 'Normal';
+                    
+                    // Debug AI urgency detection
+                    console.log('🤖 AI Urgency Detection Debug:');
+                    console.log('- Raw urgency from AI:', result.urgency);
+                    console.log('- Valid urgencies:', validUrgencies);
+                    console.log('- Final urgency:', finalUrgency);
+                    
+                    // Confidence transparency: do not clamp; report source
+                    const finalConfidence = Math.round(confidence);
+                    const confidenceSource = result.confidence !== undefined ? 'model' : 'unknown';
+                    const confidenceJustification = confidenceSource === 'model'
+                        ? 'Confidence provided by the model response'
+                        : 'Confidence source unknown (no explicit model field)';
                     
                     return {
                         classification: finalClassification,
+                        urgency: finalUrgency,
                         confidence: finalConfidence,
-                        comment: comment,
+                        comment: `${comment} [confidence: ${finalConfidence}% | source: ${confidenceSource}]`,
+                        confidenceSource,
+                        confidenceJustification,
                         reasoningReport: result.reasoningReport || {
-                            summary: `AI analysis completed. Email classified as ${finalClassification} with ${finalConfidence}% confidence.`,
+                            summary: `AI analysis completed. Email classified as ${finalClassification} with ${finalConfidence}% confidence (source: ${confidenceSource}). Urgency: ${finalUrgency}.`,
                             threatIndicators: result.threatIndicators || [],
                             roleAnalysis: result.roleAnalysis || `Content analyzed for ${userRole || 'healthcare worker'} role.`,
                             technicalFindings: result.technicalFindings || ['AI-based content analysis performed'],
+                            urgencyReason: result.reasoningReport?.urgencyReason || `Email classified as ${finalUrgency} based on content analysis.`,
                             recommendation: result.recommendation || `${finalClassification === 'Phishing' ? 'Quarantine immediately' : finalClassification === 'Safe' ? 'Allow delivery' : 'Manual review recommended'}`
                         }
                     };
@@ -2823,9 +3247,10 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 let confidence = 70;
                 let comment = 'AI analysis completed - manual review recommended';
                 
-                // Analyze email content for threat indicators
+                // Analyze email content for threat indicators and urgency
                 const phishingKeywords = ['urgent', 'immediately', 'click here', 'verify account', 'suspended', 'violation', 'compromise', 'breach', 'password expired', 'account locked', 'click here', 'verify now', 'action required', 'account suspended'];
                 const safeKeywords = ['appointment', 'schedule', 'medical', 'patient', 'doctor', 'nurse', 'hospital', 'clinic', 'treatment', 'prescription', 'hipaa', 'compliance', 'training', 'reminder', 'policy', 'staff', 'internal', 'meeting', 'conference'];
+                const urgencyKeywords = ['emergency', 'urgent', 'critical', 'immediate', 'stat', 'asap', 'patient in distress', 'code blue', 'time sensitive', 'deadline', 'urgent response needed', 'life threatening', 'emergency room', 'trauma', 'cardiac arrest', 'immediately', 'as soon as possible', 'right away', 'without delay', 'expires', 'due today', 'must complete', 'action required', 'response needed'];
                 
                 // Check for legitimate hospital/healthcare domains
                 const legitimateDomains = ['generalhospital.org', 'hospital.org', 'clinic.org', 'medical.org', 'healthcare.org', '.gov', '.edu'];
@@ -2833,6 +3258,22 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 
                 const phishingScore = phishingKeywords.filter(keyword => emailLower.includes(keyword)).length;
                 const safeScore = safeKeywords.filter(keyword => emailLower.includes(keyword)).length;
+                const urgencyScore = urgencyKeywords.filter(keyword => emailLower.includes(keyword)).length;
+                
+                // Get found keywords for debugging
+                const foundPhishingKeywords = phishingKeywords.filter(keyword => emailLower.includes(keyword));
+                const foundSafeKeywords = safeKeywords.filter(keyword => emailLower.includes(keyword));
+                const foundUrgencyKeywords = urgencyKeywords.filter(keyword => emailLower.includes(keyword));
+                
+                // Determine urgency level
+                const urgency = urgencyScore > 0 ? 'Urgent' : 'Normal';
+                
+                // Debug urgency detection
+                console.log('🔍 Urgency Detection Debug:');
+                console.log('- Email content:', emailLower.substring(0, 100) + '...');
+                console.log('- Urgency keywords found:', foundUrgencyKeywords);
+                console.log('- Urgency score:', urgencyScore);
+                console.log('- Final urgency:', urgency);
                 
                 // Determine classification based on content analysis
                 // Priority 1: Legitimate domains with healthcare content
@@ -2844,7 +3285,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 // Priority 2: Clear phishing indicators
                 else if (phishingScore >= 2 || emailLower.includes('phishing') || emailLower.includes('malicious')) {
                     classification = 'Phishing';
-                    confidence = Math.min(95, 75 + (phishingScore * 5));
+                    confidence = 75 + (phishingScore * 5);
                     comment = 'Multiple threat indicators detected';
                 }
                 // Priority 3: Strong safe indicators
@@ -2880,27 +3321,27 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                     }
                 }
                 
-                // Ensure confidence stays within bounds
-                confidence = Math.max(50, Math.min(95, confidence));
+                // Confidence transparency: no artificial bounds
                 
                 // Generate reasoning report for fallback analysis
-                const foundPhishingKeywords = phishingKeywords.filter(keyword => emailLower.includes(keyword));
-                const foundSafeKeywords = safeKeywords.filter(keyword => emailLower.includes(keyword));
+                // (foundPhishingKeywords, foundSafeKeywords, foundUrgencyKeywords already declared above)
                 
                 const reasoningReport = {
-                    summary: `Fallback analysis completed due to AI unavailability. Email classified as ${classification} with ${confidence}% confidence based on content pattern analysis.`,
+                    summary: `Fallback analysis completed due to AI unavailability. Email classified as ${classification} with ${confidence}% confidence based on content pattern analysis. Urgency: ${urgency}.`,
                     threatIndicators: [
                         ...(foundPhishingKeywords.length > 0 ? [`Phishing keywords detected: ${foundPhishingKeywords.join(', ')}`] : []),
-                        ...(phishingScore >= 2 ? ['Multiple urgency indicators present'] : []),
+                        ...(phishingScore >= 2 ? ['Multiple threat indicators present'] : []),
                         ...(!isLegitimateDomain ? ['Sender domain not in trusted healthcare domain list'] : [])
                     ],
                     roleAnalysis: roleCheck ? roleCheck.reason : `Content analyzed for ${userRole || 'healthcare worker'} role - no specific role concerns detected in fallback mode`,
                     technicalFindings: [
                         `Phishing keyword score: ${phishingScore}`,
                         `Healthcare keyword score: ${safeScore}`,
+                        `Urgency keyword score: ${urgencyScore}`,
                         `Domain legitimacy: ${isLegitimateDomain ? 'Trusted healthcare domain' : 'External domain'}`,
                         'Note: Technical analysis limited in fallback mode'
                     ],
+                    urgencyReason: urgencyScore > 0 ? `Urgent keywords detected: ${foundUrgencyKeywords.join(', ')}` : 'No urgency indicators found',
                     recommendation: classification === 'Phishing' ? 
                         'Quarantine immediately and alert security team due to multiple threat indicators' :
                         classification === 'Safe' ?
@@ -2910,6 +3351,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 
                 return {
                     classification,
+                    urgency,
                     confidence,
                     comment,
                     reasoningReport
@@ -2918,12 +3360,23 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
         }
 
         function updateResultsDisplay() {
-            const container = document.getElementById('results-container');
-            
-            if (analysisResults.length === 0) {
-                container.innerHTML = '<div class="no-results">No emails analyzed yet. Submit an email above to see results.</div>';
-                return;
+            // Results are now displayed in other tabs (IT Review, History, Quarantine)
+            // This function is kept for compatibility but does nothing since results-container was removed
+            try {
+                const container = document.getElementById('results-container');
+                if (!container) {
+                    // Container doesn't exist, which is expected since we removed it
+                    return;
+                }
+                // If container exists, update it (shouldn't happen but just in case)
+                if (analysisResults.length === 0) {
+                    container.innerHTML = '<div class="no-results">No emails analyzed yet. Submit an email above to see results.</div>';
+                    return;
+                }
+            } catch (error) {
+                console.log('updateResultsDisplay: Container not found (expected)', error);
             }
+            return;
 
             const tableHTML = `
                 <table class="results-table">
@@ -2963,8 +3416,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                                     </div>
                                     ${result.threatIntel ? `
                                         <div class="security-details">
-                                            <small>Threat Score: ${result.threatIntel.threatScore}/100</small>
-                                            ${result.threatIntel.suspiciousLinks > 0 ? `<br><small>⚠️ ${result.threatIntel.suspiciousLinks} suspicious links</small>` : ''}
+                                            ${result.threatIntel.suspiciousLinks > 0 ? `<small>⚠️ ${result.threatIntel.suspiciousLinks} suspicious links</small>` : ''}
                                             ${result.threatIntel.headerIssues.length > 0 ? `<br><small>⚠️ ${result.threatIntel.headerIssues.length} header issues</small>` : ''}
                                             ${result.threatIntel.attachmentIssues.length > 0 ? `<br><small>⚠️ ${result.threatIntel.attachmentIssues.length} attachment issues</small>` : ''}
                                         </div>
@@ -3172,12 +3624,17 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
 
         // Update history display
         function updateHistoryDisplay() {
-            const container = document.getElementById('history-container');
-            
-            if (historyResults.length === 0) {
-                container.innerHTML = '<div class="no-results">No emails in history yet. Reviewed emails and safe emails will appear here.</div>';
-                return;
-            }
+            try {
+                const container = document.getElementById('history-container');
+                if (!container) {
+                    console.log('updateHistoryDisplay: history-container not found');
+                    return;
+                }
+                
+                if (historyResults.length === 0) {
+                    container.innerHTML = '<div class="no-results">No emails in history yet. Reviewed emails and safe emails will appear here.</div>';
+                    return;
+                }
 
             const tableHTML = `
                 <table class="results-table history-table">
@@ -3207,7 +3664,6 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                                 </td>
                                 <td>
                                     <span class="confidence">${result.confidence}%</span>
-                                    ${result.threatIntel ? `<br><small>Threat: ${result.threatIntel.threatScore}/100</small>` : ''}
                                 </td>
                                 <td>
                                     <span class="history-status ${result.moveReason}">
@@ -3237,7 +3693,10 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 </table>
             `;
 
-            container.innerHTML = tableHTML;
+                container.innerHTML = tableHTML;
+            } catch (error) {
+                console.log('updateHistoryDisplay: Error updating history display', error);
+            }
         }
 
         // Filter and search history
@@ -3292,7 +3751,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             
             if (resultsToDisplay.length === 0) {
                 if (historyResults.length === 0) {
-                    container.innerHTML = '<div class="no-results">No emails in history yet. Reviewed emails and safe emails will appear here.</div>';
+                container.innerHTML = '<div class="no-results">No emails in history yet. Reviewed emails and safe emails will appear here.</div>';
                 } else {
                     container.innerHTML = '<div class="no-results">No results match your search criteria. Try adjusting your filters.</div>';
                 }
@@ -3327,7 +3786,6 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                                 </td>
                                 <td>
                                     <span class="confidence">${result.confidence}%</span>
-                                    ${result.threatIntel ? `<br><small>Threat: ${result.threatIntel.threatScore}/100</small>` : ''}
                                 </td>
                                 <td>
                                     <span class="history-status ${result.moveReason}">
@@ -3431,13 +3889,17 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 </div>
             `;
             
-            let statusContainer = document.getElementById('agent-status');
-            if (!statusContainer) {
-                statusContainer = document.createElement('div');
-                statusContainer.id = 'agent-status';
-                document.querySelector('.results-section').insertBefore(statusContainer, document.getElementById('results-container'));
+            try {
+                let statusContainer = document.getElementById('agent-status');
+                if (statusContainer) {
+                    statusContainer.innerHTML = statusHTML;
+                } else {
+                    // Status container doesn't exist, which is expected since results section was removed
+                    console.log('Agent status update (no container):', statusHTML);
+                }
+            } catch (error) {
+                console.log('updateAgentStatus: Error updating status (expected)', error);
             }
-            statusContainer.innerHTML = statusHTML;
         }
 
         // Refresh agent stats manually
@@ -3559,7 +4021,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             
             // Update quarantine display if quarantine tab is selected
             if (tabName === 'quarantine') {
-                updateQuarantineDisplay();
+                showQuarantinedEmails(); // Always show quarantined emails, not flagged emails
             }
             
             // Update IT review dashboard if review tab is selected
@@ -3576,23 +4038,30 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
         }
 
         function updateMetricsCards() {
-            const totalEmails = agentMemory.performanceMetrics.totalAnalyzed;
-            const accuracy = agentMemory.performanceMetrics.accuracyRate;
-            const threatsBlocked = agentMemory.performanceMetrics.phishingCaught + agentMemory.performanceMetrics.securityThreatsBlocked;
+            // Calculate real metrics from history data
+            const totalEmails = historyResults.length;
+            const totalReviewed = historyResults.filter(item => item.feedback).length;
+            const correctPredictions = historyResults.filter(item => item.feedback === 'correct').length;
+            const accuracy = totalReviewed > 0 ? (correctPredictions / totalReviewed) * 100 : 0;
             
-            // Calculate average processing time (mock data for now)
-            const avgProcessingTime = Math.floor(Math.random() * 500) + 200;
+            // Transparent threat calculation: phishing + security threats (no double counting)
+            const phishingCaught = agentMemory.performanceMetrics.phishingCaught;
+            const securityThreats = agentMemory.performanceMetrics.securityThreatsBlocked;
+            const threatsBlocked = phishingCaught + securityThreats;
             
+            // Update metric displays
             document.getElementById('totalEmailsMetric').textContent = totalEmails;
             document.getElementById('accuracyMetric').textContent = accuracy.toFixed(1) + '%';
             document.getElementById('threatsBlockedMetric').textContent = threatsBlocked;
-            document.getElementById('avgProcessingTimeMetric').textContent = avgProcessingTime + 'ms';
+            
+            // Console log for debugging and reporting
+            console.log(`Metrics calculated: Total=${totalEmails}, Accuracy=${accuracy.toFixed(1)}%, Threats=${threatsBlocked}`);
+            console.log(`Formulas: Total=${totalEmails} emails in history, Accuracy=${correctPredictions}/${totalReviewed} × 100 = ${accuracy.toFixed(1)}%, Threats=${phishingCaught} + ${securityThreats} = ${threatsBlocked}`);
         }
 
         function updateCharts() {
             updateClassificationChart();
             updateThreatTrends();
-            updateUserActivity();
         }
 
         function updateClassificationChart() {
@@ -3654,39 +4123,9 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             `;
         }
 
-        function updateUserActivity() {
-            const userActivity = document.getElementById('userActivity');
-            const recipientCounts = {};
-            
-            historyResults.forEach(result => {
-                const recipient = result.recipientInfo ? result.recipientInfo.name : 'Unknown';
-                recipientCounts[recipient] = (recipientCounts[recipient] || 0) + 1;
-            });
-            
-            const topUsers = Object.entries(recipientCounts)
-                .sort(([,a], [,b]) => b - a)
-                .slice(0, 5);
-            
-            if (topUsers.length === 0) {
-                userActivity.innerHTML = '<div class="chart-placeholder">No user activity data available</div>';
-                return;
-            }
-            
-            userActivity.innerHTML = `
-                <div class="user-list">
-                    ${topUsers.map(([user, count]) => `
-                        <div class="user-item">
-                            <span class="user-name">${user}</span>
-                            <span class="user-count">${count} emails</span>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
 
         function updatePerformanceMetrics() {
             const totalReviewed = historyResults.filter(item => item.feedback).length;
-            const correctPredictions = historyResults.filter(item => item.feedback === 'correct').length;
             const falsePositives = historyResults.filter(item => 
                 item.feedback === 'incorrect' && (item.classification === 'Suspicious' || item.classification === 'Phishing')
             ).length;
@@ -3694,25 +4133,11 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 item.feedback === 'incorrect' && item.classification === 'Safe'
             ).length;
             
-            const avgConfidence = historyResults.length > 0 ? 
-                (historyResults.reduce((sum, r) => sum + (r.confidence || 0), 0) / historyResults.length).toFixed(1) : 0;
-            
             const falsePositiveRate = totalReviewed > 0 ? (falsePositives / totalReviewed * 100).toFixed(1) : 0;
             const falseNegativeRate = totalReviewed > 0 ? (falseNegatives / totalReviewed * 100).toFixed(1) : 0;
             
-            let learningEfficiency = 'Unknown';
-            if (totalReviewed >= 10) {
-                const accuracy = totalReviewed > 0 ? (correctPredictions / totalReviewed * 100) : 0;
-                if (accuracy >= 90) learningEfficiency = 'Excellent';
-                else if (accuracy >= 80) learningEfficiency = 'Good';
-                else if (accuracy >= 70) learningEfficiency = 'Fair';
-                else learningEfficiency = 'Needs Improvement';
-            }
-            
-            document.getElementById('avgConfidenceScore').textContent = avgConfidence + '%';
             document.getElementById('falsePositiveRate').textContent = falsePositiveRate + '%';
             document.getElementById('falseNegativeRate').textContent = falseNegativeRate + '%';
-            document.getElementById('learningEfficiency').textContent = learningEfficiency;
         }
 
         // Quarantine Display Functions
@@ -3736,7 +4161,6 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                             <th>Subject</th>
                             <th>Classification</th>
                             <th>Confidence</th>
-                            <th>Threat Score</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -3755,7 +4179,65 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                                     <span class="confidence">${result.confidence}%</span>
                                 </td>
                                 <td>
-                                    ${result.threatIntel ? `${result.threatIntel.threatScore}/100` : 'N/A'}
+                                    <div class="quarantine-actions">
+                                        <button class="review-btn" onclick="openEmailModal(${result.id})" title="Review Email">
+                                            📧 Review
+                                        </button>
+                                        <button class="reasoning-btn" onclick="openReasoningModal(${result.id})" title="View AI Reasoning">
+                                            🧠 Reasoning
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = tableHTML;
+        }
+
+        // Show quarantined emails (emails that were actually quarantined by IT decisions)
+        function showQuarantinedEmails() {
+            const container = document.getElementById('quarantine-container');
+            const quarantinedItems = historyResults.filter(result => 
+                result.feedback === 'correct' // Emails that were quarantined by IT
+            );
+            
+            if (quarantinedItems.length === 0) {
+                container.innerHTML = '<div class="no-results">No emails have been quarantined yet. IT decisions will appear here.</div>';
+                return;
+            }
+            
+            const tableHTML = `
+                <table class="results-table quarantine-table">
+                    <thead>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Recipient</th>
+                            <th>Subject</th>
+                            <th>Classification</th>
+                            <th>Confidence</th>
+                            <th>Quarantined Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${quarantinedItems.map(result => `
+                            <tr>
+                                <td title="${result.sender}">${result.sender.length > 25 ? result.sender.substring(0, 25) + '...' : result.sender}</td>
+                                <td title="${result.recipientEmail || 'Unknown'}">${result.recipientInfo ? result.recipientInfo.name : (result.recipientEmail || 'Unknown')}</td>
+                                <td title="${result.subject}">${result.subject.length > 30 ? result.subject.substring(0, 30) + '...' : result.subject}</td>
+                                <td>
+                                    <span class="classification ${result.classification.toLowerCase()}">
+                                        ${result.classification}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="confidence">${result.confidence}%</span>
+                                </td>
+                                <td>
+                                    <span class="quarantine-date">${new Date(result.movedToHistory).toLocaleDateString()}</span>
                                 </td>
                                 <td>
                                     <div class="quarantine-actions">
@@ -3798,11 +4280,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             const correctDecisions = historyResults.filter(result => result.feedback === 'correct').length;
             const reviewAccuracy = totalReviewed > 0 ? (correctDecisions / totalReviewed * 100).toFixed(1) : 0;
             
-            // Mock average review time (in a real system, this would be tracked)
-            const avgReviewTime = totalReviewed > 0 ? Math.floor(Math.random() * 3) + 2 : 0;
-            
             document.getElementById('pendingReviewCount').textContent = pendingReview;
-            document.getElementById('avgReviewTime').textContent = avgReviewTime + 'm';
             document.getElementById('reviewedToday').textContent = reviewedToday;
             document.getElementById('reviewAccuracy').textContent = reviewAccuracy + '%';
         }
@@ -3813,6 +4291,13 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 result.classification === 'Suspicious' || result.classification === 'Phishing'
             );
             
+            // Sort by urgency: Urgent emails first, then by timestamp
+            reviewItems.sort((a, b) => {
+                if (a.urgency === 'Urgent' && b.urgency !== 'Urgent') return -1;
+                if (b.urgency === 'Urgent' && a.urgency !== 'Urgent') return 1;
+                return new Date(b.timestamp) - new Date(a.timestamp); // Newer first within same urgency level
+            });
+            
             if (reviewItems.length === 0) {
                 container.innerHTML = '<div class="no-results">No emails pending review. Flagged emails will appear here for your decision.</div>';
                 return;
@@ -3822,21 +4307,27 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 <table class="results-table review-queue-table">
                     <thead>
                         <tr>
+                            <th>Priority</th>
                             <th>Sender</th>
                             <th>Recipient</th>
                             <th>Subject</th>
                             <th>Classification</th>
                             <th>Confidence</th>
-                            <th>Threat Score</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${reviewItems.map(result => `
-                            <tr>
-                                <td title="${result.sender}">${result.sender.length > 25 ? result.sender.substring(0, 25) + '...' : result.sender}</td>
-                                <td title="${result.recipientEmail || 'Unknown'}">${result.recipientInfo ? result.recipientInfo.name : (result.recipientEmail || 'Unknown')}</td>
-                                <td title="${result.subject}">${result.subject.length > 30 ? result.subject.substring(0, 30) + '...' : result.subject}</td>
+                            <tr class="${result.urgency === 'Urgent' ? 'urgent-row' : ''}">
+                                <td>
+                                    ${result.urgency === 'Urgent' ? 
+                                        '<span class="urgency-badge urgent">🚨 URGENT</span>' : 
+                                        '<span class="urgency-badge normal">📋 Normal</span>'
+                                    }
+                                </td>
+                                <td title="${result.sender}">${result.sender}</td>
+                                <td title="${result.recipientInfo ? result.recipientInfo.name : (result.recipientEmail || 'Unknown')}">${result.recipientInfo ? result.recipientInfo.name : (result.recipientEmail || 'Unknown')}</td>
+                                <td title="${result.subject}">${result.subject}</td>
                                 <td>
                                     <span class="classification ${result.classification.toLowerCase()}">
                                         ${result.classification}
@@ -3845,10 +4336,6 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                                 </td>
                                 <td>
                                     <span class="confidence">${result.confidence}%</span>
-                                    ${result.threatIntel ? `<br><small>Threat: ${result.threatIntel.threatScore}/100</small>` : ''}
-                                </td>
-                                <td>
-                                    ${result.threatIntel ? `${result.threatIntel.threatScore}/100` : 'N/A'}
                                 </td>
                                 <td>
                                     <div class="review-actions">
@@ -3931,8 +4418,8 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             document.getElementById('quarantine-tab').classList.add('active');
             document.querySelector('[onclick="showTab(\'quarantine\')"]').classList.add('active');
             
-            // Update quarantine display
-            updateQuarantineDisplay();
+            // Show quarantined emails (emails that were actually quarantined by IT decisions)
+            showQuarantinedEmails();
             
             // Highlight the specific email if it exists in quarantine
             setTimeout(() => {
@@ -3994,11 +4481,64 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                     recipientInfo.style.borderColor = '#f6cc8f';
                 }
             } else {
-                recipientInfo.style.display = 'none';
+                // Show unknown recipient info
+                recipientInfo.style.display = 'block';
+                recipientName.textContent = 'Unknown User';
+                recipientRole.textContent = 'Healthcare Worker (Default)';
+                recipientDepartment.textContent = 'Unknown Department';
+                
+                unknownUserWarning.style.display = 'block';
+                unknownUserWarning.textContent = '⚠️ Unknown recipient - using default healthcare worker role for analysis';
+                recipientInfo.style.background = '#fef5e7';
+                recipientInfo.style.borderColor = '#f6cc8f';
             }
         }
 
         // Modal Functions
+        function openEmailModal(resultId) {
+            // Try to find in analysisResults first (active queue)
+            let result = analysisResults.find(r => r.id === resultId);
+            
+            // If not found, try historyResults (reviewed emails)
+            if (!result) {
+                result = historyResults.find(r => r.id === resultId);
+            }
+            
+            if (!result) {
+                console.error('Result not found for ID:', resultId);
+                return;
+            }
+
+            const modal = document.getElementById('emailModal');
+            
+            // Populate modal with email details
+            document.getElementById('modalSender').textContent = result.sender;
+            document.getElementById('modalRecipient').textContent = result.recipientEmail || 'Unknown';
+            document.getElementById('modalSubject').textContent = result.subject;
+            document.getElementById('modalBody').textContent = result.body;
+            
+            // Update analysis details
+            const classificationSpan = document.getElementById('modalClassification');
+            classificationSpan.innerHTML = `<span class="classification ${(result.classification || 'Unknown').toLowerCase()}">${result.classification || 'Unknown'}</span>`;
+            
+            document.getElementById('modalConfidence').textContent = `${result.confidence || 0}%`;
+            document.getElementById('modalComment').textContent = result.comment || 'No comment available';
+            
+            // Show/hide reasoning report button
+            const reasoningBtn = document.getElementById('modalReasoningBtn');
+            if (result.reasoningReport) {
+                reasoningBtn.style.display = 'inline-block';
+                reasoningBtn.onclick = () => openReasoningFromModal(resultId);
+            } else {
+                reasoningBtn.style.display = 'none';
+            }
+            
+            // Store result ID for feedback
+            modal.dataset.resultId = resultId;
+            
+            modal.style.display = 'block';
+        }
+
         function openReview(resultId) {
             const result = analysisResults.find(r => r.id === resultId);
             if (!result) return;
@@ -4019,7 +4559,6 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             classificationSpan.innerHTML = `<span class="classification ${(result.classification || 'Unknown').toLowerCase()}">${result.classification || 'Unknown'}</span>`;
             
             document.getElementById('modalConfidence').textContent = `${result.confidence || 0}%`;
-            document.getElementById('modalThreatScore').textContent = result.threatIntel ? `${result.threatIntel.threatScore}/100` : 'N/A';
             document.getElementById('modalComment').textContent = result.comment || 'No comment available';
             
             // Store result ID for feedback
@@ -4038,6 +4577,146 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             const resultId = parseInt(document.getElementById('emailModal').dataset.resultId);
             setFeedback(resultId, feedback);
             closeModal();
+        }
+
+        function openReasoningFromModal(resultId) {
+            // Try to find in analysisResults first (active queue)
+            let result = analysisResults.find(r => r.id === resultId);
+            
+            // If not found, try historyResults (reviewed emails)
+            if (!result) {
+                result = historyResults.find(r => r.id === resultId);
+            }
+            
+            if (!result || !result.reasoningReport) {
+                console.error('Reasoning report not found for result ID:', resultId);
+                console.error('Result:', result);
+                return;
+            }
+
+            console.log('Found reasoning report:', result.reasoningReport);
+
+            // Close email modal first
+            closeModal();
+            
+            // Open reasoning modal
+            const reasoningModal = document.getElementById('reasoningModal');
+            const modalContent = document.getElementById('reasoningModalContent');
+            
+            if (modalContent && result.reasoningReport) {
+                modalContent.innerHTML = `
+                    <div class="reasoning-section">
+                        <h4>📊 Analysis Summary</h4>
+                        <p>${result.reasoningReport.summary || 'No summary available'}</p>
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>🔍 Threat Indicators</h4>
+                        <ul>
+                            ${result.reasoningReport.threatIndicators ? result.reasoningReport.threatIndicators.map(indicator => `<li>${indicator}</li>`).join('') : '<li>No threat indicators detected</li>'}
+                        </ul>
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>👤 Role Analysis</h4>
+                        <p>${result.reasoningReport.roleAnalysis || 'No role analysis available'}</p>
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>⚙️ Technical Findings</h4>
+                        <ul>
+                            ${result.reasoningReport.technicalFindings ? result.reasoningReport.technicalFindings.map(finding => `<li>${finding}</li>`).join('') : '<li>No technical findings</li>'}
+                        </ul>
+                    </div>
+                    
+                    <div class="reasoning-section recommendation">
+                        <h4>💡 Recommendation</h4>
+                        <p>${result.reasoningReport.recommendation || 'No recommendation available'}</p>
+                    </div>
+                `;
+            }
+            
+            reasoningModal.style.display = 'block';
+        }
+
+        // Opens reasoning report modal from any context (quarantine/review/history)
+        function openReasoningModal(resultId) {
+            console.log('openReasoningModal called with ID:', resultId);
+            
+            // Prefer active analysis results, then fall back to history
+            let result = analysisResults.find(r => r.id === resultId);
+            if (!result) {
+                console.log('Not found in analysisResults, checking historyResults...');
+                result = historyResults.find(r => r.id === resultId);
+            }
+            
+            console.log('Found result:', result);
+            console.log('Has reasoningReport:', result ? !!result.reasoningReport : 'no result');
+            
+            if (!result) {
+                console.error('Result not found for ID:', resultId);
+                return;
+            }
+            
+            if (!result.reasoningReport) {
+                console.error('No reasoning report for result ID:', resultId);
+                console.error('Result data:', result);
+                return;
+            }
+
+            const modal = document.getElementById('reasoningModal');
+            const content = document.getElementById('reasoningModalContent');
+            
+            content.innerHTML = `
+                <div class="reasoning-report-modal">
+                    <div class="email-context">
+                        <h3>📧 Email Context</h3>
+                        <div class="context-grid">
+                            <div><strong>From:</strong> ${result.sender || 'Unknown'}</div>
+                            <div><strong>To:</strong> ${result.recipientEmail || (result.recipientInfo ? result.recipientInfo.name : 'Unknown')}</div>
+                            <div><strong>Subject:</strong> ${result.subject || 'No subject'}</div>
+                            <div><strong>Classification:</strong> ${result.classification || 'Unknown'} (${result.confidence || 0}%)</div>
+                        </div>
+                    </div>
+
+                    <div class="reasoning-section">
+                        <h4>📋 Analysis Summary</h4>
+                        <p>${result.reasoningReport.summary || 'No summary available'}</p>
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>⚠️ Threat Indicators</h4>
+                        ${result.reasoningReport.threatIndicators && result.reasoningReport.threatIndicators.length > 0 ? `
+                            <ul>
+                                ${result.reasoningReport.threatIndicators.map(indicator => `<li>${indicator}</li>`).join('')}
+                            </ul>
+                        ` : '<p class="no-threats">No specific threat indicators detected.</p>'}
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>👤 Role Analysis</h4>
+                        <p>${result.reasoningReport.roleAnalysis || 'No role analysis available'}</p>
+                    </div>
+                    
+                    <div class="reasoning-section">
+                        <h4>🔧 Technical Findings</h4>
+                        ${result.reasoningReport.technicalFindings && result.reasoningReport.technicalFindings.length > 0 ? `
+                            <ul>
+                                ${result.reasoningReport.technicalFindings.map(finding => `<li>${finding}</li>`).join('')}
+                            </ul>
+                        ` : '<p>No technical findings.</p>'}
+                    </div>
+                    
+                    <div class="reasoning-section recommendation">
+                        <h4>💡 Recommendation</h4>
+                        <p><strong>${result.reasoningReport.recommendation || 'No recommendation available'}</strong></p>
+                    </div>
+                </div>
+            `;
+
+            console.log('About to show modal...');
+            modal.style.display = 'block';
+            console.log('Modal display set to block');
         }
 
         // Confirmation dialogs for feedback actions
@@ -4178,7 +4857,6 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             classificationSpan.innerHTML = `<span class="classification ${(result.classification || 'Unknown').toLowerCase()}">${result.classification || 'Unknown'}</span>`;
             
             document.getElementById('modalConfidence').textContent = `${result.confidence || 0}%`;
-            document.getElementById('modalThreatScore').textContent = result.threatIntel ? `${result.threatIntel.threatScore}/100` : 'N/A';
             document.getElementById('modalComment').textContent = result.comment || 'No comment available';
             
             // Add investigation context
@@ -4368,6 +5046,182 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             }
         ];
 
+        // Pre-written test email examples
+        const testEmails = {
+            safe1: {
+                recipient: 'dr.smith@generalhospital.org',
+                sender: 'hr@generalhospital.org',
+                subject: 'Monthly Staff Meeting Reminder',
+                body: `Dear Dr. Smith,
+
+This is a friendly reminder about our monthly staff meeting scheduled for next Friday, December 15th at 2:00 PM in the main conference room.
+
+Agenda items include:
+- Q4 Performance Review Updates
+- New HIPAA Compliance Procedures
+- Holiday Schedule Announcements
+- Equipment Maintenance Schedule
+
+Please confirm your attendance by replying to this email by Wednesday. Coffee and light refreshments will be provided.
+
+Best regards,
+Human Resources Team
+General Hospital`
+            },
+            safe2: {
+                recipient: 'nurse.johnson@memorialmedical.org',
+                sender: 'compliance@memorialmedical.org',
+                subject: 'URGENT: HIPAA Training Completion Required',
+                body: `Dear Nurse Johnson,
+
+This is an urgent reminder that your HIPAA compliance training must be completed by this Friday, December 8th, to maintain your active status.
+
+Our records show that your annual HIPAA training is overdue. This is a mandatory requirement for all healthcare staff and must be completed immediately to avoid any compliance issues.
+
+Please log into the staff portal at your earliest convenience and complete the 30-minute training module. The training covers:
+- Patient privacy protection
+- Data handling procedures
+- Breach reporting protocols
+- Recent regulation updates
+
+Failure to complete this training may result in temporary suspension of system access.
+
+Please contact the compliance department if you have any questions.
+
+Compliance Department
+Memorial Medical Center`
+            },
+            suspicious1: {
+                recipient: 'admin.wilson@cityhealthclinic.org',
+                sender: 'it-support@external-service.com',
+                subject: 'Unusual System Access Request',
+                body: `Hello Admin Wilson,
+
+I'm writing from IT Support regarding an unusual access request we received for your clinic's patient database system.
+
+Someone claiming to be from your clinic requested elevated access to patient records, citing "emergency medical research needs." However, the request came from an external email address and didn't follow our standard verification procedures.
+
+Could you please confirm if this request is legitimate? The requestor provided the following details:
+- Name: Dr. Sarah Martinez
+- Email: smartinez@research-partners.com
+- Request: Full patient database access for "critical research project"
+- Timeline: Immediate access needed
+
+This seems unusual as Dr. Martinez is not listed in your staff directory, and research access typically requires formal approval through proper channels.
+
+Please advise if this is a legitimate request or if we should deny access.
+
+IT Support Team`
+            },
+            suspicious2: {
+                recipient: 'manager.davis@communitymedical.org',
+                sender: 'executive@communitymedical.org',
+                subject: 'URGENT: Immediate Policy Change Required',
+                body: `Manager Davis,
+
+URGENT: We need to implement an immediate policy change regarding patient data sharing due to a regulatory compliance issue discovered this morning.
+
+Effective immediately, all patient information must be shared with our new research partner, MedData Analytics, for "quality improvement purposes." This is a temporary measure while we resolve the compliance issue.
+
+Action Required:
+1. Grant access to patient databases to meddata@external-research.org
+2. Share all patient records from the last 6 months
+3. Provide administrative credentials for their research team
+4. Do not inform patients about this data sharing
+
+This is urgent and must be completed by end of business today. Failure to comply may result in regulatory penalties.
+
+Please confirm completion immediately.
+
+Executive Office
+Community Medical`
+            },
+            phishing1: {
+                recipient: 'coordinator.taylor@universitymedical.org',
+                sender: 'security-alert@universitymedical-security.com',
+                subject: 'Your Account Will Be Suspended - Action Required',
+                body: `Dear Coordinator Taylor,
+
+We have detected suspicious activity on your University Medical Center account. Your access will be suspended within 24 hours unless you verify your identity immediately.
+
+Security Alert Details:
+- Multiple failed login attempts detected
+- Unusual access from foreign IP addresses
+- Potential data breach in progress
+
+To prevent account suspension, please click the link below and verify your credentials:
+
+[VERIFY ACCOUNT NOW] - Click here to secure your account
+
+If you do not verify your account within 24 hours:
+- Your account will be permanently suspended
+- All patient data access will be revoked
+- Legal action may be taken
+
+This is your final warning. Do not ignore this message.
+
+Security Department
+University Medical Center`
+            },
+            phishing2: {
+                recipient: 'specialist.garcia@stmaryshospital.org',
+                sender: 'emergency-response@hospital-security.org',
+                subject: 'EMERGENCY: Critical Security Breach Detected',
+                body: `EMERGENCY ALERT - Specialist Garcia
+
+CRITICAL SECURITY BREACH DETECTED: Our hospital systems have been compromised by a sophisticated cyber attack. Patient data is at immediate risk of exposure.
+
+EMERGENCY ACTION REQUIRED:
+- Click here immediately to secure your account
+- Enter your login credentials to activate emergency protocols
+- Provide your social security number for identity verification
+- Download our emergency security patch
+
+The breach is spreading rapidly. Every second counts. Failure to act immediately may result in:
+- Complete patient data exposure
+- HIPAA violation penalties
+- Personal liability for data breaches
+- Immediate termination
+
+This is a genuine emergency. Do not delay.
+
+Emergency Response Team
+St. Mary's Hospital Security`
+            }
+        };
+
+        function selectTestEmail(emailKey) {
+            const email = testEmails[emailKey];
+            if (!email) {
+                console.error('Test email not found:', emailKey);
+                return;
+            }
+
+            // Fill the form fields
+            document.getElementById('recipientEmail').value = email.recipient;
+            document.getElementById('sender').value = email.sender;
+            document.getElementById('subject').value = email.subject;
+            document.getElementById('body').value = email.body;
+
+            // Update recipient info display
+            updateRecipientInfo();
+
+            // Add visual feedback
+            const inputs = ['recipientEmail', 'sender', 'subject', 'body'];
+            inputs.forEach(id => {
+                const element = document.getElementById(id);
+                element.style.backgroundColor = '#f0f9ff';
+                element.style.borderColor = '#38a169';
+                
+                setTimeout(() => {
+                    element.style.backgroundColor = '';
+                    element.style.borderColor = '';
+                }, 2000);
+            });
+
+            console.log(`✅ Selected test email: ${emailKey}`);
+        }
+
         async function generateExample() {
             if (!openrouterApiKey) {
                 alert('OpenRouter API key not configured. Please ensure OPENROUTER_API_KEY is set in environment variables.');
@@ -4386,12 +5240,13 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 const generatedEmail = await generateRealTimeEmail(openrouterApiKey);
                 
                 // Fill the form fields
+                document.getElementById('recipientEmail').value = generatedEmail.recipient || '';
                 document.getElementById('sender').value = generatedEmail.sender;
                 document.getElementById('subject').value = generatedEmail.subject;
                 document.getElementById('body').value = generatedEmail.body;
                 
                 // Add a subtle highlight to show it was generated
-                const inputs = ['sender', 'subject', 'body'];
+                const inputs = ['recipientEmail', 'sender', 'subject', 'body'];
                 inputs.forEach(id => {
                     const element = document.getElementById(id);
                     element.style.backgroundColor = '#f0f9ff';
@@ -4410,6 +5265,7 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
                 console.error('Error generating email:', error);
                 // Fallback to template if AI generation fails
                 const randomExample = exampleEmails[Math.floor(Math.random() * exampleEmails.length)];
+                document.getElementById('recipientEmail').value = 'dr.smith@generalhospital.org'; // Default recipient
                 document.getElementById('sender').value = randomExample.sender;
                 document.getElementById('subject').value = randomExample.subject;
                 document.getElementById('body').value = randomExample.body;
@@ -4446,10 +5302,24 @@ RULES: Safe=legitimate, Suspicious=unclear/inappropriate, Phishing=malicious. Ro
             const timestamp = Date.now();
             const randomId = Math.random().toString(36).substring(2, 8);
             
+            // Add recipient variety
+            const recipientTypes = [
+                'dr.johnson@generalhospital.org',
+                'nurse.smith@memorialmedical.org', 
+                'admin.wilson@cityhealthclinic.org',
+                'dr.brown@regionalhospital.org',
+                'manager.davis@communitymedical.org',
+                'coordinator.taylor@universitymedical.org',
+                'specialist.garcia@stmaryshospital.org',
+                'director.martinez@childrenshospital.org'
+            ];
+            const randomRecipient = recipientTypes[Math.floor(Math.random() * recipientTypes.length)];
+
             const prompt = `Generate a unique, realistic healthcare email that would be classified as "${randomType}". 
 
 Context: ${randomHospital} - ${randomDept} Department
 Sender Role: ${randomRole}
+Recipient: ${randomRecipient}
 Urgency: ${randomTime}
 Generation #${generationCounter}
 Unique ID: ${randomId}
@@ -4459,6 +5329,7 @@ Requirements:
 - Make it completely unique and different from typical examples
 - Include specific healthcare details, terminology, and context for ${randomHospital}
 - Use realistic sender domains and professional language
+- Address the email appropriately to the recipient: ${randomRecipient}
 - For Safe: Normal hospital communications (schedules, reminders, announcements, policy updates, training notifications)
 - For Suspicious: Unusual requests that might be legitimate but raise questions (access requests, data sharing, policy changes)
 - For Phishing: Clear malicious intent targeting healthcare workers/patients (credential theft, fake alerts, urgent actions)
@@ -4469,6 +5340,7 @@ Respond ONLY with this JSON format:
 {
   "type": "${randomType}",
   "sender": "realistic.email@domain.com",
+  "recipient": "${randomRecipient}",
   "subject": "Unique realistic subject line",
   "body": "Detailed unique email body content"
 }

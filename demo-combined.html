@@ -1,0 +1,3145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Email Defense Agent - Modern Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --secondary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            --success-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            --danger-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --info-gradient: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border-color: #334155;
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 35px 60px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(1deg); }
+            66% { transform: translateY(30px) rotate(-1deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header with glassmorphism */
+        .header {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--danger-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .demo-badge {
+            display: inline-block;
+            background: var(--info-gradient);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 12px;
+            margin: 30px 30px 0 30px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 16px 24px;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-btn:hover::before {
+            left: 100%;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .main-content {
+            padding: 30px;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            margin: 0 30px 30px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+        }
+
+        /* Focus Statement with modern card */
+        .focus-statement {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .focus-statement h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .focus-statement p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .metric-card:nth-child(1) { animation-delay: 0.1s; }
+        .metric-card:nth-child(2) { animation-delay: 0.2s; }
+        .metric-card:nth-child(3) { animation-delay: 0.3s; }
+        .metric-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .metric-title {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .metric-explanation {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        .metric-justification {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #0369a1;
+        }
+
+        /* Input Section */
+        .input-section {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .input-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            background: rgba(30, 41, 59, 0.8);
+            transform: translateY(-2px);
+        }
+
+        input[type="text"]::placeholder, textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .analyze-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .analyze-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .analyze-btn:hover::before {
+            left: 100%;
+        }
+
+        .analyze-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .classification-result {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .classification-result::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .classification-result:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .classification-badge {
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .classification-urgent {
+            background: var(--danger-gradient);
+            color: white;
+        }
+
+        .classification-safe {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .classification-phishing {
+            background: var(--warning-gradient);
+            color: #92400e;
+        }
+
+        .confidence-score {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .confidence-score::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--success-gradient);
+        }
+
+        .confidence-bar {
+            flex: 1;
+            height: 24px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: var(--danger-gradient);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .confidence-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .confidence-fill.medium {
+            background: var(--warning-gradient);
+        }
+
+        .confidence-fill.low {
+            background: var(--success-gradient);
+        }
+
+        .reasoning {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reasoning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .reasoning h4 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reasoning p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .feedback-section {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feedback-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--warning-gradient);
+        }
+
+        .feedback-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feedback-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .feedback-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .feedback-btn.correct {
+            background: var(--success-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+
+        .feedback-btn.incorrect {
+            background: var(--danger-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);
+        }
+
+        .feedback-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Test Cases */
+        .test-cases {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .test-case {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .test-case::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .test-case:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .test-case.urgent {
+            border-left: 3px solid #dc2626;
+        }
+
+        .test-case.urgent::before {
+            background: var(--danger-gradient);
+        }
+
+        .test-case.safe {
+            border-left: 3px solid #059669;
+        }
+
+        .test-case.safe::before {
+            background: var(--success-gradient);
+        }
+
+        .test-case.phishing {
+            border-left: 3px solid #dc2626;
+        }
+
+        .test-case.phishing::before {
+            background: var(--warning-gradient);
+        }
+
+        .test-case-subject {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .test-case-from {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .dashboard-widget {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dashboard-widget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .dashboard-widget:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-widget h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: var(--info-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .chart-container {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        /* History Log */
+        .history-item {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .history-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .history-item:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow);
+        }
+
+        .history-item.urgent::before {
+            background: var(--danger-gradient);
+        }
+
+        .history-item.safe::before {
+            background: var(--success-gradient);
+        }
+
+        .history-item.phishing::before {
+            background: var(--warning-gradient);
+        }
+
+        .history-time {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .history-subject {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .history-from {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        /* Quarantine */
+        .quarantine-item {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quarantine-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--warning-gradient);
+        }
+
+        .quarantine-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quarantine-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quarantine-btn.release {
+            background: var(--success-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+
+        .quarantine-btn.delete {
+            background: var(--danger-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);
+        }
+
+        .quarantine-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .main-content {
+                padding: 20px;
+                margin: 0 15px 20px 15px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .nav-tabs {
+                margin: 20px 15px 0 15px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .tab-btn {
+                padding: 14px 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .focus-statement {
+                padding: 25px 20px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feedback-buttons {
+                flex-direction: column;
+            }
+
+            .quarantine-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🚨 Healthcare Email Defense Agent</h1>
+            <p>AI-Powered Urgent Healthcare Email Detection with Real-Time Learning</p>
+            <div class="demo-badge">Healthcare Email Defense Demo</div>
+        </div>
+
+        <!-- Focus Statement -->
+        <div class="focus-statement">
+            <h2>🎯 Dual Classification Tasks</h2>
+            <p>This agent focuses on two critical healthcare email classifications: detecting URGENT emails to reduce care delays and identifying PHISHING attempts to protect patient data security.</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('analysis')">🚨 Email Analysis</button>
+            <button class="tab-btn" onclick="showTab('generator')">🧪 Email Generator</button>
+            <button class="tab-btn" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-btn" onclick="showTab('evaluation')">📈 Evaluation</button>
+            <button class="tab-btn" onclick="showTab('history')">📋 History</button>
+            <button class="tab-btn" onclick="showTab('quarantine')">⚠️ Quarantine</button>
+        </div>
+
+        <div class="main-content">
+            <!-- Email Analysis Tab -->
+            <div id="analysis" class="tab-content active">
+                <div class="input-section">
+                    <h2>🚨 Healthcare Email Classification</h2>
+                    <p>Detect urgent medical emails and phishing attempts</p>
+                    
+                    <div class="form-group">
+                        <label for="sender">Sender Email:</label>
+                        <input type="text" id="sender" placeholder="e.g., dr.smith@emergency.hospital.org">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject Line:</label>
+                        <input type="text" id="subject" placeholder="e.g., URGENT: Patient Code Blue - ICU">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailBody">Email Body:</label>
+                        <textarea id="emailBody" placeholder="Enter the email content here..."></textarea>
+                    </div>
+
+                    <button class="analyze-btn" onclick="analyzeEmail()">
+                        🔍 Classify Email (Urgency + Security)
+                    </button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>AI Agent analyzing email for urgency and security threats...</p>
+                </div>
+
+                <div class="results-section" id="results" style="display: none;">
+                    <h3>Email Classification Results</h3>
+                    
+                    <!-- Dual Classification Display -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                        <!-- Urgency Classification -->
+                        <div class="classification-result">
+                            <h4 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem; font-weight: 600;">🚨 Urgency Classification</h4>
+                            <div class="classification-badge" id="urgencyClassificationBadge">Safe</div>
+                            <div id="urgencyLevel"></div>
+                        </div>
+
+                        <!-- Phishing Classification -->
+                        <div class="classification-result">
+                            <h4 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem; font-weight: 600;">🛡️ Security Classification</h4>
+                            <div class="classification-badge" id="phishingClassificationBadge">Safe</div>
+                            <div id="phishingLevel"></div>
+                        </div>
+                    </div>
+
+                    <div class="confidence-score">
+                        <span>Confidence Score:</span>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceBar"></div>
+                        </div>
+                        <span id="confidenceValue">0%</span>
+                    </div>
+
+                    <div class="reasoning">
+                        <h4>🧠 AI Decision Process</h4>
+                        <div id="reasoningText"></div>
+                    </div>
+
+                    <div class="feedback-section">
+                        <h4>Help Improve Our AI:</h4>
+                        <p>Please provide feedback on both classifications:</p>
+                        
+                        <!-- Urgency Feedback -->
+                        <div style="margin-bottom: 20px; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--danger-gradient);"></div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.1rem; font-weight: 600;">🚨 Urgency Classification</h5>
+                            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 15px;">Was the urgency classification correct?</p>
+                            <div class="feedback-buttons">
+                                <button class="feedback-btn correct" onclick="provideFeedback(true, 'urgency')">✅ Correct</button>
+                                <button class="feedback-btn incorrect" onclick="provideFeedback(false, 'urgency')">❌ Incorrect</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Phishing Feedback -->
+                        <div style="margin-bottom: 20px; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--warning-gradient);"></div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.1rem; font-weight: 600;">🛡️ Security Classification</h5>
+                            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 15px;">Was the phishing detection correct?</p>
+                            <div class="feedback-buttons">
+                                <button class="feedback-btn correct" onclick="provideFeedback(true, 'phishing')">🛡️ Safe (Not Phishing)</button>
+                                <button class="feedback-btn incorrect" onclick="provideFeedback(false, 'phishing')">🚨 Phishing</button>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px; padding: 16px; background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--primary-gradient);"></div>
+                            <p style="font-size: 0.95rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+                                <strong style="color: var(--text-primary);">📊 Metrics will update</strong> when you provide feedback above. 
+                                This helps the AI learn and improve both urgency and security classification accuracy.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Cases -->
+                <div class="test-cases">
+                    <h3>📋 Test with Sample Emails (12 scenarios)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px;">
+                        <!-- Urgent Medical Emails -->
+                        <div class="test-case urgent" onclick="loadTestEmail('urgent1')">
+                            <div class="test-case-subject">URGENT: Patient Code Blue - ICU</div>
+                            <div class="test-case-from">nurse.smith@icu.hospital.org</div>
+                        </div>
+                        <div class="test-case urgent" onclick="loadTestEmail('urgent2')">
+                            <div class="test-case-subject">Emergency Surgery Update Required</div>
+                            <div class="test-case-from">dr.johnson@emergency.hospital.org</div>
+                        </div>
+                        <div class="test-case urgent" onclick="loadTestEmail('urgent3')">
+                            <div class="test-case-subject">CRITICAL: Medication Error</div>
+                            <div class="test-case-from">pharmacy@hospital.org</div>
+                        </div>
+                        <div class="test-case urgent" onclick="loadTestEmail('urgent4')">
+                            <div class="test-case-subject">STAT: Critical Lab Values</div>
+                            <div class="test-case-from">lab.results@hospital.org</div>
+                        </div>
+                        
+                        <!-- Safe Emails -->
+                        <div class="test-case safe" onclick="loadTestEmail('safe1')">
+                            <div class="test-case-subject">Monthly Staff Meeting Reminder</div>
+                            <div class="test-case-from">admin@hospital.org</div>
+                        </div>
+                        <div class="test-case safe" onclick="loadTestEmail('safe2')">
+                            <div class="test-case-subject">IT System Maintenance Notice</div>
+                            <div class="test-case-from">it-admin@hospital.org</div>
+                        </div>
+                        
+                        <!-- Phishing Emails -->
+                        <div class="test-case phishing" onclick="loadTestEmail('phishing1')">
+                            <div class="test-case-subject">URGENT: HIPAA Compliance Verification</div>
+                            <div class="test-case-from">urgent@medical-alert.net</div>
+                        </div>
+                        <div class="test-case phishing" onclick="loadTestEmail('phishing2')">
+                            <div class="test-case-subject">Password Expiration - Immediate Action</div>
+                            <div class="test-case-from">security@hospital-security.net</div>
+                        </div>
+                        
+                        <!-- Additional Urgent Scenarios -->
+                        <div class="test-case urgent" onclick="loadTestEmail('urgent5')">
+                            <div class="test-case-subject">URGENT: Patient Fall - Room 4B-205</div>
+                            <div class="test-case-from">nurse.johnson@icu.hospital.org</div>
+                        </div>
+                        <div class="test-case urgent" onclick="loadTestEmail('urgent6')">
+                            <div class="test-case-subject">STAT: Blood Transfusion Required</div>
+                            <div class="test-case-from">blood.bank@hospital.org</div>
+                        </div>
+                        
+                        <!-- Additional Safe Scenarios -->
+                        <div class="test-case safe" onclick="loadTestEmail('safe3')">
+                            <div class="test-case-subject">Weekly Staff Schedule Update</div>
+                            <div class="test-case-from">scheduling@hospital.org</div>
+                        </div>
+                        <div class="test-case safe" onclick="loadTestEmail('safe4')">
+                            <div class="test-case-subject">New Equipment Training Session</div>
+                            <div class="test-case-from">training@hospital.org</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Generator Tab -->
+            <div id="generator" class="tab-content">
+                <div class="input-section">
+                    <h2>🧪 Test Email Generator</h2>
+                    <p>Generate realistic healthcare emails to test the AI classification system</p>
+                </div>
+
+                <div class="dashboard-widget">
+                    <h3>📝 Generate Test Emails</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                            <button class="analyze-btn" onclick="generateEmail('urgent')" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);">
+                                🚨 Generate Urgent Email
+                            </button>
+                            <button class="analyze-btn" onclick="generateEmail('safe')" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                                ✅ Generate Safe Email
+                            </button>
+                            <button class="analyze-btn" onclick="generateEmail('phishing')" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);">
+                                🚨 Generate Phishing Email
+                            </button>
+                            <button class="analyze-btn" onclick="generateEmail('random')" style="background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);">
+                                🎲 Generate Random Email
+                            </button>
+                        </div>
+                        
+                        <div id="generatedEmail" style="display: none;">
+                            <h4 style="margin-bottom: 20px; color: var(--text-primary); font-size: 1.3rem; font-weight: 600; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Generated Email:</h4>
+                            <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; padding: 24px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="margin-bottom: 18px;">
+                                    <label style="font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem;">Sender:</label>
+                                    <div id="genSender" style="padding: 12px 16px; background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 8px; color: var(--text-primary);"></div>
+                                </div>
+                                <div style="margin-bottom: 18px;">
+                                    <label style="font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem;">Subject:</label>
+                                    <div id="genSubject" style="padding: 12px 16px; background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 8px; color: var(--text-primary);"></div>
+                                </div>
+                                <div style="margin-bottom: 18px;">
+                                    <label style="font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem;">Body:</label>
+                                    <div id="genBody" style="padding: 12px 16px; background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 8px; min-height: 120px; white-space: pre-wrap; color: var(--text-primary); line-height: 1.6;"></div>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <button class="analyze-btn" onclick="loadGeneratedEmail()" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                                        📥 Load into Analysis
+                                    </button>
+                                    <button class="analyze-btn" onclick="generateEmail('random')" style="background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);">
+                                        🔄 Generate Another
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-widget">
+                    <h3>📊 Generation Statistics</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--danger-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentGenerated">0</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Urgent Generated</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="safeGenerated">0</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Safe Generated</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--warning-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--warning-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingGenerated">0</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Phishing Generated</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--primary-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="totalGenerated">0</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Total Generated</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content">
+                <div class="input-section">
+                    <h2>📊 System Dashboard</h2>
+                    <p>Monitor system performance, threat trends, and AI accuracy metrics</p>
+                </div>
+
+                <!-- Real Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-title">True Positive Rate</div>
+                        <div class="metric-value" id="dashboardTruePositiveRate">0.0%</div>
+                        <div class="metric-explanation">Correctly identified urgent emails</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">False Positive Rate</div>
+                        <div class="metric-value" id="dashboardFalsePositiveRate">0.0%</div>
+                        <div class="metric-explanation">Safe emails flagged as urgent</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Total Emails Analyzed</div>
+                        <div class="metric-value" id="dashboardTotalEmails">0</div>
+                        <div class="metric-explanation">Emails processed by AI</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Average Confidence</div>
+                        <div class="metric-value" id="dashboardAvgConfidence">0.0%</div>
+                        <div class="metric-explanation">AI confidence across all emails</div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Widgets -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-widget">
+                        <h3>📊 Classification Distribution</h3>
+                        <div class="chart-container">
+                            <div>Classification breakdown will appear here as you test emails</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3>📈 Performance Trends</h3>
+                        <div class="chart-container">
+                            <div>Performance trends will be tracked over time</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3>🧠 AI Learning Progress</h3>
+                        <div class="chart-container">
+                            <div>Learning progress based on user feedback</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3>⚡ System Status</h3>
+                        <div style="padding: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>System Health:</span>
+                                <span style="color: #059669; font-weight: 600;">✅ Operational</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>AI Status:</span>
+                                <span style="color: #059669; font-weight: 600;">✅ Active</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Learning Mode:</span>
+                                <span style="color: #059669; font-weight: 600;">✅ Enabled</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evaluation Tab -->
+            <div id="evaluation" class="tab-content">
+                <div class="input-section">
+                    <h2>📈 Evaluation Metrics & Justification</h2>
+                    <p>Detailed performance analysis for dual classification system (Urgency + Phishing detection)</p>
+                </div>
+
+                <!-- Overall Performance Summary -->
+                <div class="dashboard-widget">
+                    <h3>🎯 Overall Classification Performance</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-bottom: 25px;">
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="overallAccuracy">0.0%</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Overall Accuracy</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--warning-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--warning-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="overallPrecision">0.0%</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Overall Precision</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--primary-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="overallRecall">0.0%</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Overall Recall</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--secondary-gradient);"></div>
+                                <div style="font-size: 2rem; font-weight: 700; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="overallF1Score">0.0%</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Overall F1-Score</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Urgency Classification Performance -->
+                <div class="dashboard-widget">
+                    <h3>🚨 Urgency Classification Metrics</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">True Positives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentTruePositives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Correctly identified urgent</div>
+                            </div>
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">True Negatives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentTrueNegatives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Correctly identified safe</div>
+                            </div>
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--danger-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">False Positives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentFalsePositives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Safe flagged as urgent</div>
+                            </div>
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--danger-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">False Negatives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentFalseNegatives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Urgent missed</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--warning-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--warning-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentPrecision">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Precision</div>
+                            </div>
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--primary-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentRecall">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Recall</div>
+                            </div>
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--secondary-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentF1Score">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">F1-Score</div>
+                            </div>
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="urgentAccuracy">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phishing Classification Performance -->
+                <div class="dashboard-widget">
+                    <h3>🛡️ Phishing Classification Metrics</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--warning-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">True Positives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--warning-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingTruePositives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Correctly identified phishing</div>
+                            </div>
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">True Negatives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingTrueNegatives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Correctly identified safe</div>
+                            </div>
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--danger-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">False Positives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingFalsePositives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Safe flagged as phishing</div>
+                            </div>
+                            <div style="padding: 18px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--danger-gradient);"></div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">False Negatives</div>
+                                <div style="font-size: 1.6rem; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingFalseNegatives">0</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Phishing missed</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--warning-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--warning-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingPrecision">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Precision</div>
+                            </div>
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--primary-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingRecall">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Recall</div>
+                            </div>
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--secondary-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingF1Score">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">F1-Score</div>
+                            </div>
+                            <div style="text-align: center; padding: 16px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <div style="font-size: 1.4rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="phishingAccuracy">0.0%</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px;">Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Reward System -->
+                <div class="dashboard-widget">
+                    <h3>🎁 Enhanced Reward System for Agent Learning</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-bottom: 25px;">
+                            <div style="padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--success-gradient);"></div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.1rem; font-weight: 600; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚨 Urgency Detection Rewards</h4>
+                                <div style="font-size: 0.95rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                        <span style="color: var(--text-secondary);">Correctly identified urgent:</span>
+                                        <span style="color: #22c55e; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">+15 points</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                        <span style="color: var(--text-secondary);">Correctly identified safe:</span>
+                                        <span style="color: #22c55e; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">+3 points</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                        <span style="color: var(--text-secondary);">False positive (alert fatigue):</span>
+                                        <span style="color: #ef4444; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">-5 points</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                        <span style="color: var(--text-secondary);">False negative (missed urgent):</span>
+                                        <span style="color: #ef4444; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">-20 points</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--warning-gradient);"></div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.1rem; font-weight: 600; background: var(--warning-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🛡️ Phishing Detection Rewards</h4>
+                                <div style="font-size: 0.95rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                        <span style="color: var(--text-secondary);">Correctly identified phishing:</span>
+                                        <span style="color: #22c55e; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">+25 points</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                        <span style="color: var(--text-secondary);">Correctly identified safe:</span>
+                                        <span style="color: #22c55e; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">+2 points</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                        <span style="color: var(--text-secondary);">False positive (blocked safe):</span>
+                                        <span style="color: #ef4444; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">-3 points</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                        <span style="color: var(--text-secondary);">False negative (missed phishing):</span>
+                                        <span style="color: #ef4444; font-weight: 700; background: var(--danger-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">-30 points</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Current Reward Score -->
+                        <div style="text-align: center; padding: 24px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--primary-gradient);"></div>
+                            <div style="font-size: 2.5rem; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px;" id="currentRewardScore">0</div>
+                            <div style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 15px; font-weight: 600;">Current Agent Reward Score</div>
+                            <div style="font-size: 0.95rem; color: var(--text-secondary);">
+                                <span id="rewardLevel" style="color: var(--text-primary); font-weight: 600;">Novice</span> • 
+                                <span id="rewardProgress" style="color: var(--text-primary); font-weight: 600;">0%</span> to next level
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Insights -->
+                <div class="dashboard-widget">
+                    <h3>💡 Performance Insights & Recommendations</h3>
+                    <div style="margin-top: 15px;">
+                        <div id="performanceInsights" style="padding: 20px; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--info-gradient);"></div>
+                            <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; font-style: italic;">
+                                Start testing emails to see performance insights and recommendations...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history" class="tab-content">
+                <div class="input-section">
+                    <h2>📋 Analysis History</h2>
+                    <p>Complete log of all email analyses and AI decisions</p>
+                </div>
+
+                <div id="historyList">
+                    <div style="text-align: center; color: #64748b; font-style: italic; padding: 40px;">
+                        No emails analyzed yet. Start testing emails to see the history here.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quarantine Tab -->
+            <div id="quarantine" class="tab-content">
+                <div class="input-section">
+                    <h2>⚠️ Quarantine Management</h2>
+                    <p>Review and manage emails flagged for manual review</p>
+                </div>
+
+                <div id="quarantineList">
+                    <div style="text-align: center; color: #64748b; font-style: italic; padding: 40px;">
+                        No emails in quarantine. Suspicious emails will appear here for manual review.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for REAL metrics tracking - starting from zero
+        // Urgency classification metrics
+        let urgentTruePositives = 0;
+        let urgentFalsePositives = 0;
+        let urgentTrueNegatives = 0;
+        let urgentFalseNegatives = 0;
+        
+        // Phishing classification metrics
+        let phishingTruePositives = 0;
+        let phishingFalsePositives = 0;
+        let phishingTrueNegatives = 0;
+        let phishingFalseNegatives = 0;
+        
+        let totalAnalyzed = 0;
+        let agentRewardScore = 0;
+        let userFeedbackHistory = [];
+        let emailHistory = [];
+        let startTime = new Date();
+        let responseTimes = [];
+        let confidenceScores = [];
+        
+        // Email generation statistics
+        let urgentGenerated = 0;
+        let safeGenerated = 0;
+        let phishingGenerated = 0;
+        let totalGenerated = 0;
+
+        // Test email data (same as demo3-focused.html)
+        const testEmails = {
+            urgent1: {
+                sender: "nurse.smith@icu.hospital.org",
+                subject: "URGENT: Patient Code Blue - ICU",
+                body: `CODE BLUE ALERT - ICU UNIT 3
+
+Patient: Mary Johnson (MRN: 1234568)
+Room: ICU-312
+Time: 14:23
+
+CRITICAL SITUATION:
+- Cardiac arrest
+- Resuscitation in progress
+- Family notified
+- Dr. Wilson en route
+
+Immediate action required. All available staff please report to ICU-312.
+
+Nurse Smith
+ICU Charge Nurse`
+            },
+            urgent2: {
+                sender: "dr.johnson@emergency.hospital.org",
+                subject: "Emergency Surgery Update Required",
+                body: `Dear Dr. Smith,
+
+We have an emergency surgical case that requires immediate attention. Patient John Doe (MRN: 1234567) was admitted through the ER with acute appendicitis.
+
+URGENT: The surgery has been scheduled for 3:00 PM today in OR 2. Please confirm your availability immediately.
+
+Patient Details:
+- Age: 34
+- Allergies: Penicillin
+- Vital Signs: Stable but deteriorating
+- Estimated Surgery Time: 45 minutes
+
+Please respond ASAP as we need to finalize the surgical team.
+
+Best regards,
+Dr. Johnson
+Emergency Department`
+            },
+            urgent3: {
+                sender: "pharmacy@hospital.org",
+                subject: "CRITICAL: Medication Error - Immediate Review",
+                body: `URGENT PHARMACY ALERT
+
+Patient: Sarah Williams (MRN: 9876543)
+Room: 4B-205
+Medication Error Detected: Incorrect dosage dispensed
+
+IMMEDIATE ACTION REQUIRED:
+- Patient received 10mg instead of 5mg of medication
+- Doctor needs to be notified immediately
+- Patient monitoring required
+- Incident report filed
+
+Please contact pharmacy immediately at ext. 5555.
+
+Pharmacy Manager
+Critical Care Pharmacy`
+            },
+            urgent4: {
+                sender: "lab.results@hospital.org",
+                subject: "STAT: Critical Lab Values - Patient 2345678",
+                body: `CRITICAL LAB RESULTS
+
+Patient: Robert Chen (MRN: 2345678)
+Room: ICU-205
+Attending: Dr. Martinez
+
+CRITICAL VALUES:
+- Potassium: 6.8 mEq/L (Critical High)
+- Creatinine: 4.2 mg/dL (Critical High)
+- BUN: 85 mg/dL (Critical High)
+
+IMMEDIATE ACTION REQUIRED:
+- Patient at risk for cardiac arrhythmia
+- Renal function critically impaired
+- STAT physician notification required
+
+Lab Technician
+Critical Care Laboratory`
+            },
+            safe1: {
+                sender: "admin@hospital.org",
+                subject: "Monthly Staff Meeting Reminder",
+                body: `Subject: Monthly Cardiology Department Meeting
+
+Dear Cardiology Team,
+
+This is a reminder about our monthly department meeting scheduled for next Friday, March 15th at 2:00 PM in the main conference room (Room 204).
+
+Agenda:
+1. Monthly performance metrics review
+2. New equipment installation updates
+3. Staff scheduling for next month
+4. Q&A session
+
+Please confirm your attendance by replying to this email by Wednesday.
+
+Best regards,
+Department Administration`
+            },
+            safe2: {
+                sender: "it-admin@hospital.org",
+                subject: "IT System Maintenance Notice",
+                body: `SYSTEM MAINTENANCE NOTICE
+
+Date: March 10, 2024
+Time: 2:00 AM - 4:00 AM EST
+Affected Systems: Email, Patient Records, Billing
+
+Dear Staff,
+
+We will be performing scheduled maintenance on our core systems this weekend. During this time, some services may be temporarily unavailable.
+
+What to expect:
+- Brief email delays (up to 15 minutes)
+- Patient record system may be read-only
+- Billing system will be offline
+
+All systems will be fully restored by 4:00 AM.
+
+If you experience any issues, please contact the IT helpdesk.
+
+IT Administration`
+            },
+            phishing1: {
+                sender: "urgent@medical-alert.net",
+                subject: "URGENT: HIPAA Compliance Verification Required",
+                body: `HIPAA COMPLIANCE VIOLATION ALERT
+
+Your healthcare facility has been flagged for potential HIPAA violations. Immediate action is required to avoid legal penalties and regulatory sanctions.
+
+VIOLATIONS DETECTED:
+- Unauthorized patient data access
+- Inadequate security protocols
+- Missing compliance documentation
+
+IMMEDIATE ACTION REQUIRED:
+Click here to verify your compliance status and update your security protocols.
+
+Failure to respond within 48 hours will result in:
+- Regulatory investigation
+- Potential fines up to $50,000
+- Legal action
+
+Verify Compliance: http://hipaa-compliance-verify.org/login
+
+Healthcare Compliance Bureau`
+            },
+            phishing2: {
+                sender: "security@hospital-security.net",
+                subject: "Password Expiration - Immediate Action",
+                body: `PASSWORD EXPIRATION NOTICE
+
+Your hospital system password will expire in 24 hours. To avoid account suspension and potential security breaches, please update your credentials immediately.
+
+ACCOUNT DETAILS:
+- Username: [Your Email]
+- Expiration: March 11, 2024
+- System: Hospital Management Portal
+
+SECURITY ALERT: Multiple failed login attempts detected from your account. Immediate password change required.
+
+Click here to update your password: http://hospital-security-update.net/password
+
+If you do not update your password within 24 hours:
+- Your account will be suspended
+- You will lose access to patient records
+- Security team will be notified
+
+Hospital IT Security Department`
+            },
+            urgent5: {
+                sender: "nurse.johnson@icu.hospital.org",
+                subject: "URGENT: Patient Fall - Room 4B-205",
+                body: `PATIENT FALL ALERT
+
+Patient: Elizabeth Davis (MRN: 5678901)
+Room: 4B-205
+Time: 15:45
+Fall Risk Score: High
+
+INCIDENT DETAILS:
+- Patient found on floor by nursing assistant
+- Possible head injury - patient complaining of headache
+- Vital signs stable but monitoring required
+- Family notified
+
+IMMEDIATE ACTIONS TAKEN:
+- Patient assessed and moved to bed
+- Neurological checks initiated
+- Physician notified
+- Incident report filed
+
+REQUIRED FOLLOW-UP:
+- CT scan ordered STAT
+- Neurological monitoring
+- Fall prevention protocol review
+- Family update required
+
+Please respond ASAP for physician assessment.
+
+Nurse Johnson
+ICU Unit 4B`
+            },
+            urgent6: {
+                sender: "blood.bank@hospital.org",
+                subject: "STAT: Blood Transfusion Required",
+                body: `URGENT BLOOD TRANSFUSION REQUEST
+
+Patient: James Wilson (MRN: 2345678)
+Room: ICU-208
+Physician: Dr. Anderson
+Blood Type: O Negative (Universal Donor)
+
+CRITICAL SITUATION:
+- Patient experiencing acute blood loss
+- Hemoglobin: 6.2 g/dL (Critical Low)
+- Blood pressure: 85/45 mmHg
+- Transfusion required immediately
+
+BLOOD PRODUCTS REQUESTED:
+- 2 units O Negative packed red blood cells
+- 1 unit fresh frozen plasma
+- Cross-match completed and compatible
+
+IMMEDIATE ACTION REQUIRED:
+- Blood products ready for pickup
+- STAT delivery to ICU-208
+- Nursing staff standing by
+- Physician approval received
+
+Please confirm receipt and initiate transfusion immediately.
+
+Blood Bank Manager
+Laboratory Services`
+            },
+            safe3: {
+                sender: "scheduling@hospital.org",
+                subject: "Weekly Staff Schedule Update",
+                body: `Weekly Staff Schedule - March 18-24, 2024
+
+Dear Healthcare Team,
+
+Please find below your updated schedules for the upcoming week:
+
+DEPARTMENT SCHEDULES:
+- Emergency Department: 12-hour shifts as posted
+- ICU Units: Rotating shifts with weekend coverage
+- Medical/Surgical Units: 8-hour shifts with call rotation
+- Operating Rooms: Elective cases scheduled
+
+IMPORTANT REMINDERS:
+- Please confirm your availability by Friday
+- Weekend coverage volunteers needed
+- Holiday schedule planning begins next week
+- Overtime opportunities available
+
+If you have any scheduling conflicts or requests, please contact the scheduling office at ext. 2500.
+
+Best regards,
+Staff Scheduling Department
+Human Resources`
+            },
+            safe4: {
+                sender: "training@hospital.org",
+                subject: "New Equipment Training Session",
+                body: `Equipment Training Announcement
+
+Dear Staff,
+
+We're pleased to announce training sessions for the new patient monitoring equipment installed in ICU units.
+
+TRAINING SCHEDULE:
+- Session 1: March 20th, 2:00 PM - Conference Room B
+- Session 2: March 22nd, 10:00 AM - Conference Room B
+- Session 3: March 25th, 3:00 PM - Conference Room B
+
+EQUIPMENT COVERED:
+- Advanced cardiac monitors
+- New IV pump systems
+- Updated vital signs equipment
+- Electronic documentation tools
+
+TRAINING BENEFITS:
+- Hands-on equipment familiarization
+- Troubleshooting procedures
+- Safety protocols
+- Continuing education credits
+
+Registration is required. Please sign up through the training portal or contact the Education Department at ext. 3000.
+
+Education Department
+Professional Development`
+            }
+        };
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Load test email
+        function loadTestEmail(testId) {
+            const email = testEmails[testId];
+            document.getElementById('sender').value = email.sender;
+            document.getElementById('subject').value = email.subject;
+            document.getElementById('emailBody').value = email.body;
+        }
+
+        // Email analysis with REAL performance measurement
+        async function analyzeEmail() {
+            const sender = document.getElementById('sender').value;
+            const subject = document.getElementById('subject').value;
+            const emailBody = document.getElementById('emailBody').value;
+
+            if (!sender || !subject || !emailBody) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Record start time for response time measurement
+            const analysisStartTime = new Date();
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            // Store email for history tracking
+            const emailData = {
+                id: Date.now(),
+                sender: sender,
+                subject: subject,
+                body: emailBody,
+                timestamp: analysisStartTime
+            };
+            emailHistory.push(emailData);
+            persistHistory();
+
+            // Simulate AI analysis delay
+            setTimeout(() => {
+                const analysisEndTime = new Date();
+                const responseTime = analysisEndTime - analysisStartTime;
+                responseTimes.push(responseTime);
+                
+                const analysis = performDualAnalysis(sender, subject, emailBody);
+                confidenceScores.push(analysis.confidence);
+                
+                // Store analysis results
+                emailData.analysis = analysis;
+                emailData.responseTime = responseTime;
+                emailData.actualUrgent = null;
+                
+                displayResults(analysis);
+                updateHistory();
+                updateDashboard();
+                persistHistory();
+                persistMetrics();
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                
+                console.log(`Analysis completed in ${responseTime}ms`);
+            }, Math.random() * 1000 + 500);
+        }
+
+        // Dual Analysis Logic - Urgency + Phishing Detection
+        function performDualAnalysis(sender, subject, body) {
+            console.log('=== AI DECISION MAKING PROCESS ===');
+            
+            // Urgency indicators with weights
+            const urgencyPatterns = [
+                { pattern: /urgent/i, weight: 30, description: "URGENT keyword" },
+                { pattern: /emergency/i, weight: 25, description: "EMERGENCY keyword" },
+                { pattern: /critical/i, weight: 20, description: "CRITICAL keyword" },
+                { pattern: /code blue/i, weight: 40, description: "Code Blue medical emergency" },
+                { pattern: /immediate/i, weight: 25, description: "IMMEDIATE action required" },
+                { pattern: /asap/i, weight: 20, description: "ASAP urgency indicator" },
+                { pattern: /stat/i, weight: 35, description: "STAT medical urgency" },
+                { pattern: /patient.*emergency/i, weight: 30, description: "Patient emergency context" },
+                { pattern: /surgery.*urgent/i, weight: 35, description: "Urgent surgery context" }
+            ];
+
+            // Safe patterns with weights
+            const safePatterns = [
+                { pattern: /meeting.*reminder/i, weight: -25, description: "Meeting reminder" },
+                { pattern: /maintenance/i, weight: -20, description: "System maintenance" },
+                { pattern: /newsletter/i, weight: -30, description: "Newsletter content" },
+                { pattern: /routine/i, weight: -15, description: "Routine communication" },
+                { pattern: /scheduled/i, weight: -20, description: "Scheduled activity" }
+            ];
+
+            // Phishing indicators with weights
+            const phishingPatterns = [
+                { pattern: /click.*here/i, weight: 25, description: "Click here directive" },
+                { pattern: /verify.*account/i, weight: 30, description: "Account verification request" },
+                { pattern: /password.*expir/i, weight: 35, description: "Password expiration threat" },
+                { pattern: /urgent.*action/i, weight: 40, description: "Urgent action required" },
+                { pattern: /compliance.*violation/i, weight: 45, description: "Compliance violation threat" },
+                { pattern: /http:\/\//i, weight: 20, description: "Unsecure HTTP link" },
+                { pattern: /\.net/i, weight: 15, description: "Non-hospital domain (.net)" },
+                { pattern: /immediate.*response/i, weight: 30, description: "Immediate response pressure" },
+                { pattern: /account.*suspend/i, weight: 35, description: "Account suspension threat" },
+                { pattern: /legal.*action/i, weight: 40, description: "Legal action threat" }
+            ];
+
+            let urgencyScore = 0;
+            let phishingScore = 0;
+            let matchedPatterns = [];
+            let confidence = 0;
+
+            // Check for urgency patterns
+            urgencyPatterns.forEach(patternObj => {
+                if (patternObj.pattern.test(subject) || patternObj.pattern.test(body)) {
+                    urgencyScore += patternObj.weight;
+                    matchedPatterns.push(`URGENCY: +${patternObj.weight}: ${patternObj.description}`);
+                    console.log(`✅ Matched urgency pattern: ${patternObj.description} (+${patternObj.weight})`);
+                }
+            });
+
+            // Check for safe patterns
+            safePatterns.forEach(patternObj => {
+                if (patternObj.pattern.test(subject) || patternObj.pattern.test(body)) {
+                    urgencyScore += patternObj.weight;
+                    matchedPatterns.push(`URGENCY: ${patternObj.weight}: ${patternObj.description}`);
+                    console.log(`✅ Matched safe pattern: ${patternObj.description} (${patternObj.weight})`);
+                }
+            });
+
+            // Check for phishing patterns
+            phishingPatterns.forEach(patternObj => {
+                if (patternObj.pattern.test(subject) || patternObj.pattern.test(body)) {
+                    phishingScore += patternObj.weight;
+                    matchedPatterns.push(`PHISHING: +${patternObj.weight}: ${patternObj.description}`);
+                    console.log(`🚨 Matched phishing pattern: ${patternObj.description} (+${patternObj.weight})`);
+                }
+            });
+
+            // Domain analysis
+            const domain = sender.split('@')[1];
+            const emergencyDomains = ['emergency.hospital.org', 'icu.hospital.org', 'er.hospital.org'];
+            const adminDomains = ['admin.hospital.org', 'it-admin.hospital.org'];
+            const suspiciousDomains = ['.net', '.com', 'medical-alert', 'hospital-security'];
+
+            let domainWeight = 0;
+            let domainPhishingWeight = 0;
+            
+            if (emergencyDomains.some(d => domain.includes(d))) {
+                domainWeight = 20;
+                urgencyScore += domainWeight;
+                matchedPatterns.push(`URGENCY: +${domainWeight}: Emergency department domain`);
+            } else if (adminDomains.some(d => domain.includes(d))) {
+                domainWeight = -15;
+                urgencyScore += domainWeight;
+                matchedPatterns.push(`URGENCY: ${domainWeight}: Administrative domain`);
+            } else if (suspiciousDomains.some(d => domain.includes(d))) {
+                domainPhishingWeight = 30;
+                phishingScore += domainPhishingWeight;
+                matchedPatterns.push(`PHISHING: +${domainPhishingWeight}: Suspicious domain`);
+            } else {
+                matchedPatterns.push(`DOMAIN: 0: Neutral domain (${domain})`);
+            }
+
+            // Calculate confidence based on pattern strength and consistency
+            let patternConsistency = 0;
+            let urgencyPatternCount = 0;
+            let safePatternCount = 0;
+            let phishingPatternCount = 0;
+            
+            matchedPatterns.forEach(pattern => {
+                if (pattern.includes('URGENCY: +')) urgencyPatternCount++;
+                if (pattern.includes('URGENCY: -')) safePatternCount++;
+                if (pattern.includes('PHISHING: +')) phishingPatternCount++;
+            });
+            
+            if (matchedPatterns.length > 0) {
+                const totalPatterns = urgencyPatternCount + safePatternCount + phishingPatternCount;
+                const maxPatternType = Math.max(urgencyPatternCount, safePatternCount, phishingPatternCount);
+                const consistencyRatio = maxPatternType / totalPatterns;
+                patternConsistency = Math.min(25, consistencyRatio * 25);
+            }
+
+            // Calculate final classifications and confidence
+            let isUrgent = urgencyScore > 30;
+            let isPhishing = phishingScore > 35;
+            let classification = 'safe';
+            
+            if (isPhishing) {
+                classification = 'phishing';
+            } else if (isUrgent) {
+                classification = 'urgent';
+            }
+            
+            let baseConfidence = 60;
+            const urgencyThresholdDistance = Math.abs(urgencyScore - 30);
+            const phishingThresholdDistance = Math.abs(phishingScore - 35);
+            const maxThresholdDistance = Math.max(urgencyThresholdDistance, phishingThresholdDistance);
+            const scoreConfidence = Math.min(25, maxThresholdDistance * 0.8);
+            const consistencyBonus = patternConsistency;
+            const evidenceBonus = Math.min(10, matchedPatterns.length * 2);
+            
+            confidence = Math.min(95, baseConfidence + scoreConfidence + consistencyBonus + evidenceBonus);
+
+            console.log(`Final urgency score: ${urgencyScore}`);
+            console.log(`Final phishing score: ${phishingScore}`);
+            console.log(`Classification: ${classification.toUpperCase()}`);
+            console.log(`Confidence: ${confidence}%`);
+
+            return {
+                classification,
+                isUrgent,
+                isPhishing,
+                confidence,
+                urgencyScore,
+                phishingScore,
+                matchedPatterns,
+                domainWeight,
+                domainPhishingWeight,
+                patternConsistency,
+                reasoning: generateDualReasoning(classification, urgencyScore, phishingScore, domain, matchedPatterns)
+            };
+        }
+
+        function generateDualReasoning(classification, urgencyScore, phishingScore, domain, matchedPatterns) {
+            let reasoning = `AI Decision Process:\n\n`;
+            reasoning += `Urgency Score: ${urgencyScore} (threshold: 30 for urgent classification)\n`;
+            reasoning += `Phishing Score: ${phishingScore} (threshold: 35 for phishing classification)\n\n`;
+            reasoning += `Matched Patterns:\n`;
+            matchedPatterns.forEach(pattern => {
+                reasoning += `• ${pattern}\n`;
+            });
+            reasoning += `\nClassification: ${classification.toUpperCase()}\n`;
+            
+            if (classification === 'phishing') {
+                reasoning += `Reason: Phishing score exceeds threshold - potential security threat detected`;
+            } else if (classification === 'urgent') {
+                reasoning += `Reason: Urgency score exceeds threshold - immediate medical attention required`;
+            } else {
+                reasoning += `Reason: Both scores below thresholds - standard processing acceptable`;
+            }
+            
+            return reasoning;
+        }
+
+        function displayResults(analysis) {
+            // Update urgency classification
+            const urgencyBadge = document.getElementById('urgencyClassificationBadge');
+            const urgencyLevel = document.getElementById('urgencyLevel');
+            
+            if (analysis.isUrgent) {
+                urgencyBadge.textContent = 'URGENT';
+                urgencyBadge.className = 'classification-badge classification-urgent';
+                urgencyLevel.textContent = '🚨 Requires immediate attention';
+                urgencyLevel.style.color = '#dc2626';
+            } else {
+                urgencyBadge.textContent = 'SAFE';
+                urgencyBadge.className = 'classification-badge classification-safe';
+                urgencyLevel.textContent = '✅ Normal processing';
+                urgencyLevel.style.color = '#059669';
+            }
+            
+            // Update phishing classification
+            const phishingBadge = document.getElementById('phishingClassificationBadge');
+            const phishingLevel = document.getElementById('phishingLevel');
+            
+            if (analysis.isPhishing) {
+                phishingBadge.textContent = 'PHISHING';
+                phishingBadge.className = 'classification-badge classification-phishing';
+                phishingLevel.textContent = '🚨 Security threat detected';
+                phishingLevel.style.color = '#dc2626';
+            } else {
+                phishingBadge.textContent = 'SAFE';
+                phishingBadge.className = 'classification-badge classification-safe';
+                phishingLevel.textContent = '✅ No security threats';
+                phishingLevel.style.color = '#059669';
+            }
+
+            // Update confidence score
+            const confidenceBar = document.getElementById('confidenceBar');
+            const confidenceValue = document.getElementById('confidenceValue');
+            
+            confidenceBar.style.width = analysis.confidence + '%';
+            confidenceValue.textContent = analysis.confidence + '%';
+            
+            // Update confidence bar color
+            confidenceBar.className = 'confidence-fill';
+            if (analysis.confidence < 70) {
+                confidenceBar.classList.add('low');
+            } else if (analysis.confidence < 85) {
+                confidenceBar.classList.add('medium');
+            }
+
+            // Update reasoning
+            document.getElementById('reasoningText').textContent = analysis.reasoning;
+
+            // Update metrics
+            totalAnalyzed++;
+            console.log(`Email analyzed. Total analyzed: ${totalAnalyzed}`);
+            updateMetrics();
+            updateDashboard();
+        }
+
+        function provideFeedback(isCorrect, type) {
+            console.log(`Feedback provided: ${isCorrect ? 'correct' : 'incorrect'} for ${type}`);
+            console.log(`Current metrics - Urgent TP: ${urgentTruePositives}, FP: ${urgentFalsePositives}, TN: ${urgentTrueNegatives}, FN: ${urgentFalseNegatives}`);
+            
+            // Get the last analyzed email
+            const lastEmail = emailHistory[emailHistory.length - 1];
+            if (lastEmail) {
+                console.log(`Processing feedback for email: ${lastEmail.subject}`);
+                if (type === 'urgency') {
+                    lastEmail.actualUrgent = isCorrect ? lastEmail.analysis.isUrgent : !lastEmail.analysis.isUrgent;
+                    
+                    const predictedUrgent = lastEmail.analysis.isUrgent;
+                    const actualUrgent = lastEmail.actualUrgent;
+                    
+                    if (actualUrgent && predictedUrgent) {
+                        urgentTruePositives++;
+                    } else if (!actualUrgent && !predictedUrgent) {
+                        urgentTrueNegatives++;
+                    } else if (!actualUrgent && predictedUrgent) {
+                        urgentFalsePositives++;
+                    } else if (actualUrgent && !predictedUrgent) {
+                        urgentFalseNegatives++;
+                    }
+                } else if (type === 'phishing') {
+                    lastEmail.actualPhishing = isCorrect ? !lastEmail.analysis.isPhishing : lastEmail.analysis.isPhishing;
+                    
+                    const predictedPhishing = lastEmail.analysis.isPhishing;
+                    const actualPhishing = lastEmail.actualPhishing;
+                    
+                    if (actualPhishing && predictedPhishing) {
+                        phishingTruePositives++;
+                    } else if (!actualPhishing && !predictedPhishing) {
+                        phishingTrueNegatives++;
+                    } else if (!actualPhishing && predictedPhishing) {
+                        phishingFalsePositives++;
+                    } else if (actualPhishing && !predictedPhishing) {
+                        phishingFalseNegatives++;
+                    }
+                }
+                
+                if (isCorrect) {
+                    if (type === 'urgency') {
+                        agentRewardScore += lastEmail.analysis.isUrgent ? 15 : 3;
+                    } else if (type === 'phishing') {
+                        agentRewardScore += lastEmail.analysis.isPhishing ? 25 : 2;
+                    }
+                } else {
+                    if (type === 'urgency') {
+                        agentRewardScore += lastEmail.analysis.isUrgent ? -20 : -5;
+                    } else if (type === 'phishing') {
+                        agentRewardScore += lastEmail.analysis.isPhishing ? -30 : -3;
+                    }
+                }
+            }
+
+            userFeedbackHistory.push({
+                timestamp: new Date(),
+                isCorrect: isCorrect,
+                type: type,
+                confidence: document.getElementById('confidenceValue').textContent,
+                emailId: lastEmail ? lastEmail.id : null
+            });
+
+            // Update the feedback section to show feedback was provided
+            updateFeedbackSection(type, isCorrect);
+            
+            if (isCorrect) {
+                alert(`✅ Thank you for the feedback! This helps improve our ${type} detection accuracy.`);
+            } else {
+                alert(`❌ Thank you for the correction! This will help the AI learn to better detect ${type} patterns.`);
+            }
+            
+            updateMetrics();
+            updateDashboard();
+            updateHistory();
+            // Persist after feedback updates
+            persistHistory();
+            persistMetrics();
+            persistReward();
+        }
+
+        function updateMetrics() {
+            // Calculate urgency metrics
+            const urgentTotal = urgentTruePositives + urgentFalsePositives + urgentTrueNegatives + urgentFalseNegatives;
+            
+            // Calculate phishing metrics
+            const phishingTotal = phishingTruePositives + phishingFalsePositives + phishingTrueNegatives + phishingFalseNegatives;
+            
+            // Update individual urgency metrics
+            document.getElementById('urgentTruePositives').textContent = urgentTruePositives;
+            document.getElementById('urgentTrueNegatives').textContent = urgentTrueNegatives;
+            document.getElementById('urgentFalsePositives').textContent = urgentFalsePositives;
+            document.getElementById('urgentFalseNegatives').textContent = urgentFalseNegatives;
+            
+            // Calculate urgency precision, recall, F1-score, and accuracy
+            let urgentPrecision = '0.0';
+            let urgentRecall = '0.0';
+            let urgentF1Score = '0.0';
+            let urgentAccuracy = '0.0';
+            
+            if (urgentTotal > 0) {
+                // Precision: TP / (TP + FP)
+                if (urgentTruePositives + urgentFalsePositives > 0) {
+                    urgentPrecision = ((urgentTruePositives / (urgentTruePositives + urgentFalsePositives)) * 100).toFixed(1);
+                }
+                
+                // Recall: TP / (TP + FN)
+                if (urgentTruePositives + urgentFalseNegatives > 0) {
+                    urgentRecall = ((urgentTruePositives / (urgentTruePositives + urgentFalseNegatives)) * 100).toFixed(1);
+                }
+                
+                // Accuracy: (TP + TN) / Total
+                urgentAccuracy = (((urgentTruePositives + urgentTrueNegatives) / urgentTotal) * 100).toFixed(1);
+                
+                // F1-Score: 2 * (Precision * Recall) / (Precision + Recall)
+                const precisionNum = parseFloat(urgentPrecision);
+                const recallNum = parseFloat(urgentRecall);
+                if (precisionNum + recallNum > 0) {
+                    urgentF1Score = ((2 * precisionNum * recallNum) / (precisionNum + recallNum)).toFixed(1);
+                }
+            }
+            
+            document.getElementById('urgentPrecision').textContent = urgentPrecision + '%';
+            document.getElementById('urgentRecall').textContent = urgentRecall + '%';
+            document.getElementById('urgentF1Score').textContent = urgentF1Score + '%';
+            document.getElementById('urgentAccuracy').textContent = urgentAccuracy + '%';
+            
+            // Update individual phishing metrics
+            document.getElementById('phishingTruePositives').textContent = phishingTruePositives;
+            document.getElementById('phishingTrueNegatives').textContent = phishingTrueNegatives;
+            document.getElementById('phishingFalsePositives').textContent = phishingFalsePositives;
+            document.getElementById('phishingFalseNegatives').textContent = phishingFalseNegatives;
+            
+            // Calculate phishing precision, recall, F1-score, and accuracy
+            let phishingPrecision = '0.0';
+            let phishingRecall = '0.0';
+            let phishingF1Score = '0.0';
+            let phishingAccuracy = '0.0';
+            
+            if (phishingTotal > 0) {
+                // Precision: TP / (TP + FP)
+                if (phishingTruePositives + phishingFalsePositives > 0) {
+                    phishingPrecision = ((phishingTruePositives / (phishingTruePositives + phishingFalsePositives)) * 100).toFixed(1);
+                }
+                
+                // Recall: TP / (TP + FN)
+                if (phishingTruePositives + phishingFalseNegatives > 0) {
+                    phishingRecall = ((phishingTruePositives / (phishingTruePositives + phishingFalseNegatives)) * 100).toFixed(1);
+                }
+                
+                // Accuracy: (TP + TN) / Total
+                phishingAccuracy = (((phishingTruePositives + phishingTrueNegatives) / phishingTotal) * 100).toFixed(1);
+                
+                // F1-Score: 2 * (Precision * Recall) / (Precision + Recall)
+                const precisionNum = parseFloat(phishingPrecision);
+                const recallNum = parseFloat(phishingRecall);
+                if (precisionNum + recallNum > 0) {
+                    phishingF1Score = ((2 * precisionNum * recallNum) / (precisionNum + recallNum)).toFixed(1);
+                }
+            }
+            
+            document.getElementById('phishingPrecision').textContent = phishingPrecision + '%';
+            document.getElementById('phishingRecall').textContent = phishingRecall + '%';
+            document.getElementById('phishingF1Score').textContent = phishingF1Score + '%';
+            document.getElementById('phishingAccuracy').textContent = phishingAccuracy + '%';
+            
+            // Calculate overall metrics
+            const totalTruePositives = urgentTruePositives + phishingTruePositives;
+            const totalFalsePositives = urgentFalsePositives + phishingFalsePositives;
+            const totalTrueNegatives = urgentTrueNegatives + phishingTrueNegatives;
+            const totalFalseNegatives = urgentFalseNegatives + phishingFalseNegatives;
+            const totalClassifications = totalTruePositives + totalFalsePositives + totalTrueNegatives + totalFalseNegatives;
+            
+            let overallAccuracy = '0.0';
+            let overallPrecision = '0.0';
+            let overallRecall = '0.0';
+            let overallF1Score = '0.0';
+            
+            if (totalClassifications > 0) {
+                // Overall Accuracy: (TP + TN) / Total
+                overallAccuracy = (((totalTruePositives + totalTrueNegatives) / totalClassifications) * 100).toFixed(1);
+                
+                // Overall Precision: TP / (TP + FP)
+                if (totalTruePositives + totalFalsePositives > 0) {
+                    overallPrecision = ((totalTruePositives / (totalTruePositives + totalFalsePositives)) * 100).toFixed(1);
+                }
+                
+                // Overall Recall: TP / (TP + FN)
+                if (totalTruePositives + totalFalseNegatives > 0) {
+                    overallRecall = ((totalTruePositives / (totalTruePositives + totalFalseNegatives)) * 100).toFixed(1);
+                }
+                
+                // Overall F1-Score: 2 * (Precision * Recall) / (Precision + Recall)
+                const precisionNum = parseFloat(overallPrecision);
+                const recallNum = parseFloat(overallRecall);
+                if (precisionNum + recallNum > 0) {
+                    overallF1Score = ((2 * precisionNum * recallNum) / (precisionNum + recallNum)).toFixed(1);
+                }
+            }
+            
+            document.getElementById('overallAccuracy').textContent = overallAccuracy + '%';
+            document.getElementById('overallPrecision').textContent = overallPrecision + '%';
+            document.getElementById('overallRecall').textContent = overallRecall + '%';
+            document.getElementById('overallF1Score').textContent = overallF1Score + '%';
+            
+            // Update reward system
+            updateRewardSystem();
+            
+            // Update performance insights
+            updatePerformanceInsights();
+        }
+
+        function updateDashboard() {
+            // Update dashboard metrics (combined urgency + phishing)
+            const totalTruePositives = urgentTruePositives + phishingTruePositives;
+            const totalFalseNegatives = urgentFalseNegatives + phishingFalseNegatives;
+            const totalFalsePositives = urgentFalsePositives + phishingFalsePositives;
+            const totalTrueNegatives = urgentTrueNegatives + phishingTrueNegatives;
+            
+            // Calculate True Positive Rate (Recall) - correctly identified positives
+            let truePositiveRate = '0.0';
+            if (totalTruePositives + totalFalseNegatives > 0) {
+                truePositiveRate = ((totalTruePositives / (totalTruePositives + totalFalseNegatives)) * 100).toFixed(1);
+            }
+            document.getElementById('dashboardTruePositiveRate').textContent = truePositiveRate + '%';
+            
+            // Calculate False Positive Rate - incorrectly flagged as positive
+            let falsePositiveRate = '0.0';
+            if (totalFalsePositives + totalTrueNegatives > 0) {
+                falsePositiveRate = ((totalFalsePositives / (totalFalsePositives + totalTrueNegatives)) * 100).toFixed(1);
+            }
+            document.getElementById('dashboardFalsePositiveRate').textContent = falsePositiveRate + '%';
+            
+            document.getElementById('dashboardTotalEmails').textContent = totalAnalyzed;
+            
+            // Calculate average confidence
+            const avgConfidence = confidenceScores.length > 0 
+                ? (confidenceScores.reduce((a, b) => a + b, 0) / confidenceScores.length).toFixed(1)
+                : '0.0';
+            document.getElementById('dashboardAvgConfidence').textContent = avgConfidence + '%';
+        }
+
+        function updateHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (emailHistory.length === 0) {
+                historyList.innerHTML = '<div style="text-align: center; color: #64748b; font-style: italic; padding: 40px;">No emails analyzed yet. Start testing emails to see the history here.</div>';
+                return;
+            }
+            
+            let historyHTML = '';
+            emailHistory.slice(-10).reverse().forEach(email => {
+                const timeStr = email.timestamp.toLocaleTimeString();
+                const urgencyClass = email.analysis.isUrgent ? 'urgent' : 'safe';
+                const phishingClass = email.analysis.isPhishing ? 'phishing' : 'safe';
+                
+                historyHTML += `
+                    <div class="history-item ${urgencyClass}">
+                        <div class="history-time">${timeStr}</div>
+                        <div class="history-subject">${email.subject}</div>
+                        <div class="history-from">From: ${email.sender}</div>
+                        <div style="margin-top: 5px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span class="classification-badge classification-${urgencyClass}">
+                                🚨 ${email.analysis.isUrgent ? 'URGENT' : 'SAFE'}
+                            </span>
+                            <span class="classification-badge classification-${phishingClass}">
+                                🛡️ ${email.analysis.isPhishing ? 'PHISHING' : 'SAFE'}
+                            </span>
+                            <span style="font-size: 0.8rem; color: #64748b; align-self: center;">
+                                Confidence: ${email.analysis.confidence}%
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            historyList.innerHTML = historyHTML;
+        }
+
+        // Email Generation Functions
+        function generateEmail(type) {
+            let email;
+            
+            if (type === 'random') {
+                const types = ['urgent', 'safe', 'phishing'];
+                type = types[Math.floor(Math.random() * types.length)];
+            }
+            
+            switch(type) {
+                case 'urgent':
+                    email = generateUrgentEmail();
+                    urgentGenerated++;
+                    break;
+                case 'safe':
+                    email = generateSafeEmail();
+                    safeGenerated++;
+                    break;
+                case 'phishing':
+                    email = generatePhishingEmail();
+                    phishingGenerated++;
+                    break;
+            }
+            
+            totalGenerated++;
+            updateGenerationStats();
+            displayGeneratedEmail(email, type);
+        }
+
+        function generateUrgentEmail() {
+            const urgentScenarios = [
+                {
+                    sender: "dr.martinez@emergency.hospital.org",
+                    subject: "URGENT: Cardiac Arrest - ICU Room 312",
+                    body: `CODE BLUE ALERT - IMMEDIATE RESPONSE REQUIRED
+
+Patient: Jennifer Adams (MRN: 7890123)
+Location: ICU Room 312
+Time of Event: ${new Date().toLocaleTimeString()}
+
+CRITICAL CONDITION:
+- Cardiac arrest in progress
+- CPR initiated by nursing staff
+- Defibrillation attempted
+- Patient unresponsive
+
+IMMEDIATE ACTIONS NEEDED:
+1. Cardiology team STAT to ICU-312
+2. Anesthesia team for potential intubation
+3. Family notification required
+4. Prepare crash cart and emergency medications
+
+Please respond immediately. Every second counts.
+
+Dr. Martinez
+Emergency Medicine
+Pager: 555-0123`
+                },
+                {
+                    sender: "pharmacy.alert@hospital.org",
+                    subject: "CRITICAL: Drug Interaction Alert - Patient 4567890",
+                    body: `URGENT PHARMACY ALERT
+
+Patient: Michael Rodriguez (MRN: 4567890)
+Room: 5B-208
+Attending Physician: Dr. Thompson
+
+CRITICAL DRUG INTERACTION DETECTED:
+- Patient prescribed Warfarin 5mg daily
+- New prescription: Aspirin 325mg daily
+- HIGH RISK of bleeding complications
+
+IMMEDIATE ACTION REQUIRED:
+- Physician consultation needed
+- Medication review required
+- Patient monitoring for bleeding signs
+- Consider alternative antiplatelet therapy
+
+Please contact pharmacy immediately at ext. 4444.
+
+Pharmacy Clinical Specialist
+Critical Care Team`
+                },
+                {
+                    sender: "lab.critical@hospital.org",
+                    subject: "STAT: Critical Lab Values - Patient 3456789",
+                    body: `CRITICAL LABORATORY RESULTS
+
+Patient: Sarah Johnson (MRN: 3456789)
+Room: ICU-205
+Attending: Dr. Williams
+
+CRITICAL VALUES REQUIRING IMMEDIATE ATTENTION:
+- Potassium: 7.2 mEq/L (CRITICAL HIGH - Normal: 3.5-5.0)
+- Creatinine: 5.8 mg/dL (CRITICAL HIGH - Normal: 0.6-1.2)
+- BUN: 95 mg/dL (CRITICAL HIGH - Normal: 7-20)
+
+CLINICAL SIGNIFICANCE:
+- Patient at immediate risk for cardiac arrhythmia
+- Acute kidney injury with potential for dialysis
+- Hyperkalemia treatment required STAT
+
+IMMEDIATE INTERVENTIONS NEEDED:
+1. Cardiac monitoring
+2. EKG STAT
+3. Consider calcium gluconate
+4. Insulin/dextrose protocol
+5. Nephrology consultation
+
+Lab Technician
+Critical Care Laboratory`
+                }
+            ];
+            
+            return urgentScenarios[Math.floor(Math.random() * urgentScenarios.length)];
+        }
+
+        function generateSafeEmail() {
+            const safeScenarios = [
+                {
+                    sender: "admin@hospital.org",
+                    subject: "Monthly Department Meeting Reminder",
+                    body: `Dear Team,
+
+This is a friendly reminder about our monthly department meeting scheduled for next Tuesday, March 19th at 2:00 PM in Conference Room A.
+
+Agenda Items:
+- Monthly performance review
+- New equipment updates
+- Staff scheduling for April
+- Quality improvement initiatives
+- Open discussion
+
+Please confirm your attendance by replying to this email by Friday.
+
+Best regards,
+Department Administration
+Human Resources`
+                },
+                {
+                    sender: "it-support@hospital.org",
+                    subject: "Scheduled System Maintenance - Weekend",
+                    body: `SYSTEM MAINTENANCE NOTICE
+
+Date: March 16-17, 2024
+Time: Saturday 10:00 PM - Sunday 2:00 AM
+Affected Systems: Electronic Health Records, Email Server
+
+Dear Staff,
+
+We will be performing routine maintenance on our core systems this weekend. During this time, you may experience:
+
+- Brief email delays (up to 10 minutes)
+- EHR system in read-only mode
+- Temporary unavailability of some features
+
+All systems will be fully restored by Sunday 2:00 AM.
+
+If you encounter any issues, please contact the IT helpdesk at ext. 5000.
+
+IT Administration
+Hospital Information Systems`
+                },
+                {
+                    sender: "education@hospital.org",
+                    subject: "Continuing Education Opportunities - April",
+                    body: `Continuing Education Update
+
+Dear Healthcare Professionals,
+
+We're excited to announce several continuing education opportunities for April:
+
+UPCOMING COURSES:
+1. Advanced Cardiac Life Support (ACLS) - April 5th
+2. Pediatric Emergency Assessment - April 12th
+3. Infection Control Best Practices - April 19th
+4. Healthcare Ethics Workshop - April 26th
+
+Registration is now open. Please visit the education portal or contact the Education Department at ext. 3000.
+
+CE credits available for all courses.
+
+Education Department
+Professional Development`
+                }
+            ];
+            
+            return safeScenarios[Math.floor(Math.random() * safeScenarios.length)];
+        }
+
+        function generatePhishingEmail() {
+            const phishingScenarios = [
+                {
+                    sender: "security@healthcare-compliance.net",
+                    subject: "URGENT: HIPAA Violation Notice - Immediate Response Required",
+                    body: `HIPAA COMPLIANCE ALERT
+
+Your healthcare facility has been flagged for potential HIPAA violations. Immediate verification is required to prevent regulatory action.
+
+VIOLATIONS DETECTED:
+- Unauthorized patient data access
+- Inadequate security protocols
+- Missing compliance documentation
+- Potential data breach incidents
+
+IMMEDIATE ACTION REQUIRED:
+Verify your compliance status immediately to avoid:
+- Regulatory investigation
+- Fines up to $1.5 million
+- Legal action
+- License suspension
+
+Click here to verify: http://hipaa-compliance-verify.net/secure-login
+
+You have 24 hours to respond. Failure to comply will result in immediate regulatory action.
+
+Healthcare Compliance Bureau
+Department of Health and Human Services`
+                },
+                {
+                    sender: "it-security@hospital-security.net",
+                    subject: "CRITICAL: Account Security Breach - Immediate Password Reset",
+                    body: `SECURITY ALERT - IMMEDIATE ACTION REQUIRED
+
+Multiple unauthorized login attempts detected on your hospital account. Your password has been compromised and must be changed immediately.
+
+SECURITY INCIDENT DETAILS:
+- 15 failed login attempts from unknown IP
+- Potential data breach in progress
+- Account temporarily suspended
+- Immediate action required
+
+TO SECURE YOUR ACCOUNT:
+1. Click here to reset password: http://hospital-security-reset.net/login
+2. Update security questions
+3. Enable two-factor authentication
+4. Review recent account activity
+
+WARNING: Your account will be permanently suspended if not secured within 2 hours.
+
+IT Security Department
+Hospital Network Security`
+                },
+                {
+                    sender: "billing@medical-billing.net",
+                    subject: "URGENT: Payment Processing Error - Immediate Verification",
+                    body: `PAYMENT PROCESSING ALERT
+
+A critical error has been detected in your recent billing transactions. Immediate verification is required to prevent payment delays.
+
+ERROR DETAILS:
+- Payment processing failure
+- Insurance claim rejected
+- Billing system malfunction
+- Revenue cycle interruption
+
+IMMEDIATE ACTION REQUIRED:
+Verify your billing information immediately to prevent:
+- Payment delays
+- Insurance claim rejections
+- Revenue loss
+- System lockout
+
+Click here to verify billing: http://medical-billing-verify.net/secure-access
+
+You have 48 hours to resolve this issue.
+
+Medical Billing Department
+Revenue Cycle Management`
+                }
+            ];
+            
+            return phishingScenarios[Math.floor(Math.random() * phishingScenarios.length)];
+        }
+
+        function displayGeneratedEmail(email, type) {
+            document.getElementById('genSender').textContent = email.sender;
+            document.getElementById('genSubject').textContent = email.subject;
+            document.getElementById('genBody').textContent = email.body;
+            
+            const generatedDiv = document.getElementById('generatedEmail');
+            generatedDiv.style.display = 'block';
+            
+            // Store the generated email for loading into analysis
+            window.currentGeneratedEmail = email;
+            
+            // Scroll to the generated email
+            generatedDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function loadGeneratedEmail() {
+            if (window.currentGeneratedEmail) {
+                document.getElementById('sender').value = window.currentGeneratedEmail.sender;
+                document.getElementById('subject').value = window.currentGeneratedEmail.subject;
+                document.getElementById('emailBody').value = window.currentGeneratedEmail.body;
+                
+                // Switch to analysis tab
+                showTab('analysis');
+                
+                // Scroll to the input section
+                document.querySelector('.input-section').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateGenerationStats() {
+            document.getElementById('urgentGenerated').textContent = urgentGenerated;
+            document.getElementById('safeGenerated').textContent = safeGenerated;
+            document.getElementById('phishingGenerated').textContent = phishingGenerated;
+            document.getElementById('totalGenerated').textContent = totalGenerated;
+        }
+
+        function updateRewardSystem() {
+            document.getElementById('currentRewardScore').textContent = agentRewardScore;
+            
+            // Determine reward level
+            let rewardLevel = 'Novice';
+            let nextLevelThreshold = 100;
+            let progress = 0;
+            
+            if (agentRewardScore >= 500) {
+                rewardLevel = 'Expert';
+                progress = 100;
+            } else if (agentRewardScore >= 300) {
+                rewardLevel = 'Advanced';
+                nextLevelThreshold = 500;
+                progress = Math.round(((agentRewardScore - 300) / (500 - 300)) * 100);
+            } else if (agentRewardScore >= 150) {
+                rewardLevel = 'Intermediate';
+                nextLevelThreshold = 300;
+                progress = Math.round(((agentRewardScore - 150) / (300 - 150)) * 100);
+            } else if (agentRewardScore >= 50) {
+                rewardLevel = 'Beginner';
+                nextLevelThreshold = 150;
+                progress = Math.round(((agentRewardScore - 50) / (150 - 50)) * 100);
+            } else {
+                nextLevelThreshold = 50;
+                progress = Math.round((agentRewardScore / 50) * 100);
+            }
+            
+            document.getElementById('rewardLevel').textContent = rewardLevel;
+            document.getElementById('rewardProgress').textContent = progress + '%';
+        }
+
+        function updateFeedbackSection(type, isCorrect) {
+            // Get the last analyzed email
+            const lastEmail = emailHistory[emailHistory.length - 1];
+            if (!lastEmail) return;
+            
+            // Mark feedback as provided
+            if (!lastEmail.feedbackProvided) {
+                lastEmail.feedbackProvided = {};
+            }
+            lastEmail.feedbackProvided[type] = isCorrect;
+            
+            // Update the feedback buttons to show they were clicked
+            if (type === 'urgency') {
+                const urgencySection = document.querySelector('.feedback-section > div:first-of-type');
+                if (urgencySection) {
+                    urgencySection.style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
+                    urgencySection.style.borderLeftColor = isCorrect ? '#22c55e' : '#ef4444';
+                    
+                    const buttons = urgencySection.querySelector('.feedback-buttons');
+                    if (buttons) {
+                        buttons.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border-radius: 6px; border: 1px solid ${isCorrect ? '#22c55e' : '#ef4444'};">
+                                <span style="color: ${isCorrect ? '#166534' : '#991b1b'}; font-weight: 600;">
+                                    ${isCorrect ? '✅' : '❌'} Feedback Recorded
+                                </span>
+                                <span style="font-size: 0.8rem; color: #64748b;">
+                                    ${isCorrect ? 'Correct' : 'Incorrect'} urgency classification
+                                </span>
+                            </div>
+                        `;
+                    }
+                }
+            } else if (type === 'phishing') {
+                const phishingSection = document.querySelector('.feedback-section > div:nth-of-type(2)');
+                if (phishingSection) {
+                    phishingSection.style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
+                    phishingSection.style.borderLeftColor = isCorrect ? '#22c55e' : '#ef4444';
+                    
+                    const buttons = phishingSection.querySelector('.feedback-buttons');
+                    if (buttons) {
+                        buttons.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border-radius: 6px; border: 1px solid ${isCorrect ? '#22c55e' : '#ef4444'};">
+                                <span style="color: ${isCorrect ? '#166534' : '#991b1b'}; font-weight: 600;">
+                                    ${isCorrect ? '✅' : '❌'} Feedback Recorded
+                                </span>
+                                <span style="font-size: 0.8rem; color: #64748b;">
+                                    ${isCorrect ? 'Correct' : 'Incorrect'} security classification
+                                </span>
+                            </div>
+                        `;
+                    }
+                }
+            }
+            
+            // Check if both feedbacks have been provided
+            const urgencyFeedback = lastEmail.feedbackProvided?.urgency;
+            const phishingFeedback = lastEmail.feedbackProvided?.phishing;
+            
+            if (urgencyFeedback !== undefined && phishingFeedback !== undefined) {
+                // Both feedbacks provided - show completion message
+                const feedbackSection = document.querySelector('.feedback-section');
+                if (feedbackSection) {
+                    const completionDiv = document.createElement('div');
+                    completionDiv.style.cssText = `
+                        margin-top: 20px; 
+                        padding: 15px; 
+                        background: #f0f9ff; 
+                        border-radius: 8px; 
+                        border-left: 4px solid #3b82f6;
+                        text-align: center;
+                    `;
+                    completionDiv.innerHTML = `
+                        <h5 style="color: #1e40af; margin-bottom: 10px;">🎉 Complete!</h5>
+                        <p style="color: #1e40af; margin: 0; font-size: 0.9rem;">
+                            Thank you for providing feedback on both classifications. 
+                            This helps improve our AI's accuracy for future emails.
+                        </p>
+                    `;
+                    
+                    // Remove the instruction message if it exists
+                    const instructionMsg = feedbackSection.querySelector('div[style*="f0f9ff"]');
+                    if (instructionMsg) {
+                        instructionMsg.remove();
+                    }
+                    
+                    feedbackSection.appendChild(completionDiv);
+                }
+            }
+        }
+
+        function updatePerformanceInsights() {
+            const insightsDiv = document.getElementById('performanceInsights');
+            const urgentTotal = urgentTruePositives + urgentFalsePositives + urgentTrueNegatives + urgentFalseNegatives;
+            const phishingTotal = phishingTruePositives + phishingFalsePositives + phishingTrueNegatives + phishingFalseNegatives;
+            
+            if (urgentTotal === 0 && phishingTotal === 0) {
+                insightsDiv.innerHTML = 'Start testing emails to see performance insights and recommendations...';
+                return;
+            }
+            
+            let insights = [];
+            
+            // Urgency insights
+            if (urgentTotal > 0) {
+                const urgentAccuracy = ((urgentTruePositives + urgentTrueNegatives) / urgentTotal) * 100;
+                const urgentPrecision = urgentTruePositives + urgentFalsePositives > 0 ? 
+                    (urgentTruePositives / (urgentTruePositives + urgentFalsePositives)) * 100 : 0;
+                const urgentRecall = urgentTruePositives + urgentFalseNegatives > 0 ? 
+                    (urgentTruePositives / (urgentTruePositives + urgentFalseNegatives)) * 100 : 0;
+                
+                if (urgentAccuracy >= 90) {
+                    insights.push('🚨 <strong>Excellent urgency detection!</strong> The AI is accurately identifying urgent medical emails.');
+                } else if (urgentAccuracy >= 75) {
+                    insights.push('🚨 <strong>Good urgency detection.</strong> Consider testing more edge cases to improve accuracy.');
+                } else {
+                    insights.push('🚨 <strong>Urgency detection needs improvement.</strong> The AI may be missing critical medical emails.');
+                }
+                
+                if (urgentPrecision < 80 && urgentFalsePositives > 0) {
+                    insights.push('⚠️ <strong>High false positive rate for urgency.</strong> This may cause alert fatigue among healthcare staff.');
+                }
+                
+                if (urgentRecall < 80 && urgentFalseNegatives > 0) {
+                    insights.push('⚠️ <strong>High false negative rate for urgency.</strong> Missing urgent emails could lead to delayed care.');
+                }
+            }
+            
+            // Phishing insights
+            if (phishingTotal > 0) {
+                const phishingAccuracy = ((phishingTruePositives + phishingTrueNegatives) / phishingTotal) * 100;
+                const phishingPrecision = phishingTruePositives + phishingFalsePositives > 0 ? 
+                    (phishingTruePositives / (phishingTruePositives + phishingFalsePositives)) * 100 : 0;
+                const phishingRecall = phishingTruePositives + phishingFalseNegatives > 0 ? 
+                    (phishingTruePositives / (phishingTruePositives + phishingFalseNegatives)) * 100 : 0;
+                
+                if (phishingAccuracy >= 90) {
+                    insights.push('🛡️ <strong>Excellent phishing detection!</strong> The AI is effectively protecting against security threats.');
+                } else if (phishingAccuracy >= 75) {
+                    insights.push('🛡️ <strong>Good phishing detection.</strong> Continue testing to maintain security standards.');
+                } else {
+                    insights.push('🛡️ <strong>Phishing detection needs improvement.</strong> Security vulnerabilities may exist.');
+                }
+                
+                if (phishingPrecision < 80 && phishingFalsePositives > 0) {
+                    insights.push('⚠️ <strong>High false positive rate for phishing.</strong> Legitimate emails may be blocked unnecessarily.');
+                }
+                
+                if (phishingRecall < 80 && phishingFalseNegatives > 0) {
+                    insights.push('⚠️ <strong>High false negative rate for phishing.</strong> Security threats may be getting through.');
+                }
+            }
+            
+            // Overall recommendations
+            if (insights.length === 0) {
+                insights.push('📊 <strong>Performance looks good!</strong> Continue testing to maintain high accuracy.');
+            }
+            
+            // Add reward system insight
+            if (agentRewardScore >= 300) {
+                insights.push('🎁 <strong>Excellent agent performance!</strong> The AI is learning effectively from feedback.');
+            } else if (agentRewardScore >= 100) {
+                insights.push('🎁 <strong>Good learning progress.</strong> The agent is improving with continued feedback.');
+            } else if (agentRewardScore < 0) {
+                insights.push('🎁 <strong>Agent needs more training.</strong> Provide more feedback to help the AI learn.');
+            }
+            
+            insightsDiv.innerHTML = insights.join('<br><br>');
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Healthcare Email Defense Agent - Combined Demo loaded');
+
+            // Load persisted state from localStorage (if available)
+            try {
+                const storedHistory = localStorage.getItem('hed_emailHistory');
+                const storedMetrics = localStorage.getItem('hed_metrics');
+                const storedGeneration = localStorage.getItem('hed_generationStats');
+                const storedReward = localStorage.getItem('hed_rewardScore');
+
+                if (storedHistory) {
+                    const parsed = JSON.parse(storedHistory);
+                    // Restore Date objects for timestamps
+                    emailHistory = Array.isArray(parsed) ? parsed.map(item => ({
+                        ...item,
+                        timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
+                    })) : [];
+                }
+
+                if (storedMetrics) {
+                    const m = JSON.parse(storedMetrics);
+                    urgentTruePositives = m.urgentTruePositives || 0;
+                    urgentFalsePositives = m.urgentFalsePositives || 0;
+                    urgentTrueNegatives = m.urgentTrueNegatives || 0;
+                    urgentFalseNegatives = m.urgentFalseNegatives || 0;
+                    phishingTruePositives = m.phishingTruePositives || 0;
+                    phishingFalsePositives = m.phishingFalsePositives || 0;
+                    phishingTrueNegatives = m.phishingTrueNegatives || 0;
+                    phishingFalseNegatives = m.phishingFalseNegatives || 0;
+                    totalAnalyzed = m.totalAnalyzed || 0;
+                }
+
+                if (storedGeneration) {
+                    const g = JSON.parse(storedGeneration);
+                    urgentGenerated = g.urgentGenerated || 0;
+                    safeGenerated = g.safeGenerated || 0;
+                    phishingGenerated = g.phishingGenerated || 0;
+                    totalGenerated = g.totalGenerated || 0;
+                }
+
+                if (storedReward) {
+                    agentRewardScore = parseInt(storedReward, 10) || 0;
+                }
+            } catch (e) {
+                console.warn('Failed to load persisted state:', e);
+            }
+
+            updateMetrics();
+            updateDashboard();
+            updateHistory();
+            updateGenerationStats();
+        });
+
+        // Persist helpers
+        function persistHistory() {
+            try {
+                // Store timestamps as ISO strings
+                const serializable = emailHistory.map(item => ({
+                    ...item,
+                    timestamp: item.timestamp instanceof Date ? item.timestamp.toISOString() : item.timestamp
+                }));
+                localStorage.setItem('hed_emailHistory', JSON.stringify(serializable));
+            } catch (e) {
+                console.warn('Failed to persist history:', e);
+            }
+        }
+
+        function persistMetrics() {
+            try {
+                localStorage.setItem('hed_metrics', JSON.stringify({
+                    urgentTruePositives,
+                    urgentFalsePositives,
+                    urgentTrueNegatives,
+                    urgentFalseNegatives,
+                    phishingTruePositives,
+                    phishingFalsePositives,
+                    phishingTrueNegatives,
+                    phishingFalseNegatives,
+                    totalAnalyzed
+                }));
+            } catch (e) {
+                console.warn('Failed to persist metrics:', e);
+            }
+        }
+
+        function persistGenerationStats() {
+            try {
+                localStorage.setItem('hed_generationStats', JSON.stringify({
+                    urgentGenerated,
+                    safeGenerated,
+                    phishingGenerated,
+                    totalGenerated
+                }));
+            } catch (e) {
+                console.warn('Failed to persist generation stats:', e);
+            }
+        }
+
+        function persistReward() {
+            try {
+                localStorage.setItem('hed_rewardScore', String(agentRewardScore));
+            } catch (e) {
+                console.warn('Failed to persist reward score:', e);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Security Metrics - Interactive Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            margin-top: 20px;
+        }
+
+        .nav-buttons a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-buttons a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .metric-card.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .metric-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .metric-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-right: 20px;
+        }
+
+        .icon-fp {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .icon-accuracy {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .icon-confidence {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .metric-title {
+            flex: 1;
+        }
+
+        .metric-title h2 {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .metric-title .subtitle {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .formula {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            color: #2d3748;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .explanation {
+            line-height: 1.8;
+            color: #4a5568;
+            font-size: 1.05em;
+        }
+
+        .significance {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .significance h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .interactive-demo {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .control-group input {
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .result {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .example {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .example strong {
+            color: #c53030;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #5568d3;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .metric-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Email Security Metrics</h1>
+            <p>Interactive Guide to AI Email Security Agent Performance</p>
+            <div class="nav-buttons">
+                <a href="index.html">🏥 Email Defense Demo</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- False Positive Rate -->
+            <div class="metric-card" onclick="toggleCard(this)">
+                <div class="metric-header">
+                    <div class="metric-icon icon-fp">⚠️</div>
+                    <div class="metric-title">
+                        <h2>False Positive Rate (FPR)</h2>
+                        <span class="subtitle">Measuring Alert Noise</span>
+                    </div>
+                </div>
+
+                <div class="formula">
+                    FPR = (Emails Quarantined by Agent BUT Marked ✓ Legit by Human) / Total Reviewed Emails × 100%
+                </div>
+
+                <div class="explanation">
+                    <p><strong>What is a False Positive?</strong></p>
+                    <p>A false positive occurs when the AI Agent flags and quarantines an email that is actually legitimate, creating unnecessary alerts for the IT team.</p>
+                    
+                    <div class="example">
+                        <strong>Example:</strong> An important business email from a client gets quarantined because it contains phrases like "urgent payment," which the system mistakenly identifies as a phishing attempt.
+                    </div>
+                </div>
+
+                <div class="significance">
+                    <h3>🎯 Thesis Significance: Solving Alert Fatigue</h3>
+                    <p>Lower FPR means IT staff see less "noise," allowing them to focus only on critical threats. This directly improves work efficiency and reduces alert fatigue caused by excessive false alarms.</p>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>📊 Calculator: Try Calculating FPR</h4>
+                    <div class="demo-controls">
+                        <div class="control-group">
+                            <label>Total Reviewed Emails:</label>
+                            <input type="number" id="fp-total" value="1000" min="1">
+                        </div>
+                        <div class="control-group">
+                            <label>False Positive Emails:</label>
+                            <input type="number" id="fp-false" value="50" min="0">
+                        </div>
+                    </div>
+                    <button onclick="calculateFP()">Calculate False Positive Rate</button>
+                    <div class="result" id="fp-result" style="display: none;"></div>
+                    
+                    <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px;">
+                        <canvas id="fpChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Accuracy Rate -->
+            <div class="metric-card" onclick="toggleCard(this)">
+                <div class="metric-header">
+                    <div class="metric-icon icon-accuracy">✅</div>
+                    <div class="metric-title">
+                        <h2>AI Accuracy Rate</h2>
+                        <span class="subtitle">Proving Trustworthiness</span>
+                    </div>
+                </div>
+
+                <div class="formula">
+                    Accuracy = (Emails Marked ✓ Correct by Human Reviewer) / Total Reviewed Emails × 100%
+                </div>
+
+                <div class="explanation">
+                    <p><strong>What is Accuracy Rate?</strong></p>
+                    <p>The percentage of times the AI Agent's judgment (whether flagging as threat or marking as safe) aligns with human expert assessment.</p>
+                    
+                    <div class="example">
+                        <strong>Example:</strong> The AI flags 100 emails. Human reviewers confirm that 92 of those judgments were correct, resulting in 92% accuracy.
+                    </div>
+                </div>
+
+                <div class="significance">
+                    <h3>🎯 Thesis Significance: Proves Trustworthiness</h3>
+                    <p>The rise in this number validates that Reinforced Learning is occurring, making the Agent more reliable. As the AI learns from human feedback over time, its judgments become increasingly accurate and trustworthy.</p>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>📊 Calculator: Try Calculating Accuracy</h4>
+                    <div class="demo-controls">
+                        <div class="control-group">
+                            <label>Total Reviewed Emails:</label>
+                            <input type="number" id="acc-total" value="1000" min="1">
+                        </div>
+                        <div class="control-group">
+                            <label>Correctly Judged Emails:</label>
+                            <input type="number" id="acc-correct" value="920" min="0">
+                        </div>
+                    </div>
+                    <button onclick="calculateAccuracy()">Calculate Accuracy Rate</button>
+                    <div class="result" id="acc-result" style="display: none;"></div>
+                    
+                    <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px;">
+                        <canvas id="accChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confidence Score -->
+            <div class="metric-card" onclick="toggleCard(this)">
+                <div class="metric-header">
+                    <div class="metric-icon icon-confidence">🎯</div>
+                    <div class="metric-title">
+                        <h2>Confidence Score</h2>
+                        <span class="subtitle">Streamlining Workload</span>
+                    </div>
+                </div>
+
+                <div class="formula">
+                    Confidence = LLM's internal judgment based on signal analysis (0-100%)
+                </div>
+
+                <div class="explanation">
+                    <p><strong>What is Confidence Score?</strong></p>
+                    <p>The AI Agent's level of certainty in its own judgment, calculated based on the number and quality of detected threat signals.</p>
+                    
+                    <div class="example">
+                        <strong>Example:</strong> 4 signals detected (suspicious link, urgent tone, unknown sender, spelling errors) → 85% confidence score
+                    </div>
+                </div>
+
+                <div class="significance">
+                    <h3>🎯 Thesis Significance: Mitigates Judgment Fatigue</h3>
+                    <p>Higher scores mean the Agent is certain and can handle cases automatically. Low scores (<70%) prompt Director Li for priority review, streamlining his workload to focus only on complex cases requiring human judgment.</p>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>📊 Simulator: Threat Signals vs Confidence</h4>
+                    <div class="demo-controls">
+                        <div class="control-group">
+                            <label>Detected Threat Signals:</label>
+                            <input type="number" id="conf-signals" value="4" min="0" max="10">
+                        </div>
+                        <div class="control-group">
+                            <label>Total Possible Signals:</label>
+                            <input type="number" id="conf-total-signals" value="10" min="1">
+                        </div>
+                    </div>
+                    <button onclick="calculateConfidence()">Calculate Confidence Score</button>
+                    <div class="result" id="conf-result" style="display: none;"></div>
+                    
+                    <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px;">
+                        <canvas id="confChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Authentication Check
+        function checkAuthentication() {
+            if (sessionStorage.getItem('authenticated') !== 'true') {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Role-based access control
+        function getUserRole() {
+            return sessionStorage.getItem('userRole') || 'guest';
+        }
+
+        function hasPermission(requiredRole) {
+            const userRole = getUserRole();
+            const roleHierarchy = {
+                'physician': 1,
+                'nurse-manager': 2,
+                'medical-admin': 3,
+                'auditor': 4,
+                'compliance-officer': 5,
+                'security-analyst': 6,
+                'it-director': 7
+            };
+            
+            return roleHierarchy[userRole] >= roleHierarchy[requiredRole];
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'login.html';
+        }
+
+        // Display user information
+        function displayUserInfo() {
+            const username = sessionStorage.getItem('username');
+            const userRole = sessionStorage.getItem('userRole');
+            const roleNames = {
+                'it-director': 'IT Director',
+                'security-analyst': 'Security Analyst',
+                'compliance-officer': 'Compliance Officer',
+                'medical-admin': 'Medical Admin',
+                'nurse-manager': 'Nurse Manager',
+                'physician': 'Physician',
+                'auditor': 'Auditor'
+            };
+            
+            if (username && userRole) {
+                // Add user info to header
+                const navButtons = document.querySelector('.nav-buttons');
+                const userInfo = document.createElement('span');
+                userInfo.style.cssText = 'color: rgba(255,255,255,0.8); font-size: 0.9em; margin-left: 20px;';
+                userInfo.innerHTML = `👤 ${username} | ${roleNames[userRole] || userRole}`;
+                
+                const logoutLink = document.createElement('a');
+                logoutLink.href = '#';
+                logoutLink.onclick = logout;
+                logoutLink.style.cssText = 'background: rgba(255,255,255,0.1); margin-left: 10px;';
+                logoutLink.innerHTML = '🚪 Logout';
+                
+                navButtons.appendChild(userInfo);
+                navButtons.appendChild(logoutLink);
+            }
+        }
+
+        // Initialize authentication
+        if (!checkAuthentication()) {
+            // Redirect to login page
+            document.body.innerHTML = '<div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;"><h2>🔐 Authentication Required</h2><p>Redirecting to login page...</p></div>';
+        } else {
+            // Display user info if authenticated
+            displayUserInfo();
+        }
+
+        let fpChart, accChart, confChart;
+
+        function toggleCard(card) {
+            card.classList.toggle('active');
+        }
+
+        function calculateFP() {
+            const total = parseInt(document.getElementById('fp-total').value);
+            const falsePositives = parseInt(document.getElementById('fp-false').value);
+            
+            if (falsePositives > total) {
+                alert('False positives cannot exceed total emails!');
+                return;
+            }
+            
+            const fpr = ((falsePositives / total) * 100).toFixed(2);
+            const result = document.getElementById('fp-result');
+            result.style.display = 'block';
+            
+            let assessment = '';
+            if (fpr < 5) assessment = 'Excellent! ✨';
+            else if (fpr < 10) assessment = 'Good 👍';
+            else if (fpr < 20) assessment = 'Needs Improvement ⚠️';
+            else assessment = 'High Alert Fatigue Risk 🚨';
+            
+            result.innerHTML = `False Positive Rate: ${fpr}%<br><small>${assessment}</small>`;
+            
+            // Update chart
+            updateFPChart();
+        }
+
+        function calculateAccuracy() {
+            const total = parseInt(document.getElementById('acc-total').value);
+            const correct = parseInt(document.getElementById('acc-correct').value);
+            
+            if (correct > total) {
+                alert('Correct judgments cannot exceed total emails!');
+                return;
+            }
+            
+            const accuracy = ((correct / total) * 100).toFixed(2);
+            const result = document.getElementById('acc-result');
+            result.style.display = 'block';
+            
+            let assessment = '';
+            if (accuracy >= 95) assessment = 'Extremely Trustworthy! 🌟';
+            else if (accuracy >= 90) assessment = 'Highly Reliable ✅';
+            else if (accuracy >= 80) assessment = 'Reasonably Trustworthy 👌';
+            else assessment = 'Needs More Training 📚';
+            
+            result.innerHTML = `Accuracy Rate: ${accuracy}%<br><small>${assessment}</small>`;
+            
+            // Update chart
+            updateAccChart();
+        }
+
+        function calculateConfidence() {
+            const signals = parseInt(document.getElementById('conf-signals').value);
+            const totalSignals = parseInt(document.getElementById('conf-total-signals').value);
+            
+            if (signals > totalSignals) {
+                alert('Detected signals cannot exceed total signals!');
+                return;
+            }
+            
+            const confidence = ((signals / totalSignals) * 100).toFixed(1);
+            const result = document.getElementById('conf-result');
+            result.style.display = 'block';
+            
+            let action = '';
+            if (confidence >= 70) action = 'Auto-Handle ✅';
+            else action = 'Requires Human Review 👤';
+            
+            result.innerHTML = `Confidence Score: ${confidence}%<br><small>${action}</small>`;
+            
+            // Update chart
+            updateConfChart();
+        }
+
+        // Initialize charts on page load
+        window.onload = function() {
+            initFPChart();
+            initAccChart();
+            initConfChart();
+        };
+
+        function initFPChart() {
+            const ctx = document.getElementById('fpChart').getContext('2d');
+            fpChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [{
+                        label: 'False Positive Rate (%)',
+                        data: [18, 15, 12, 8, 6, 5],
+                        borderColor: '#f5576c',
+                        backgroundColor: 'rgba(245, 87, 108, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Simulated: FPR Improvement Over Time (Learning Trend)'
+                        },
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 20,
+                            title: {
+                                display: true,
+                                text: 'False Positive Rate (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initAccChart() {
+            const ctx = document.getElementById('accChart').getContext('2d');
+            accChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [{
+                        label: 'Accuracy Rate (%)',
+                        data: [78, 82, 86, 89, 92, 94],
+                        borderColor: '#00f2fe',
+                        backgroundColor: 'rgba(0, 242, 254, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Simulated: Accuracy Improvement via Reinforcement Learning'
+                        },
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Accuracy Rate (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initConfChart() {
+            const ctx = document.getElementById('confChart').getContext('2d');
+            confChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['High Confidence\n(>70%)', 'Medium Confidence\n(40-70%)', 'Low Confidence\n(<40%)'],
+                    datasets: [{
+                        label: 'Number of Cases',
+                        data: [720, 200, 80],
+                        backgroundColor: [
+                            'rgba(67, 233, 123, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(245, 87, 108, 0.8)'
+                        ],
+                        borderColor: [
+                            '#43e97b',
+                            '#ffc107',
+                            '#f5576c'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Simulated: Confidence Score Distribution (1000 emails)'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Cases'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateFPChart() {
+            const total = parseInt(document.getElementById('fp-total').value);
+            const falsePositives = parseInt(document.getElementById('fp-false').value);
+            const currentFPR = ((falsePositives / total) * 100).toFixed(2);
+            
+            // Simulate trend data
+            const newData = [18, 15, 12, 8, parseFloat(currentFPR) + 1, parseFloat(currentFPR)];
+            fpChart.data.datasets[0].data = newData;
+            fpChart.update();
+        }
+
+        function updateAccChart() {
+            const total = parseInt(document.getElementById('acc-total').value);
+            const correct = parseInt(document.getElementById('acc-correct').value);
+            const currentAcc = ((correct / total) * 100).toFixed(2);
+            
+            // Simulate trend data
+            const newData = [78, 82, 86, parseFloat(currentAcc) - 3, parseFloat(currentAcc) - 1, parseFloat(currentAcc)];
+            accChart.data.datasets[0].data = newData;
+            accChart.update();
+        }
+
+        function updateConfChart() {
+            const signals = parseInt(document.getElementById('conf-signals').value);
+            const totalSignals = parseInt(document.getElementById('conf-total-signals').value);
+            const confidence = ((signals / totalSignals) * 100).toFixed(1);
+            
+            // Simulate distribution based on confidence
+            let high, medium, low;
+            if (confidence >= 70) {
+                high = 720;
+                medium = 200;
+                low = 80;
+            } else if (confidence >= 40) {
+                high = 500;
+                medium = 350;
+                low = 150;
+            } else {
+                high = 300;
+                medium = 400;
+                low = 300;
+            }
+            
+            confChart.data.datasets[0].data = [high, medium, low];
+            confChart.update();
+        }
+    </script>
+</body>
+</html>

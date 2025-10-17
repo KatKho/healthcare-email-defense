@@ -15,14 +15,22 @@ app.get('/api/config', (req, res) => {
     });
 });
 
-// Serve the main HTML file
+// Serve the login page as default
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login.html'));
+});
+
+// Serve the main dashboard (protected)
+app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Serve the metrics page (protected)
+app.get('/metrics', (req, res) => {
+    res.sendFile(path.join(__dirname, 'email-security-metrics.html'));
 });
 
 app.listen(PORT, () => {
     console.log(`Healthcare Email Defense Demo running on http://localhost:${PORT}`);
     console.log('Make sure to set OPENROUTER_API_KEY in your .env file');
 });
-
-

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Email Defense - Secure Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .login-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .login-form {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .role-info {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+
+        .role-info h4 {
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .role-permissions {
+            display: none;
+            background: #f0f4ff;
+            border: 1px solid #c3dafe;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .role-permissions.show {
+            display: block;
+        }
+
+        .permission-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .permission-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .permission-icon {
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .security-notice {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #c53030;
+        }
+
+        .security-notice h4 {
+            color: #e53e3e;
+            margin-bottom: 8px;
+        }
+
+        .demo-credentials {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: #22543d;
+        }
+
+        .demo-credentials h4 {
+            color: #2f855a;
+            margin-bottom: 8px;
+        }
+
+        .demo-credentials code {
+            background: #e6fffa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 10px;
+            }
+            
+            .login-header {
+                padding: 30px 20px;
+            }
+            
+            .login-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>🏥 Healthcare Email Defense</h1>
+            <p>Secure Access Portal for Authorized Personnel</p>
+        </div>
+
+        <div class="login-form">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username / Email</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Healthcare Role</label>
+                    <select id="role" name="role" required onchange="showRolePermissions()">
+                        <option value="">Select your role...</option>
+                        <option value="it-director">IT Director / CISO</option>
+                        <option value="security-analyst">Security Analyst</option>
+                        <option value="compliance-officer">Compliance Officer</option>
+                        <option value="medical-admin">Medical Administrator</option>
+                        <option value="nurse-manager">Nurse Manager</option>
+                        <option value="physician">Physician</option>
+                        <option value="auditor">Internal Auditor</option>
+                    </select>
+                </div>
+
+                <div class="role-info">
+                    <h4>🔒 Role-Based Access Control</h4>
+                    <p>Your access level is determined by your healthcare role and responsibilities. Select your role to see available permissions.</p>
+                </div>
+
+                <div id="rolePermissions" class="role-permissions">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    🔐 Secure Login
+                </button>
+            </form>
+
+            <div class="security-notice">
+                <h4>⚠️ Security Notice</h4>
+                <p>This system contains sensitive healthcare information. All access is logged and monitored. Unauthorized access is prohibited by HIPAA regulations.</p>
+            </div>
+
+            <div class="demo-credentials">
+                <h4>🧪 Demo Credentials</h4>
+                <p><strong>IT Director:</strong> <code>admin@hospital.org</code> / <code>admin123</code></p>
+                <p><strong>Security Analyst:</strong> <code>analyst@hospital.org</code> / <code>analyst123</code></p>
+                <p><strong>Compliance Officer:</strong> <code>compliance@hospital.org</code> / <code>compliance123</code></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rolePermissions = {
+            'it-director': {
+                title: 'IT Director / CISO',
+                permissions: [
+                    { icon: '📊', text: 'Full dashboard access with all metrics' },
+                    { icon: '🔍', text: 'Complete email analysis and threat intelligence' },
+                    { icon: '⚙️', text: 'System configuration and policy management' },
+                    { icon: '👥', text: 'User role management and access control' },
+                    { icon: '📈', text: 'Executive reporting and compliance metrics' },
+                    { icon: '🚨', text: 'Incident response and escalation authority' }
+                ]
+            },
+            'security-analyst': {
+                title: 'Security Analyst',
+                permissions: [
+                    { icon: '🔍', text: 'Email threat analysis and investigation' },
+                    { icon: '📊', text: 'Security metrics and trend analysis' },
+                    { icon: '🚨', text: 'Incident response and threat hunting' },
+                    { icon: '📝', text: 'Security report generation' },
+                    { icon: '🔧', text: 'Threat detection rule configuration' }
+                ]
+            },
+            'compliance-officer': {
+                title: 'Compliance Officer',
+                permissions: [
+                    { icon: '📋', text: 'HIPAA compliance monitoring and reporting' },
+                    { icon: '📊', text: 'Audit trail and access logs review' },
+                    { icon: '📝', text: 'Compliance documentation and policies' },
+                    { icon: '🔍', text: 'Privacy incident investigation' },
+                    { icon: '📈', text: 'Regulatory reporting and metrics' }
+                ]
+            },
+            'medical-admin': {
+                title: 'Medical Administrator',
+                permissions: [
+                    { icon: '📊', text: 'Department-level security metrics' },
+                    { icon: '👥', text: 'Staff email security training oversight' },
+                    { icon: '📝', text: 'Administrative incident reporting' },
+                    { icon: '🔍', text: 'Limited email review for department' }
+                ]
+            },
+            'nurse-manager': {
+                title: 'Nurse Manager',
+                permissions: [
+                    { icon: '📊', text: 'Unit-level security awareness metrics' },
+                    { icon: '👥', text: 'Staff security training coordination' },
+                    { icon: '📝', text: 'Incident reporting for nursing staff' }
+                ]
+            },
+            'physician': {
+                title: 'Physician',
+                permissions: [
+                    { icon: '📊', text: 'Personal email security status' },
+                    { icon: '📝', text: 'Report suspicious emails' },
+                    { icon: '🔍', text: 'View own email security alerts' }
+                ]
+            },
+            'auditor': {
+                title: 'Internal Auditor',
+                permissions: [
+                    { icon: '📊', text: 'Read-only access to all security metrics' },
+                    { icon: '📋', text: 'Compliance audit trail review' },
+                    { icon: '📝', text: 'Audit report generation' },
+                    { icon: '🔍', text: 'Historical data analysis' }
+                ]
+            }
+        };
+
+        function showRolePermissions() {
+            const roleSelect = document.getElementById('role');
+            const permissionsDiv = document.getElementById('rolePermissions');
+            const selectedRole = roleSelect.value;
+
+            if (selectedRole && rolePermissions[selectedRole]) {
+                const role = rolePermissions[selectedRole];
+                let html = `<h4>${role.title} Permissions:</h4>`;
+                
+                role.permissions.forEach(permission => {
+                    html += `
+                        <div class="permission-item">
+                            <span class="permission-icon">${permission.icon}</span>
+                            <span>${permission.text}</span>
+                        </div>
+                    `;
+                });
+                
+                permissionsDiv.innerHTML = html;
+                permissionsDiv.classList.add('show');
+            } else {
+                permissionsDiv.classList.remove('show');
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            
+            // Demo authentication logic
+            const validCredentials = {
+                'admin@hospital.org': { password: 'admin123', role: 'it-director' },
+                'analyst@hospital.org': { password: 'analyst123', role: 'security-analyst' },
+                'compliance@hospital.org': { password: 'compliance123', role: 'compliance-officer' }
+            };
+            
+            // Debug information
+            console.log('Login attempt:', { username, password, role });
+            console.log('Valid credentials:', validCredentials);
+            
+            if (validCredentials[username] && 
+                validCredentials[username].password === password && 
+                validCredentials[username].role === role) {
+                
+                console.log('Login successful!');
+                
+                // Store authentication info
+                sessionStorage.setItem('authenticated', 'true');
+                sessionStorage.setItem('userRole', role);
+                sessionStorage.setItem('username', username);
+                
+                // Show loading state
+                const loginBtn = document.getElementById('loginBtn');
+                loginBtn.innerHTML = '🔐 Authenticating...';
+                loginBtn.disabled = true;
+                
+                // Redirect to appropriate dashboard
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+                
+            } else {
+                console.log('Login failed - checking credentials...');
+                console.log('Username exists:', !!validCredentials[username]);
+                if (validCredentials[username]) {
+                    console.log('Password match:', validCredentials[username].password === password);
+                    console.log('Role match:', validCredentials[username].role === role);
+                }
+                alert('❌ Invalid credentials or role mismatch. Please check your login information.\n\nTry:\n- admin@hospital.org / admin123 / IT Director\n- analyst@hospital.org / analyst123 / Security Analyst\n- compliance@hospital.org / compliance123 / Compliance Officer');
+            }
+        });
+
+        // Check if already authenticated
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -2,18 +2,163 @@
 
 A web-based demo for an AI Email Defense Agent designed for healthcare organizations. This tool analyzes incoming emails to classify them as Safe, Suspicious, or Phishing using AI models via OpenRouter API, with agentic capabilities and human-in-the-loop feedback.
 
-## Features
+## Code
 
-- **🤖 Agentic AI Analysis**: Intelligent email analysis with learning capabilities and autonomous threat detection
-- **📧 Email Classification**: Classifies emails as Safe, Suspicious, or Phishing with confidence scores
-- **🏥 Healthcare Focus**: Specialized for healthcare threats (HIPAA compliance, medical identity theft, data breaches)
-- **👁️ Email Review Modal**: Full email content review with detailed AI analysis
-- **🔄 Human-in-the-Loop**: IT reviewer feedback system for continuous learning
-- **📊 Agent Memory**: Persistent learning from feedback with pattern recognition
-- **🎲 Example Generator**: AI-powered realistic email generation for testing
-- **📱 Responsive Design**: Clean, healthcare-themed interface for desktop and mobile
-- **🔒 Security Features**: Threat intelligence, link analysis, and attachment scanning
-- **⚡ Real-time Analysis**: Fast AI processing with multiple model support
+The repository contains the following key components:
+
+### Frontend (`index.html`)
+- **Main Application**: Complete healthcare email defense interface
+- **AI Integration**: OpenRouter API integration for email analysis
+- **UI Components**: Modern glassmorphism design with responsive layout
+- **Agentic Features**: Memory system, learning capabilities, autonomous actions
+- **Review System**: Human-in-the-loop feedback mechanism
+
+### Backend (`server.js`)
+- **Express Server**: Node.js server for API key management
+- **Environment Configuration**: Secure API key handling
+- **Static File Serving**: Serves the main application
+
+### Configuration Files
+- **`package.json`**: Node.js dependencies and scripts
+- **`.env.example`**: Environment variable template
+- **`LICENSE`**: MIT License file
+
+## Data
+
+### Email Analysis Data
+- **Classification Results**: Safe, Suspicious, Phishing classifications
+- **Confidence Scores**: AI model confidence levels
+- **Threat Intelligence**: Domain analysis, link scanning, attachment detection
+- **Learning Patterns**: Feedback-based pattern recognition
+
+### Storage
+- **Browser localStorage**: Persistent storage for analysis history
+- **Session Data**: Real-time analysis results and metrics
+- **Feedback Data**: IT reviewer corrections and learning patterns
+
+### Sample Data
+- **Test Emails**: Pre-written examples for Safe, Suspicious, and Phishing categories
+- **Healthcare Scenarios**: Medical-specific threat examples
+- **Urgency Classification**: Priority-based email sorting
+
+## LLM Prompts Used
+
+### Email Analysis Prompt
+```
+Healthcare email security analysis with urgency detection. Respond with valid JSON only.
+
+EMAIL DATA:
+From: {sender}
+To: {userRole} ({recipientInfo.name} - {recipientInfo.role})
+Subject: {subject}
+Body: {body}
+{roleCheck ? `Role Issue: ${roleCheck.reason}` : ''}
+{threatIntel ? `Threats: ${threatIntel.threatScore}/100, ${threatIntel.suspiciousLinks} suspicious links` : ''}
+
+REQUIRED JSON OUTPUT:
+{
+  "classification": "Safe",
+  "urgency": "Normal", 
+  "confidence": 85,
+  "comment": "Brief explanation",
+  "reasoningReport": {
+    "summary": "2-sentence analysis summary",
+    "threatIndicators": ["threat1", "threat2"],
+    "roleAnalysis": "Role appropriateness explanation",
+    "technicalFindings": ["finding1", "finding2"], 
+    "recommendation": "Clear action recommendation",
+    "urgencyReason": "Why this email is urgent or normal"
+  }
+}
+
+CLASSIFICATION RULES:
+- Safe: legitimate healthcare communication
+- Suspicious: unclear/inappropriate content
+- Phishing: malicious intent
+
+URGENCY RULES (CRITICAL - ALWAYS DETECT URGENCY):
+- Urgent: medical emergencies, critical alerts, time-sensitive patient care, urgent requests, any email with urgency keywords
+- Normal: routine communications, general updates, non-critical information
+
+IMPORTANT: If ANY urgency indicator is present in the email (subject OR body), classify as "Urgent". Err on the side of urgency for healthcare communications.
+
+URGENCY INDICATORS: "emergency", "urgent", "critical", "immediate", "stat", "asap", "patient in distress", "code blue", "time sensitive", "deadline", "urgent response needed", "life threatening", "emergency room", "trauma", "cardiac arrest", "immediately", "as soon as possible", "right away", "without delay", "expires", "deadline", "due today", "must complete", "action required", "response needed"
+```
+
+### Email Generation Prompt
+```
+Generate a unique, realistic healthcare email that would be classified as "{randomType}".
+
+Context: {randomHospital} - {randomDept} Department
+Sender Role: {randomRole}
+Recipient: {randomRecipient}
+Urgency: {randomTime}
+Generation #{generationCounter}
+Unique ID: {randomId}
+Timestamp: {timestamp}
+
+Requirements:
+- Make it completely unique and different from typical examples
+- Include specific healthcare details, terminology, and context for {randomHospital}
+- Use realistic sender domains and professional language
+- Address the email appropriately to the recipient: {randomRecipient}
+- For Safe: Normal hospital communications (schedules, reminders, announcements, policy updates, training notifications)
+- For Suspicious: Unusual requests that might be legitimate but raise questions (access requests, data sharing, policy changes)
+- For Phishing: Clear malicious intent targeting healthcare workers/patients (credential theft, fake alerts, urgent actions)
+
+Be creative and avoid common patterns. Make each email feel like a real, unique communication.
+
+Respond ONLY with this JSON format:
+{
+  "type": "{randomType}",
+  "sender": "realistic.email@domain.com",
+  "recipient": "{randomRecipient}",
+  "subject": "Unique realistic subject line",
+  "body": "Detailed unique email body content"
+}
+
+Make the email detailed, believable, and completely unique.
+```
+
+## Dependencies
+
+### Node.js Dependencies (`package.json`)
+```json
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  }
+}
+```
+
+### External Dependencies
+- **OpenRouter API**: AI model access (Alibaba Tongyi, Microsoft WizardLM, Meta Llama)
+- **Modern Browser**: Fetch API, ES6+ JavaScript, CSS Grid/Flexbox support
+
+### Environment Requirements
+- **Node.js**: Version 14+ recommended
+- **API Key**: OpenRouter API key (free tier available)
+- **Browser**: Modern browser with JavaScript enabled
+
+## Stakeholder Interview Notes
+
+### Interview 1: Healthcare IT Security Professional
+**Link**: [Stakeholder Interview Notes 1](https://docs.google.com/document/d/1v-JA_fMWU8BTfyirkAur9Ttzgm4gYSRmlmv-8oaC3fg/edit?usp=sharing)
+
+
+### Interview 2: Certified Clinical Medical Assistant
+**Link**: [Stakeholder Interview Notes 2](https://docs.google.com/document/d/1Z5haY_CN6UcKJs23IL9b9Q5xTB7i7pu-6vGAbXVa6Lw/edit?usp=sharing)
+
+
+## LLM Summarization of Class Feedback
+
+### Class Feedback Analysis
+**Link**: [LLM Feedback Summary](https://docs.google.com/document/d/1LdIhOaMyLEjzospOPMIjfieTOR_CKVCiK4HebnLg5eg/edit?usp=sharing)
+
 
 ## Setup
 

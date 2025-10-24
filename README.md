@@ -2,6 +2,26 @@
 
 A web-based demo for an AI Email Defense Agent designed for healthcare organizations. This tool analyzes incoming emails to classify them as Safe, Suspicious, or Phishing using AI models via OpenRouter API, with agentic capabilities and human-in-the-loop feedback.
 
+## Table of Contents
+
+- [Code](#code)
+- [Data](#data)
+- [LLM Prompts Used](#llm-prompts-used)
+- [Dependencies](#dependencies)
+- [Stakeholder Interview Notes](#stakeholder-interview-notes)
+- [LLM Summarization of Class Feedback](#llm-summarization-of-class-feedback)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Sample Test Emails](#sample-test-emails)
+- [Technical Details](#technical-details)
+- [Agentic Features](#agentic-features)
+- [Limitations](#limitations)
+- [Healthcare-Specific Analysis](#healthcare-specific-analysis)
+- [Browser Compatibility](#browser-compatibility)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
 ## Code
 
 The repository contains the following key components:

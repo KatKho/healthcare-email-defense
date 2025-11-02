@@ -1,0 +1,74 @@
+---
+title: "Demo Feedback Summary"
+author: "Team 6"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Overview
+
+This document summarizes the feedback received on our demo and organizes it into strengths, concerns, and possible next steps. The goal is to use this feedback to improve clarity, functionality, and relevance for the next presentation.
+
+---
+
+# Strengths
+
+- Design and interface were well-received.
+- The concept is relevant and timely.
+- Visual layout and user flow make sense but need stronger context during presentation.
+
+---
+
+# Main Concerns
+
+## Impersonation Flagging
+- Some flagged emails may actually be genuine, so there is a risk of mislabeling.
+- There needs to be a clearer process for verifying or reviewing flagged emails.
+
+**Potential Improvements:**
+- Include a confidence score or justification for each flagged email.
+- Consider integrating a human review or approval step before final classification.
+
+---
+
+## Clarity of Demo and Dashboard
+
+- Without verbal explanation, the flow of the demo is difficult to follow.
+- A centralized dashboard would help tie everything together and make it understandable on its own.
+
+**Next Steps:**
+- Develop a main dashboard showing:
+  - Number of emails processed
+  - Emails flagged (impersonation, phishing, etc.)
+  - Status of review or resolution
+- Add brief descriptions or tooltips for features to reduce reliance on verbal explanation.
+
+---
+
+## Cost and Feasibility
+
+- Cost was raised as a key concern.
+- Need to provide a clearer justification of infrastructure, tools, and expected ROI.
+
+**Next Steps:**
+- Estimate cost breakdown (storage, model usage, API calls, maintenance).
+- Explore cost-saving strategies like batching, caching, or open-source tools.
+
+---
+
+## Healthcare Context
+
+- Question raised: how does this system translate specifically to healthcare?
+- Need clearer framing of how this applies to hospitals, patient data protection, HIPAA compliance, or internal communication systems.
+
+**Possible Additions:**
+- Example use case in a hospital (e.g., phishing email to a doctor or impersonation of a patient portal).
+- Mention compliance considerations: HIPAA, data retention, audit trails.
+
+---
+
+# Additional Notes to Consider
+
+- Heat map was suggested as a possible visual, but mainly for quick insight rather than deep analysis.
+- Be prepared to explain where automation ends and human decision-making begins.
+- For the next demo, focus on making the system understandable within the first minute.

@@ -1,0 +1,11 @@
+[
+{
+  "email_body": "Subject: Appointment Confirmation for John Doe\n\nHi Dr. Lee,\n\nThis is a reminder that patient John Doe (MRN 004992) has a follow-up appointment on March 10, 2025 at 2:30 PM.\nPlease call him at (206) 555-6789 if rescheduling is needed.\n\nBest,\nReception Team"
+},
+
+{
+  "redacted_email": "Subject: Appointment Confirmation for [REDACTED]\n\nHi Dr. [REDACTED],\n\nThis is a reminder that patient [REDACTED] (MRN [REDACTED]) has a follow-up appointment on [REDACTED] at 2:30 PM.\nPlease call him at [REDACTED] if rescheduling is needed.\n\nBest,\nReception Team",
+  "entities_detected": 6,
+  "model_version": "1.1.0"
+}
+]

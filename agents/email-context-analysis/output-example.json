@@ -1,0 +1,22 @@
+{
+  "confidence_final": 0.87,
+  "notes": [{
+    "intent": "financial_action",
+    "tone": "manipulative",
+    "urgency": "urgent",
+    "classification": "phishing",
+    "reasoning": [
+      "Detected credential-related phrases suggesting access verification.",
+      "Detected urgency indicators.",
+      "Detected manipulative tone implying consequences for inaction.",
+      "Detected reference to an attachment, which can be a phishing lure."
+    ],
+    "signals": {
+      "credential_language": true,
+      "urgency_language": true,
+      "manipulative_tone": true,
+      "suspicious_link": false,
+      "attachment_reference": true
+    }
+  }]
+}

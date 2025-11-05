@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Lead View - Healthcare Email Defense</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .department {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-tab {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-tab.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        .quarantine-panel {
+            width: 50%;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .panel-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .panel-header h2 {
+            color: #2d3748;
+            font-size: 1.5rem;
+        }
+
+        .email-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .email-card:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+        }
+
+        .email-card.selected {
+            border-color: #007bff;
+            background: #ebf4ff;
+        }
+
+        .email-card.reported {
+            border-left: 4px solid #ff9800;
+            background: #fff5f5;
+        }
+
+        .email-card.released {
+            border-left: 4px solid #28a745;
+            background: #f0fff4;
+        }
+
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .email-sender {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.95rem;
+        }
+
+        .email-timestamp {
+            color: #718096;
+            font-size: 0.85rem;
+        }
+
+        .email-subject {
+            font-size: 1rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .email-labels {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .label {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .label.urgent {
+            background: #dc3545;
+            color: white;
+        }
+
+        .label.reported {
+            background: #ff9800;
+            color: white;
+            font-size: 0.7rem;
+        }
+
+        .label.released {
+            background: #28a745;
+            color: white;
+            font-size: 0.7rem;
+        }
+
+        .status-info {
+            font-size: 0.85rem;
+            color: #4a5568;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .status-info.reported {
+            color: #ff9800;
+        }
+
+        .status-info.released {
+            color: #28a745;
+        }
+
+        .detail-panel {
+            width: 50%;
+            background: white;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .detail-panel.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 1.1rem;
+        }
+
+        .detail-header {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .detail-header h2 {
+            color: #2d3748;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .info-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.9rem;
+            min-width: 150px;
+        }
+
+        .info-value {
+            color: #2d3748;
+            font-size: 1rem;
+            text-align: right;
+            flex: 1;
+        }
+
+        .risk-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .risk-badge.medium {
+            background: #ffc107;
+            color: #856404;
+        }
+
+        .detection-rationale {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .comment-section {
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .email-content-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .email-content-header {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .email-content-header .email-field {
+            margin-bottom: 10px;
+        }
+
+        .email-field-label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .email-field-value {
+            color: #2d3748;
+            font-size: 0.95rem;
+        }
+
+        .email-body {
+            margin-top: 15px;
+            color: #2d3748;
+            line-height: 1.8;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-release {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-release:hover {
+            background: #218838;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-quarantine {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-quarantine:hover {
+            background: #5a6268;
+            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            color: #2d3748;
+            font-size: 1.3rem;
+        }
+
+        .modal-body {
+            color: #4a5568;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .btn-modal {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-modal.confirm {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-modal.confirm:hover {
+            background: #218838;
+        }
+
+        .btn-modal.cancel {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-modal.cancel:hover {
+            background: #5a6268;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        .audit-notification {
+            position: fixed;
+            top: 80px;
+            right: 30px;
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .audit-notification.show {
+            display: block;
+        }
+
+        .audit-notification h4 {
+            color: #28a745;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .audit-notification p {
+            color: #4a5568;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="user-info">
+            <div class="user-name">👨‍💼 Dr. Chen (Department Lead)</div>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('quarantine')">Quarantine Queue</button>
+            <button class="nav-tab" onclick="switchTab('statistics')">Statistics</button>
+            <button class="nav-tab" onclick="switchTab('profile')">Profile</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="quarantine-panel">
+            <div class="panel-header">
+                <h2>📧 Quarantine Queue</h2>
+            </div>
+            <div id="emailList">
+                <!-- Emails will be rendered here -->
+            </div>
+        </div>
+
+        <div class="detail-panel empty" id="detailPanel">
+            <div>Select an email to review</div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Release</h3>
+            </div>
+            <div class="modal-body">
+                Confirm release? This action will be logged.
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-modal confirm" onclick="confirmRelease()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <div class="audit-notification" id="auditNotification">
+        <h4>Audit Record Created</h4>
+        <p id="auditId"></p>
+    </div>
+
+    <script>
+        let selectedEmailId = null;
+        let pendingReleaseEmailId = null;
+
+        // Load reported emails from localStorage
+        function loadReportedEmails() {
+            const reportedEmails = [];
+            const emails = [
+                {
+                    id: 'email1',
+                    sender: 'lab-report@medlab-info.com',
+                    subject: 'Lab Results: Patient #2387',
+                    timestamp: '2 hours ago',
+                    labels: ['Urgent', 'Suspicious'],
+                    confidence: 0.67,
+                    rationale: 'New domain detected; unverified link contained in message body.',
+                    status: 'suspicious',
+                    reportedBy: 'Nurse Li',
+                    reportedTime: '30 minutes ago',
+                    domainReputation: 'Medium Risk',
+                    content: `Dear Healthcare Provider,
+
+We have received lab results for Patient #2387 (Jane Doe, DOB: 05/15/1982).
+
+URGENT: Abnormal test results detected.
+
+Please review the attached report by clicking here: [View Results](https://medlab-info.com/results/verify?id=2387)
+
+Critical values:
+- Hemoglobin: 8.2 g/dL (Low - Normal: 12.0-15.5)
+- Platelet count: 95,000/μL (Low - Normal: 150,000-450,000)
+
+Immediate action may be required. Please contact the lab if you have any questions.
+
+Best regards,
+Medical Lab Services
+lab-report@medlab-info.com`
+                }
+            ];
+
+            // Check localStorage for reported emails
+            emails.forEach(email => {
+                const reportData = localStorage.getItem(`emailReport_${email.id}`);
+                if (reportData) {
+                    const report = JSON.parse(reportData);
+                    if (report.status === 'reported' || report.status === 'released') {
+                        reportedEmails.push({
+                            ...email,
+                            status: report.status,
+                            reportedBy: report.reportedBy || 'Nurse Li',
+                            reportedTime: report.reportedTime || '30 minutes ago',
+                            releasedBy: report.releasedBy,
+                            releasedTime: report.releasedTime,
+                            auditId: report.auditId,
+                            domainReputation: email.domainReputation || 'Medium Risk'
+                        });
+                    }
+                }
+            });
+            
+            // Also check if there are any emails reported from nurse-view
+            // This handles the case where nurse reported the email
+            const allReportKeys = Object.keys(localStorage).filter(key => key.startsWith('emailReport_'));
+            allReportKeys.forEach(key => {
+                const emailId = key.replace('emailReport_', '');
+                const reportData = JSON.parse(localStorage.getItem(key));
+                if (reportData && reportData.status === 'reported') {
+                    // Check if this email is already in the list
+                    const exists = reportedEmails.find(e => e.id === emailId);
+                    if (!exists) {
+                        // Add the email from the base list
+                        const baseEmail = emails.find(e => e.id === emailId);
+                        if (baseEmail) {
+                            reportedEmails.push({
+                                ...baseEmail,
+                                status: 'reported',
+                                reportedBy: reportData.reportedBy || 'Nurse Li',
+                                reportedTime: reportData.reportedTime || '30 minutes ago'
+                            });
+                        }
+                    }
+                }
+            });
+
+            return reportedEmails;
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            if (tab === 'quarantine') {
+                renderEmailList();
+            }
+        }
+
+        function renderEmailList() {
+            const container = document.getElementById('emailList');
+            const emails = loadReportedEmails();
+            
+            if (emails.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #a0aec0;">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">📭</div>
+                        <div>No emails in quarantine queue</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = emails.map(email => {
+                const isSelected = email.id === selectedEmailId;
+                const isReported = email.status === 'reported';
+                const isReleased = email.status === 'released';
+                
+                return `
+                    <div class="email-card ${isReported ? 'reported' : ''} ${isReleased ? 'released' : ''} ${isSelected ? 'selected' : ''}" 
+                         onclick="selectEmail('${email.id}')">
+                        <div class="email-header">
+                            <div class="email-sender">${email.sender}</div>
+                            <div class="email-timestamp">${email.timestamp}</div>
+                        </div>
+                        <div class="email-subject">${email.subject}</div>
+                        <div class="email-labels">
+                            ${email.labels.includes('Urgent') ? `<span class="label urgent">Urgent</span>` : ''}
+                            ${isReported ? `<span class="label reported">Reported</span>` : ''}
+                            ${isReleased ? `<span class="label released">Released ✅</span>` : ''}
+                        </div>
+                        <div class="status-info ${email.status}">
+                            ${isReported ? `📋 Status: Reported by ${email.reportedBy}` : ''}
+                            ${isReleased ? `✅ Status: Released by ${email.releasedBy || 'Dr. Chen'}` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectEmail(emailId) {
+            selectedEmailId = emailId;
+            const emails = loadReportedEmails();
+            const email = emails.find(e => e.id === emailId);
+            
+            renderEmailList();
+            
+            if (email) {
+                renderDetailPanel(email);
+            } else {
+                renderEmptyDetail();
+            }
+        }
+
+        function renderDetailPanel(email) {
+            const panel = document.getElementById('detailPanel');
+            panel.className = 'detail-panel';
+            
+            const isReported = email.status === 'reported';
+            const isUrgent = email.labels.includes('Urgent');
+            
+            panel.innerHTML = `
+                <div class="detail-header">
+                    <h2>Message Detail View</h2>
+                </div>
+                <div class="email-content-section">
+                    <div class="email-content-header">
+                        <div class="email-field">
+                            <div class="email-field-label">From:</div>
+                            <div class="email-field-value">${email.sender}</div>
+                        </div>
+                        <div class="email-field">
+                            <div class="email-field-label">Subject:</div>
+                            <div class="email-field-value">${email.subject}</div>
+                        </div>
+                        <div class="email-field">
+                            <div class="email-field-label">Received:</div>
+                            <div class="email-field-value">${email.timestamp}</div>
+                        </div>
+                    </div>
+                    <div class="email-body">
+${email.content || 'No content available.'}
+                    </div>
+                </div>
+                <div class="info-section">
+                    <div class="info-row">
+                        <div class="info-label">Sender Domain Reputation:</div>
+                        <div class="info-value">
+                            <span class="risk-badge medium">${email.domainReputation || 'Medium Risk'}</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Confidence Score:</div>
+                        <div class="info-value">${email.confidence}</div>
+                    </div>
+                </div>
+                <div class="detection-rationale">
+                    <strong>Why flagged?</strong><br>
+                    ${email.rationale}
+                </div>
+                ${email.reportedBy ? `
+                    <div class="comment-section">
+                        <strong>Comment:</strong><br>
+                        Reported by ${email.reportedBy} – requires review.
+                    </div>
+                ` : ''}
+                ${isReported && isUrgent ? `
+                    <div class="action-buttons">
+                        <button class="btn btn-release" onclick="showReleaseModal('${email.id}')">
+                            Release Urgent
+                        </button>
+                        <button class="btn btn-quarantine" onclick="keepQuarantined('${email.id}')">
+                            Keep Quarantined
+                        </button>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function renderEmptyDetail() {
+            const panel = document.getElementById('detailPanel');
+            panel.className = 'detail-panel empty';
+            panel.innerHTML = '<div>Select an email to review</div>';
+        }
+
+        function showReleaseModal(emailId) {
+            pendingReleaseEmailId = emailId;
+            const modal = document.getElementById('confirmModal');
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('confirmModal');
+            modal.classList.remove('show');
+            pendingReleaseEmailId = null;
+        }
+
+        function confirmRelease() {
+            if (!pendingReleaseEmailId) return;
+            
+            const emailId = pendingReleaseEmailId;
+            const reportData = localStorage.getItem(`emailReport_${emailId}`);
+            
+            if (reportData) {
+                const report = JSON.parse(reportData);
+                report.status = 'released';
+                report.releasedBy = 'Dr. Chen';
+                report.releasedTime = new Date().toISOString();
+                
+                // Generate audit ID
+                const auditId = '#A' + Math.floor(1000 + Math.random() * 9000);
+                report.auditId = auditId;
+                
+                localStorage.setItem(`emailReport_${emailId}`, JSON.stringify(report));
+                
+                // Show toast
+                showToast('Released with audit record.');
+                
+                // Show audit notification
+                showAuditNotification(auditId);
+                
+                // Close modal
+                closeModal();
+                
+                // Refresh UI
+                renderEmailList();
+                selectEmail(emailId);
+            }
+        }
+
+        function keepQuarantined(emailId) {
+            showToast('Email remains in quarantine.');
+            renderEmailList();
+            renderEmptyDetail();
+            selectedEmailId = null;
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function showAuditNotification(auditId) {
+            const notification = document.getElementById('auditNotification');
+            const auditIdElement = document.getElementById('auditId');
+            auditIdElement.textContent = `Audit ID: ${auditId} recorded.`;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
+        renderEmailList();
+    </script>
+</body>
+</html>

@@ -1,20 +1,18 @@
-@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurse View - Healthcare Email Defense</title>
-    <title>In Basket - EPIC</title>
+    <title>IT Admin Login - Healthcare Email Defense</title>
     <style>
         * {
             margin: 0;
-@ -13,50 +13,503 @@
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
             min-height: 100vh;
             font-size: 13px;
         }
@@ -528,7 +526,6 @@
         }
 
         .nav-icon:hover {
-@ -65,228 +518,440 @@
 
         .main-container {
             display: flex;
@@ -1055,12 +1052,9 @@
         }
 
         .toast.show {
-@ -305,50 +970,463 @@
         }
     </style>
 </head>
-<body>
-    <div class="top-bar">
 <body class="login-mode" id="bodyElement">
     <!-- Login Section -->
     <div id="loginSection">
@@ -1071,11 +1065,11 @@
             </div>
             <div style="text-align: center; margin: 30px 0;">
                 <p style="color: #4a5568; font-size: 0.95rem; margin-bottom: 20px;">
-                    Please swipe your ID card to access the system
+                    Insert Admin Smart Card…
                 </p>
                 <button class="smart-card-btn" onclick="startSmartCardLogin()">
                     <span class="smart-card-icon">💳</span>
-                    <span>Swipe ID Card</span>
+                    <span>Detect Card</span>
                 </button>
             </div>
             <div class="footer-links">
@@ -1086,8 +1080,8 @@
         <!-- Smart Card Detection -->
         <div class="login-container smart-card-container" id="smartCardContainer">
             <div class="login-header">
-                <h1>Smart Card Authentication</h1>
-                <p>Please insert your ID card</p>
+                <h1>Admin Smart Card Authentication</h1>
+                <p>Insert Admin Smart Card…</p>
             </div>
             <div class="card-slot" id="cardSlot">
                 <div class="card-inserted" id="cardInserted">
@@ -1531,7 +1525,6 @@
                 content: `Dear Healthcare Provider,
 
 We have received lab results for Patient #2387 (Jane Doe, DOB: 05/15/1982).
-@ -369,13 +1447,21 @@ lab-report@medlab-info.com`
             },
             {
                 id: 'email2',
@@ -1554,7 +1547,6 @@ We have received lab results for Patient #2387 (Jane Doe, DOB: 05/15/1982).
                 content: `Dear Nurse Li,
 
 Your monthly billing statement for October 2025 is now available.
-@ -394,13 +1480,21 @@ Hospital Billing Department`
             },
             {
                 id: 'email3',
@@ -1577,7 +1569,6 @@ Your monthly billing statement for October 2025 is now available.
                 content: `Hi Nurse Li,
 
 URGENT: Patient John Smith (Room 304) is ready for discharge.
-@ -419,13 +1513,21 @@ ER Department`
             },
             {
                 id: 'email4',
@@ -1600,7 +1591,6 @@ URGENT: Patient John Smith (Room 304) is ready for discharge.
                 content: `Hello,
 
 This is a notification that a prescription is ready for pickup at the hospital pharmacy.
-@ -443,6 +1545,9 @@ Hospital Pharmacy`
             }
         ];
 
@@ -1610,7 +1600,6 @@ This is a notification that a prescription is ready for pickup at the hospital p
         // Load state from localStorage
         function loadState() {
             const saved = localStorage.getItem('emailState');
-@ -462,32 +1567,84 @@ Hospital Pharmacy`
             emails.forEach(email => {
                 state[email.id] = {
                     status: email.status,
@@ -1701,7 +1690,6 @@ This is a notification that a prescription is ready for pickup at the hospital p
                                 } else if (label === 'Urgent') {
                                     return `<span class="label urgent">Urgent</span>`;
                                 } else if (label === 'Suspicious') {
-@ -495,45 +1652,69 @@ Hospital Pharmacy`
                                 }
                                 return '';
                             }).join('')}
@@ -1781,7 +1769,6 @@ This is a notification that a prescription is ready for pickup at the hospital p
                         <div class="email-field">
                             <div class="email-field-label">Subject:</div>
                             <div class="email-field-value">${email.subject}</div>
-@ -542,33 +1723,129 @@ Hospital Pharmacy`
                             <div class="email-field-label">Received:</div>
                             <div class="email-field-value">${email.timestamp}</div>
                         </div>
@@ -1925,7 +1912,6 @@ ${email.content || 'No content available.'}
         }
 
         function reportEmail(emailId) {
-@ -582,7 +1859,12 @@ ${email.content || 'No content available.'}
                 // Save to localStorage with notification info
                 const reportData = {
                     status: 'reported',
@@ -1939,7 +1925,6 @@ ${email.content || 'No content available.'}
                 };
                 localStorage.setItem(`emailReport_${emailId}`, JSON.stringify(reportData));
                 
-@ -590,22 +1872,59 @@ ${email.content || 'No content available.'}
                 renderEmailList();
                 
                 // Show toast notification

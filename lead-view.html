@@ -13,9 +13,407 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f2f3f5;
             min-height: 100vh;
             font-size: 13px;
+        }
+
+        body.login-mode {
+            background: linear-gradient(135deg, #0072CE 0%, #005a9e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        body.view-mode {
+            background: #f2f3f5;
+        }
+
+        /* Login Styles */
+        .login-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #0072CE;
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .smart-card-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #0072CE;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0072CE;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .smart-card-btn:hover {
+            background: #f0f4ff;
+            border-color: #005a9e;
+            color: #005a9e;
+        }
+
+        .smart-card-icon {
+            font-size: 1.2rem;
+        }
+
+        .smart-card-container {
+            display: none;
+        }
+
+        .smart-card-container.show {
+            display: block;
+        }
+
+        .card-slot {
+            width: 120px;
+            height: 80px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+            border: 3px solid #a0aec0;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-slot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            right: 10px;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #a0aec0 0px,
+                #a0aec0 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            transform: translateY(-50%);
+        }
+
+        .card-inserted {
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, #0072CE 0%, #005a9e 100%);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50%);
+            transition: left 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .card-inserted.animating {
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .card-chip {
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border-radius: 2px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .detection-status {
+            text-align: center;
+            margin: 20px 0;
+            min-height: 60px;
+        }
+
+        .detection-message {
+            font-size: 1rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .detection-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #0072CE;
+            border-radius: 50%;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .card-info {
+            background: #e7f3ff;
+            border-left: 3px solid #0072CE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #2d3748;
+        }
+
+        .card-info strong {
+            color: #0072CE;
+        }
+
+        .card-user-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f7f9fc;
+            border-radius: 4px;
+            border: 1px solid #E4E8EF;
+        }
+
+        .card-user-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .card-user-info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-user-info-label {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .card-user-info-value {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .mfa-container {
+            display: none;
+        }
+
+        .mfa-container.show {
+            display: block;
+        }
+
+        .mfa-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .mfa-header h1 {
+            color: #0072CE;
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .mfa-header p {
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .mfa-info {
+            background: #e7f3ff;
+            border-left: 3px solid #0072CE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: #2d3748;
+        }
+
+        .mfa-code-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mfa-code-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .mfa-code-input:focus {
+            outline: none;
+            border-color: #0072CE;
+            box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.1);
+        }
+
+        .mfa-code-input.filled {
+            border-color: #0072CE;
+            background: #f0f4ff;
+        }
+
+        .mfa-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f7f9fc;
+            border-radius: 4px;
+        }
+
+        .mfa-hint code {
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #0072CE;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .mfa-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .resend-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        .resend-link a {
+            color: #0072CE;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .resend-link a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #0072CE;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #005a9e;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: #0072CE;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* View Container */
+        .view-container {
+            display: none;
+        }
+
+        .view-container.show {
+            display: block;
         }
 
         .top-bar {
@@ -624,8 +1022,109 @@
         }
     </style>
 </head>
-<body>
-    <div class="top-bar">
+<body class="login-mode" id="bodyElement">
+    <!-- Login Section -->
+    <div id="loginSection">
+        <!-- Smart Card Login -->
+        <div class="login-container" id="loginContainer">
+            <div class="login-header">
+                <h1>Healthcare Email Defense System</h1>
+                <p>Department Lead Access</p>
+            </div>
+            <div style="text-align: center; margin: 30px 0;">
+                <p style="color: #4a5568; font-size: 0.95rem; margin-bottom: 20px;">
+                    Please swipe your ID card to access the system
+                </p>
+                <button class="smart-card-btn" onclick="startSmartCardLogin()">
+                    <span class="smart-card-icon">💳</span>
+                    <span>Swipe ID Card</span>
+                </button>
+            </div>
+            <div class="footer-links">
+                <a href="#">Help</a>
+            </div>
+        </div>
+
+        <!-- Smart Card Detection -->
+        <div class="login-container smart-card-container" id="smartCardContainer">
+            <div class="login-header">
+                <h1>Smart Card Authentication</h1>
+                <p>Please insert your ID card</p>
+            </div>
+            <div class="card-slot" id="cardSlot">
+                <div class="card-inserted" id="cardInserted">
+                    <div class="card-chip"></div>
+                    ID CARD
+                </div>
+            </div>
+            <div class="detection-status" id="detectionStatus">
+                <div class="detection-message" id="detectionMessage">Please insert your card...</div>
+                <div class="detection-animation" id="detectionAnimation" style="display: none;">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="card-info" id="cardInfo" style="display: none;">
+                <strong>Card Detected:</strong> Reading card information...
+            </div>
+            <div class="card-user-info" id="cardUserInfo" style="display: none;">
+                <div class="card-user-info-row">
+                    <span class="card-user-info-label">Name:</span>
+                    <span class="card-user-info-value" id="cardUserName">-</span>
+                </div>
+                <div class="card-user-info-row">
+                    <span class="card-user-info-label">Employee ID:</span>
+                    <span class="card-user-info-value" id="cardUserID">-</span>
+                </div>
+                <div class="card-user-info-row">
+                    <span class="card-user-info-label">Department:</span>
+                    <span class="card-user-info-value" id="cardUserDept">-</span>
+                </div>
+            </div>
+            <div class="mfa-actions" style="margin-top: 20px;">
+                <button type="button" class="login-btn btn-secondary" onclick="backToLoginFromCard()" style="flex: 1;">Cancel</button>
+            </div>
+        </div>
+
+        <!-- MFA Verification -->
+        <div class="login-container mfa-container" id="mfaContainer">
+            <div class="mfa-header">
+                <h1>Two-Factor Authentication</h1>
+                <p>Enter the 6-digit verification code</p>
+            </div>
+            <div class="mfa-info">
+                A verification code has been sent to your registered device.
+            </div>
+            <form id="mfaForm" onsubmit="handleMFA(event)">
+                <div class="mfa-code-container" id="codeContainer">
+                    <input type="text" class="mfa-code-input" id="code1" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code2" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code3" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code4" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code5" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code6" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                </div>
+                <div class="mfa-hint">
+                    Demo Code: <code id="demoCode">000000</code>
+                </div>
+                <div class="error-message" id="mfaErrorMessage">
+                    Invalid verification code. Please try again.
+                </div>
+                <div class="mfa-actions">
+                    <button type="button" class="login-btn btn-secondary" onclick="backToLogin()" style="flex: 1;">Back</button>
+                    <button type="submit" class="login-btn" style="flex: 1;">Verify</button>
+                </div>
+            </form>
+            <div class="resend-link">
+                <a href="#" onclick="resendCode(event)">Resend Code</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Section -->
+    <div class="view-container" id="viewSection">
+        <div class="top-bar">
         <div class="user-info">
             <div class="user-name" id="userName">Dr. Chen (Department Lead)</div>
         </div>
@@ -700,15 +1199,275 @@
         <p id="auditId"></p>
     </div>
 
+    </div> <!-- End viewSection -->
+
     <script>
-        // Check authentication
-        if (sessionStorage.getItem('authenticated') !== 'true' || sessionStorage.getItem('role') !== 'lead') {
-            window.location.href = 'nurse-login.html';
+        // Login Functions
+        let currentUser = null;
+        let mfaCode = '';
+
+        // Generate 6-digit MFA code
+        function generateMFACode() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Show MFA page
+        function showMFA(user) {
+            currentUser = user;
+            mfaCode = generateMFACode();
+            
+            sessionStorage.setItem('mfaCode', mfaCode);
+            sessionStorage.setItem('pendingUser', JSON.stringify(user));
+            
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('mfaContainer').classList.add('show');
+            
+            document.getElementById('demoCode').textContent = mfaCode;
+            
+            setTimeout(() => {
+                document.getElementById('code1').focus();
+            }, 100);
+            
+            setupCodeInputs();
+        }
+
+        // Setup code input navigation
+        function setupCodeInputs() {
+            const inputs = document.querySelectorAll('.mfa-code-input');
+            
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    e.target.value = value;
+                    
+                    if (value) {
+                        e.target.classList.add('filled');
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    } else {
+                        e.target.classList.remove('filled');
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                        inputs[index - 1].value = '';
+                        inputs[index - 1].classList.remove('filled');
+                    }
+                });
+                
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+                    for (let i = 0; i < pastedData.length && (index + i) < inputs.length; i++) {
+                        inputs[index + i].value = pastedData[i];
+                        inputs[index + i].classList.add('filled');
+                    }
+                    if (pastedData.length > 0) {
+                        const nextIndex = Math.min(index + pastedData.length, inputs.length - 1);
+                        inputs[nextIndex].focus();
+                    }
+                });
+            });
+        }
+
+        // Handle MFA verification
+        function handleMFA(event) {
+            event.preventDefault();
+            
+            const inputs = document.querySelectorAll('.mfa-code-input');
+            const enteredCode = Array.from(inputs).map(input => input.value).join('');
+            const errorMessage = document.getElementById('mfaErrorMessage');
+            
+            if (enteredCode === mfaCode || enteredCode === sessionStorage.getItem('mfaCode')) {
+                sessionStorage.setItem('authenticated', 'true');
+                sessionStorage.setItem('username', currentUser.name);
+                sessionStorage.setItem('role', currentUser.role);
+                
+                sessionStorage.removeItem('mfaCode');
+                sessionStorage.removeItem('pendingUser');
+                
+                // Show view instead of redirecting
+                showView();
+            } else {
+                errorMessage.classList.add('show');
+                inputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('filled');
+                });
+                inputs[0].focus();
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Back to login
+        function backToLogin() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('mfaContainer').classList.remove('show');
+            currentUser = null;
+            mfaCode = '';
+            sessionStorage.removeItem('mfaCode');
+            sessionStorage.removeItem('pendingUser');
+            
+            document.querySelectorAll('.mfa-code-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            
+            document.getElementById('mfaErrorMessage').classList.remove('show');
+        }
+
+        // Resend code
+        function resendCode(event) {
+            event.preventDefault();
+            mfaCode = generateMFACode();
+            sessionStorage.setItem('mfaCode', mfaCode);
+            document.getElementById('demoCode').textContent = mfaCode;
+            document.querySelectorAll('.mfa-code-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            document.getElementById('code1').focus();
+            const resendLink = event.target;
+            const originalText = resendLink.textContent;
+            resendLink.textContent = 'Code resent!';
+            setTimeout(() => {
+                resendLink.textContent = originalText;
+            }, 2000);
+        }
+
+        // Smart Card Login Functions
+        function startSmartCardLogin() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('smartCardContainer').classList.add('show');
+            
+            const cardInserted = document.getElementById('cardInserted');
+            const detectionMessage = document.getElementById('detectionMessage');
+            const detectionAnimation = document.getElementById('detectionAnimation');
+            const cardInfo = document.getElementById('cardInfo');
+            const cardUserInfo = document.getElementById('cardUserInfo');
+            
+            cardInserted.classList.remove('animating');
+            detectionMessage.textContent = 'Please insert your card...';
+            detectionAnimation.style.display = 'none';
+            cardInfo.style.display = 'none';
+            cardUserInfo.style.display = 'none';
+            
+            setTimeout(() => {
+                simulateCardInsertion();
+            }, 1000);
+        }
+
+        function simulateCardInsertion() {
+            const cardInserted = document.getElementById('cardInserted');
+            const detectionMessage = document.getElementById('detectionMessage');
+            const detectionAnimation = document.getElementById('detectionAnimation');
+            const cardInfo = document.getElementById('cardInfo');
+            
+            cardInserted.classList.add('animating');
+            detectionMessage.textContent = 'Card detected. Reading...';
+            detectionAnimation.style.display = 'flex';
+            
+            setTimeout(() => {
+                cardInfo.style.display = 'block';
+                cardInfo.innerHTML = '<strong>Card Detected:</strong> Reading card information...';
+            }, 800);
+            
+            setTimeout(() => {
+                detectionMessage.textContent = 'Card detected. Reading...';
+                cardInfo.innerHTML = '<strong>Card Verified:</strong> Authenticating user...';
+            }, 2000);
+            
+            setTimeout(() => {
+                authenticateCardUser();
+            }, 3000);
+        }
+
+        function authenticateCardUser() {
+            const detectionMessage = document.getElementById('detectionMessage');
+            const detectionAnimation = document.getElementById('detectionAnimation');
+            const cardInfo = document.getElementById('cardInfo');
+            const cardUserInfo = document.getElementById('cardUserInfo');
+            
+            // Only lead role for this page
+            const selectedUser = { name: 'Dr. Chen', id: 'EMP-2024-002', dept: 'ER Department', role: 'lead' };
+            
+            detectionMessage.textContent = 'Authentication successful!';
+            detectionAnimation.style.display = 'none';
+            cardInfo.innerHTML = '<strong>✓ Card Verified:</strong> User authenticated successfully.';
+            cardUserInfo.style.display = 'block';
+            document.getElementById('cardUserName').textContent = selectedUser.name;
+            document.getElementById('cardUserID').textContent = selectedUser.id;
+            document.getElementById('cardUserDept').textContent = selectedUser.dept;
+            
+            currentUser = {
+                name: selectedUser.name,
+                role: selectedUser.role
+            };
+            
+            setTimeout(() => {
+                showMFA(currentUser);
+                document.getElementById('smartCardContainer').classList.remove('show');
+            }, 2000);
+        }
+
+        function backToLoginFromCard() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('smartCardContainer').classList.remove('show');
+            const cardInserted = document.getElementById('cardInserted');
+            cardInserted.classList.remove('animating');
+        }
+
+        // Show/Hide views
+        function showView() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('viewSection').classList.add('show');
+            document.getElementById('bodyElement').className = 'view-mode';
+            
+            // Initialize view
+            const userName = sessionStorage.getItem('username') || 'Dr. Chen';
+            document.getElementById('userName').textContent = userName + ' (Department Lead)';
+            
+            updateFolderCounts();
+            renderEmailList();
+        }
+
+        function showLogin() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('viewSection').classList.remove('show');
+            document.getElementById('bodyElement').className = 'login-mode';
+        }
+
+        // Check authentication on load
+        if (sessionStorage.getItem('authenticated') === 'true' && sessionStorage.getItem('role') === 'lead') {
+            showView();
+        } else {
+            // Check if there's a pending MFA verification
+            const pendingUser = sessionStorage.getItem('pendingUser');
+            if (pendingUser) {
+                const user = JSON.parse(pendingUser);
+                const storedCode = sessionStorage.getItem('mfaCode');
+                if (user && storedCode && user.role === 'lead') {
+                    currentUser = user;
+                    mfaCode = storedCode;
+                    showMFA(user);
+                } else {
+                    showLogin();
+                }
+            } else {
+                showLogin();
+            }
         }
 
         // Set user name from session
         const userName = sessionStorage.getItem('username') || 'Dr. Chen';
-        document.getElementById('userName').textContent = userName + ' (Department Lead)';
+        if (document.getElementById('userName')) {
+            document.getElementById('userName').textContent = userName + ' (Department Lead)';
+        }
 
         let selectedEmailId = null;
         let pendingReleaseEmailId = null;
@@ -1200,7 +1959,7 @@ ${email.content || 'No content available.'}
         function signOut() {
             if (confirm('Sign out?')) {
                 sessionStorage.clear();
-                window.location.href = 'nurse-login.html';
+                showLogin();
             }
         }
 

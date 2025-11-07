@@ -804,7 +804,11 @@
             sessionStorage.setItem('authenticated', 'true');
             sessionStorage.setItem('username', 'IT Admin');
             sessionStorage.setItem('role', 'itAdmin');
-            alert('Login successful! IT Admin access granted.');
+            alert('Login successful! Redirecting to IT Administrator Portal...');
+            // Redirect to Mina's dashboard
+            setTimeout(() => {
+                window.location.href = 'demo-combined.html';
+            }, 1000);
         });
 
         // Initialize

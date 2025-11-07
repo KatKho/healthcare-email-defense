@@ -20,8 +20,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`Healthcare Email Defense Demo running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Healthcare Email Defense Demo running on http://0.0.0.0:${PORT}`);
+    console.log(`Accessible at http://is-info492.ischool.uw.edu:${PORT}`);
     console.log('Make sure to set OPENROUTER_API_KEY in your .env file');
 });
 

@@ -1,79 +1,78 @@
-# 部署检查清单
+# Deployment Checklist
 
-## ✅ 已完成的准备工作
+## ✅ Completed Preparations
 
-- [x] 修改 `server.js` 绑定到 `0.0.0.0`
-- [x] 创建部署脚本 `deploy.sh`
-- [x] 创建部署文档 `DEPLOYMENT.md` 和 `SERVER_DEPLOYMENT.md`
-- [x] 所有页面文件已准备好（index.html, nurse-view.html, lead-view.html, it-admin-view.html）
-- [x] package.json 配置正确
+- [x] Modified `server.js` to bind to `0.0.0.0`
+- [x] Created deployment script `deploy.sh`
+- [x] Created deployment docs `DEPLOYMENT.md` and `SERVER_DEPLOYMENT.md`
+- [x] All page files ready (index.html, nurse-view.html, lead-view.html, it-admin-view.html)
+- [x] package.json configured correctly
 
-## 📋 需要在服务器上执行的步骤
+## 📋 Steps to Execute on Server
 
-### 步骤 1: 连接服务器
+### Step 1: Connect to server
 ```bash
 ssh <your_netid>@is-info492.ischool.uw.edu
 ```
 
-### 步骤 2: 进入团队目录
+### Step 2: Navigate to team directory
 ```bash
-cd ~/teams/teamX
-pwd  # 确认路径
-ls   # 查看文件
+cd ~/teams/team6
+pwd  # Confirm path
+ls   # View files
 ```
 
-### 步骤 3: 上传项目文件
+### Step 3: Upload project files
 
-**选项 A: 使用 Git（如果已推送到 GitHub）**
+**Option A: Using Git (if pushed to GitHub)**
 ```bash
 git clone https://github.com/KatKho/healthcare-email-defense.git .
-# 或者如果目录已存在
+# Or if directory exists
 cd healthcare-email-defense
 git pull
 ```
 
-**选项 B: 使用 SCP 从本地上传**
-在**本地终端**运行：
+**Option B: Using SCP from local**
+Run in **local terminal**:
 ```bash
 cd /Users/kaibo/Documents/GitHub/healthcare-email-defense
-scp -r * <your_netid>@is-info492.ischool.uw.edu:~/teams/teamX/
+scp -r * <your_netid>@is-info492.ischool.uw.edu:~/teams/team6/
 ```
 
-### 步骤 4: 运行部署脚本
+### Step 4: Run deployment script
 ```bash
-# 使用分配的端口（例如 8001）
+# Use assigned port 8006
 chmod +x deploy.sh
-./deploy.sh 8001
+./deploy.sh 8006
 ```
 
-### 步骤 5: 启动服务器
+### Step 5: Start server
 ```bash
 npm start
 ```
 
-### 步骤 6: 验证
-- 服务器应该显示：`Healthcare Email Defense Demo running on http://0.0.0.0:8001`
-- 在浏览器访问：`http://is-info492.ischool.uw.edu:8001`
+### Step 6: Verify
+- Server should show: `Healthcare Email Defense Demo running on http://0.0.0.0:8006`
+- Access in browser: `http://is-info492.ischool.uw.edu:8006`
 
-## 📝 提交信息模板
+## 📝 Submission Template
 
-在课程 #announcements 频道提交：
+Post in course #announcements channel:
 
 ```
-Team X — Healthcare — Defense
-Demo: http://is-info492.ischool.uw.edu:8001
+Team 6 — Healthcare — Defense
+Demo: http://is-info492.ischool.uw.edu:8006
 Test creds:
 - Nurse: Smart Card Swipe → MFA (Demo code shown on screen)
 - IT Admin: Smart Card Swipe → PIN: 123456 → MFA (Demo code with 30s countdown)
 - Department Lead: Smart Card Swipe → MFA (Demo code shown on screen)
 ```
 
-## 🔍 故障排除
+## 🔍 Troubleshooting
 
-如果遇到问题：
+If you encounter issues:
 
-1. **端口被占用**：使用其他端口（8002, 8003 等）
-2. **权限问题**：`chmod +x deploy.sh`
-3. **依赖问题**：`rm -rf node_modules && npm install`
-4. **Node 版本**：检查 `node --version`（需要 14+）
-
+1. **Port in use**: Use different port (8002, 8003, etc.)
+2. **Permission issues**: `chmod +x deploy.sh`
+3. **Dependency issues**: `rm -rf node_modules && npm install`
+4. **Node version**: Check `node --version` (requires 14+)

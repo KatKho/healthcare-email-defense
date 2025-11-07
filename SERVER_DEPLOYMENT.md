@@ -1,115 +1,114 @@
-# 课程服务器部署指南
+# Course Server Deployment Guide
 
-## 快速部署步骤
+## Quick Deployment Steps
 
-### 1. SSH 连接到服务器
+### 1. SSH to the server
 ```bash
 ssh <your_netid>@is-info492.ischool.uw.edu
 ```
 
-### 2. 进入团队目录
+### 2. Navigate to team directory
 ```bash
-cd ~/teams/teamX
+cd ~/teams/team6
 pwd
 ls
 ```
 
-### 3. 上传项目文件
-你可以选择以下方式之一：
+### 3. Upload project files
 
-**方式 A: 使用 Git（推荐）**
+**Option A: Using Git (Recommended)**
 ```bash
-git clone <your-repo-url> .
-# 或者如果已经存在，使用 git pull
+git clone https://github.com/KatKho/healthcare-email-defense.git .
+# Or if directory exists, use git pull
 ```
 
-**方式 B: 使用 SCP 从本地上传**
-在本地终端运行：
+**Option B: Using SCP from local machine**
+Run in local terminal:
 ```bash
-scp -r . <your_netid>@is-info492.ischool.uw.edu:~/teams/teamX/
+scp -r . <your_netid>@is-info492.ischool.uw.edu:~/teams/team6/
 ```
 
-### 4. 运行部署脚本
+### 4. Run deployment script
 ```bash
-# 使用分配的端口（例如 8001）
-./deploy.sh 8001
+# Use assigned port 8006
+chmod +x deploy.sh
+./deploy.sh 8006
 
-# 或者手动设置
-PORT=8001 npm install
-echo "PORT=8001" > .env
+# Or manually set
+PORT=8006 npm install
+echo "PORT=8006" > .env
 ```
 
-### 5. 启动服务器
+### 5. Start the server
 ```bash
 npm start
 ```
 
-服务器将在 `http://is-info492.ischool.uw.edu:8001` 上运行
+Server will run at `http://is-info492.ischool.uw.edu:8006`
 
-## 验证部署
+## Verify Deployment
 
-1. 检查服务器是否运行：
+1. Check if server is running:
    ```bash
    ps aux | grep node
    ```
 
-2. 检查端口是否监听：
+2. Check if port is listening:
    ```bash
-   netstat -tuln | grep 8001
+   netstat -tuln | grep 8006
    ```
 
-3. 测试访问（在浏览器中）：
+3. Test access (in browser):
    ```
-   http://is-info492.ischool.uw.edu:8001
+   http://is-info492.ischool.uw.edu:8006
    ```
 
-## 提交信息格式
+## Submission Format
 
-在 #announcements 频道提交：
+Post in #announcements channel:
 
 ```
-Team X — Healthcare — Defense
-Demo: http://is-info492.ischool.uw.edu:8001
+Team 6 — Healthcare — Defense
+Demo: http://is-info492.ischool.uw.edu:8006
 Test creds:
 - Nurse Login: Smart Card Swipe → MFA (Demo code displayed on screen)
 - IT Admin Login: Smart Card Swipe → PIN: 123456 → MFA (Demo code with 30s countdown)
 - Department Lead Login: Smart Card Swipe → MFA (Demo code displayed on screen)
 ```
 
-## 故障排除
+## Troubleshooting
 
-### 端口已被占用
+### Port already in use
 ```bash
-# 检查端口使用情况
-lsof -i :8001
+# Check port usage
+lsof -i :8006
 
-# 或使用其他端口
-PORT=8002 npm start
+# Or use different port
+PORT=8007 npm start
 ```
 
-### 权限问题
+### Permission issues
 ```bash
 chmod +x deploy.sh
 chmod +x server.js
 ```
 
-### Node.js 版本问题
+### Node.js version issues
 ```bash
 node --version
-# 如果版本太低，可能需要使用 nvm
+# If version is too low, may need to use nvm
 ```
 
-### 依赖安装失败
+### Dependency installation fails
 ```bash
-# 清除缓存重新安装
+# Clear cache and reinstall
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-## 重要提示
+## Important Notes
 
-- ✅ 服务器已配置为绑定到 `0.0.0.0`（所有接口）
-- ✅ 所有数据都是合成的，安全用于实验室环境
-- ✅ 不需要真实的 API 密钥（如果使用 OpenRouter，需要设置环境变量）
-- ✅ 所有认证都是模拟的，不需要真实凭据
-
+- ✅ Server configured to bind to `0.0.0.0` (all interfaces)
+- ✅ All data is synthetic, safe for lab environment
+- ✅ No real API keys needed (if using OpenRouter, set environment variable)
+- ✅ All authentication is simulated, no real credentials required

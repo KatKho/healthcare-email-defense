@@ -9,7 +9,7 @@ ssh <your_netid>@is-info492.ischool.uw.edu
 
 ### 2. Navigate to your team directory
 ```bash
-cd ~/teams/teamX
+cd ~/teams/team6
 pwd
 ls
 ```
@@ -35,11 +35,11 @@ npm install
 
 ### 6. Run the server
 ```bash
-# Use your assigned port (e.g., 8001, 8002, etc.)
-PORT=800X npm start
+# Use your assigned port 8006
+PORT=8006 npm start
 
 # Or set in .env file
-# PORT=800X
+# PORT=8006
 npm start
 ```
 

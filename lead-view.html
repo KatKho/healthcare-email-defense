@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Department Lead View - Healthcare Email Defense</title>
+    <title>In Basket - EPIC</title>
     <style>
         * {
             margin: 0;
@@ -13,55 +13,48 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
+            background: #f2f3f5;
             min-height: 100vh;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .top-bar {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            background: #0072CE;
             color: white;
-            padding: 15px 30px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 13px;
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .user-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .department {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            padding: 5px 12px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
         }
 
         .nav-tabs {
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
 
         .nav-tab {
-            padding: 8px 16px;
+            padding: 6px 12px;
             background: rgba(255, 255, 255, 0.1);
             border: none;
             color: white;
-            border-radius: 6px;
+            border-radius: 3px;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s;
-            font-size: 14px;
+            transition: all 0.2s;
+            font-size: 13px;
         }
 
         .nav-tab:hover {
@@ -74,119 +67,187 @@
 
         .main-container {
             display: flex;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 40px);
         }
 
-        .quarantine-panel {
-            width: 50%;
+        /* Folder Panel */
+        .folder-panel {
+            width: 200px;
             background: white;
-            border-right: 1px solid #e2e8f0;
+            border-right: 1px solid #E4E8EF;
             overflow-y: auto;
-            padding: 20px;
+            padding: 15px 0;
+        }
+
+        .folder-panel h3 {
+            color: #2d3748;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 0 15px 10px 15px;
+            border-bottom: 1px solid #E4E8EF;
+            margin-bottom: 10px;
+        }
+
+        .folder-list {
+            list-style: none;
+        }
+
+        .folder-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #4a5568;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .folder-item:hover {
+            background: #f7f9fc;
+            color: #0072CE;
+        }
+
+        .folder-item.active {
+            background: #E4E8EF;
+            color: #0072CE;
+            border-left-color: #0072CE;
+            font-weight: 600;
+        }
+
+        .folder-count {
+            background: #0072CE;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Quarantine Panel */
+        .quarantine-panel {
+            width: 400px;
+            background: #f7f9fc;
+            border-right: 1px solid #E4E8EF;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .panel-header {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+            background: white;
+            padding: 12px 15px;
+            border-bottom: 1px solid #E4E8EF;
         }
 
         .panel-header h2 {
             color: #2d3748;
-            font-size: 1.5rem;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .email-list-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 5px;
         }
 
         .email-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            background: white;
+            border: 1px solid #E4E8EF;
+            border-left: 3px solid transparent;
+            padding: 12px;
+            margin-bottom: 5px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            font-size: 13px;
         }
 
         .email-card:hover {
-            border-color: #007bff;
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+            border-left-color: #0072CE;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .email-card.selected {
-            border-color: #007bff;
-            background: #ebf4ff;
+            border-left-color: #0072CE;
+            background: #E4E8EF;
         }
 
         .email-card.reported {
-            border-left: 4px solid #ff9800;
-            background: #fff5f5;
+            border-left-color: #ff9800;
         }
 
         .email-card.released {
-            border-left: 4px solid #28a745;
-            background: #f0fff4;
+            border-left-color: #28a745;
         }
 
-        .email-header {
+        .email-header-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .email-sender {
             font-weight: 600;
             color: #2d3748;
-            font-size: 0.95rem;
+            font-size: 13px;
         }
 
         .email-timestamp {
             color: #718096;
-            font-size: 0.85rem;
+            font-size: 11px;
         }
 
         .email-subject {
-            font-size: 1rem;
+            font-size: 13px;
             color: #2d3748;
-            margin-bottom: 10px;
-            font-weight: 500;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .email-patient-info {
+            font-size: 11px;
+            color: #4a5568;
+            margin-bottom: 6px;
         }
 
         .email-labels {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .label {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
             font-weight: 600;
         }
 
         .label.urgent {
-            background: #dc3545;
-            color: white;
+            background: #fed7d7;
+            color: #c53030;
         }
 
         .label.reported {
             background: #ff9800;
             color: white;
-            font-size: 0.7rem;
+            font-size: 10px;
         }
 
         .label.released {
             background: #28a745;
             color: white;
-            font-size: 0.7rem;
+            font-size: 10px;
         }
 
         .status-info {
-            font-size: 0.85rem;
+            font-size: 11px;
             color: #4a5568;
-            margin-top: 8px;
-            font-weight: 500;
+            margin-top: 6px;
         }
 
         .status-info.reported {
@@ -197,11 +258,13 @@
             color: #28a745;
         }
 
+        /* Detail Panel */
         .detail-panel {
-            width: 50%;
+            flex: 1;
             background: white;
-            padding: 30px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .detail-panel.empty {
@@ -209,30 +272,107 @@
             align-items: center;
             justify-content: center;
             color: #a0aec0;
-            font-size: 1.1rem;
+            font-size: 13px;
         }
 
         .detail-header {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e2e8f0;
+            background: #f7f9fc;
+            padding: 12px 20px;
+            border-bottom: 1px solid #E4E8EF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .detail-header h2 {
             color: #2d3748;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
         }
 
-        .info-section {
-            background: #f8fafc;
-            border-radius: 8px;
+        .detail-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #E4E8EF;
+            background: white;
+        }
+
+        .detail-tab {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-size: 13px;
+            color: #4a5568;
+            transition: all 0.2s;
+        }
+
+        .detail-tab:hover {
+            color: #0072CE;
+        }
+
+        .detail-tab.active {
+            color: #0072CE;
+            border-bottom-color: #0072CE;
+            font-weight: 600;
+        }
+
+        .detail-content {
+            flex: 1;
             padding: 20px;
+            overflow-y: auto;
+        }
+
+        .email-content-section {
+            background: #f7f9fc;
+            border: 1px solid #E4E8EF;
+            border-radius: 4px;
+            padding: 15px;
             margin-bottom: 20px;
         }
 
-        .info-row {
+        .email-content-header {
             margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #E4E8EF;
+        }
+
+        .email-field {
+            margin-bottom: 10px;
+        }
+
+        .email-field-label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .email-field-value {
+            color: #2d3748;
+            font-size: 13px;
+        }
+
+        .email-body {
+            margin-top: 15px;
+            color: #2d3748;
+            line-height: 1.6;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .info-section {
+            background: #f7f9fc;
+            border: 1px solid #E4E8EF;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-row {
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -245,21 +385,21 @@
         .info-label {
             font-weight: 600;
             color: #4a5568;
-            font-size: 0.9rem;
-            min-width: 150px;
+            font-size: 12px;
+            min-width: 140px;
         }
 
         .info-value {
             color: #2d3748;
-            font-size: 1rem;
+            font-size: 13px;
             text-align: right;
             flex: 1;
         }
 
         .risk-badge {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.85rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
             font-weight: 600;
         }
 
@@ -270,77 +410,40 @@
 
         .detection-rationale {
             background: #fff5f5;
-            border-left: 4px solid #f56565;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 25px;
+            border-left: 3px solid #e53e3e;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
             color: #4a5568;
             line-height: 1.6;
+            font-size: 13px;
         }
 
         .comment-section {
             background: #e7f3ff;
-            border-left: 4px solid #007bff;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 25px;
+            border-left: 3px solid #0072CE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
             color: #4a5568;
             line-height: 1.6;
-        }
-
-        .email-content-section {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .email-content-header {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .email-content-header .email-field {
-            margin-bottom: 10px;
-        }
-
-        .email-field-label {
-            font-weight: 600;
-            color: #4a5568;
-            font-size: 0.85rem;
-            margin-bottom: 4px;
-        }
-
-        .email-field-value {
-            color: #2d3748;
-            font-size: 0.95rem;
-        }
-
-        .email-body {
-            margin-top: 15px;
-            color: #2d3748;
-            line-height: 1.8;
-            font-size: 14px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            font-size: 13px;
         }
 
         .action-buttons {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .btn {
-            padding: 12px 24px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 4px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .btn-release {
@@ -350,7 +453,6 @@
 
         .btn-release:hover {
             background: #218838;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
 
         .btn-quarantine {
@@ -360,7 +462,6 @@
 
         .btn-quarantine:hover {
             background: #5a6268;
-            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
         }
 
         /* Modal */
@@ -384,43 +485,45 @@
 
         .modal-content {
             background: white;
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 500px;
+            border-radius: 4px;
+            padding: 25px;
+            max-width: 450px;
             width: 90%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             animation: slideUp 0.3s;
         }
 
         .modal-header {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .modal-header h3 {
             color: #2d3748;
-            font-size: 1.3rem;
+            font-size: 16px;
+            font-weight: 600;
         }
 
         .modal-body {
             color: #4a5568;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.6;
+            font-size: 13px;
         }
 
         .modal-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: flex-end;
         }
 
         .btn-modal {
-            padding: 10px 20px;
+            padding: 8px 16px;
             border: none;
-            border-radius: 6px;
-            font-size: 14px;
+            border-radius: 4px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .btn-modal.confirm {
@@ -445,15 +548,16 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            background: #28a745;
             color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 4px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             display: none;
             animation: slideIn 0.3s ease;
             z-index: 1000;
             max-width: 400px;
+            font-size: 13px;
         }
 
         .toast.show {
@@ -462,17 +566,17 @@
 
         .audit-notification {
             position: fixed;
-            top: 80px;
+            top: 60px;
             right: 30px;
             background: white;
             border: 2px solid #28a745;
-            border-radius: 8px;
-            padding: 15px 20px;
+            border-radius: 4px;
+            padding: 12px 16px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             display: none;
             animation: slideIn 0.3s ease;
             z-index: 1000;
-            max-width: 300px;
+            max-width: 280px;
         }
 
         .audit-notification.show {
@@ -481,13 +585,14 @@
 
         .audit-notification h4 {
             color: #28a745;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
+            margin-bottom: 4px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .audit-notification p {
             color: #4a5568;
-            font-size: 0.85rem;
+            font-size: 11px;
             margin: 0;
         }
 
@@ -522,25 +627,52 @@
 <body>
     <div class="top-bar">
         <div class="user-info">
-            <div class="user-name">👨‍💼 Dr. Chen (Department Lead)</div>
+            <div class="user-name" id="userName">Dr. Chen (Department Lead)</div>
         </div>
         <div class="nav-tabs">
             <button class="nav-tab active" onclick="switchTab('quarantine')">Quarantine Queue</button>
             <button class="nav-tab" onclick="switchTab('statistics')">Statistics</button>
             <button class="nav-tab" onclick="switchTab('profile')">Profile</button>
+            <button class="nav-tab" onclick="resetDemo()" style="background: rgba(255, 255, 255, 0.15);">🔄 Reset</button>
+            <button class="nav-tab" onclick="signOut()" style="background: rgba(255, 255, 255, 0.15);">🚪 Sign Out</button>
         </div>
     </div>
 
     <div class="main-container">
+        <!-- Folder Panel -->
+        <div class="folder-panel">
+            <h3>In Basket</h3>
+            <ul class="folder-list">
+                <li class="folder-item active" onclick="switchFolder('Quarantine')">
+                    <span>Quarantine</span>
+                    <span class="folder-count" id="countQuarantine">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('All')">
+                    <span>All Messages</span>
+                    <span class="folder-count" id="countAll">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('Results')">
+                    <span>Results</span>
+                    <span class="folder-count" id="countResults">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('Team Messages')">
+                    <span>Team Messages</span>
+                    <span class="folder-count" id="countTeam">0</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Quarantine Panel -->
         <div class="quarantine-panel">
             <div class="panel-header">
-                <h2>📧 Quarantine Queue</h2>
+                <h2 id="folderTitle">Quarantine Queue</h2>
             </div>
-            <div id="emailList">
+            <div class="email-list-container" id="emailList">
                 <!-- Emails will be rendered here -->
             </div>
         </div>
 
+        <!-- Detail Panel -->
         <div class="detail-panel empty" id="detailPanel">
             <div>Select an email to review</div>
         </div>
@@ -569,26 +701,37 @@
     </div>
 
     <script>
+        // Check authentication
+        if (sessionStorage.getItem('authenticated') !== 'true' || sessionStorage.getItem('role') !== 'lead') {
+            window.location.href = 'nurse-login.html';
+        }
+
+        // Set user name from session
+        const userName = sessionStorage.getItem('username') || 'Dr. Chen';
+        document.getElementById('userName').textContent = userName + ' (Department Lead)';
+
         let selectedEmailId = null;
         let pendingReleaseEmailId = null;
+        let currentFolder = 'Quarantine';
 
-        // Load reported emails from localStorage
-        function loadReportedEmails() {
-            const reportedEmails = [];
-            const emails = [
-                {
-                    id: 'email1',
-                    sender: 'lab-report@medlab-info.com',
-                    subject: 'Lab Results: Patient #2387',
-                    timestamp: '2 hours ago',
-                    labels: ['Urgent', 'Suspicious'],
-                    confidence: 0.67,
-                    rationale: 'New domain detected; unverified link contained in message body.',
-                    status: 'suspicious',
-                    reportedBy: 'Nurse Li',
-                    reportedTime: '30 minutes ago',
-                    domainReputation: 'Medium Risk',
-                    content: `Dear Healthcare Provider,
+        // Base email data
+        const baseEmails = [
+            {
+                id: 'email1',
+                sender: 'Lab Results System',
+                to: 'Nurse Li',
+                subject: 'Lab Results: Patient #2387',
+                timestamp: '2 hours ago',
+                labels: ['Urgent', 'Suspicious'],
+                confidence: 0.67,
+                rationale: 'New domain detected; unverified link contained in message body.',
+                status: 'suspicious',
+                folder: 'Results',
+                patient: { name: 'Jane Doe', mrn: '2387', dob: '05/15/1982' },
+                encounter: 'ER Visit 10/29/2025',
+                attachments: ['LabReport_2387.pdf'],
+                domainReputation: 'Medium Risk',
+                content: `Dear Healthcare Provider,
 
 We have received lab results for Patient #2387 (Jane Doe, DOB: 05/15/1982).
 
@@ -605,11 +748,14 @@ Immediate action may be required. Please contact the lab if you have any questio
 Best regards,
 Medical Lab Services
 lab-report@medlab-info.com`
-                }
-            ];
+            }
+        ];
 
-            // Check localStorage for reported emails
-            emails.forEach(email => {
+        // Load reported emails from localStorage
+        function loadReportedEmails() {
+            const reportedEmails = [];
+            
+            baseEmails.forEach(email => {
                 const reportData = localStorage.getItem(`emailReport_${email.id}`);
                 if (reportData) {
                     const report = JSON.parse(reportData);
@@ -629,17 +775,14 @@ lab-report@medlab-info.com`
             });
             
             // Also check if there are any emails reported from nurse-view
-            // This handles the case where nurse reported the email
             const allReportKeys = Object.keys(localStorage).filter(key => key.startsWith('emailReport_'));
             allReportKeys.forEach(key => {
                 const emailId = key.replace('emailReport_', '');
                 const reportData = JSON.parse(localStorage.getItem(key));
                 if (reportData && reportData.status === 'reported') {
-                    // Check if this email is already in the list
                     const exists = reportedEmails.find(e => e.id === emailId);
                     if (!exists) {
-                        // Add the email from the base list
-                        const baseEmail = emails.find(e => e.id === emailId);
+                        const baseEmail = baseEmails.find(e => e.id === emailId);
                         if (baseEmail) {
                             reportedEmails.push({
                                 ...baseEmail,
@@ -655,6 +798,18 @@ lab-report@medlab-info.com`
             return reportedEmails;
         }
 
+        function switchFolder(folder) {
+            currentFolder = folder;
+            document.querySelectorAll('.folder-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.folder-item').classList.add('active');
+            document.getElementById('folderTitle').textContent = folder === 'Quarantine' ? 'Quarantine Queue' : folder;
+            renderEmailList();
+            renderEmptyDetail();
+            selectedEmailId = null;
+        }
+
         function switchTab(tab) {
             document.querySelectorAll('.nav-tab').forEach(btn => {
                 btn.classList.remove('active');
@@ -666,15 +821,37 @@ lab-report@medlab-info.com`
             }
         }
 
+        function updateFolderCounts() {
+            const emails = loadReportedEmails();
+            const counts = {
+                'Quarantine': emails.filter(e => e.status === 'reported').length,
+                'All': emails.length,
+                'Results': emails.filter(e => e.folder === 'Results').length,
+                'Team Messages': emails.filter(e => e.folder === 'Team Messages').length
+            };
+
+            document.getElementById('countQuarantine').textContent = counts['Quarantine'];
+            document.getElementById('countAll').textContent = counts['All'];
+            document.getElementById('countResults').textContent = counts['Results'];
+            document.getElementById('countTeam').textContent = counts['Team Messages'];
+        }
+
         function renderEmailList() {
             const container = document.getElementById('emailList');
-            const emails = loadReportedEmails();
+            let emails = loadReportedEmails();
+            
+            // Filter by folder
+            if (currentFolder === 'Quarantine') {
+                emails = emails.filter(e => e.status === 'reported');
+            } else if (currentFolder !== 'All') {
+                emails = emails.filter(e => e.folder === currentFolder);
+            }
             
             if (emails.length === 0) {
                 container.innerHTML = `
                     <div style="text-align: center; padding: 40px; color: #a0aec0;">
-                        <div style="font-size: 3rem; margin-bottom: 15px;">📭</div>
-                        <div>No emails in quarantine queue</div>
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📭</div>
+                        <div>No emails in ${currentFolder.toLowerCase()}</div>
                     </div>
                 `;
                 return;
@@ -688,11 +865,16 @@ lab-report@medlab-info.com`
                 return `
                     <div class="email-card ${isReported ? 'reported' : ''} ${isReleased ? 'released' : ''} ${isSelected ? 'selected' : ''}" 
                          onclick="selectEmail('${email.id}')">
-                        <div class="email-header">
+                        <div class="email-header-row">
                             <div class="email-sender">${email.sender}</div>
                             <div class="email-timestamp">${email.timestamp}</div>
                         </div>
                         <div class="email-subject">${email.subject}</div>
+                        ${email.patient ? `
+                            <div class="email-patient-info">
+                                Patient: ${email.patient.name} (MRN: ${email.patient.mrn})
+                            </div>
+                        ` : ''}
                         <div class="email-labels">
                             ${email.labels.includes('Urgent') ? `<span class="label urgent">Urgent</span>` : ''}
                             ${isReported ? `<span class="label reported">Reported</span>` : ''}
@@ -700,7 +882,7 @@ lab-report@medlab-info.com`
                         </div>
                         <div class="status-info ${email.status}">
                             ${isReported ? `📋 Status: Reported by ${email.reportedBy}` : ''}
-                            ${isReleased ? `✅ Status: Released by ${email.releasedBy || 'Dr. Chen'}` : ''}
+                            ${isReleased ? `✅ Status: Released by ${email.releasedBy || userName}` : ''}
                         </div>
                     </div>
                 `;
@@ -732,11 +914,31 @@ lab-report@medlab-info.com`
                 <div class="detail-header">
                     <h2>Message Detail View</h2>
                 </div>
+                <div class="detail-tabs">
+                    <button class="detail-tab active" onclick="switchDetailTab('message', '${email.id}')">Message</button>
+                    <button class="detail-tab" onclick="switchDetailTab('patient', '${email.id}')">Patient Info</button>
+                    <button class="detail-tab" onclick="switchDetailTab('audit', '${email.id}')">Audit Trail</button>
+                </div>
+                <div class="detail-content" id="detailContent">
+                    ${renderMessageTab(email)}
+                </div>
+            `;
+        }
+
+        function renderMessageTab(email) {
+            const isReported = email.status === 'reported';
+            const isUrgent = email.labels.includes('Urgent');
+            
+            return `
                 <div class="email-content-section">
                     <div class="email-content-header">
                         <div class="email-field">
                             <div class="email-field-label">From:</div>
                             <div class="email-field-value">${email.sender}</div>
+                        </div>
+                        <div class="email-field">
+                            <div class="email-field-label">To:</div>
+                            <div class="email-field-value">${email.to}</div>
                         </div>
                         <div class="email-field">
                             <div class="email-field-label">Subject:</div>
@@ -746,6 +948,24 @@ lab-report@medlab-info.com`
                             <div class="email-field-label">Received:</div>
                             <div class="email-field-value">${email.timestamp}</div>
                         </div>
+                        ${email.patient ? `
+                            <div class="email-field">
+                                <div class="email-field-label">Patient:</div>
+                                <div class="email-field-value">${email.patient.name} (MRN: ${email.patient.mrn})</div>
+                            </div>
+                        ` : ''}
+                        ${email.encounter ? `
+                            <div class="email-field">
+                                <div class="email-field-label">Encounter:</div>
+                                <div class="email-field-value">${email.encounter}</div>
+                            </div>
+                        ` : ''}
+                        ${email.attachments && email.attachments.length > 0 ? `
+                            <div class="email-field">
+                                <div class="email-field-label">Attachments:</div>
+                                <div class="email-field-value">${email.attachments.map(att => `<span style="color: #0072CE; cursor: pointer;">${att}</span>`).join(', ')}</div>
+                            </div>
+                        ` : ''}
                     </div>
                     <div class="email-body">
 ${email.content || 'No content available.'}
@@ -786,6 +1006,99 @@ ${email.content || 'No content available.'}
             `;
         }
 
+        function renderPatientTab(email) {
+            if (!email.patient) {
+                return '<div style="padding: 20px; color: #718096;">No patient information available.</div>';
+            }
+            return `
+                <div class="info-section">
+                    <div class="info-row">
+                        <div class="info-label">Patient Name:</div>
+                        <div class="info-value">${email.patient.name}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">MRN:</div>
+                        <div class="info-value">${email.patient.mrn}</div>
+                    </div>
+                    ${email.patient.dob ? `
+                        <div class="info-row">
+                            <div class="info-label">Date of Birth:</div>
+                            <div class="info-value">${email.patient.dob}</div>
+                        </div>
+                    ` : ''}
+                    ${email.encounter ? `
+                        <div class="info-row">
+                            <div class="info-label">Encounter:</div>
+                            <div class="info-value">${email.encounter}</div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function renderAuditTab(email) {
+            const reportData = localStorage.getItem(`emailReport_${email.id}`);
+            let auditLog = [];
+            
+            if (reportData) {
+                const report = JSON.parse(reportData);
+                if (report.reportedBy) {
+                    auditLog.push({
+                        time: report.reportedTime || new Date().toISOString(),
+                        action: 'Reported',
+                        actor: report.reportedBy,
+                        role: 'nurse'
+                    });
+                }
+                if (report.releasedBy) {
+                    auditLog.push({
+                        time: report.releasedTime || new Date().toISOString(),
+                        action: 'Released',
+                        actor: report.releasedBy,
+                        role: 'lead',
+                        auditId: report.auditId
+                    });
+                }
+            }
+            
+            if (auditLog.length === 0) {
+                return '<div style="padding: 20px; color: #718096;">No audit trail available.</div>';
+            }
+            
+            return `
+                <div class="info-section">
+                    ${auditLog.map(log => `
+                        <div class="info-row" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #E4E8EF;">
+                            <div>
+                                <div style="font-weight: 600; color: #2d3748; margin-bottom: 4px;">${log.action}</div>
+                                <div style="font-size: 11px; color: #718096;">${log.actor} (${log.role})</div>
+                                <div style="font-size: 11px; color: #718096;">${new Date(log.time).toLocaleString()}</div>
+                                ${log.auditId ? `<div style="font-size: 11px; color: #0072CE; margin-top: 4px;">Audit ID: ${log.auditId}</div>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function switchDetailTab(tab, emailId) {
+            const emails = loadReportedEmails();
+            const email = emails.find(e => e.id === emailId);
+            if (!email) return;
+            
+            document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const content = document.getElementById('detailContent');
+            if (tab === 'message') {
+                content.innerHTML = renderMessageTab(email);
+            } else if (tab === 'patient') {
+                content.innerHTML = renderPatientTab(email);
+            } else if (tab === 'audit') {
+                content.innerHTML = renderAuditTab(email);
+            }
+        }
+
         function renderEmptyDetail() {
             const panel = document.getElementById('detailPanel');
             panel.className = 'detail-panel empty';
@@ -813,7 +1126,7 @@ ${email.content || 'No content available.'}
             if (reportData) {
                 const report = JSON.parse(reportData);
                 report.status = 'released';
-                report.releasedBy = 'Dr. Chen';
+                report.releasedBy = userName;
                 report.releasedTime = new Date().toISOString();
                 
                 // Generate audit ID
@@ -834,6 +1147,7 @@ ${email.content || 'No content available.'}
                 // Refresh UI
                 renderEmailList();
                 selectEmail(emailId);
+                updateFolderCounts();
             }
         }
 
@@ -863,6 +1177,33 @@ ${email.content || 'No content available.'}
             }, 5000);
         }
 
+        function resetDemo() {
+            if (confirm('Reset all report records? This will clear all reported and released email statuses.')) {
+                // 清除所有报告记录
+                const keys = Object.keys(localStorage);
+                keys.forEach(key => {
+                    if (key.startsWith('emailReport_') || key === 'emailState') {
+                        localStorage.removeItem(key);
+                    }
+                });
+                
+                // 重新渲染
+                selectedEmailId = null;
+                renderEmailList();
+                renderEmptyDetail();
+                updateFolderCounts();
+                
+                showToast('All report records cleared. Demo reset.');
+            }
+        }
+
+        function signOut() {
+            if (confirm('Sign out?')) {
+                sessionStorage.clear();
+                window.location.href = 'nurse-login.html';
+            }
+        }
+
         // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('confirmModal');
@@ -872,6 +1213,7 @@ ${email.content || 'No content available.'}
         }
 
         // Initialize
+        updateFolderCounts();
         renderEmailList();
     </script>
 </body>

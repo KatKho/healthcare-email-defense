@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurse View - Healthcare Email Defense</title>
+    <title>In Basket - EPIC</title>
     <style>
         * {
             margin: 0;
@@ -13,50 +13,503 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
             min-height: 100vh;
+            font-size: 13px;
+        }
+
+        body.login-mode {
+            background: linear-gradient(135deg, #0072CE 0%, #005a9e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        body.view-mode {
+            background: #f2f3f5;
+        }
+
+        /* Login Styles */
+        .login-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #0072CE;
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
             font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0072CE;
+            box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #0072CE;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #005a9e;
+        }
+
+        .login-btn:active {
+            transform: translateY(1px);
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: #0072CE;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MFA Container */
+        .mfa-container {
+            display: none;
+        }
+
+        .mfa-container.show {
+            display: block;
+        }
+
+        .mfa-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .mfa-header h1 {
+            color: #0072CE;
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .mfa-header p {
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .mfa-info {
+            background: #e7f3ff;
+            border-left: 3px solid #0072CE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: #2d3748;
+        }
+
+        .mfa-code-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mfa-code-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .mfa-code-input:focus {
+            outline: none;
+            border-color: #0072CE;
+            box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.1);
+        }
+
+        .mfa-code-input.filled {
+            border-color: #0072CE;
+            background: #f0f4ff;
+        }
+
+        .mfa-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f7f9fc;
+            border-radius: 4px;
+        }
+
+        .mfa-hint code {
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #0072CE;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .mfa-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .resend-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        .resend-link a {
+            color: #0072CE;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .resend-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Smart Card Login */
+        .smart-card-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #718096;
+            font-size: 0.85rem;
+        }
+
+        .smart-card-divider::before,
+        .smart-card-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .smart-card-divider span {
+            padding: 0 15px;
+        }
+
+        .smart-card-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #0072CE;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0072CE;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .smart-card-btn:hover {
+            background: #f0f4ff;
+            border-color: #005a9e;
+            color: #005a9e;
+        }
+
+        .smart-card-icon {
+            font-size: 1.2rem;
+        }
+
+        .smart-card-container {
+            display: none;
+        }
+
+        .smart-card-container.show {
+            display: block;
+        }
+
+        .card-slot {
+            width: 120px;
+            height: 80px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+            border: 3px solid #a0aec0;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-slot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            right: 10px;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #a0aec0 0px,
+                #a0aec0 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            transform: translateY(-50%);
+        }
+
+        .card-inserted {
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, #0072CE 0%, #005a9e 100%);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50%);
+            transition: left 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .card-inserted.animating {
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .card-chip {
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border-radius: 2px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .detection-status {
+            text-align: center;
+            margin: 20px 0;
+            min-height: 60px;
+        }
+
+        .detection-message {
+            font-size: 1rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .detection-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #0072CE;
+            border-radius: 50%;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .card-info {
+            background: #e7f3ff;
+            border-left: 3px solid #0072CE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #2d3748;
+        }
+
+        .card-info strong {
+            color: #0072CE;
+        }
+
+        .card-user-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f7f9fc;
+            border-radius: 4px;
+            border: 1px solid #E4E8EF;
+        }
+
+        .card-user-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .card-user-info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-user-info-label {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .card-user-info-value {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        /* View Container */
+        .view-container {
+            display: none;
+        }
+
+        .view-container.show {
+            display: block;
         }
 
         .top-bar {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            background: #0072CE;
             color: white;
-            padding: 15px 30px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 13px;
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .user-name {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 500;
         }
 
         .department {
-            font-size: 0.9rem;
+            font-size: 12px;
             opacity: 0.9;
-            padding: 5px 12px;
+            padding: 4px 10px;
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            border-radius: 3px;
         }
 
         .nav-icons {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            align-items: center;
         }
 
         .nav-icon {
             cursor: pointer;
-            padding: 8px;
-            border-radius: 6px;
-            transition: background 0.3s;
+            padding: 6px;
+            border-radius: 3px;
+            transition: background 0.2s;
+            font-size: 14px;
         }
 
         .nav-icon:hover {
@@ -65,228 +518,440 @@
 
         .main-container {
             display: flex;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 40px);
         }
 
-        .email-list-panel {
-            width: 50%;
+        /* Folder Panel - EPIC Style */
+        .folder-panel {
+            width: 200px;
             background: white;
-            border-right: 1px solid #e2e8f0;
+            border-right: 1px solid #E4E8EF;
             overflow-y: auto;
-            padding: 20px;
+            padding: 15px 0;
+        }
+
+        .folder-panel h3 {
+            color: #2d3748;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 0 15px 10px 15px;
+            border-bottom: 1px solid #E4E8EF;
+            margin-bottom: 10px;
+        }
+
+        .folder-list {
+            list-style: none;
+        }
+
+        .folder-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #4a5568;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .folder-item:hover {
+            background: #f7f9fc;
+            color: #0072CE;
+        }
+
+        .folder-item.active {
+            background: #E4E8EF;
+            color: #0072CE;
+            border-left-color: #0072CE;
+            font-weight: 600;
+        }
+
+        .folder-count {
+            background: #cbd5e0;
+            color: #4a5568;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        /* Email List Panel */
+        .email-list-panel {
+            width: 400px;
+            background: #f7f9fc;
+            border-right: 1px solid #E4E8EF;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .email-list-header {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+            background: white;
+            padding: 12px 15px;
+            border-bottom: 1px solid #E4E8EF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .email-list-header h2 {
             color: #2d3748;
-            font-size: 1.5rem;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .email-list-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 5px;
         }
 
         .email-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            background: white;
+            border: 1px solid #E4E8EF;
+            border-left: 3px solid transparent;
+            padding: 12px;
+            margin-bottom: 5px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            font-size: 13px;
         }
 
         .email-card:hover {
-            border-color: #2c5aa0;
-            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.1);
+            border-left-color: #0072CE;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .email-card.selected {
-            border-color: #2c5aa0;
-            background: #ebf4ff;
+            border-left-color: #0072CE;
+            background: #E4E8EF;
+        }
+
+        .email-card.unread {
+            background: white;
+            border-left-color: #cbd5e0;
         }
 
         .email-card.suspicious-urgent {
-            border-left: 4px solid #f56565;
-            background: #fff5f5;
+            border-left-color: #ff9800;
+            border-left-width: 2px;
         }
 
-        .email-header {
+        .email-header-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .email-sender {
-            font-weight: 600;
+            font-weight: 500;
             color: #2d3748;
-            font-size: 0.95rem;
+            font-size: 13px;
         }
 
         .email-timestamp {
             color: #718096;
-            font-size: 0.85rem;
+            font-size: 11px;
         }
 
         .email-subject {
-            font-size: 1rem;
+            font-size: 13px;
             color: #2d3748;
-            margin-bottom: 10px;
-            font-weight: 500;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .email-patient-info {
+            font-size: 11px;
+            color: #4a5568;
+            margin-bottom: 6px;
         }
 
         .email-labels {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .label {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 500;
         }
 
         .label.urgent {
-            background: #dc3545;
-            color: white;
+            background: #fff5f5;
+            color: #9b2c2c;
+            border: 1px solid #feb2b2;
         }
 
         .label.suspicious {
-            background: white;
-            color: #ff9800;
-            border: 2px solid #ff9800;
+            background: #fffaf0;
+            color: #c05621;
+            border: 1px solid #fbd38d;
         }
 
         .label.reported {
-            background: #c6f6d5;
-            color: #22543d;
-            font-size: 0.7rem;
+            background: #f0fff4;
+            color: #2f855a;
+            border: 1px solid #9ae6b4;
+            font-size: 10px;
         }
 
-        .confidence-score {
-            font-size: 0.85rem;
-            color: #718096;
+        .label.needs-cosign {
+            background: #fffaf0;
+            color: #c05621;
+            border: 1px solid #fbd38d;
         }
 
-        .plugin-panel {
-            width: 50%;
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .status-indicator.unread {
+            background: #718096;
+        }
+
+        .status-indicator.read {
+            background: #cbd5e0;
+        }
+
+        /* Detail Panel */
+        .detail-panel {
+            flex: 1;
             background: white;
-            padding: 30px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
-        .plugin-panel.empty {
+        .detail-panel.empty {
             display: flex;
             align-items: center;
             justify-content: center;
             color: #a0aec0;
-            font-size: 1.1rem;
+            font-size: 13px;
         }
 
-        .plugin-header {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e2e8f0;
+        .detail-header {
+            background: #f7f9fc;
+            padding: 12px 20px;
+            border-bottom: 1px solid #E4E8EF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .plugin-header h2 {
+        .detail-header h2 {
             color: #2d3748;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .detail-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #E4E8EF;
+            background: white;
+        }
+
+        .detail-tab {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-size: 13px;
+            color: #4a5568;
+            transition: all 0.2s;
+        }
+
+        .detail-tab:hover {
+            color: #0072CE;
+        }
+
+        .detail-tab.active {
+            color: #0072CE;
+            border-bottom-color: #0072CE;
+            font-weight: 600;
+        }
+
+        .detail-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
         }
 
         .email-content-section {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid #e2e8f0;
+            background: #f7f9fc;
+            border: 1px solid #E4E8EF;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
 
         .email-content-header {
             margin-bottom: 15px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #E4E8EF;
         }
 
-        .email-content-header .email-field {
+        .email-field {
             margin-bottom: 10px;
         }
 
         .email-field-label {
             font-weight: 600;
             color: #4a5568;
-            font-size: 0.85rem;
+            font-size: 12px;
             margin-bottom: 4px;
         }
 
         .email-field-value {
             color: #2d3748;
-            font-size: 0.95rem;
+            font-size: 13px;
         }
 
         .email-body {
             margin-top: 15px;
             color: #2d3748;
-            line-height: 1.8;
-            font-size: 14px;
+            line-height: 1.6;
+            font-size: 13px;
             white-space: pre-wrap;
             word-wrap: break-word;
         }
 
-        .detection-rationale {
-            background: #fff5f5;
-            border-left: 4px solid #f56565;
+        .info-section {
+            background: #f7f9fc;
+            border: 1px solid #E4E8EF;
+            border-radius: 4px;
             padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
+        }
+
+        .info-row {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 12px;
+            min-width: 140px;
+        }
+
+        .info-value {
+            color: #2d3748;
+            font-size: 13px;
+            text-align: right;
+            flex: 1;
+        }
+
+        .risk-badge {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .risk-badge.medium {
+            background: #ffc107;
+            color: #856404;
+        }
+
+        .detection-rationale {
+            background: #fffaf0;
+            border-left: 2px solid #fbd38d;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
             color: #4a5568;
             line-height: 1.6;
+            font-size: 13px;
         }
 
         .action-buttons {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .btn {
-            padding: 12px 24px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 4px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        .btn-report {
-            background: #007bff;
+        .btn-read {
+            background: #E4E8EF;
+            color: #2d3748;
+        }
+
+        .btn-read:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-sign {
+            background: #28a745;
             color: white;
         }
 
+        .btn-sign:hover {
+            background: #218838;
+        }
+
+        .btn-route {
+            background: #0072CE;
+            color: white;
+        }
+
+        .btn-route:hover {
+            background: #005a9e;
+        }
+
+        .btn-report {
+            background: #0072CE;
+            color: white;
+            box-shadow: 0 1px 2px rgba(0, 114, 206, 0.2);
+        }
+
         .btn-report:hover {
-            background: #0056b3;
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            background: #005a9e;
+            box-shadow: 0 2px 4px rgba(0, 114, 206, 0.3);
         }
 
         .toast {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: #28a745;
             color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 4px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             display: none;
             animation: slideIn 0.3s ease;
             z-index: 1000;
+            font-size: 13px;
         }
 
         .toast.show {
@@ -305,50 +970,463 @@
         }
     </style>
 </head>
-<body>
-    <div class="top-bar">
+<body class="login-mode" id="bodyElement">
+    <!-- Login Section -->
+    <div id="loginSection">
+        <!-- Smart Card Login -->
+        <div class="login-container" id="loginContainer">
+            <div class="login-header">
+                <h1>Healthcare Email Defense System</h1>
+            </div>
+            <div style="text-align: center; margin: 30px 0;">
+                <p style="color: #4a5568; font-size: 0.95rem; margin-bottom: 20px;">
+                    Please swipe your ID card to access the system
+                </p>
+                <button class="smart-card-btn" onclick="startSmartCardLogin()">
+                    <span class="smart-card-icon">💳</span>
+                    <span>Swipe ID Card</span>
+                </button>
+            </div>
+            <div class="footer-links">
+                <a href="#">Help</a>
+            </div>
+        </div>
+
+        <!-- Smart Card Detection -->
+        <div class="login-container smart-card-container" id="smartCardContainer">
+            <div class="login-header">
+                <h1>Smart Card Authentication</h1>
+                <p>Please insert your ID card</p>
+            </div>
+            <div class="card-slot" id="cardSlot">
+                <div class="card-inserted" id="cardInserted">
+                    <div class="card-chip"></div>
+                    ID CARD
+                </div>
+            </div>
+            <div class="detection-status" id="detectionStatus">
+                <div class="detection-message" id="detectionMessage">Please insert your card...</div>
+                <div class="detection-animation" id="detectionAnimation" style="display: none;">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="card-info" id="cardInfo" style="display: none;">
+                <strong>Card Detected:</strong> Reading card information...
+            </div>
+            <div class="card-user-info" id="cardUserInfo" style="display: none;">
+                <div class="card-user-info-row">
+                    <span class="card-user-info-label">Name:</span>
+                    <span class="card-user-info-value" id="cardUserName">-</span>
+                </div>
+                <div class="card-user-info-row">
+                    <span class="card-user-info-label">Employee ID:</span>
+                    <span class="card-user-info-value" id="cardUserID">-</span>
+                </div>
+                <div class="card-user-info-row">
+                    <span class="card-user-info-label">Department:</span>
+                    <span class="card-user-info-value" id="cardUserDept">-</span>
+                </div>
+            </div>
+            <div class="mfa-actions" style="margin-top: 20px;">
+                <button type="button" class="login-btn btn-secondary" onclick="backToLoginFromCard()" style="flex: 1;">Cancel</button>
+            </div>
+        </div>
+
+        <!-- MFA Verification -->
+        <div class="login-container mfa-container" id="mfaContainer">
+            <div class="mfa-header">
+                <h1>Two-Factor Authentication</h1>
+                <p>Enter the 6-digit verification code</p>
+            </div>
+            <div class="mfa-info">
+                A verification code has been sent to your registered device.
+            </div>
+            <form id="mfaForm" onsubmit="handleMFA(event)">
+                <div class="mfa-code-container" id="codeContainer">
+                    <input type="text" class="mfa-code-input" id="code1" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code2" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code3" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code4" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code5" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    <input type="text" class="mfa-code-input" id="code6" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                </div>
+                <div class="mfa-hint">
+                    Demo Code: <code id="demoCode">000000</code>
+                </div>
+                <div class="error-message" id="mfaErrorMessage">
+                    Invalid verification code. Please try again.
+                </div>
+                <div class="mfa-actions">
+                    <button type="button" class="login-btn btn-secondary" onclick="backToLogin()" style="flex: 1;">Back</button>
+                    <button type="submit" class="login-btn" style="flex: 1;">Verify</button>
+                </div>
+            </form>
+            <div class="resend-link">
+                <a href="#" onclick="resendCode(event)">Resend Code</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Section -->
+    <div class="view-container" id="viewSection">
+        <div class="top-bar">
         <div class="user-info">
-            <div class="user-name">👩‍⚕️ Nurse Li</div>
+            <div class="user-name" id="userName">Nurse Li</div>
             <div class="department">ER Department</div>
         </div>
         <div class="nav-icons">
             <div class="nav-icon" title="Inbox">📥</div>
             <div class="nav-icon" title="Alerts">🔔</div>
             <div class="nav-icon" title="Profile">👤</div>
+            <div class="nav-icon" title="Reset Demo" onclick="resetDemo()" style="cursor: pointer;">🔄</div>
+            <div class="nav-icon" title="Sign Out" onclick="signOut()" style="cursor: pointer;">🚪</div>
         </div>
     </div>
 
     <div class="main-container">
+        <!-- Folder Panel -->
+        <div class="folder-panel">
+            <h3>In Basket</h3>
+            <ul class="folder-list">
+                <li class="folder-item active" onclick="switchFolder('All')">
+                    <span>All Messages</span>
+                    <span class="folder-count" id="countAll">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('Results')">
+                    <span>Results</span>
+                    <span class="folder-count" id="countResults">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('Patient Calls')">
+                    <span>Patient Calls</span>
+                    <span class="folder-count" id="countCalls">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('Refill Requests')">
+                    <span>Refill Requests</span>
+                    <span class="folder-count" id="countRefills">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('Team Messages')">
+                    <span>Team Messages</span>
+                    <span class="folder-count" id="countTeam">0</span>
+                </li>
+                <li class="folder-item" onclick="switchFolder('Billing')">
+                    <span>Billing</span>
+                    <span class="folder-count" id="countBilling">0</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Email List Panel -->
         <div class="email-list-panel">
             <div class="email-list-header">
-                <h2>📧 Inbox</h2>
+                <h2 id="folderTitle">All Messages</h2>
             </div>
-            <div id="emailList">
+            <div class="email-list-container" id="emailList">
                 <!-- Emails will be rendered here -->
             </div>
         </div>
 
-        <div class="plugin-panel empty" id="pluginPanel">
-            <div>Select an email to view detection details</div>
+        <!-- Detail Panel -->
+        <div class="detail-panel empty" id="detailPanel">
+            <div>Select a message to view details</div>
         </div>
     </div>
 
-    <div class="toast" id="toast">
-        Reported successfully. Awaiting review.
-    </div>
+    </div> <!-- End viewSection -->
+
+    <div class="toast" id="toast"></div>
 
     <script>
-        // Mock emails data
+        // Login Functions
+        let currentUser = null;
+        let mfaCode = '';
+
+        // Generate 6-digit MFA code
+        function generateMFACode() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Show MFA page
+        function showMFA(user) {
+            currentUser = user;
+            mfaCode = generateMFACode();
+            
+            sessionStorage.setItem('mfaCode', mfaCode);
+            sessionStorage.setItem('pendingUser', JSON.stringify(user));
+            
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('mfaContainer').classList.add('show');
+            
+            document.getElementById('demoCode').textContent = mfaCode;
+            
+            setTimeout(() => {
+                document.getElementById('code1').focus();
+            }, 100);
+            
+            setupCodeInputs();
+        }
+
+        // Setup code input navigation
+        function setupCodeInputs() {
+            const inputs = document.querySelectorAll('.mfa-code-input');
+            
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    e.target.value = value;
+                    
+                    if (value) {
+                        e.target.classList.add('filled');
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    } else {
+                        e.target.classList.remove('filled');
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                        inputs[index - 1].value = '';
+                        inputs[index - 1].classList.remove('filled');
+                    }
+                });
+                
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+                    for (let i = 0; i < pastedData.length && (index + i) < inputs.length; i++) {
+                        inputs[index + i].value = pastedData[i];
+                        inputs[index + i].classList.add('filled');
+                    }
+                    if (pastedData.length > 0) {
+                        const nextIndex = Math.min(index + pastedData.length, inputs.length - 1);
+                        inputs[nextIndex].focus();
+                    }
+                });
+            });
+        }
+
+        // Handle MFA verification
+        function handleMFA(event) {
+            event.preventDefault();
+            
+            const inputs = document.querySelectorAll('.mfa-code-input');
+            const enteredCode = Array.from(inputs).map(input => input.value).join('');
+            const errorMessage = document.getElementById('mfaErrorMessage');
+            
+            if (enteredCode === mfaCode || enteredCode === sessionStorage.getItem('mfaCode')) {
+                sessionStorage.setItem('authenticated', 'true');
+                sessionStorage.setItem('username', currentUser.name);
+                sessionStorage.setItem('role', currentUser.role);
+                
+                sessionStorage.removeItem('mfaCode');
+                sessionStorage.removeItem('pendingUser');
+                
+                // Show view instead of redirecting
+                showView();
+            } else {
+                errorMessage.classList.add('show');
+                inputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('filled');
+                });
+                inputs[0].focus();
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Back to login
+        function backToLogin() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('mfaContainer').classList.remove('show');
+            currentUser = null;
+            mfaCode = '';
+            sessionStorage.removeItem('mfaCode');
+            sessionStorage.removeItem('pendingUser');
+            
+            document.querySelectorAll('.mfa-code-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            
+            document.getElementById('mfaErrorMessage').classList.remove('show');
+        }
+
+        // Resend code
+        function resendCode(event) {
+            event.preventDefault();
+            mfaCode = generateMFACode();
+            sessionStorage.setItem('mfaCode', mfaCode);
+            document.getElementById('demoCode').textContent = mfaCode;
+            document.querySelectorAll('.mfa-code-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            document.getElementById('code1').focus();
+            const resendLink = event.target;
+            const originalText = resendLink.textContent;
+            resendLink.textContent = 'Code resent!';
+            setTimeout(() => {
+                resendLink.textContent = originalText;
+            }, 2000);
+        }
+
+
+        // Smart Card Login Functions
+        function startSmartCardLogin() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('smartCardContainer').classList.add('show');
+            
+            const cardInserted = document.getElementById('cardInserted');
+            const detectionMessage = document.getElementById('detectionMessage');
+            const detectionAnimation = document.getElementById('detectionAnimation');
+            const cardInfo = document.getElementById('cardInfo');
+            const cardUserInfo = document.getElementById('cardUserInfo');
+            
+            cardInserted.classList.remove('animating');
+            detectionMessage.textContent = 'Please insert your card...';
+            detectionAnimation.style.display = 'none';
+            cardInfo.style.display = 'none';
+            cardUserInfo.style.display = 'none';
+            
+            setTimeout(() => {
+                simulateCardInsertion();
+            }, 1000);
+        }
+
+        function simulateCardInsertion() {
+            const cardInserted = document.getElementById('cardInserted');
+            const detectionMessage = document.getElementById('detectionMessage');
+            const detectionAnimation = document.getElementById('detectionAnimation');
+            const cardInfo = document.getElementById('cardInfo');
+            
+            cardInserted.classList.add('animating');
+            detectionMessage.textContent = 'Card detected. Reading...';
+            detectionAnimation.style.display = 'flex';
+            
+            setTimeout(() => {
+                cardInfo.style.display = 'block';
+                cardInfo.innerHTML = '<strong>Card Detected:</strong> Reading card information...';
+            }, 800);
+            
+            setTimeout(() => {
+                detectionMessage.textContent = 'Card detected. Reading...';
+                cardInfo.innerHTML = '<strong>Card Verified:</strong> Authenticating user...';
+            }, 2000);
+            
+            setTimeout(() => {
+                authenticateCardUser();
+            }, 3000);
+        }
+
+        function authenticateCardUser() {
+            const detectionMessage = document.getElementById('detectionMessage');
+            const detectionAnimation = document.getElementById('detectionAnimation');
+            const cardInfo = document.getElementById('cardInfo');
+            const cardUserInfo = document.getElementById('cardUserInfo');
+            
+            const demoUsers = [
+                { name: 'Nurse Li', id: 'EMP-2024-001', dept: 'ER Department', role: 'nurse' },
+                { name: 'Dr. Chen', id: 'EMP-2024-002', dept: 'ER Department', role: 'lead' }
+            ];
+            const selectedUser = demoUsers[Math.floor(Math.random() * demoUsers.length)];
+            
+            detectionMessage.textContent = 'Authentication successful!';
+            detectionAnimation.style.display = 'none';
+            cardInfo.innerHTML = '<strong>✓ Card Verified:</strong> User authenticated successfully.';
+            cardUserInfo.style.display = 'block';
+            document.getElementById('cardUserName').textContent = selectedUser.name;
+            document.getElementById('cardUserID').textContent = selectedUser.id;
+            document.getElementById('cardUserDept').textContent = selectedUser.dept;
+            
+            currentUser = {
+                name: selectedUser.name,
+                role: selectedUser.role
+            };
+            
+            setTimeout(() => {
+                showMFA(currentUser);
+                document.getElementById('smartCardContainer').classList.remove('show');
+            }, 2000);
+        }
+
+        function backToLoginFromCard() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('smartCardContainer').classList.remove('show');
+            const cardInserted = document.getElementById('cardInserted');
+            cardInserted.classList.remove('animating');
+        }
+
+        // Show/Hide views
+        function showView() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('viewSection').classList.add('show');
+            document.getElementById('bodyElement').className = 'view-mode';
+            
+            // Initialize view
+            const userName = sessionStorage.getItem('username') || 'Nurse Li';
+            document.getElementById('userName').textContent = userName;
+            
+            loadState();
+            updateFolderCounts();
+            renderEmailList();
+        }
+
+        function showLogin() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('viewSection').classList.remove('show');
+            document.getElementById('bodyElement').className = 'login-mode';
+        }
+
+        // Check authentication on load
+        if (sessionStorage.getItem('authenticated') === 'true' && sessionStorage.getItem('role') === 'nurse') {
+            showView();
+        } else {
+            // Check if there's a pending MFA verification
+            const pendingUser = sessionStorage.getItem('pendingUser');
+            if (pendingUser) {
+                const user = JSON.parse(pendingUser);
+                const storedCode = sessionStorage.getItem('mfaCode');
+                if (user && storedCode) {
+                    currentUser = user;
+                    mfaCode = storedCode;
+                    showMFA(user);
+                }
+            } else {
+                showLogin();
+            }
+        }
+
+        // Set user name from session
+        const userName = sessionStorage.getItem('username') || 'Nurse Li';
+        if (document.getElementById('userName')) {
+            document.getElementById('userName').textContent = userName;
+        }
+
+        // Enhanced email data structure
         const emails = [
             {
                 id: 'email1',
-                sender: 'lab-report@medlab-info.com',
+                sender: 'Lab Results System',
+                to: 'Nurse Li',
                 subject: 'Lab Results: Patient #2387',
                 timestamp: '2 hours ago',
                 labels: ['Urgent', 'Suspicious'],
                 confidence: 0.67,
                 rationale: 'New domain detected; unverified link contained in message body.',
                 status: 'suspicious',
+                read: false,
+                requiresCosign: false,
+                folder: 'Results',
+                patient: { name: 'Jane Doe', mrn: '2387', dob: '05/15/1982' },
+                encounter: 'ER Visit 10/29/2025',
+                attachments: ['LabReport_2387.pdf'],
+                actionRequired: 'Review',
                 content: `Dear Healthcare Provider,
 
 We have received lab results for Patient #2387 (Jane Doe, DOB: 05/15/1982).
@@ -369,13 +1447,21 @@ lab-report@medlab-info.com`
             },
             {
                 id: 'email2',
-                sender: 'billing@hospital.org',
+                sender: 'Billing Department',
+                to: 'Nurse Li',
                 subject: 'Monthly Statement - October 2025',
                 timestamp: '1 day ago',
                 labels: [],
                 confidence: 0.95,
                 rationale: '',
                 status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Billing',
+                patient: null,
+                encounter: null,
+                attachments: [],
+                actionRequired: null,
                 content: `Dear Nurse Li,
 
 Your monthly billing statement for October 2025 is now available.
@@ -394,13 +1480,21 @@ Hospital Billing Department`
             },
             {
                 id: 'email3',
-                sender: 'nurse-chang@hospital.org',
+                sender: 'Nurse Chang',
+                to: 'Nurse Li',
                 subject: 'Patient discharge notification',
                 timestamp: '3 hours ago',
                 labels: ['Urgent'],
                 confidence: 0.88,
                 rationale: '',
                 status: 'safe',
+                read: false,
+                requiresCosign: false,
+                folder: 'Team Messages',
+                patient: { name: 'John Smith', mrn: '12345' },
+                encounter: 'ER Visit 10/29/2025',
+                attachments: [],
+                actionRequired: 'Acknowledge',
                 content: `Hi Nurse Li,
 
 URGENT: Patient John Smith (Room 304) is ready for discharge.
@@ -419,13 +1513,21 @@ ER Department`
             },
             {
                 id: 'email4',
-                sender: 'pharmacy@hospital.org',
+                sender: 'Pharmacy',
+                to: 'Nurse Li',
                 subject: 'Prescription ready for pickup',
                 timestamp: '5 hours ago',
                 labels: [],
                 confidence: 0.92,
                 rationale: '',
                 status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Refill Requests',
+                patient: { name: 'Sarah Johnson', mrn: '67890' },
+                encounter: 'Outpatient Visit 10/28/2025',
+                attachments: [],
+                actionRequired: null,
                 content: `Hello,
 
 This is a notification that a prescription is ready for pickup at the hospital pharmacy.
@@ -442,6 +1544,9 @@ Thank you,
 Hospital Pharmacy`
             }
         ];
+
+        let currentFolder = 'All';
+        let selectedEmailId = null;
 
         // Load state from localStorage
         function loadState() {
@@ -462,32 +1567,84 @@ Hospital Pharmacy`
             emails.forEach(email => {
                 state[email.id] = {
                     status: email.status,
-                    labels: email.labels
+                    labels: email.labels,
+                    read: email.read,
+                    requiresCosign: email.requiresCosign
                 };
             });
             localStorage.setItem('emailState', JSON.stringify(state));
         }
 
+        // Update folder counts
+        function updateFolderCounts() {
+            const counts = {
+                'All': emails.length,
+                'Results': emails.filter(e => e.folder === 'Results').length,
+                'Patient Calls': emails.filter(e => e.folder === 'Patient Calls').length,
+                'Refill Requests': emails.filter(e => e.folder === 'Refill Requests').length,
+                'Team Messages': emails.filter(e => e.folder === 'Team Messages').length,
+                'Billing': emails.filter(e => e.folder === 'Billing').length
+            };
+
+            document.getElementById('countAll').textContent = counts['All'];
+            document.getElementById('countResults').textContent = counts['Results'];
+            document.getElementById('countCalls').textContent = counts['Patient Calls'];
+            document.getElementById('countRefills').textContent = counts['Refill Requests'];
+            document.getElementById('countTeam').textContent = counts['Team Messages'];
+            document.getElementById('countBilling').textContent = counts['Billing'];
+        }
+
+        // Switch folder
+        function switchFolder(folder) {
+            currentFolder = folder;
+            document.querySelectorAll('.folder-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.folder-item').classList.add('active');
+            document.getElementById('folderTitle').textContent = folder;
+            renderEmailList();
+            renderEmptyDetail();
+            selectedEmailId = null;
+        }
+
+        // Filter emails by folder
+        function getFilteredEmails() {
+            if (currentFolder === 'All') {
+                return emails;
+            }
+            return emails.filter(email => email.folder === currentFolder);
+        }
+
         // Render email list
         function renderEmailList() {
             const container = document.getElementById('emailList');
-            container.innerHTML = emails.map(email => {
+            const filteredEmails = getFilteredEmails();
+            
+            container.innerHTML = filteredEmails.map(email => {
                 const isSuspiciousUrgent = email.labels.includes('Urgent') && email.labels.includes('Suspicious');
                 const isSelected = email.id === selectedEmailId;
                 const hasReported = email.labels.includes('Reported');
                 
                 return `
-                    <div class="email-card ${isSuspiciousUrgent ? 'suspicious-urgent' : ''} ${isSelected ? 'selected' : ''}" 
+                    <div class="email-card ${isSuspiciousUrgent ? 'suspicious-urgent' : ''} ${isSelected ? 'selected' : ''} ${!email.read ? 'unread' : ''}" 
                          onclick="selectEmail('${email.id}')">
-                        <div class="email-header">
-                            <div class="email-sender">${email.sender}</div>
+                        <div class="email-header-row">
+                            <div class="email-sender">
+                                <span class="status-indicator ${email.read ? 'read' : 'unread'}"></span>
+                                ${email.sender}
+                            </div>
                             <div class="email-timestamp">${email.timestamp}</div>
                         </div>
                         <div class="email-subject">${email.subject}</div>
+                        ${email.patient ? `
+                            <div class="email-patient-info">
+                                Patient: ${email.patient.name} (MRN: ${email.patient.mrn})
+                            </div>
+                        ` : ''}
                         <div class="email-labels">
                             ${email.labels.map(label => {
                                 if (label === 'Reported') {
-                                    return `<span class="label reported">Reported by Nurse Li</span>`;
+                                    return `<span class="label reported">Reported by ${userName}</span>`;
                                 } else if (label === 'Urgent') {
                                     return `<span class="label urgent">Urgent</span>`;
                                 } else if (label === 'Suspicious') {
@@ -495,44 +1652,68 @@ Hospital Pharmacy`
                                 }
                                 return '';
                             }).join('')}
+                            ${email.requiresCosign ? `<span class="label needs-cosign">Needs Cosign</span>` : ''}
                         </div>
-                        ${email.labels.includes('Suspicious') ? `<div class="confidence-score">Confidence Score: ${email.confidence}</div>` : ''}
                     </div>
                 `;
             }).join('');
         }
 
-        let selectedEmailId = null;
-
         function selectEmail(emailId) {
             selectedEmailId = emailId;
             const email = emails.find(e => e.id === emailId);
             
+            // Mark as read
+            if (email && !email.read) {
+                email.read = true;
+                saveState();
+            }
+            
             renderEmailList();
             
             if (email) {
-                renderPluginPanel(email);
+                renderDetailPanel(email);
             } else {
-                renderEmptyPlugin();
+                renderEmptyDetail();
             }
         }
 
-        function renderPluginPanel(email) {
-            const panel = document.getElementById('pluginPanel');
-            panel.className = 'plugin-panel';
+        function renderDetailPanel(email) {
+            const panel = document.getElementById('detailPanel');
+            panel.className = 'detail-panel';
             
             const isSuspicious = email.labels.includes('Suspicious');
             const isUrgent = email.labels.includes('Urgent');
             
             panel.innerHTML = `
-                <div class="plugin-header">
-                    <h2>Email Content</h2>
+                <div class="detail-header">
+                    <h2>Message Detail</h2>
                 </div>
+                <div class="detail-tabs">
+                    <button class="detail-tab active" onclick="switchTab('message')">Message</button>
+                    <button class="detail-tab" onclick="switchTab('patient')">Patient Info</button>
+                    ${isSuspicious ? `<button class="detail-tab" onclick="switchTab('audit')">Audit Trail</button>` : ''}
+                </div>
+                <div class="detail-content" id="detailContent">
+                    ${renderMessageTab(email)}
+                </div>
+            `;
+        }
+
+        function renderMessageTab(email) {
+            const isSuspicious = email.labels.includes('Suspicious');
+            const isUrgent = email.labels.includes('Urgent');
+            
+            return `
                 <div class="email-content-section">
                     <div class="email-content-header">
                         <div class="email-field">
                             <div class="email-field-label">From:</div>
                             <div class="email-field-value">${email.sender}</div>
+                        </div>
+                        <div class="email-field">
+                            <div class="email-field-label">To:</div>
+                            <div class="email-field-value">${email.to}</div>
                         </div>
                         <div class="email-field">
                             <div class="email-field-label">Subject:</div>
@@ -542,33 +1723,129 @@ Hospital Pharmacy`
                             <div class="email-field-label">Received:</div>
                             <div class="email-field-value">${email.timestamp}</div>
                         </div>
+                        ${email.patient ? `
+                            <div class="email-field">
+                                <div class="email-field-label">Patient:</div>
+                                <div class="email-field-value">${email.patient.name} (MRN: ${email.patient.mrn})</div>
+                            </div>
+                        ` : ''}
+                        ${email.encounter ? `
+                            <div class="email-field">
+                                <div class="email-field-label">Encounter:</div>
+                                <div class="email-field-value">${email.encounter}</div>
+                            </div>
+                        ` : ''}
+                        ${email.attachments.length > 0 ? `
+                            <div class="email-field">
+                                <div class="email-field-label">Attachments:</div>
+                                <div class="email-field-value">${email.attachments.map(att => `<span style="color: #0072CE; cursor: pointer;">${att}</span>`).join(', ')}</div>
+                            </div>
+                        ` : ''}
                     </div>
                     <div class="email-body">
 ${email.content || 'No content available.'}
                     </div>
                 </div>
                 ${isSuspicious || isUrgent ? `
-                    <div class="plugin-header">
-                        <h2>Why flagged?</h2>
-                    </div>
                     <div class="detection-rationale">
+                        <strong>Why flagged?</strong><br>
                         ${email.rationale || 'This email has been flagged for review.'}
                     </div>
-                    <div class="action-buttons">
-                        ${isSuspicious ? `
-                            <button class="btn btn-report" onclick="reportEmail('${email.id}')">
-                                Report to Department Lead & IT Director
-                            </button>
-                        ` : ''}
-                    </div>
                 ` : ''}
+                <div class="action-buttons">
+                    ${isSuspicious ? `
+                        <button class="btn btn-report" onclick="reportEmail('${email.id}')">
+                            Report to IT Department
+                        </button>
+                    ` : ''}
+                </div>
             `;
         }
 
-        function renderEmptyPlugin() {
-            const panel = document.getElementById('pluginPanel');
-            panel.className = 'plugin-panel empty';
-            panel.innerHTML = '<div>Select an email to view detection details</div>';
+        function renderPatientTab(email) {
+            if (!email.patient) {
+                return '<div style="padding: 20px; color: #718096;">No patient information available.</div>';
+            }
+            return `
+                <div class="info-section">
+                    <div class="info-row">
+                        <div class="info-label">Patient Name:</div>
+                        <div class="info-value">${email.patient.name}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">MRN:</div>
+                        <div class="info-value">${email.patient.mrn}</div>
+                    </div>
+                    ${email.patient.dob ? `
+                        <div class="info-row">
+                            <div class="info-label">Date of Birth:</div>
+                            <div class="info-value">${email.patient.dob}</div>
+                        </div>
+                    ` : ''}
+                    ${email.encounter ? `
+                        <div class="info-row">
+                            <div class="info-label">Encounter:</div>
+                            <div class="info-value">${email.encounter}</div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function renderAuditTab(email) {
+            const reportData = localStorage.getItem(`emailReport_${email.id}`);
+            let auditLog = [];
+            
+            if (reportData) {
+                const report = JSON.parse(reportData);
+                auditLog.push({
+                    time: report.reportedTime || new Date().toISOString(),
+                    action: 'Reported',
+                    actor: report.reportedBy || userName,
+                    role: 'nurse'
+                });
+            }
+            
+            if (auditLog.length === 0) {
+                return '<div style="padding: 20px; color: #718096;">No audit trail available.</div>';
+            }
+            
+            return `
+                <div class="info-section">
+                    ${auditLog.map(log => `
+                        <div class="info-row" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #E4E8EF;">
+                            <div>
+                                <div style="font-weight: 600; color: #2d3748; margin-bottom: 4px;">${log.action}</div>
+                                <div style="font-size: 11px; color: #718096;">${log.actor} (${log.role})</div>
+                                <div style="font-size: 11px; color: #718096;">${new Date(log.time).toLocaleString()}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function switchTab(tab) {
+            const email = emails.find(e => e.id === selectedEmailId);
+            if (!email) return;
+            
+            document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const content = document.getElementById('detailContent');
+            if (tab === 'message') {
+                content.innerHTML = renderMessageTab(email);
+            } else if (tab === 'patient') {
+                content.innerHTML = renderPatientTab(email);
+            } else if (tab === 'audit') {
+                content.innerHTML = renderAuditTab(email);
+            }
+        }
+
+        function renderEmptyDetail() {
+            const panel = document.getElementById('detailPanel');
+            panel.className = 'detail-panel empty';
+            panel.innerHTML = '<div>Select a message to view details</div>';
         }
 
         function reportEmail(emailId) {
@@ -582,7 +1859,12 @@ ${email.content || 'No content available.'}
                 // Save to localStorage with notification info
                 const reportData = {
                     status: 'reported',
-                    notifiedRoles: ['lead', 'itDirector']
+                    notifiedRoles: ['itDirector'],
+                    reportedBy: userName,
+                    reportedTime: new Date().toISOString(),
+                    emailId: emailId,
+                    emailSubject: email.subject,
+                    emailSender: email.sender
                 };
                 localStorage.setItem(`emailReport_${emailId}`, JSON.stringify(reportData));
                 
@@ -590,22 +1872,59 @@ ${email.content || 'No content available.'}
                 renderEmailList();
                 
                 // Show toast notification
-                showToast();
+                showToast('Reported successfully. Redirecting to IT Admin...');
+                
+                // Redirect to IT admin login page after a short delay
+                setTimeout(() => {
+                    window.location.href = 'it-admin-view.html';
+                }, 1500);
             }
         }
 
-        function showToast() {
+        function showToast(message) {
             const toast = document.getElementById('toast');
+            toast.textContent = message;
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
         }
 
-        // Initialize
-        loadState();
-        renderEmailList();
+        function resetDemo() {
+            if (confirm('Reset all report records? This will clear all reported email statuses.')) {
+                // 清除所有报告记录
+                const keys = Object.keys(localStorage);
+                keys.forEach(key => {
+                    if (key.startsWith('emailReport_') || key === 'emailState') {
+                        localStorage.removeItem(key);
+                    }
+                });
+                
+                // 重置邮件状态
+                emails.forEach(email => {
+                    email.status = email.labels.includes('Suspicious') ? 'suspicious' : 'safe';
+                    email.labels = email.labels.filter(l => l !== 'Reported');
+                    email.read = false;
+                    email.requiresCosign = false;
+                });
+                
+                // 重新渲染
+                selectedEmailId = null;
+                renderEmailList();
+                renderEmptyDetail();
+                updateFolderCounts();
+                
+                showToast('All report records cleared. Demo reset.');
+            }
+        }
+
+        function signOut() {
+            if (confirm('Sign out?')) {
+                sessionStorage.clear();
+                showLogin();
+            }
+        }
+
     </script>
 </body>
 </html>
-

@@ -1225,8 +1225,8 @@
                 sessionStorage.removeItem('mfaCode');
                 sessionStorage.removeItem('pendingUser');
                 
-                // Show view instead of redirecting
-                showView();
+                // Show view with reset flag for new login
+                showView(true);
             } else {
                 errorMessage.classList.add('show');
                 inputs.forEach(input => {
@@ -1363,7 +1363,7 @@
         }
 
         // Show/Hide views
-        function showView() {
+        function showView(resetOnLogin = false) {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('viewSection').classList.add('show');
             document.getElementById('bodyElement').className = 'view-mode';
@@ -1372,7 +1372,31 @@
             const userName = sessionStorage.getItem('username') || 'Nurse Li';
             document.getElementById('userName').textContent = userName;
             
-            loadState();
+            // If this is a new login, reset all email states
+            if (resetOnLogin) {
+                // Clear all report records from localStorage
+                const keys = Object.keys(localStorage);
+                keys.forEach(key => {
+                    if (key.startsWith('emailReport_') || key === 'emailState') {
+                        localStorage.removeItem(key);
+                    }
+                });
+                
+                // Reset email states to initial values
+                emails.forEach(email => {
+                    email.status = email.labels.includes('Suspicious') ? 'suspicious' : 'safe';
+                    email.labels = email.labels.filter(l => l !== 'Reported');
+                    email.read = false;
+                    email.requiresCosign = false;
+                });
+                
+                // Save the reset state
+                saveState();
+            } else {
+                // Page refresh - load existing state
+                loadState();
+            }
+            
             updateFolderCounts();
             renderEmailList();
         }
@@ -1385,7 +1409,8 @@
 
         // Check authentication on load
         if (sessionStorage.getItem('authenticated') === 'true' && sessionStorage.getItem('role') === 'nurse') {
-            showView();
+            // Page refresh - don't reset, just load existing state
+            showView(false);
         } else {
             // Check if there's a pending MFA verification
             const pendingUser = sessionStorage.getItem('pendingUser');

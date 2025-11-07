@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Login Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background: #0072CE;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #005a9e;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Login Reset Function Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Check localStorage State</h2>
+        <button onclick="checkLocalStorage()">Check localStorage</button>
+        <div id="localStorageResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: Simulate Email Report</h2>
+        <button onclick="simulateReport()">Simulate Report Email</button>
+        <div id="reportResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: Simulate Login Reset</h2>
+        <button onclick="simulateLoginReset()">Simulate Login Reset</button>
+        <div id="resetResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 4: Clear All Test Data</h2>
+        <button onclick="clearAll()">Clear All localStorage</button>
+        <div id="clearResult" class="result"></div>
+    </div>
+
+    <script>
+        function checkLocalStorage() {
+            const keys = Object.keys(localStorage);
+            const emailKeys = keys.filter(k => k.startsWith('emailReport_') || k === 'emailState');
+            const result = document.getElementById('localStorageResult');
+            
+            if (emailKeys.length === 0) {
+                result.className = 'result success';
+                result.innerHTML = '✓ No email state found in localStorage (clean state)';
+            } else {
+                result.className = 'result error';
+                result.innerHTML = `✗ Found ${emailKeys.length} email state keys:<br>` + 
+                    emailKeys.map(k => `- ${k}`).join('<br>');
+            }
+        }
+        
+        function simulateReport() {
+            // Simulate reporting an email
+            const reportData = {
+                status: 'reported',
+                notifiedRoles: ['itDirector'],
+                reportedBy: 'Nurse Li',
+                reportedTime: new Date().toISOString(),
+                emailId: 'email1',
+                emailSubject: 'Test Email',
+                emailSender: 'test@example.com'
+            };
+            localStorage.setItem('emailReport_email1', JSON.stringify(reportData));
+            localStorage.setItem('emailState', JSON.stringify({
+                email1: {
+                    status: 'reported',
+                    labels: ['Urgent', 'Suspicious', 'Reported'],
+                    read: false,
+                    requiresCosign: false
+                }
+            }));
+            
+            const result = document.getElementById('reportResult');
+            result.className = 'result success';
+            result.innerHTML = '✓ Simulated email report saved to localStorage';
+            checkLocalStorage();
+        }
+        
+        function simulateLoginReset() {
+            // Simulate the reset logic from showView(true)
+            const keys = Object.keys(localStorage);
+            let cleared = 0;
+            keys.forEach(key => {
+                if (key.startsWith('emailReport_') || key === 'emailState') {
+                    localStorage.removeItem(key);
+                    cleared++;
+                }
+            });
+            
+            const result = document.getElementById('resetResult');
+            if (cleared > 0) {
+                result.className = 'result success';
+                result.innerHTML = `✓ Reset successful! Cleared ${cleared} key(s) from localStorage`;
+            } else {
+                result.className = 'result';
+                result.innerHTML = 'No email state found to reset';
+            }
+            checkLocalStorage();
+        }
+        
+        function clearAll() {
+            const keys = Object.keys(localStorage);
+            keys.forEach(key => {
+                if (key.startsWith('emailReport_') || key === 'emailState' || key.startsWith('test_')) {
+                    localStorage.removeItem(key);
+                }
+            });
+            const result = document.getElementById('clearResult');
+            result.className = 'result success';
+            result.innerHTML = '✓ All test data cleared';
+            checkLocalStorage();
+        }
+        
+        // Check on load
+        window.onload = function() {
+            checkLocalStorage();
+        };
+    </script>
+</body>
+</html>
+

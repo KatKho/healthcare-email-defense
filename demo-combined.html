@@ -545,6 +545,15 @@
                 <p>Analyzing email patterns...</p>
             </div>
 
+            <!-- Loading indicator for API calls -->
+            <div id="loadingIndicator" style="display: none; text-align: center; padding: 20px;">
+                <div class="spinner"></div>
+                <p>Analyzing email content...</p>
+            </div>
+
+            <!-- Analysis results container for API responses -->
+            <div id="analysisResults"></div>
+
             <div class="results-section" id="results" style="display: none;">
                 <h3>Analysis Results</h3>
                 
@@ -957,38 +966,81 @@
         }
 
         function analyzeEmail() {
+            // Get email content from form fields
             const sender = document.getElementById('sender').value;
             const subject = document.getElementById('subject').value;
             const body = document.getElementById('emailBody').value;
 
+            // Validate input
             if (!sender || !subject || !body) {
                 alert('Please fill in all fields');
                 return;
             }
 
+            // Combine fields into full email content for API
+            const emailContent = `From: ${sender}\nSubject: ${subject}\n\n${body}`;
+
+            // Get context type (if there's a select box)
+            const contextSelect = document.getElementById('contextType');
+            const context = contextSelect ? contextSelect.value : 'general';
+
+            // Show loading state
             document.getElementById('loading').style.display = 'block';
             document.getElementById('results').style.display = 'none';
+            document.getElementById('analysisResults').innerHTML = '';
 
             // Simulate adding to queue
             queueStatus.new++;
             updateQueueDisplay();
 
-            setTimeout(() => {
-                const analysis = performAnalysis(sender, subject, body);
-                displayResults(analysis);
-                
-                // Log to history
-                emailHistory.push({
-                    timestamp: new Date(),
-                    sender: sender,
-                    subject: subject,
-                    analysis: analysis
+            // Call API analysis function
+            analyzeEmailWithAPI(emailContent, context)
+                .then((apiData) => {
+                    // API call successful - results are already displayed by analyzeEmailWithAPI
+                    // Log to history
+                    emailHistory.push({
+                        timestamp: new Date(),
+                        sender: sender,
+                        subject: subject,
+                        analysis: {
+                            isUrgent: apiData.urgencyLevel === 'high' || apiData.urgencyLevel === 'medium',
+                            isPhishing: false, // API will determine this
+                            confidence: 85,
+                            reasoning: `API Analysis: ${apiData.recommendedAction || 'Analysis complete'}`
+                        },
+                        apiData: apiData
+                    });
+                    
+                    // Update incident log
+                    updateIncidentLog({
+                        isUrgent: apiData.urgencyLevel === 'high' || apiData.urgencyLevel === 'medium',
+                        isPhishing: false,
+                        confidence: 85
+                    });
+                    
+                    document.getElementById('loading').style.display = 'none';
+                })
+                .catch((error) => {
+                    // API call failed - fall back to local simulation
+                    console.warn('API call failed, using local simulation:', error);
+                    
+                    setTimeout(() => {
+                        const analysis = performAnalysis(sender, subject, body);
+                        displayResults(analysis);
+                        
+                        // Log to history
+                        emailHistory.push({
+                            timestamp: new Date(),
+                            sender: sender,
+                            subject: subject,
+                            analysis: analysis
+                        });
+                        
+                        updateIncidentLog(analysis);
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('results').style.display = 'block';
+                    }, 1000);
                 });
-                
-                updateIncidentLog(analysis);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('results').style.display = 'block';
-            }, 1000);
         }
 
         function performAnalysis(sender, subject, body) {
@@ -1278,6 +1330,174 @@
                 Patterns: ${notes.patterns || 'None noted'}
             `;
         }
+
+        /**
+         * Call backend API to analyze email content
+         */
+        async function analyzeEmailWithAPI(emailContent, context = 'general') {
+            const resultsDiv = document.getElementById('analysisResults');
+            const loadingDiv = document.getElementById('loadingIndicator');
+            
+            try {
+                // Show loading state
+                if (loadingDiv) loadingDiv.style.display = 'block';
+                if (resultsDiv) resultsDiv.innerHTML = '<p>🔄 Analyzing email content...</p>';
+                
+                console.log('📤 Sending analysis request to backend');
+                
+                // Call local Express server API
+                const response = await fetch('http://localhost:3000/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        emailContent: emailContent,
+                        context: context
+                    })
+                });
+                
+                // Parse response
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.error || 'Request failed');
+                }
+                
+                console.log('✅ Received analysis result:', result);
+                
+                // Hide loading state
+                if (loadingDiv) loadingDiv.style.display = 'none';
+                
+                // Display results
+                if (result.success && result.data) {
+                    displayAnalysisResults(result.data);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+                
+                return result.data;
+                
+            } catch (error) {
+                console.error('❌ Analysis failed:', error);
+                
+                // Hide loading state
+                if (loadingDiv) loadingDiv.style.display = 'none';
+                
+                // Display error message
+                if (resultsDiv) {
+                    resultsDiv.innerHTML = `
+                        <div style="color: red; padding: 15px; border: 1px solid red; border-radius: 5px; background: #ffe6e6;">
+                            <h3>❌ Analysis Failed</h3>
+                            <p><strong>Error:</strong>${error.message}</p>
+                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                                Please check:<br>
+                                • Network connection is normal<br>
+                                • Server is running on http://localhost:3000<br>
+                                • AWS Lambda endpoint is configured correctly
+                            </p>
+                        </div>
+                    `;
+                }
+                
+                throw error;
+            }
+        }
+
+        /**
+         * Display analysis results
+         */
+        function displayAnalysisResults(data) {
+            const resultsDiv = document.getElementById('analysisResults');
+            
+            if (!resultsDiv) {
+                console.error('Results display container #analysisResults not found');
+                return;
+            }
+            
+            // Helper function: escape HTML
+            const escapeHtml = (text) => {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            };
+            
+            // Helper function: get urgency level display
+            const getUrgencyDisplay = (level) => {
+                const urgencyMap = {
+                    'high': { emoji: '🔴', text: 'High', color: '#dc3545' },
+                    'medium': { emoji: '🟡', text: 'Medium', color: '#ffc107' },
+                    'low': { emoji: '🟢', text: 'Low', color: '#28a745' },
+                    'routine': { emoji: '🟢', text: 'Routine', color: '#28a745' }
+                };
+                return urgencyMap[level] || { emoji: '⚪', text: 'Unknown', color: '#6c757d' };
+            };
+            
+            const urgency = getUrgencyDisplay(data.urgencyLevel);
+            
+            const html = `
+                <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-top: 20px;">
+                    <h3 style="color: #28a745; margin-top: 0;">✅ Analysis Complete</h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">🔒 Scrubbed Text</h4>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 4px solid #007bff; white-space: pre-wrap; font-family: monospace; font-size: 14px;">
+                            ${escapeHtml(data.scrubbedText || 'No content')}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">🏥 Detected PHI Entities</h4>
+                        ${(data.phiEntities && data.phiEntities.length > 0) ? `
+                            <ul style="list-style: none; padding: 0;">
+                                ${data.phiEntities.map(entity => `
+                                    <li style="background: #e7f3ff; padding: 10px; margin-bottom: 8px; border-radius: 5px; border-left: 4px solid #0066cc;">
+                                        <strong style="color: #0066cc;">${escapeHtml(entity.Type || entity.type)}:</strong> 
+                                        <span style="color: #333;">${escapeHtml(entity.Text || entity.text)}</span>
+                                        <span style="color: #666; font-size: 12px; margin-left: 10px;">
+                                            (Confidence: ${((entity.Score || entity.score || 0) * 100).toFixed(1)}%)
+                                        </span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        ` : '<p style="color: #666; padding: 10px; background: #f8f9fa; border-radius: 5px;">✓ No PHI entities detected</p>'}
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">⚡ Urgency Level</h4>
+                        <div style="display: inline-block; padding: 10px 20px; background: ${urgency.color}; color: white; border-radius: 5px; font-weight: bold;">
+                            ${urgency.emoji} ${urgency.text}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 0;">
+                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">💡 Recommended Action</h4>
+                        <p style="color: #333; padding: 10px; background: #fff3cd; border-radius: 5px; border-left: 4px solid #ffc107;">
+                            ${escapeHtml(data.recommendedAction || 'No special recommendations')}
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = html;
+        }
+
+        // Check server connection on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log('🔍 Checking server connection...');
+            try {
+                const response = await fetch('http://localhost:3000/api/health');
+                const health = await response.json();
+                console.log('✅ Server health check passed:', health);
+                
+                if (!health.lambdaConfigured) {
+                    console.warn('⚠️ AWS Lambda endpoint not configured, please set AWS_LAMBDA_ENDPOINT in .env file');
+                }
+            } catch (error) {
+                console.error('❌ Unable to connect to backend server:', error);
+                console.error('Please ensure server is running on http://localhost:3000');
+            }
+        });
     </script>
 </body>
 </html>

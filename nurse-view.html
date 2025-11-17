@@ -1330,11 +1330,8 @@
             const cardInfo = document.getElementById('cardInfo');
             const cardUserInfo = document.getElementById('cardUserInfo');
             
-            const demoUsers = [
-                { name: 'Nurse Li', id: 'EMP-2024-001', dept: 'ER Department', role: 'nurse' },
-                { name: 'Dr. Chen', id: 'EMP-2024-002', dept: 'ER Department', role: 'lead' }
-            ];
-            const selectedUser = demoUsers[Math.floor(Math.random() * demoUsers.length)];
+            // Only nurse role for this page
+            const selectedUser = { name: 'Nurse Li', id: 'EMP-2024-001', dept: 'ER Department', role: 'nurse' };
             
             detectionMessage.textContent = 'Authentication successful!';
             detectionAnimation.style.display = 'none';

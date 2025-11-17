@@ -1132,6 +1132,7 @@
             <button class="nav-tab active" onclick="switchTab('quarantine')">Quarantine Queue</button>
             <button class="nav-tab" onclick="switchTab('statistics')">Statistics</button>
             <button class="nav-tab" onclick="switchTab('profile')">Profile</button>
+            <button class="nav-tab" onclick="goToITAdmin()" style="background: rgba(255, 255, 255, 0.15);">🔧 IT Admin</button>
             <button class="nav-tab" onclick="resetDemo()" style="background: rgba(255, 255, 255, 0.15);">🔄 Reset</button>
             <button class="nav-tab" onclick="signOut()" style="background: rgba(255, 255, 255, 0.15);">🚪 Sign Out</button>
         </div>
@@ -1954,6 +1955,16 @@ ${email.content || 'No content available.'}
                 
                 showToast('All report records cleared. Demo reset.');
             }
+        }
+
+        function goToITAdmin() {
+            // Show notification
+            showToast('Redirecting to IT Admin Portal...');
+            
+            // Redirect to IT admin login page after a short delay
+            setTimeout(() => {
+                window.location.href = 'it-admin-view.html';
+            }, 1500);
         }
 
         function signOut() {

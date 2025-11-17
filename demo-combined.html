@@ -1470,16 +1470,50 @@
                         </div>
                     </div>
                     
-                    <div style="margin-bottom: 0;">
+                    <div style="margin-bottom: 20px;">
                         <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">💡 Recommended Action</h4>
                         <p style="color: #333; padding: 10px; background: #fff3cd; border-radius: 5px; border-left: 4px solid #ffc107;">
                             ${escapeHtml(data.recommendedAction || 'No special recommendations')}
                         </p>
                     </div>
+                    
+                    ${(data.urgencyLevel === 'high' || data.urgencyLevel === 'medium') && 
+                       (!data.recommendedAction || !data.recommendedAction.toLowerCase().includes('quarantine') && 
+                        !data.recommendedAction.toLowerCase().includes('phishing') && 
+                        !data.recommendedAction.toLowerCase().includes('threat')) ? `
+                        <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border: 2px solid #007bff; border-radius: 8px;">
+                            <h4 style="color: #007bff; margin-top: 0; margin-bottom: 10px;">⚠️ Safe but Urgent Email Detected</h4>
+                            <p style="color: #333; margin-bottom: 15px;">
+                                This email has been classified as <strong>safe</strong> but <strong>urgent</strong>. 
+                                Department Lead review is recommended to ensure timely delivery of critical information.
+                            </p>
+                            <button onclick="redirectToLeadReview()" 
+                                    style="background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 6px; 
+                                           font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.3s;"
+                                    onmouseover="this.style.background='#0056b3'" 
+                                    onmouseout="this.style.background='#007bff'">
+                                🔍 Send to Department Lead for Review
+                            </button>
+                        </div>
+                    ` : ''}
                 </div>
             `;
             
             resultsDiv.innerHTML = html;
+        }
+
+        /**
+         * Redirect to Department Lead review page
+         * Called when a safe but urgent email is detected
+         */
+        function redirectToLeadReview() {
+            // Show notification
+            alert('Redirecting to Department Lead for urgent email review...');
+            
+            // Redirect to Lead page after a short delay
+            setTimeout(() => {
+                window.location.href = 'lead-view.html';
+            }, 1000);
         }
 
         // Check server connection on page load

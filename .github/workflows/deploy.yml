@@ -2,8 +2,7 @@ name: Deploy to Lightsail
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   deploy:
@@ -19,22 +18,27 @@ jobs:
           echo "${{ secrets.LIGHTSAIL_SSH_KEY }}" > ~/.ssh/lightsail_key
           chmod 600 ~/.ssh/lightsail_key
 
-      - name: Add Lightsail server to known hosts
-        run: ssh-keyscan -H ${{ secrets.LIGHTSAIL_HOST }} >> ~/.ssh/known_hosts
+      - name: Add Lightsail host to known_hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.LIGHTSAIL_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to Lightsail instance
+      - name: Deploy to Lightsail
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/lightsail_key \
-            ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_HOST }} << 'EOF'
-            cd ~/healthcare-email-defense
-            echo "Pulling latest code..."
-            git pull origin main
+            ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_HOST }} "
+              set -e
 
-            echo "Installing dependencies..."
-            npm install --silent
+              echo '--- Switching to project directory ---'
+              cd ~/healthcare-email-defense || exit 1
 
-            echo "Building frontend..."
-            npm run build
+              echo '--- Fetching latest code ---'
+              git fetch --all
 
-            echo "Deployment complete!"
-          EOF
+              echo '--- Resetting to origin/main (force sync) ---'
+              git reset --hard origin/main
+
+              echo '--- Installing dependencies ---'
+              npm install --silent
+
+              echo '--- Deployment complete ---'
+            "

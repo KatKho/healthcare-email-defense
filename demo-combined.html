@@ -1,1537 +1,1657 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVMC SecureMail Guardian - IT Administrator Portal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <title>SecureMail Guardian – IT Administrator Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #0073cc 0%, #005699 100%);
-            --secondary-gradient: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-            --success-gradient: linear-gradient(135deg, #2d8c3c 0%, #1f672c 100%);
-            --danger-gradient: linear-gradient(135deg, #d93737 0%, #b22b2b 100%);
-            --warning-gradient: linear-gradient(135deg, #f0ad4e 0%, #d99a3e 100%);
-            --info-gradient: linear-gradient(135deg, #5bc0de 0%, #46b8da 100%);
-            --dark-bg: #f5f6fa;
-            --card-bg: #ffffff;
-            --text-primary: #1a1a2e;
-            --text-secondary: #495057;
-            --border-color: #dee2e6;
-            --shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.12);
-        }
+    :root {
+      --primary: #0073cc;
+      --primary-dark: #005699;
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --border: #dee2e6;
+      --text-primary: #1a1a2e;
+      --text-secondary: #495057;
+      --danger: #d93737;
+      --warning: #f0ad4e;
+      --success: #2d8c3c;
+      --muted: #adb5bd;
+      --shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            font-size: 14px;
-            line-height: 1.5;
-        }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0;
-        }
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      background: var(--bg);
+      min-height: 100vh;
+    }
 
-        /* Enhanced Hospital Header */
-        .header {
-            background: linear-gradient(135deg, #1e3a5f 0%, #0d2238 100%);
-            color: white;
-            padding: 0;
-            margin-bottom: 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0d2238 100%);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
 
-        .header-top {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px 24px;
-            font-size: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .header-top {
+      background: rgba(0,0,0,0.25);
+      padding: 8px 24px;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .header-main {
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .header-main {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .hospital-branding {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+    .hospital-branding {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
-        .hospital-logo {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #0d2238;
-            font-size: 0.85rem;
-        }
+    .hospital-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: #fff;
+      color: #0d2238;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
 
-        .system-info h1 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
+    .system-info h1 {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
 
-        .system-info .system-subtitle {
-            font-size: 0.85rem;
-            opacity: 0.9;
-            color: #b8d4f1;
-        }
+    .system-info .system-subtitle {
+      font-size: 0.8rem;
+      color: #c9ddff;
+    }
 
-        .user-session {
-            text-align: right;
-        }
+    .user-session {
+      text-align: right;
+      font-size: 0.8rem;
+    }
 
-        .user-session .user-name {
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
+    .user-session .user-name {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
 
-        .user-session .user-role {
-            font-size: 0.8rem;
-            color: #b8d4f1;
-            margin-bottom: 2px;
-        }
+    .user-session .user-role {
+      color: #b8d4f1;
+      margin-bottom: 4px;
+    }
 
-        .user-session .session-info {
-            font-size: 0.75rem;
-            color: #94b8d8;
-        }
+    .system-status-bar {
+      padding: 8px 24px 10px;
+      display: flex;
+      gap: 16px;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.18);
+    }
 
-        .system-status-bar {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 24px;
-            display: flex;
-            gap: 30px;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #dbeafe;
+    }
 
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+    .status-indicator.warning { background: #f59e0b; }
+    .status-indicator.danger { background: #ef4444; }
 
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #22c55e;
-        }
+    /* Tabs */
+    .nav-tabs {
+      display: flex;
+      background: #fff;
+      border-bottom: 2px solid #e5e7eb;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
 
-        .status-indicator.warning {
-            background: #f59e0b;
-        }
+    .tab-btn {
+      padding: 12px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-bottom: 3px solid transparent;
+      flex: 0 0 auto;
+      transition: 0.15s all;
+    }
 
-        .status-indicator.danger {
-            background: #ef4444;
-        }
+    .tab-btn:hover {
+      background: #f3f4f6;
+      color: var(--primary);
+    }
 
-        .nav-tabs {
-            display: flex;
-            background: white;
-            border-bottom: 2px solid #e5e7eb;
-            padding: 0;
-            margin: 0;
-        }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: #f0f7ff;
+    }
 
-        .tab-btn {
-            flex: 0 0 auto;
-            padding: 14px 24px;
-            background: transparent;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-        }
+    .content {
+      padding: 20px 24px 32px;
+    }
 
-        .tab-btn:hover {
-            background: #f3f4f6;
-            color: #0073cc;
-        }
+    .tab-content {
+      display: none;
+    }
 
-        .tab-btn.active {
-            color: #0073cc;
-            border-bottom-color: #0073cc;
-            background: #f0f7ff;
-        }
+    .tab-content.active {
+      display: block;
+    }
 
-        .tab-content {
-            display: none;
-            padding: 24px;
-            background: var(--dark-bg);
-        }
+    /* Cards / widgets */
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 16px;
+      margin-bottom: 20px;
+    }
 
-        .tab-content.active {
-            display: block;
-        }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
 
-        /* Cards and Widgets */
-        .dashboard-widget {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-        }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
 
-        .dashboard-widget h3 {
-            color: var(--text-primary);
-            margin-bottom: 16px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-color);
-        }
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
 
-        /* Input Section */
-        .input-section {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
-        }
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+    }
 
-        .input-section h2 {
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
+    .metric-card {
+      background: #f8fafc;
+      border-radius: 6px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+    }
 
-        .input-section p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .metric-value {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-        }
+    .metric-pill {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
 
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px 12px;
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 14px;
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-        }
+    /* Tables */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
 
-        input[type="text"]:focus, textarea:focus {
-            outline: none;
-            border-color: #0073cc;
-            box-shadow: 0 0 0 3px rgba(0, 115, 204, 0.1);
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
 
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-            font-family: inherit;
-        }
+    th, td {
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
 
-        .analyze-btn {
-            background: #0073cc;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+    th {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      background: #f8fafc;
+    }
 
-        .analyze-btn:hover {
-            background: #005699;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0, 115, 204, 0.3);
-        }
+    tr:hover td {
+      background: #f9fafb;
+    }
 
-        /* Results Section */
-        .results-section {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
-            margin-top: 24px;
-            box-shadow: var(--shadow);
-        }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
 
-        .classification-result {
-            padding: 16px;
-            background: #f8f9fa;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin-bottom: 16px;
-        }
+    .badge-safe {
+      background: #dcfce7;
+      color: #166534;
+    }
 
-        .classification-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .badge-phishing {
+      background: #fee2e2;
+      color: #991b1b;
+    }
 
-        .classification-urgent {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
+    .badge-suspicious {
+      background: #fef3c7;
+      color: #92400e;
+    }
 
-        .classification-safe {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
+    .badge-pending {
+      background: #e0f2fe;
+      color: #075985;
+    }
 
-        .classification-phishing {
-            background: #fef3c7;
-            color: #92400e;
-            border: 1px solid #fde68a;
-        }
+    .badge-quarantined {
+      background: #fee2e2;
+      color: #991b1b;
+    }
 
-        /* Loading spinner */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 40px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin: 20px 0;
-        }
+    .badge-delivered {
+      background: #e0f2fe;
+      color: #075985;
+    }
 
-        .spinner {
-            border: 3px solid #f3f4f6;
-            border-top: 3px solid #0073cc;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
+    .btn {
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      padding: 5px 10px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
 
-        /* Test Cases */
-        .test-cases {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
-            margin-top: 24px;
-            box-shadow: var(--shadow);
-        }
+    .btn-outline {
+      background: #fff;
+      color: var(--text-secondary);
+      border: 1px solid #e5e7eb;
+    }
 
-        .test-case {
-            background: #f8f9fa;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 14px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+    }
 
-        .test-case:hover {
-            background: white;
-            border-color: #0073cc;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .btn-ghost {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+    }
 
-        .test-case.urgent {
-            border-left: 3px solid #dc2626;
-        }
+    .btn-sm {
+      padding: 4px 8px;
+      font-size: 0.7rem;
+    }
 
-        .test-case.safe {
-            border-left: 3px solid #059669;
-        }
+    .btn-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      background: #fff;
+      font-size: 0.9rem;
+    }
 
-        .test-case.phishing {
-            border-left: 3px solid #f59e0b;
-        }
+    .btn-icon.active-thumb {
+      background: #0f766e;
+      border-color: #0f766e;
+      color: #fff;
+    }
 
-        /* Better text contrast for dark backgrounds */
-        .metric-card, .dashboard-widget {
-            background: white;
-            color: var(--text-primary);
-        }
+    /* Filters / inputs */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
 
-        .reasoning {
-            background: #f8f9fa;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 16px;
-            margin-top: 16px;
-        }
+    .filters label {
+      font-weight: 500;
+    }
 
-        .reasoning h4 {
-            color: var(--text-primary);
-            margin-bottom: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-        }
+    select, input[type="text"], input[type="date"] {
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #d1d5db;
+      font-size: 0.8rem;
+      min-width: 120px;
+    }
 
-        .reasoning p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            white-space: pre-wrap;
-        }
+    input[type="text"] {
+      min-width: 200px;
+    }
 
-        /* Hospital-specific styling */
-        .hospital-badge {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    /* Charts (simple placeholders) */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      gap: 16px;
+    }
 
-        @media (max-width: 768px) {
-            .header-main {
-                flex-direction: column;
-                gap: 16px;
-            }
+    .chart-box {
+      background: #f8fafc;
+      border-radius: 6px;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+    }
 
-            .user-session {
-                text-align: left;
-            }
+    .chart-placeholder {
+      height: 150px;
+      background: repeating-linear-gradient(
+        -45deg,
+        #e5e7eb,
+        #e5e7eb 4px,
+        #f3f4f6 4px,
+        #f3f4f6 8px
+      );
+      border-radius: 4px;
+      margin-top: 8px;
+    }
 
-            .nav-tabs {
-                overflow-x: auto;
-                white-space: nowrap;
-            }
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
 
-            .tab-btn {
-                flex: 0 0 auto;
-            }
-        }
-    </style>
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 10px;
+      max-width: 820px;
+      width: 95%;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(15,23,42,0.35);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+
+    .modal-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .modal-body {
+      padding: 16px 18px 18px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+    }
+
+    .modal-section {
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #e5e7eb;
+    }
+
+    .modal-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .key-value {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 4px 10px;
+      margin-bottom: 4px;
+    }
+
+    .key-label {
+      color: var(--text-secondary);
+    }
+
+    .value-text {
+      font-weight: 500;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .threat-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .threat-list li {
+      padding: 4px 0;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .bullet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #9ca3af;
+      flex-shrink: 0;
+    }
+
+    .modal-footer {
+      padding: 10px 18px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      background: #f9fafb;
+    }
+
+    .feedback-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .feedback-textarea {
+      margin-top: 6px;
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid #d1d5db;
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .header-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .user-session {
+        text-align: left;
+      }
+      .charts-row {
+        grid-template-columns: 1fr;
+      }
+      .key-value {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Enhanced Hospital IT Header -->
-        <div class="header">
-            <div class="header-top">
-                <div>Network: EVMC-SECURE | Environment: PRODUCTION</div>
-                <div>Help Desk: ext. 4357 | On-Call: Dr. Lee</div>
-            </div>
-            <div class="header-main">
-                <div class="hospital-branding">
-                    <div class="hospital-logo">EVMC</div>
-                    <div class="system-info">
-                        <h1>SecureMail Guardian™</h1>
-                        <div class="system-subtitle">Healthcare Email Defense System v2.4.1</div>
-                    </div>
-                </div>
-                <div class="user-session">
-                    <div class="user-name">Michael Chen</div>
-                    <div class="user-role">IT Security Administrator | Level 2</div>
-                    <div class="session-info">Session: 2h 14m | Last action: 2 min ago</div>
-                    <div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.2);">
-                        <span id="currentShiftDisplay" style="color: white; font-weight: 600;">Day Shift</span>
-                        <span id="shiftTimeDisplay" style="color: #b8d4f1; font-size: 0.75rem; margin-left: 8px;">7:00 AM - 3:00 PM</span>
-                    </div>
-                </div>
-            </div>
-            <div class="system-status-bar">
-                <div class="status-item">
-                    <span class="status-indicator"></span>
-                    <span>Email Gateway: Active</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-indicator"></span>
-                    <span>AI Engine: Online</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-indicator warning"></span>
-                    <span>Queue: 3 pending</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-indicator"></span>
-                    <span>HIPAA Mode: Enabled</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <div class="nav-tabs">
-            <button class="tab-btn active" onclick="showTab('analysis')">Email Analysis</button>
-            <button class="tab-btn" onclick="showTab('generator')">Test Generator</button>
-            <button class="tab-btn" onclick="showTab('dashboard')">Shift Dashboard</button>
-            <button class="tab-btn" onclick="showTab('evaluation')">Performance</button>
-            <button class="tab-btn" onclick="showTab('history')">Activity Log</button>
-            <button class="tab-btn" onclick="showTab('quarantine')">Quarantine</button>
-        </div>
-
-        <!-- Email Analysis Tab -->
-        <div id="analysis" class="tab-content active">
-            <div class="input-section">
-                <h2>Email Security Analysis</h2>
-                <p>Analyze emails for urgency classification and phishing detection</p>
-                
-                <div class="form-group">
-                    <label for="sender">Sender Email:</label>
-                    <input type="text" id="sender" placeholder="e.g., dr.smith@emergency.hospital.org">
-                </div>
-
-                <div class="form-group">
-                    <label for="subject">Subject Line:</label>
-                    <input type="text" id="subject" placeholder="e.g., URGENT: Patient Code Blue - ICU">
-                </div>
-
-                <div class="form-group">
-                    <label for="emailBody">Email Body:</label>
-                    <textarea id="emailBody" placeholder="Paste email content here..."></textarea>
-                </div>
-
-                <button class="analyze-btn" onclick="analyzeEmail()">
-                    Analyze Email
-                </button>
-            </div>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Analyzing email patterns...</p>
-            </div>
-
-            <!-- Loading indicator for API calls -->
-            <div id="loadingIndicator" style="display: none; text-align: center; padding: 20px;">
-                <div class="spinner"></div>
-                <p>Analyzing email content...</p>
-            </div>
-
-            <!-- Analysis results container for API responses -->
-            <div id="analysisResults"></div>
-
-            <div class="results-section" id="results" style="display: none;">
-                <h3>Analysis Results</h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 20px;">
-                    <div class="classification-result">
-                        <h4 style="margin-bottom: 12px; font-size: 1rem;">Urgency Status</h4>
-                        <div class="classification-badge" id="urgencyClassificationBadge">Analyzing...</div>
-                        <div id="urgencyLevel" style="margin-top: 8px; font-size: 0.85rem; color: var(--text-secondary);"></div>
-                    </div>
-
-                    <div class="classification-result">
-                        <h4 style="margin-bottom: 12px; font-size: 1rem;">Security Status</h4>
-                        <div class="classification-badge" id="phishingClassificationBadge">Analyzing...</div>
-                        <div id="phishingLevel" style="margin-top: 8px; font-size: 0.85rem; color: var(--text-secondary);"></div>
-                    </div>
-                </div>
-
-                <div style="padding: 16px; background: #f8f9fa; border-radius: 6px; margin-bottom: 16px;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span style="font-weight: 500;">Confidence Score:</span>
-                        <div style="flex: 1; height: 20px; background: #e5e7eb; border-radius: 10px; overflow: hidden;">
-                            <div class="confidence-fill" id="confidenceBar" style="height: 100%; background: #0073cc; transition: width 0.5s ease;"></div>
-                        </div>
-                        <span id="confidenceValue" style="font-weight: 600;">0%</span>
-                    </div>
-                </div>
-
-                <div class="reasoning">
-                    <h4>Analysis Details</h4>
-                    <p id="reasoningText"></p>
-                </div>
-
-                <div style="margin-top: 20px; padding: 16px; background: #f0f9ff; border: 1px solid #bfdbfe; border-radius: 6px;">
-                    <h4 style="margin-bottom: 12px; font-size: 1rem;">Provide Feedback</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">Help improve accuracy by confirming the analysis results</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-                        <button class="analyze-btn" onclick="provideFeedback(true, 'urgency')" style="background: #059669;">
-                            Urgency: Correct
-                        </button>
-                        <button class="analyze-btn" onclick="provideFeedback(false, 'urgency')" style="background: #dc2626;">
-                            Urgency: Incorrect
-                        </button>
-                        <button class="analyze-btn" onclick="provideFeedback(true, 'phishing')" style="background: #059669;">
-                            Security: Correct
-                        </button>
-                        <button class="analyze-btn" onclick="provideFeedback(false, 'phishing')" style="background: #dc2626;">
-                            Security: Incorrect
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Test Cases -->
-            <div class="test-cases">
-                <h3>Test Scenarios</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
-                    <div class="test-case urgent" onclick="loadTestEmail('urgent1')">
-                        <div style="font-weight: 600;">URGENT: Patient Code Blue - ICU</div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary);">nurse.smith@icu.hospital.org</div>
-                    </div>
-                    <div class="test-case urgent" onclick="loadTestEmail('urgent2')">
-                        <div style="font-weight: 600;">Emergency Surgery Update Required</div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary);">dr.johnson@emergency.hospital.org</div>
-                    </div>
-                    <div class="test-case safe" onclick="loadTestEmail('safe1')">
-                        <div style="font-weight: 600;">Monthly Staff Meeting Reminder</div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary);">admin@hospital.org</div>
-                    </div>
-                    <div class="test-case phishing" onclick="loadTestEmail('phishing1')">
-                        <div style="font-weight: 600;">URGENT: HIPAA Compliance Verification</div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary);">urgent@medical-alert.net</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Dashboard Tab -->
-        <div id="dashboard" class="tab-content">
-            <!-- Shift Handover Section -->
-            <div class="dashboard-widget">
-                <h3>Shift Handover Log</h3>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                    <!-- Queue Status and Review -->
-                    <div>
-                        <h4 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-primary);">Queue Review Status</h4>
-                        <div style="background: #f8f9fa; border-radius: 6px; padding: 16px;">
-                            <!-- Queue counts -->
-                            <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #e5e7eb;">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                    <span style="font-weight: 600;">Current Queue Status</span>
-                                    <span id="totalInQueue" style="font-weight: 600; color: #0073cc;">0 emails</span>
-                                </div>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px;">
-                                    <div style="text-align: center; padding: 8px; background: white; border-radius: 4px;">
-                                        <div id="newCount" style="font-size: 1.2rem; font-weight: 600; color: #0073cc;">0</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-secondary);">New</div>
-                                    </div>
-                                    <div style="text-align: center; padding: 8px; background: white; border-radius: 4px;">
-                                        <div id="reviewCount" style="font-size: 1.2rem; font-weight: 600; color: #f59e0b;">0</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-secondary);">Reviewing</div>
-                                    </div>
-                                    <div style="text-align: center; padding: 8px; background: white; border-radius: 4px;">
-                                        <div id="escalatedCount" style="font-size: 1.2rem; font-weight: 600; color: #dc2626;">0</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-secondary);">Escalated</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Last review info -->
-                            <div style="margin-bottom: 16px;">
-                                <strong style="display: block; margin-bottom: 8px;">Last Queue Review:</strong>
-                                <div id="lastReviewDetails" style="padding: 10px; background: white; border-radius: 4px; font-size: 0.85rem; color: var(--text-secondary);">
-                                    No reviews logged today
-                                </div>
-                            </div>
-                            
-                            <!-- Review history -->
-                            <div style="margin-bottom: 12px;">
-                                <strong style="display: block; margin-bottom: 8px;">Recent Reviews (Last 24h):</strong>
-                                <div id="reviewHistory" style="max-height: 100px; overflow-y: auto; padding: 10px; background: white; border-radius: 4px; font-size: 0.8rem;">
-                                    <div style="color: var(--text-secondary);">No previous reviews</div>
-                                </div>
-                            </div>
-                            
-                            <!-- Log review button -->
-                            <button class="analyze-btn" onclick="logQueueReview()" style="width: 100%; padding: 10px;">
-                                Log Queue Review
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Shift Notes -->
-                    <div>
-                        <h4 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-primary);">Handover Notes</h4>
-                        <div style="background: #f8f9fa; border-radius: 6px; padding: 16px;">
-                            <div style="margin-bottom: 12px;">
-                                <label style="font-size: 0.85rem; font-weight: 500;">Items Reviewed:</label>
-                                <input type="text" id="itemsReviewed" placeholder="e.g., 3 urgent emails, 2 phishing attempts" style="width: 100%; margin-top: 4px;">
-                            </div>
-                            
-                            <div style="margin-bottom: 12px;">
-                                <label style="font-size: 0.85rem; font-weight: 500;">Unresolved Issues:</label>
-                                <input type="text" id="unresolvedIssues" placeholder="e.g., Awaiting verification for sender@external.org" style="width: 100%; margin-top: 4px;">
-                            </div>
-                            
-                            <div style="margin-bottom: 12px;">
-                                <label style="font-size: 0.85rem; font-weight: 500;">Suspicious Patterns:</label>
-                                <textarea id="suspiciousPatterns" placeholder="Note any unusual activity or patterns..." style="width: 100%; margin-top: 4px; min-height: 80px;"></textarea>
-                            </div>
-                            
-                            <button class="analyze-btn" onclick="saveShiftNotes()" style="width: 100%; padding: 10px; margin-bottom: 12px;">
-                                Save Handover Notes
-                            </button>
-                            
-                            <div style="padding: 10px; background: white; border-radius: 4px; font-size: 0.8rem;">
-                                <strong>Previous Shift Notes:</strong>
-                                <div id="previousNotesContent" style="color: var(--text-secondary); margin-top: 4px;">
-                                    No notes from previous shift
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Email Safety Incident Log -->
-            <div class="dashboard-widget">
-                <h3>Email Safety Incident Log</h3>
-                
-                <div style="margin-bottom: 16px; padding: 12px; background: #f0f9ff; border-radius: 6px; border: 1px solid #bfdbfe;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>System Status:</strong>
-                            <span id="systemStatus" style="color: #059669; margin-left: 8px;">No incidents — automation active</span>
-                        </div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                            False alarms (7 days): <strong id="falseAlarmCount">0</strong> | 
-                            Missed urgent: <strong id="missedUrgentCount">0</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-                        <thead>
-                            <tr style="background: #f3f4f6; border-bottom: 2px solid #e5e7eb;">
-                                <th style="padding: 10px; text-align: left;">Time</th>
-                                <th style="padding: 10px; text-align: left;">Email Type</th>
-                                <th style="padding: 10px; text-align: left;">AI Action</th>
-                                <th style="padding: 10px; text-align: left;">Human Override</th>
-                                <th style="padding: 10px; text-align: left;">Outcome</th>
-                                <th style="padding: 10px; text-align: left;">Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody id="incidentLogBody">
-                            <tr>
-                                <td colspan="6" style="padding: 20px; text-align: center; color: var(--text-secondary);">
-                                    No incidents logged — system operating normally
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div style="margin-top: 16px; padding: 12px; background: #f8f9fa; border-radius: 6px;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; font-size: 0.85rem;">
-                        <div>
-                            <strong>Total Reviews:</strong>
-                            <div id="totalReviews" style="font-size: 1.2rem; color: var(--text-primary);">0</div>
-                        </div>
-                        <div>
-                            <strong>Human Overrides:</strong>
-                            <div id="humanOverrides" style="font-size: 1.2rem; color: var(--text-primary);">0</div>
-                        </div>
-                        <div>
-                            <strong>False Positives:</strong>
-                            <div id="falsePositives" style="font-size: 1.2rem; color: #dc2626;">0</div>
-                        </div>
-                        <div>
-                            <strong>False Negatives:</strong>
-                            <div id="falseNegatives" style="font-size: 1.2rem; color: #dc2626;">0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- System Health -->
-            <div class="dashboard-widget">
-                <h3>System Health Monitor</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-                    <div style="padding: 12px; background: #f8f9fa; border-radius: 6px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.85rem;">Email Gateway</span>
-                            <span style="color: #059669; font-weight: 600;">Active</span>
-                        </div>
-                    </div>
-                    <div style="padding: 12px; background: #f8f9fa; border-radius: 6px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.85rem;">AI Engine</span>
-                            <span style="color: #059669; font-weight: 600;">Online</span>
-                        </div>
-                    </div>
-                    <div style="padding: 12px; background: #f8f9fa; border-radius: 6px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.85rem;">Processing Time</span>
-                            <span style="font-weight: 600;">&lt;2s avg</span>
-                        </div>
-                    </div>
-                    <div style="padding: 12px; background: #f8f9fa; border-radius: 6px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.85rem;">Emails Today</span>
-                            <span id="emailsToday" style="font-weight: 600;">0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Other tabs remain similar but with improved styling... -->
-        <div id="generator" class="tab-content">
-            <div class="dashboard-widget">
-                <h3>Email Test Generator</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 20px;">Generate test emails to validate the AI classification system</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
-                    <button class="analyze-btn" onclick="generateEmail('urgent')" style="background: #dc2626;">
-                        Generate Urgent
-                    </button>
-                    <button class="analyze-btn" onclick="generateEmail('safe')" style="background: #059669;">
-                        Generate Safe
-                    </button>
-                    <button class="analyze-btn" onclick="generateEmail('phishing')" style="background: #f59e0b;">
-                        Generate Phishing
-                    </button>
-                </div>
-                
-                <div id="generatedEmail" style="display: none; margin-top: 20px;">
-                    <h4>Generated Email:</h4>
-                    <div style="background: #f8f9fa; border-radius: 6px; padding: 16px; margin-top: 12px;">
-                        <div style="margin-bottom: 12px;">
-                            <label style="font-weight: 500; font-size: 0.85rem;">Sender:</label>
-                            <div id="genSender" style="padding: 8px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; margin-top: 4px;"></div>
-                        </div>
-                        <div style="margin-bottom: 12px;">
-                            <label style="font-weight: 500; font-size: 0.85rem;">Subject:</label>
-                            <div id="genSubject" style="padding: 8px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; margin-top: 4px;"></div>
-                        </div>
-                        <div style="margin-bottom: 12px;">
-                            <label style="font-weight: 500; font-size: 0.85rem;">Body:</label>
-                            <div id="genBody" style="padding: 8px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; margin-top: 4px; white-space: pre-wrap; min-height: 100px;"></div>
-                        </div>
-                        <button class="analyze-btn" onclick="loadGeneratedEmail()">
-                            Load into Analyzer
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="evaluation" class="tab-content">
-            <div class="dashboard-widget">
-                <h3>Performance Metrics</h3>
-                <p>Classification accuracy and feedback analysis</p>
-            </div>
-        </div>
-
-        <div id="history" class="tab-content">
-            <div class="dashboard-widget">
-                <h3>Activity Log</h3>
-                <div id="historyList">
-                    <p style="text-align: center; color: var(--text-secondary); padding: 40px;">
-                        No activity recorded yet
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div id="quarantine" class="tab-content">
-            <div class="dashboard-widget">
-                <h3>Quarantine Queue</h3>
-                <div id="quarantineList">
-                    <p style="text-align: center; color: var(--text-secondary); padding: 40px;">
-                        No emails in quarantine
-                    </p>
-                </div>
-            </div>
-        </div>
+<div class="container">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-top">
+      <div>Network: EVMC-SECURE · Environment: PRODUCTION</div>
+      <div>Help Desk: ext. 4357 · On-Call: Dr. Lee</div>
     </div>
+    <div class="header-main">
+      <div class="hospital-branding">
+        <div class="hospital-logo">EVMC</div>
+        <div class="system-info">
+          <h1>SecureMail Guardian™</h1>
+          <div class="system-subtitle">Healthcare Email Defense · IT Administrator View</div>
+        </div>
+      </div>
+      <div class="user-session">
+        <div class="user-name">Michael Chen</div>
+        <div class="user-role">IT Security Administrator · Level 2</div>
+        <div style="font-size: 0.75rem; color: #cbd5f5;">
+          Session: 2h 14m · Last action: 3 min ago
+        </div>
+      </div>
+    </div>
+    <div class="system-status-bar">
+      <div class="status-item">
+        <span class="status-indicator"></span>
+        <span>Email Gateway: Active</span>
+      </div>
+      <div class="status-item">
+        <span class="status-indicator"></span>
+        <span>AI Engine: Online</span>
+      </div>
+      <div class="status-item">
+        <span class="status-indicator warning"></span>
+        <span>Queue: <span id="queueCountHeader">3 pending</span></span>
+      </div>
+      <div class="status-item">
+        <span class="status-indicator"></span>
+        <span>HIPAA Mode: Enabled</span>
+      </div>
+    </div>
+  </header>
 
-    <script>
-        // Core functionality
-        let emailHistory = [];
-        let incidentLog = [];
-        let reviewHistory = [];
-        let queueStatus = {
-            new: 0,
-            reviewing: 0,
-            escalated: 0
-        };
-        
-        // Test email data
-        const testEmails = {
-            urgent1: {
-                sender: "nurse.smith@icu.hospital.org",
-                subject: "URGENT: Patient Code Blue - ICU",
-                body: "CODE BLUE ALERT - ICU UNIT 3\n\nPatient requiring immediate assistance.\nAll available staff report to ICU-312."
-            },
-            urgent2: {
-                sender: "dr.johnson@emergency.hospital.org",
-                subject: "Emergency Surgery Update Required",
-                body: "Emergency surgical case requiring immediate attention.\nPatient scheduled for OR 2."
-            },
-            safe1: {
-                sender: "admin@hospital.org",
-                subject: "Monthly Staff Meeting Reminder",
-                body: "Reminder: Monthly department meeting next Friday at 2:00 PM."
-            },
-            phishing1: {
-                sender: "urgent@medical-alert.net",
-                subject: "URGENT: HIPAA Compliance Verification",
-                body: "Your facility has been flagged. Click here to verify compliance immediately."
-            }
-        };
+  <!-- TABS -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" data-tab="it-review">IT Review Queue</button>
+    <button class="tab-btn" data-tab="quarantine">Quarantine</button>
+    <button class="tab-btn" data-tab="performance">Performance Metrics</button>
+    <button class="tab-btn" data-tab="activity-log">History / Activity Log</button>
+  </nav>
 
-        // Initialize shift display on page load
-        function initializeShiftDisplay() {
-            updateShiftDisplay();
-            setInterval(updateShiftDisplay, 60000); // Update every minute
-        }
+  <!-- CONTENT -->
+  <main class="content">
+    <!-- IT REVIEW QUEUE TAB -->
+    <section id="it-review" class="tab-content active">
+      <!-- TOP CARDS -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">IT Review Dashboard</div>
+            <div class="card-subtitle">
+              Queue of emails requiring human-in-the-loop (HITL) review
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" id="loadSampleBtn">Load sample data</button>
+        </div>
+        <div class="metric-row" style="margin-top: 4px;">
+          <div class="metric-card">
+            <div class="metric-label">Pending Review</div>
+            <div class="metric-value" id="metricPending">0</div>
+            <div class="metric-pill">Requires IT action</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Reviewed Today</div>
+            <div class="metric-value" id="metricReviewedToday">0</div>
+            <div class="metric-pill">Since 12:00am</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Review Accuracy</div>
+            <div class="metric-value" id="metricReviewAccuracy">–</div>
+            <div class="metric-pill">% IT agreed with AI</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Avg Review Time</div>
+            <div class="metric-value" id="metricReviewTime">–</div>
+            <div class="metric-pill">From arrival to decision</div>
+          </div>
+        </div>
+      </div>
 
-        function updateShiftDisplay() {
-            const hour = new Date().getHours();
-            let shift, shiftTime;
-            
-            if (hour >= 7 && hour < 15) {
-                shift = "Day Shift";
-                shiftTime = "7:00 AM - 3:00 PM";
-            } else if (hour >= 15 && hour < 23) {
-                shift = "Evening Shift";
-                shiftTime = "3:00 PM - 11:00 PM";
-            } else {
-                shift = "Night Shift";
-                shiftTime = "11:00 PM - 7:00 AM";
-            }
-            
-            const shiftDisplay = document.getElementById('currentShiftDisplay');
-            const timeDisplay = document.getElementById('shiftTimeDisplay');
-            if (shiftDisplay) shiftDisplay.textContent = shift;
-            if (timeDisplay) timeDisplay.textContent = shiftTime;
-        }
+      <!-- ACTIVE REVIEW QUEUE TABLE -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Active Review Queue</div>
+            <div class="card-subtitle">
+              Emails that require IT approval before final delivery
+            </div>
+          </div>
+          <div class="filters">
+            <span style="font-weight: 500;">Filters:</span>
+            <div>
+              <label for="reviewFilterClass">Classification</label>
+              <select id="reviewFilterClass">
+                <option value="all">All</option>
+                <option value="phishing">Phishing</option>
+                <option value="safe">Safe</option>
+                <option value="suspicious">Suspicious</option>
+              </select>
+            </div>
+            <div>
+              <label for="reviewFilterStatus">Status</label>
+              <select id="reviewFilterStatus">
+                <option value="all">All</option>
+                <option value="pending">Pending review</option>
+                <option value="quarantined">Quarantined</option>
+                <option value="released">Released</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+            <tr>
+              <th>Sender</th>
+              <th>Recipient</th>
+              <th>Subject</th>
+              <th>Classification</th>
+              <th>Confidence</th>
+              <th>Status</th>
+              <th>Received</th>
+              <th style="width: 210px;">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="itReviewTableBody">
+            <tr>
+              <td colspan="8" style="text-align:center; padding:16px; color: var(--text-secondary);">
+                No emails currently waiting for review.
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
+    <!-- QUARANTINE TAB -->
+    <section id="quarantine" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Quarantine Queue</div>
+            <div class="card-subtitle">
+              Emails blocked automatically by AI or IT for potential threats
+            </div>
+          </div>
+          <button class="btn btn-danger btn-sm" id="clearQuarantineBtn">Clear all (demo)</button>
+        </div>
 
-        function loadTestEmail(testId) {
-            const email = testEmails[testId];
-            document.getElementById('sender').value = email.sender;
-            document.getElementById('subject').value = email.subject;
-            document.getElementById('emailBody').value = email.body;
-        }
+        <div class="metric-row" style="margin-bottom: 10px;">
+          <div class="metric-card">
+            <div class="metric-label">Total Quarantined</div>
+            <div class="metric-value" id="metricQuarantineTotal">0</div>
+            <div class="metric-pill">Across selected window</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">PHI Detected</div>
+            <div class="metric-value" id="metricQuarantinePHI">0</div>
+            <div class="metric-pill">Emails w/ PHI present</div>
+          </div>
+        </div>
 
-        function analyzeEmail() {
-            // Get email content from form fields
-            const sender = document.getElementById('sender').value;
-            const subject = document.getElementById('subject').value;
-            const body = document.getElementById('emailBody').value;
+        <div class="filters">
+          <span style="font-weight: 500;">Filters:</span>
+          <div>
+            <label for="quarFilterDateFrom">From</label>
+            <input type="date" id="quarFilterDateFrom" />
+          </div>
+          <div>
+            <label for="quarFilterDateTo">To</label>
+            <input type="date" id="quarFilterDateTo" />
+          </div>
+          <div>
+            <label for="quarFilterSearch">Search</label>
+            <input type="text" id="quarFilterSearch" placeholder="Sender, recipient, subject" />
+          </div>
+        </div>
 
-            // Validate input
-            if (!sender || !subject || !body) {
-                alert('Please fill in all fields');
-                return;
-            }
+        <div class="table-wrapper">
+          <table>
+            <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Sender</th>
+              <th>Recipient</th>
+              <th>Subject</th>
+              <th>Risk</th>
+              <th>Classification</th>
+              <th>PHI</th>
+              <th>HITL Status</th>
+              <th style="width: 150px;">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="quarantineTableBody">
+            <tr>
+              <td colspan="9" style="text-align:center; padding:16px; color: var(--text-secondary);">
+                No emails currently quarantined.
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
-            // Combine fields into full email content for API
-            const emailContent = `From: ${sender}\nSubject: ${subject}\n\n${body}`;
+    <!-- PERFORMANCE METRICS TAB -->
+    <section id="performance" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Performance Overview</div>
+            <div class="card-subtitle">
+              System-level metrics for email processing and safety performance
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" id="loadPerfBtn">
+            Load sample metrics
+          </button>
+        </div>
 
-            // Get context type (if there's a select box)
-            const contextSelect = document.getElementById('contextType');
-            const context = contextSelect ? contextSelect.value : 'general';
+        <div class="metric-row" style="margin-top: 6px;">
+          <div class="metric-card">
+            <div class="metric-label">Emails processed (last 7 days)</div>
+            <div class="metric-value" id="metricEmails7d">–</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Avg processing time</div>
+            <div class="metric-value" id="metricAvgTime">–</div>
+            <div class="metric-pill">From gateway to decision</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Quarantine rate</div>
+            <div class="metric-value" id="metricQuarantineRate">–</div>
+            <div class="metric-pill">% of all emails</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">PHI detection rate</div>
+            <div class="metric-value" id="metricPHIRate">–</div>
+            <div class="metric-pill">Any PHI flag</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Error / manual override</div>
+            <div class="metric-value" id="metricErrorRate">–</div>
+            <div class="metric-pill">IT overrides vs AI decisions</div>
+          </div>
+        </div>
+      </div>
 
-            // Show loading state
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('results').style.display = 'none';
-            document.getElementById('analysisResults').innerHTML = '';
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Decision Distribution & Trends</div>
+        </div>
 
-            // Simulate adding to queue
-            queueStatus.new++;
-            updateQueueDisplay();
+        <div class="charts-row">
+          <div class="chart-box">
+            <div class="section-title">Decision distribution</div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">
+              Count of automatic vs HITL decisions (last 7 days)
+            </div>
+            <div class="chart-placeholder"></div>
+          </div>
+          <div class="chart-box">
+            <div class="section-title">Classification mix</div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">
+              Safe vs phishing vs suspicious
+            </div>
+            <div class="chart-placeholder"></div>
+          </div>
+        </div>
 
-            // Call API analysis function
-            analyzeEmailWithAPI(emailContent, context)
-                .then((apiData) => {
-                    // API call successful - results are already displayed by analyzeEmailWithAPI
-                    // Log to history
-                    emailHistory.push({
-                        timestamp: new Date(),
-                        sender: sender,
-                        subject: subject,
-                        analysis: {
-                            isUrgent: apiData.urgencyLevel === 'high' || apiData.urgencyLevel === 'medium',
-                            isPhishing: false, // API will determine this
-                            confidence: 85,
-                            reasoning: `API Analysis: ${apiData.recommendedAction || 'Analysis complete'}`
-                        },
-                        apiData: apiData
-                    });
-                    
-                    // Update incident log
-                    updateIncidentLog({
-                        isUrgent: apiData.urgencyLevel === 'high' || apiData.urgencyLevel === 'medium',
-                        isPhishing: false,
-                        confidence: 85
-                    });
-                    
-                    document.getElementById('loading').style.display = 'none';
-                })
-                .catch((error) => {
-                    // API call failed - fall back to local simulation
-                    console.warn('API call failed, using local simulation:', error);
-                    
-                    setTimeout(() => {
-                        const analysis = performAnalysis(sender, subject, body);
-                        displayResults(analysis);
-                        
-                        // Log to history
-                        emailHistory.push({
-                            timestamp: new Date(),
-                            sender: sender,
-                            subject: subject,
-                            analysis: analysis
-                        });
-                        
-                        updateIncidentLog(analysis);
-                        document.getElementById('loading').style.display = 'none';
-                        document.getElementById('results').style.display = 'block';
-                    }, 1000);
-                });
-        }
+        <div class="chart-box" style="margin-top: 14px;">
+          <div class="section-title">Email volume trend</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">
+            Emails processed per day over last 7 days
+          </div>
+          <div class="chart-placeholder" style="height: 120px;"></div>
+        </div>
+      </div>
+    </section>
 
-        function performAnalysis(sender, subject, body) {
-            let isUrgent = false;
-            let isPhishing = false;
-            let confidence = 75;
+    <!-- HISTORY / ACTIVITY LOG TAB -->
+    <section id="activity-log" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">History / Activity Log</div>
+            <div class="card-subtitle">
+              End-to-end record of system decisions and IT actions
+            </div>
+          </div>
+        </div>
 
-            // Simple pattern matching
-            if (/urgent|emergency|critical|stat|code/i.test(subject) || /urgent|emergency|critical|stat|code/i.test(body)) {
-                isUrgent = true;
-                confidence = 85;
-            }
+        <div class="filters">
+          <span style="font-weight:500;">Filters:</span>
+          <div>
+            <label for="histDateFrom">From</label>
+            <input type="date" id="histDateFrom" />
+          </div>
+          <div>
+            <label for="histDateTo">To</label>
+            <input type="date" id="histDateTo" />
+          </div>
+          <div>
+            <label for="histFilterClass">Classification</label>
+            <select id="histFilterClass">
+              <option value="all">All</option>
+              <option value="safe">Safe</option>
+              <option value="phishing">Phishing</option>
+              <option value="suspicious">Suspicious</option>
+            </select>
+          </div>
+          <div>
+            <label for="histFilterStatus">Status</label>
+            <select id="histFilterStatus">
+              <option value="all">All</option>
+              <option value="delivered">Delivered</option>
+              <option value="quarantined">Quarantined</option>
+              <option value="hitl">HITL</option>
+            </select>
+          </div>
+          <div>
+            <label for="histFilterSearch">Search</label>
+            <input type="text" id="histFilterSearch" placeholder="Sender, recipient, subject" />
+          </div>
+        </div>
 
-            if (/click here|verify|expire|suspend/i.test(body) && !sender.includes('@hospital.org')) {
-                isPhishing = true;
-                confidence = 90;
-            }
+        <div class="table-wrapper">
+          <table>
+            <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Sender</th>
+              <th>Recipient</th>
+              <th>Subject</th>
+              <th>Classification</th>
+              <th>AI Decision</th>
+              <th>IT Decision</th>
+              <th>Latency</th>
+              <th style="width: 80px;">Details</th>
+            </tr>
+            </thead>
+            <tbody id="activityLogTableBody">
+            <tr>
+              <td colspan="9" style="text-align:center; padding:16px; color: var(--text-secondary);">
+                No history yet. Load sample data from the IT Review tab.
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
 
-            return {
-                isUrgent: isUrgent,
-                isPhishing: isPhishing,
-                confidence: confidence,
-                reasoning: `Analyzed ${body.length} characters. Found ${isUrgent ? 'urgent' : 'non-urgent'} patterns. ${isPhishing ? 'Phishing indicators detected.' : 'No security threats found.'}`
-            };
-        }
+<!-- DETAILED REASONING MODAL -->
+<div id="reasoningModalBackdrop" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Detailed Reasoning Report</div>
+      <button class="btn-ghost" onclick="closeReasoningModal()" style="color:#e5e7eb; font-size:1.1rem;">✕</button>
+    </div>
+    <div class="modal-body" id="reasoningModalBody">
+      <!-- Filled dynamically -->
+    </div>
+    <div class="modal-footer">
+      <div style="flex:1;">
+        <div class="feedback-row">
+          <span>Was this AI reasoning helpful?</span>
+          <button id="thumbUpBtn" class="btn-icon" onclick="setThumbFeedback('up')">👍</button>
+          <button id="thumbDownBtn" class="btn-icon" onclick="setThumbFeedback('down')">👎</button>
+        </div>
+        <div id="reasoningFeedbackBox" style="display:none; margin-top:6px;">
+          <textarea
+            id="reasoningFeedbackText"
+            class="feedback-textarea"
+            placeholder="Optional: briefly describe why this reasoning was helpful or not."
+          ></textarea>
+        </div>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-outline btn-sm" onclick="closeReasoningModal()">Close</button>
+        <button class="btn btn-primary btn-sm" onclick="submitReasoningFeedback()">Save feedback</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        function displayResults(analysis) {
-            const urgencyBadge = document.getElementById('urgencyClassificationBadge');
-            const phishingBadge = document.getElementById('phishingClassificationBadge');
-            
-            urgencyBadge.textContent = analysis.isUrgent ? 'URGENT' : 'ROUTINE';
-            urgencyBadge.className = 'classification-badge ' + (analysis.isUrgent ? 'classification-urgent' : 'classification-safe');
-            
-            phishingBadge.textContent = analysis.isPhishing ? 'THREAT DETECTED' : 'SAFE';
-            phishingBadge.className = 'classification-badge ' + (analysis.isPhishing ? 'classification-phishing' : 'classification-safe');
-            
-            document.getElementById('urgencyLevel').textContent = analysis.isUrgent ? 'Requires immediate attention' : 'Normal processing';
-            document.getElementById('phishingLevel').textContent = analysis.isPhishing ? 'Security threat - quarantine recommended' : 'No threats detected';
-            
-            document.getElementById('confidenceBar').style.width = analysis.confidence + '%';
-            document.getElementById('confidenceValue').textContent = analysis.confidence + '%';
-            document.getElementById('reasoningText').textContent = analysis.reasoning;
-        }
+<!-- IT REVIEW MODAL -->
+<div id="reviewModalBackdrop" class="modal-backdrop">
+  <div class="modal" style="max-width:720px;">
+    <div class="modal-header">
+      <div class="modal-title">IT Review – Final Decision</div>
+      <button class="btn-ghost" onclick="closeReviewModal()" style="color:#e5e7eb; font-size:1.1rem;">✕</button>
+    </div>
+    <div class="modal-body" id="reviewModalBody">
+      <!-- Filled dynamically -->
+    </div>
+    <div class="modal-footer">
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-primary btn-sm" onclick="applyReviewDecision('send')">Send / Allow</button>
+        <button class="btn btn-danger btn-sm" onclick="applyReviewDecision('quarantine')">Quarantine</button>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="closeReviewModal()">Cancel</button>
+    </div>
+  </div>
+</div>
 
-        function provideFeedback(isCorrect, type) {
-            if (!isCorrect) {
-                // Log incident
-                const lastEmail = emailHistory[emailHistory.length - 1];
-                if (lastEmail) {
-                    incidentLog.push({
-                        time: new Date(),
-                        emailType: lastEmail.analysis.isUrgent ? 'Urgent' : 'Routine',
-                        aiAction: type === 'urgency' ? 
-                            (lastEmail.analysis.isUrgent ? 'Flagged Urgent' : 'Marked Routine') :
-                            (lastEmail.analysis.isPhishing ? 'Flagged Phishing' : 'Marked Safe'),
-                        humanOverride: 'Yes',
-                        outcome: type === 'urgency' ? 'Urgency Misclassified' : 'Security Misclassified',
-                        notes: `Corrected by admin`
-                    });
-                    updateIncidentTable();
-                }
-            }
-            alert('Thank you for your feedback. This helps improve the system.');
-        }
+<!-- EMAIL DETAILS MODAL -->
+<div id="detailsModalBackdrop" class="modal-backdrop">
+  <div class="modal" style="max-width:780px;">
+    <div class="modal-header">
+      <div class="modal-title">Email Details (sanitized)</div>
+      <button class="btn-ghost" onclick="closeDetailsModal()" style="color:#e5e7eb; font-size:1.1rem;">✕</button>
+    </div>
+    <div class="modal-body" id="detailsModalBody">
+      <!-- Filled dynamically -->
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeDetailsModal()">Close</button>
+    </div>
+  </div>
+</div>
 
-        function updateIncidentLog(analysis) {
-            // Update dashboard status
-            const totalEmails = emailHistory.length;
-            document.getElementById('emailsToday').textContent = totalEmails;
-        }
+<script>
+  /************************************************************
+   * SIMPLE STATE (replace with real data later)
+   ************************************************************/
+  let itQueue = [];
+  let quarantineQueue = [];
+  let activityLog = [];
 
-        function updateIncidentTable() {
-            const tbody = document.getElementById('incidentLogBody');
-            if (incidentLog.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="padding: 20px; text-align: center; color: var(--text-secondary);">No incidents logged — system operating normally</td></tr>';
-                return;
-            }
-            
-            let html = '';
-            incidentLog.slice(-10).reverse().forEach(incident => {
-                html += `
-                    <tr style="border-bottom: 1px solid #e5e7eb;">
-                        <td style="padding: 10px;">${incident.time.toLocaleTimeString()}</td>
-                        <td style="padding: 10px;">${incident.emailType}</td>
-                        <td style="padding: 10px;">${incident.aiAction}</td>
-                        <td style="padding: 10px;">${incident.humanOverride}</td>
-                        <td style="padding: 10px;">${incident.outcome}</td>
-                        <td style="padding: 10px;">${incident.notes}</td>
-                    </tr>
-                `;
-            });
-            tbody.innerHTML = html;
-            
-            // Update counts
-            const falsePositives = incidentLog.filter(i => i.outcome.includes('Misclassified')).length;
-            document.getElementById('falsePositives').textContent = falsePositives;
-            document.getElementById('falseAlarmCount').textContent = falsePositives;
-            document.getElementById('humanOverrides').textContent = incidentLog.length;
-            document.getElementById('totalReviews').textContent = emailHistory.length;
-            
-            // Update system status
-            if (falsePositives > 5) {
-                document.getElementById('systemStatus').textContent = 'Multiple incidents — review required';
-                document.getElementById('systemStatus').style.color = '#dc2626';
-            }
-        }
+  let currentReasoningItem = null;
+  let currentReviewItem = null;
 
-        function logQueueReview() {
-            // Show confirmation dialog
-            const confirmMessage = queueStatus.new > 0 ? 
-                `Confirm you have reviewed all ${queueStatus.new + queueStatus.reviewing + queueStatus.escalated} quarantine emails for this shift?` :
-                'Confirm queue review complete (no pending emails)?';
-                
-            if (confirm(confirmMessage)) {
-                const now = new Date();
-                const adminNames = ['M. Chen', 'J. Lee', 'S. Smith', 'K. Johnson', 'R. Patel'];
-                const currentAdmin = adminNames[Math.floor(Math.random() * adminNames.length)];
-                
-                // Create review record
-                const reviewRecord = {
-                    timestamp: now,
-                    reviewer: currentAdmin,
-                    itemsCleared: queueStatus.new,
-                    status: queueStatus.new > 0 ? `${queueStatus.new} pending emails cleared` : 'No pending emails'
-                };
-                
-                // Add to review history
-                reviewHistory.unshift(reviewRecord);
-                if (reviewHistory.length > 10) reviewHistory.pop(); // Keep only last 10 reviews
-                
-                // Update last review display
-                document.getElementById('lastReviewDetails').innerHTML = `
-                    <strong style="color: #059669;">✓</strong> Reviewed by ${currentAdmin} at ${now.toLocaleTimeString()}<br>
-                    <span style="font-size: 0.8rem;">${reviewRecord.status}</span>
-                `;
-                
-                // Update review history display
-                updateReviewHistoryDisplay();
-                
-                // Clear queue counts
-                queueStatus.new = 0;
-                queueStatus.reviewing = 0;
-                updateQueueDisplay();
-                
-                // Save to localStorage
-                localStorage.setItem('reviewHistory', JSON.stringify(reviewHistory));
-            }
-        }
+  /************************************************************
+   * TABS
+   ************************************************************/
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tabId = btn.dataset.tab;
+      document
+        .querySelectorAll(".tab-btn")
+        .forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
-        function updateReviewHistoryDisplay() {
-            const historyDiv = document.getElementById('reviewHistory');
-            if (reviewHistory.length === 0) {
-                historyDiv.innerHTML = '<div style="color: var(--text-secondary);">No previous reviews</div>';
-                return;
-            }
-            
-            let html = '';
-            // Filter reviews from last 24 hours
-            const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-            const recentReviews = reviewHistory.filter(r => new Date(r.timestamp) > oneDayAgo);
-            
-            if (recentReviews.length === 0) {
-                historyDiv.innerHTML = '<div style="color: var(--text-secondary);">No reviews in last 24 hours</div>';
-                return;
-            }
-            
-            recentReviews.forEach(review => {
-                const time = new Date(review.timestamp);
-                html += `
-                    <div style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #e5e7eb;">
-                        <div style="font-weight: 500;">${time.toLocaleTimeString()} - ${review.reviewer}</div>
-                        <div style="color: var(--text-secondary);">${review.status}</div>
-                    </div>
-                `;
-            });
-            historyDiv.innerHTML = html;
-        }
+      document
+        .querySelectorAll(".tab-content")
+        .forEach((sec) => sec.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+    });
+  });
 
-        function updateQueueDisplay() {
-            const total = queueStatus.new + queueStatus.reviewing + queueStatus.escalated;
-            document.getElementById('totalInQueue').textContent = total + ' emails';
-            document.getElementById('newCount').textContent = queueStatus.new;
-            document.getElementById('reviewCount').textContent = queueStatus.reviewing;
-            document.getElementById('escalatedCount').textContent = queueStatus.escalated;
-        }
+  /************************************************************
+   * SAMPLE DATA LOADERS
+   ************************************************************/
+  const sampleItQueue = [
+    {
+      id: "item1",
+      sender: "hr@evmc-clinic.org",
+      recipient: "nurse.lee@evmc-clinic.org",
+      subject: "URGENT: Benefits portal password reset",
+      classification: "phishing",
+      confidence: 0.89,
+      status: "pending",
+      receivedAt: "10:14 AM",
+      riskScore: 87,
+      phi: false,
+      reasoning: {
+        aiOutcome: "Pending – requires IT review",
+        aiSummary:
+          "AI classified this email as phishing with 89% confidence due to suspicious reset link, sender domain mismatch, and credential-harvesting language.",
+        indicators: {
+          credentialLanguage: "Detected – 'confirm your credentials', 'reset now'",
+          urgencyLanguage: "Detected – 'immediately', 'avoid suspension'",
+          suspiciousLinks: "Link points to evmc-benefits-login.com (no TLS history)",
+          manipulativeTone: "Detected; fear-based (account suspension)",
+          senderRisk: "Medium – domain newly registered (7 days)",
+          phiPresence: "No PHI patterns detected"
+        },
+        technicalFindings: {
+          phishingKeywordScore: 0.82,
+          healthcareKeywordScore: 0.10,
+          urgencyScore: 0.76,
+          typosquatting: "Possible – domain visually similar to official",
+          domainRegistered: "7 days ago",
+          cacheHits: "2 previous blocks for similar domain"
+        },
+        aiRecommendation: "Quarantine and require IT approval before release",
+        itDecision: "Pending"
+      }
+    },
+    {
+      id: "item2",
+      sender: "lab-results@evmc-lab.org",
+      recipient: "dr.smith@evmc-clinic.org",
+      subject: "Stat lab result: Panel 10392",
+      classification: "safe",
+      confidence: 0.93,
+      status: "pending",
+      receivedAt: "10:27 AM",
+      riskScore: 15,
+      phi: true,
+      reasoning: {
+        aiOutcome: "Safe but urgent clinical email",
+        aiSummary:
+          "AI detected urgent clinical lab content with PHI present; routing to HITL to ensure safe delivery path under HIPAA constraints.",
+        indicators: {
+          credentialLanguage: "None detected",
+          urgencyLanguage: "Detected – 'STAT', 'immediate review'",
+          suspiciousLinks: "None – internal lab result viewer",
+          manipulativeTone: "None – clinical tone",
+          senderRisk: "Low – trusted internal domain",
+          phiPresence: "Yes – lab identifiers / potential PHI"
+        },
+        technicalFindings: {
+          phishingKeywordScore: 0.05,
+          healthcareKeywordScore: 0.91,
+          urgencyScore: 0.84,
+          typosquatting: "No",
+          domainRegistered: "8 years ago",
+          cacheHits: "147 previous safe deliveries"
+        },
+        aiRecommendation:
+          "Allow but log; ensure PHI scrubber policies are satisfied.",
+        itDecision: "Pending"
+      }
+    }
+  ];
 
-        function saveShiftNotes() {
-            const notes = {
-                itemsReviewed: document.getElementById('itemsReviewed').value,
-                unresolved: document.getElementById('unresolvedIssues').value,
-                patterns: document.getElementById('suspiciousPatterns').value,
-                timestamp: new Date(),
-                shift: getCurrentShift()
-            };
-            
-            localStorage.setItem('shiftNotes', JSON.stringify(notes));
-            alert('Shift notes saved successfully');
-            
-            // Move to previous notes
-            setTimeout(() => {
-                document.getElementById('previousNotesContent').innerHTML = `
-                    <strong>${notes.shift} - ${notes.timestamp.toLocaleString()}</strong><br>
-                    Items: ${notes.itemsReviewed || 'None'}<br>
-                    Unresolved: ${notes.unresolved || 'None'}<br>
-                    Patterns: ${notes.patterns || 'None noted'}
-                `;
-            }, 100);
-        }
+  const sampleQuarantine = [
+    {
+      id: "q1",
+      timestamp: "2025-11-18 09:03",
+      sender: "security@evmc-compliance.net",
+      recipient: "frontdesk@evmc-clinic.org",
+      subject: "ACTION REQUIRED: HIPAA Compliance portal",
+      riskScore: 92,
+      classification: "phishing",
+      confidence: 0.94,
+      phi: false,
+      hitlStatus: "awaiting IT confirmation"
+    },
+    {
+      id: "q2",
+      timestamp: "2025-11-18 08:41",
+      sender: "it.support@evmc-clinic.org",
+      recipient: "admin@evmc-clinic.org",
+      subject: "Multi-factor enrollment incomplete",
+      riskScore: 68,
+      classification: "suspicious",
+      confidence: 0.78,
+      phi: false,
+      hitlStatus: "quarantined (auto)"
+    }
+  ];
 
-        function getCurrentShift() {
-            const hour = new Date().getHours();
-            if (hour >= 7 && hour < 15) return 'Day Shift';
-            if (hour >= 15 && hour < 23) return 'Evening Shift';
-            return 'Night Shift';
-        }
+  function loadSampleQueues() {
+    itQueue = JSON.parse(JSON.stringify(sampleItQueue));
+    quarantineQueue = JSON.parse(JSON.stringify(sampleQuarantine));
 
-        function generateEmail(type) {
-            const templates = {
-                urgent: {
-                    sender: 'dr.emergency@hospital.org',
-                    subject: 'URGENT: Medical Emergency',
-                    body: 'Immediate medical attention required for patient in ICU.'
-                },
-                safe: {
-                    sender: 'admin@hospital.org',
-                    subject: 'Staff Schedule Update',
-                    body: 'Please review the updated schedule for next week.'
-                },
-                phishing: {
-                    sender: 'security@fake-hospital.net',
-                    subject: 'Account Verification Required',
-                    body: 'Click here to verify your account or it will be suspended.'
-                }
-            };
-            
-            const email = templates[type];
-            document.getElementById('genSender').textContent = email.sender;
-            document.getElementById('genSubject').textContent = email.subject;
-            document.getElementById('genBody').textContent = email.body;
-            document.getElementById('generatedEmail').style.display = 'block';
-            
-            window.currentGeneratedEmail = email;
-        }
+    // Derive simple sample activity log from these
+    activityLog = itQueue.map((item, idx) => ({
+      id: "log-" + item.id,
+      timestamp: "2025-11-18 10:" + (10 + idx * 3),
+      sender: item.sender,
+      recipient: item.recipient,
+      subject: item.subject,
+      classification: item.classification,
+      aiDecision:
+        item.classification === "phishing" ? "Quarantine recommended" : "Allow",
+      itDecision: "Pending",
+      latency: "–"
+    }));
 
-        function loadGeneratedEmail() {
-            if (window.currentGeneratedEmail) {
-                document.getElementById('sender').value = window.currentGeneratedEmail.sender;
-                document.getElementById('subject').value = window.currentGeneratedEmail.subject;
-                document.getElementById('emailBody').value = window.currentGeneratedEmail.body;
-                showTab('analysis');
-            }
-        }
+    renderItQueue();
+    renderQuarantine();
+    renderMetricsFromQueues();
+    renderActivityLog();
 
-        // Initialize dashboard
-        updateQueueDisplay();
-        initializeShiftDisplay();
-        
-        // Load review history from localStorage
-        const savedReviewHistory = localStorage.getItem('reviewHistory');
-        if (savedReviewHistory) {
-            try {
-                reviewHistory = JSON.parse(savedReviewHistory);
-                updateReviewHistoryDisplay();
-                
-                // Show last review if it exists
-                if (reviewHistory.length > 0) {
-                    const lastReview = reviewHistory[0];
-                    const time = new Date(lastReview.timestamp);
-                    document.getElementById('lastReviewDetails').innerHTML = `
-                        <strong style="color: #059669;">✓</strong> Reviewed by ${lastReview.reviewer} at ${time.toLocaleTimeString()}<br>
-                        <span style="font-size: 0.8rem;">${lastReview.status}</span>
-                    `;
-                }
-            } catch (e) {
-                console.error('Error loading review history:', e);
-            }
-        }
-        
-        // Load previous shift notes if they exist
-        const savedNotes = localStorage.getItem('shiftNotes');
-        if (savedNotes) {
-            const notes = JSON.parse(savedNotes);
-            document.getElementById('previousNotesContent').innerHTML = `
-                <strong>${notes.shift} - ${new Date(notes.timestamp).toLocaleString()}</strong><br>
-                Items: ${notes.itemsReviewed || 'None'}<br>
-                Unresolved: ${notes.unresolved || 'None'}<br>
-                Patterns: ${notes.patterns || 'None noted'}
-            `;
-        }
+    alert("Sample queue + quarantine data loaded.");
+  }
 
-        /**
-         * Call backend API to analyze email content
-         */
-        async function analyzeEmailWithAPI(emailContent, context = 'general') {
-            const resultsDiv = document.getElementById('analysisResults');
-            const loadingDiv = document.getElementById('loadingIndicator');
-            
-            try {
-                // Show loading state
-                if (loadingDiv) loadingDiv.style.display = 'block';
-                if (resultsDiv) resultsDiv.innerHTML = '<p>🔄 Analyzing email content...</p>';
-                
-                console.log('📤 Sending analysis request to backend');
-                
-                // Call local Express server API
-                const response = await fetch('http://localhost:3000/api/analyze', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        emailContent: emailContent,
-                        context: context
-                    })
-                });
-                
-                // Parse response
-                const result = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(result.error || 'Request failed');
-                }
-                
-                console.log('✅ Received analysis result:', result);
-                
-                // Hide loading state
-                if (loadingDiv) loadingDiv.style.display = 'none';
-                
-                // Display results
-                if (result.success && result.data) {
-                    displayAnalysisResults(result.data);
-                } else {
-                    throw new Error('Invalid response format');
-                }
-                
-                return result.data;
-                
-            } catch (error) {
-                console.error('❌ Analysis failed:', error);
-                
-                // Hide loading state
-                if (loadingDiv) loadingDiv.style.display = 'none';
-                
-                // Display error message
-                if (resultsDiv) {
-                    resultsDiv.innerHTML = `
-                        <div style="color: red; padding: 15px; border: 1px solid red; border-radius: 5px; background: #ffe6e6;">
-                            <h3>❌ Analysis Failed</h3>
-                            <p><strong>Error:</strong>${error.message}</p>
-                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
-                                Please check:<br>
-                                • Network connection is normal<br>
-                                • Server is running on http://localhost:3000<br>
-                                • AWS Lambda endpoint is configured correctly
-                            </p>
-                        </div>
-                    `;
-                }
-                
-                throw error;
-            }
-        }
+  function loadSamplePerformanceMetrics() {
+    // very simple sample numbers
+    document.getElementById("metricEmails7d").textContent = "12,482";
+    document.getElementById("metricAvgTime").textContent = "1.9s";
+    document.getElementById("metricQuarantineRate").textContent = "2.7%";
+    document.getElementById("metricPHIRate").textContent = "31%";
+    document.getElementById("metricErrorRate").textContent = "3.1%";
 
-        /**
-         * Display analysis results
-         */
-        function displayAnalysisResults(data) {
-            const resultsDiv = document.getElementById('analysisResults');
-            
-            if (!resultsDiv) {
-                console.error('Results display container #analysisResults not found');
-                return;
-            }
-            
-            // Helper function: escape HTML
-            const escapeHtml = (text) => {
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            };
-            
-            // Helper function: get urgency level display
-            const getUrgencyDisplay = (level) => {
-                const urgencyMap = {
-                    'high': { emoji: '🔴', text: 'High', color: '#dc3545' },
-                    'medium': { emoji: '🟡', text: 'Medium', color: '#ffc107' },
-                    'low': { emoji: '🟢', text: 'Low', color: '#28a745' },
-                    'routine': { emoji: '🟢', text: 'Routine', color: '#28a745' }
-                };
-                return urgencyMap[level] || { emoji: '⚪', text: 'Unknown', color: '#6c757d' };
-            };
-            
-            const urgency = getUrgencyDisplay(data.urgencyLevel);
-            
-            const html = `
-                <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-top: 20px;">
-                    <h3 style="color: #28a745; margin-top: 0;">✅ Analysis Complete</h3>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">🔒 Scrubbed Text</h4>
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 4px solid #007bff; white-space: pre-wrap; font-family: monospace; font-size: 14px;">
-                            ${escapeHtml(data.scrubbedText || 'No content')}
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">🏥 Detected PHI Entities</h4>
-                        ${(data.phiEntities && data.phiEntities.length > 0) ? `
-                            <ul style="list-style: none; padding: 0;">
-                                ${data.phiEntities.map(entity => `
-                                    <li style="background: #e7f3ff; padding: 10px; margin-bottom: 8px; border-radius: 5px; border-left: 4px solid #0066cc;">
-                                        <strong style="color: #0066cc;">${escapeHtml(entity.Type || entity.type)}:</strong> 
-                                        <span style="color: #333;">${escapeHtml(entity.Text || entity.text)}</span>
-                                        <span style="color: #666; font-size: 12px; margin-left: 10px;">
-                                            (Confidence: ${((entity.Score || entity.score || 0) * 100).toFixed(1)}%)
-                                        </span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        ` : '<p style="color: #666; padding: 10px; background: #f8f9fa; border-radius: 5px;">✓ No PHI entities detected</p>'}
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">⚡ Urgency Level</h4>
-                        <div style="display: inline-block; padding: 10px 20px; background: ${urgency.color}; color: white; border-radius: 5px; font-weight: bold;">
-                            ${urgency.emoji} ${urgency.text}
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <h4 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 5px;">💡 Recommended Action</h4>
-                        <p style="color: #333; padding: 10px; background: #fff3cd; border-radius: 5px; border-left: 4px solid #ffc107;">
-                            ${escapeHtml(data.recommendedAction || 'No special recommendations')}
-                        </p>
-                    </div>
-                    
-                    ${(data.urgencyLevel === 'high' || data.urgencyLevel === 'medium') && 
-                       (!data.recommendedAction || !data.recommendedAction.toLowerCase().includes('quarantine') && 
-                        !data.recommendedAction.toLowerCase().includes('phishing') && 
-                        !data.recommendedAction.toLowerCase().includes('threat')) ? `
-                        <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border: 2px solid #007bff; border-radius: 8px;">
-                            <h4 style="color: #007bff; margin-top: 0; margin-bottom: 10px;">⚠️ Safe but Urgent Email Detected</h4>
-                            <p style="color: #333; margin-bottom: 15px;">
-                                This email has been classified as <strong>safe</strong> but <strong>urgent</strong>. 
-                                Department Lead review is recommended to ensure timely delivery of critical information.
-                            </p>
-                            <button onclick="redirectToLeadReview()" 
-                                    style="background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 6px; 
-                                           font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.3s;"
-                                    onmouseover="this.style.background='#0056b3'" 
-                                    onmouseout="this.style.background='#007bff'">
-                                🔍 Send to Department Lead for Review
-                            </button>
-                        </div>
-                    ` : ''}
-                </div>
-            `;
-            
-            resultsDiv.innerHTML = html;
-        }
+    alert("Sample performance metrics loaded (charts are placeholders).");
+  }
 
-        /**
-         * Redirect to Department Lead review page
-         * Called when a safe but urgent email is detected
-         */
-        function redirectToLeadReview() {
-            // Show notification
-            alert('Redirecting to Department Lead for urgent email review...');
-            
-            // Redirect to Lead page after a short delay
-            setTimeout(() => {
-                window.location.href = 'lead-view.html';
-            }, 1000);
-        }
+  document.getElementById("loadSampleBtn").addEventListener("click", loadSampleQueues);
+  document.getElementById("loadPerfBtn").addEventListener("click", loadSamplePerformanceMetrics);
+  document.getElementById("clearQuarantineBtn").addEventListener("click", () => {
+    if (quarantineQueue.length === 0) {
+      alert("Quarantine is already empty.");
+      return;
+    }
+    if (confirm("Clear all quarantined emails? (demo only)")) {
+      quarantineQueue = [];
+      renderQuarantine();
+    }
+  });
 
-        // Check server connection on page load
-        window.addEventListener('DOMContentLoaded', async () => {
-            console.log('🔍 Checking server connection...');
-            try {
-                const response = await fetch('http://localhost:3000/api/health');
-                const health = await response.json();
-                console.log('✅ Server health check passed:', health);
-                
-                if (!health.lambdaConfigured) {
-                    console.warn('⚠️ AWS Lambda endpoint not configured, please set AWS_LAMBDA_ENDPOINT in .env file');
-                }
-            } catch (error) {
-                console.error('❌ Unable to connect to backend server:', error);
-                console.error('Please ensure server is running on http://localhost:3000');
-            }
+  /************************************************************
+   * RENDER FUNCTIONS
+   ************************************************************/
+  function renderItQueue() {
+    const tbody = document.getElementById("itReviewTableBody");
+    if (!itQueue.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails currently waiting for review.</td></tr>';
+      updateTopCounts();
+      return;
+    }
+
+    tbody.innerHTML = itQueue
+      .map((item) => {
+        return `
+      <tr>
+        <td>${item.sender}</td>
+        <td>${item.recipient}</td>
+        <td>${item.subject}</td>
+        <td>
+          ${renderClassificationBadge(item.classification)}
+        </td>
+        <td>${Math.round(item.confidence * 100)}%</td>
+        <td>
+          <span class="badge badge-pending">${item.status === "pending" ? "Pending review" : item.status}</span>
+        </td>
+        <td>${item.receivedAt}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" onclick="openReviewModal('${item.id}')">Review</button>
+          <button class="btn btn-outline btn-sm" onclick="openDetailsModal('${item.id}')">Details</button>
+          <button class="btn btn-outline btn-sm" onclick="openReasoningModal('${item.id}')">Reasoning</button>
+        </td>
+      </tr>`;
+      })
+      .join("");
+
+    updateTopCounts();
+  }
+
+  function renderQuarantine() {
+    const tbody = document.getElementById("quarantineTableBody");
+    if (!quarantineQueue.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No emails currently quarantined.</td></tr>';
+      document.getElementById("metricQuarantineTotal").textContent = "0";
+      document.getElementById("metricQuarantinePHI").textContent = "0";
+      return;
+    }
+
+    let phiCount = 0;
+    tbody.innerHTML = quarantineQueue
+      .map((item) => {
+        if (item.phi) phiCount++;
+        return `
+      <tr>
+        <td>${item.timestamp}</td>
+        <td>${item.sender}</td>
+        <td>${item.recipient}</td>
+        <td>${item.subject}</td>
+        <td>${item.riskScore}</td>
+        <td>${renderClassificationBadge(item.classification, item.confidence)}</td>
+        <td>${item.phi ? '<span class="badge badge-suspicious">PHI</span>' : "–"}</td>
+        <td>${item.hitlStatus}</td>
+        <td>
+          <button class="btn btn-outline btn-sm" onclick="openDetailsFromQuarantine('${item.id}')">View</button>
+          <button class="btn btn-outline btn-sm" onclick="openReasoningFromQuarantine('${item.id}')">Reasoning</button>
+        </td>
+      </tr>`;
+      })
+      .join("");
+
+    document.getElementById("metricQuarantineTotal").textContent =
+      quarantineQueue.length;
+    document.getElementById("metricQuarantinePHI").textContent = phiCount;
+  }
+
+  function renderActivityLog() {
+    const tbody = document.getElementById("activityLogTableBody");
+    if (!activityLog.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No history yet. Load sample data from the IT Review tab.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = activityLog
+      .map((log) => {
+        return `
+      <tr>
+        <td>${log.timestamp}</td>
+        <td>${log.sender}</td>
+        <td>${log.recipient}</td>
+        <td>${log.subject}</td>
+        <td>${renderClassificationBadge(log.classification)}</td>
+        <td>${log.aiDecision}</td>
+        <td>${log.itDecision}</td>
+        <td>${log.latency}</td>
+        <td>
+          <button class="btn btn-outline btn-sm" onclick="openDetailsFromLog('${log.id}')">Details</button>
+        </td>
+      </tr>`;
+      })
+      .join("");
+  }
+
+  function renderMetricsFromQueues() {
+    const pendingCount = itQueue.filter((x) => x.status === "pending").length;
+    const reviewedToday = 5; // simple demo
+    const reviewAccuracy = "92%"; // demo
+
+    document.getElementById("metricPending").textContent = pendingCount;
+    document.getElementById("metricReviewedToday").textContent = reviewedToday;
+    document.getElementById("metricReviewAccuracy").textContent = reviewAccuracy;
+    document.getElementById("metricReviewTime").textContent = "34s";
+    document.getElementById("queueCountHeader").textContent =
+      pendingCount + " pending";
+  }
+
+  function updateTopCounts() {
+    const pendingCount = itQueue.filter((x) => x.status === "pending").length;
+    document.getElementById("metricPending").textContent = pendingCount;
+    document.getElementById("queueCountHeader").textContent =
+      pendingCount + " pending";
+  }
+
+  function renderClassificationBadge(classification, confidence) {
+    const percent = confidence ? ` ${Math.round(confidence * 100)}%` : "";
+    if (classification === "phishing") {
+      return `<span class="badge badge-phishing">Phishing${percent}</span>`;
+    }
+    if (classification === "suspicious") {
+      return `<span class="badge badge-suspicious">Suspicious${percent}</span>`;
+    }
+    return `<span class="badge badge-safe">Safe${percent}</span>`;
+  }
+
+  /************************************************************
+   * REASONING MODAL
+   ************************************************************/
+  function openReasoningModal(id) {
+    const item = itQueue.find((i) => i.id === id);
+    if (!item) return;
+    currentReasoningItem = item;
+
+    const r = item.reasoning;
+    const body = document.getElementById("reasoningModalBody");
+
+    body.innerHTML = `
+      <div class="modal-section">
+        <div class="section-title">Historical investigation report</div>
+        <div class="key-value">
+          <div class="key-label">Final outcome:</div>
+          <div class="value-text">${r.aiOutcome || "Pending"}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">Processed at:</div>
+          <div class="value-text">Today · ${item.receivedAt}</div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="section-title">Email context</div>
+        <div class="key-value">
+          <div class="key-label">From:</div>
+          <div class="value-text">${item.sender}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">To:</div>
+          <div class="value-text">${item.recipient}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">Subject:</div>
+          <div class="value-text">${item.subject}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">AI Classification:</div>
+          <div class="value-text">${item.classification}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">Confidence:</div>
+          <div class="value-text">${Math.round(item.confidence * 100)}%</div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="section-title">AI analysis summary</div>
+        <p style="margin-bottom:6px;">${r.aiSummary || "—"}</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="section-title">Threat indicators</div>
+        <ul class="threat-list">
+          <li><span class="bullet-dot"></span><span>Credential language: <strong>${r.indicators.credentialLanguage}</strong></span></li>
+          <li><span class="bullet-dot"></span><span>Urgency language: <strong>${r.indicators.urgencyLanguage}</strong></span></li>
+          <li><span class="bullet-dot"></span><span>Suspicious links: <strong>${r.indicators.suspiciousLinks}</strong></span></li>
+          <li><span class="bullet-dot"></span><span>Manipulative tone: <strong>${r.indicators.manipulativeTone}</strong></span></li>
+          <li><span class="bullet-dot"></span><span>Sender risk: <strong>${r.indicators.senderRisk}</strong></span></li>
+          <li><span class="bullet-dot"></span><span>PHI presence: <strong>${r.indicators.phiPresence}</strong></span></li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="section-title">Technical findings</div>
+        <div class="key-value">
+          <div class="key-label">phishing_keyword_score:</div>
+          <div>${r.technicalFindings.phishingKeywordScore}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">healthcare_keyword_score:</div>
+          <div>${r.technicalFindings.healthcareKeywordScore}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">urgency_score:</div>
+          <div>${r.technicalFindings.urgencyScore}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">typosquatting:</div>
+          <div>${r.technicalFindings.typosquatting}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">domain registered:</div>
+          <div>${r.technicalFindings.domainRegistered}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">cache hits:</div>
+          <div>${r.technicalFindings.cacheHits}</div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="section-title">AI recommendation vs IT decision</div>
+        <div class="key-value">
+          <div class="key-label">AI recommendation:</div>
+          <div>${r.aiRecommendation}</div>
+        </div>
+        <div class="key-value">
+          <div class="key-label">IT decision:</div>
+          <div>${r.itDecision}</div>
+        </div>
+      </div>
+    `;
+
+    // reset feedback UI
+    document.getElementById("thumbUpBtn").classList.remove("active-thumb");
+    document.getElementById("thumbDownBtn").classList.remove("active-thumb");
+    document.getElementById("reasoningFeedbackText").value = "";
+    document.getElementById("reasoningFeedbackBox").style.display = "none";
+
+    document.getElementById("reasoningModalBackdrop").classList.add("active");
+  }
+
+  function openReasoningFromQuarantine(id) {
+    const item = quarantineQueue.find((i) => i.id === id);
+    if (!item) return;
+    alert("In a real build, this would show reasoning connected to quarantine logs.\nFor now, open reasoning from IT Review items.");
+  }
+
+  function closeReasoningModal() {
+    document
+      .getElementById("reasoningModalBackdrop")
+      .classList.remove("active");
+  }
+
+  function setThumbFeedback(dir) {
+    const up = document.getElementById("thumbUpBtn");
+    const down = document.getElementById("thumbDownBtn");
+    const fbBox = document.getElementById("reasoningFeedbackBox");
+
+    if (dir === "up") {
+      up.classList.add("active-thumb");
+      down.classList.remove("active-thumb");
+      fbBox.style.display = "block";
+      fbBox.querySelector("textarea").placeholder =
+        "Optional: what worked well about this reasoning?";
+    } else {
+      down.classList.add("active-thumb");
+      up.classList.remove("active-thumb");
+      fbBox.style.display = "block";
+      fbBox.querySelector("textarea").placeholder =
+        "Optional: what did the reasoning miss or get wrong?";
+    }
+  }
+
+  function submitReasoningFeedback() {
+    // In real app, send to backend.
+    alert("Feedback recorded (demo only).");
+    closeReasoningModal();
+  }
+
+  /************************************************************
+   * IT REVIEW MODAL
+   ************************************************************/
+  function openReviewModal(id) {
+    const item = itQueue.find((i) => i.id === id);
+    if (!item) return;
+    currentReviewItem = item;
+
+    const body = document.getElementById("reviewModalBody");
+    body.innerHTML = `
+      <div class="modal-section">
+        <div class="section-title">Summary</div>
+        <p><strong>Sender:</strong> ${item.sender}</p>
+        <p><strong>Recipient:</strong> ${item.recipient}</p>
+        <p><strong>Subject:</strong> ${item.subject}</p>
+        <p><strong>AI classification:</strong> ${item.classification} (${Math.round(
+          item.confidence * 100
+        )}%)</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="section-title">Decision</div>
+        <p style="margin-bottom:6px;">Choose how to handle this email:</p>
+        <ul style="font-size:0.8rem; color:#4b5563; padding-left:16px;">
+          <li><strong>Send / Allow</strong> – deliver to recipient inbox and log decision.</li>
+          <li><strong>Quarantine</strong> – keep in quarantine and block delivery.</li>
+        </ul>
+      </div>
+    `;
+
+    document.getElementById("reviewModalBackdrop").classList.add("active");
+  }
+
+  function closeReviewModal() {
+    document.getElementById("reviewModalBackdrop").classList.remove("active");
+    currentReviewItem = null;
+  }
+
+  function applyReviewDecision(action) {
+    if (!currentReviewItem) return;
+    const item = currentReviewItem;
+
+    if (action === "send") {
+      item.status = "released";
+      // update activity log entry if exists
+      const log = activityLog.find((l) => l.subject === item.subject);
+      if (log) {
+        log.itDecision = "Sent";
+        log.latency = "32s";
+      }
+    } else if (action === "quarantine") {
+      item.status = "quarantined";
+      // push into quarantine if not there already (demo)
+      if (!quarantineQueue.find((q) => q.subject === item.subject)) {
+        quarantineQueue.push({
+          id: "q-" + item.id,
+          timestamp: "2025-11-18 10:40",
+          sender: item.sender,
+          recipient: item.recipient,
+          subject: item.subject,
+          riskScore: item.reasoning?.technicalFindings?.phishingKeywordScore
+            ? Math.round(
+                item.reasoning.technicalFindings.phishingKeywordScore * 100
+              )
+            : 80,
+          classification: item.classification,
+          confidence: item.confidence,
+          phi: item.reasoning?.indicators?.phiPresence?.includes("Yes") || false,
+          hitlStatus: "quarantined (IT)"
         });
-    </script>
+      }
+      const log = activityLog.find((l) => l.subject === item.subject);
+      if (log) {
+        log.itDecision = "Quarantined";
+        log.latency = "45s";
+      }
+    }
+
+    renderItQueue();
+    renderQuarantine();
+    renderActivityLog();
+    closeReviewModal();
+  }
+
+  /************************************************************
+   * DETAILS MODAL
+   ************************************************************/
+  function openDetailsModal(id) {
+    const item = itQueue.find((i) => i.id === id);
+    if (!item) return;
+    const body = document.getElementById("detailsModalBody");
+    body.innerHTML = `
+      <div class="modal-section">
+        <div class="section-title">Headers</div>
+        <p><strong>From:</strong> ${item.sender}</p>
+        <p><strong>To:</strong> ${item.recipient}</p>
+        <p><strong>Subject:</strong> ${item.subject}</p>
+        <p><strong>Received:</strong> Today · ${item.receivedAt}</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Body (sanitized)</div>
+        <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
+          [Demo placeholder: in the real system, this would show PHI-scrubbed MIME content for this email.]
+        </p>
+      </div>
+    `;
+    document.getElementById("detailsModalBackdrop").classList.add("active");
+  }
+
+  function openDetailsFromQuarantine(id) {
+    const item = quarantineQueue.find((i) => i.id === id);
+    if (!item) return;
+    const body = document.getElementById("detailsModalBody");
+    body.innerHTML = `
+      <div class="modal-section">
+        <div class="section-title">Headers</div>
+        <p><strong>From:</strong> ${item.sender}</p>
+        <p><strong>To:</strong> ${item.recipient}</p>
+        <p><strong>Subject:</strong> ${item.subject}</p>
+        <p><strong>Quarantined:</strong> ${item.timestamp}</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Reason</div>
+        <p>This email was quarantined due to elevated risk score (${item.riskScore}) and classification &ldquo;${item.classification}&rdquo;.</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Body (sanitized)</div>
+        <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
+          [Demo placeholder: PHI-scrubbed MIME body for quarantined email.]
+        </p>
+      </div>
+    `;
+    document.getElementById("detailsModalBackdrop").classList.add("active");
+  }
+
+  function openDetailsFromLog(id) {
+    const log = activityLog.find((l) => l.id === id);
+    if (!log) return;
+    const body = document.getElementById("detailsModalBody");
+    body.innerHTML = `
+      <div class="modal-section">
+        <div class="section-title">Event summary</div>
+        <p><strong>Timestamp:</strong> ${log.timestamp}</p>
+        <p><strong>Sender:</strong> ${log.sender}</p>
+        <p><strong>Recipient:</strong> ${log.recipient}</p>
+        <p><strong>Subject:</strong> ${log.subject}</p>
+        <p><strong>AI decision:</strong> ${log.aiDecision}</p>
+        <p><strong>IT decision:</strong> ${log.itDecision}</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Body (sanitized)</div>
+        <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
+          [Demo placeholder: sanitized email body associated with this log entry.]
+        </p>
+      </div>
+    `;
+    document.getElementById("detailsModalBackdrop").classList.add("active");
+  }
+
+  function closeDetailsModal() {
+    document.getElementById("detailsModalBackdrop").classList.remove("active");
+  }
+
+  /************************************************************
+   * INITIALIZE (empty state)
+   ************************************************************/
+  renderItQueue();
+  renderQuarantine();
+  renderActivityLog();
+</script>
 </body>
 </html>
+```

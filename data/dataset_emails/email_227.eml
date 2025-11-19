@@ -1,0 +1,50 @@
+From: "Carestream Update System" <updates@carestream-softupdate.com>
+To: jen.hygienist@smileclinic.org
+Subject: Immediate Verification Required
+Date: Tue, 18 Nov 2025 22:02:20 -0800
+Message-ID: 20251118220220.17926@mail.smileclinic.org
+Return-Path: updates@carestream-softupdate.com
+Reply-To: updates@carestream-softupdate.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.232])
+    by gateway.smileclinic.org with ESMTP id xyz4597
+    for <jen.hygienist@smileclinic.org>; Tue, 18 Nov 2025 22:02:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=updates@carestream-softupdate.com;
+    dmarc=none header.from=updates@carestream-softupdate.com
+Content-Type: multipart/mixed; boundary="boundary-227"
+
+--boundary-227
+Content-Type: multipart/alternative; boundary="boundary-alt-227"
+
+--boundary-alt-227
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Jen,
+
+Please complete the validation process using the secure link below.
+
+Access to patient records will be paused unless credentials are revalidated.
+
+This check is mandatory and time-sensitive.
+
+Verification link: https://carestream-update-verify.com/session
+
+Sincerely,
+Carestream Update System
+
+--boundary-alt-227
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Jen,</p><p>Please complete the validation process using the secure link below.</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>This check is mandatory and time-sensitive.</p><p>Verification link: <a href="https://carestream-update-verify.com/session">https://carestream-update-verify.com/session</a></p><p>Sincerely,</p><p>Carestream Update System</p></body></html>
+--boundary-alt-227--
+
+--boundary-227
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-227--

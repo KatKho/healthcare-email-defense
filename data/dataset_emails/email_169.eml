@@ -1,0 +1,53 @@
+From: "Dentrix Cloud Support" <support@dentrixcloud.com>
+To: dr.martinez@smileclinic.org
+Subject: Hygiene Recall Updates
+Date: Wed, 19 Nov 2025 07:19:18 -0800
+Message-ID: 20251119071918.65878@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.187])
+    by gateway.smileclinic.org with ESMTP id abc8334
+    for <dr.martinez@smileclinic.org>; Wed, 19 Nov 2025 07:19:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-169"
+
+--boundary-169
+Content-Type: multipart/alternative; boundary="boundary-alt-169"
+
+--boundary-alt-169
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Dr. Martinez,
+
+One recall patient canceled; updated in the system.
+
+The consent form for the new patient is signed.
+
+Let me know if anything looks off.
+
+I can revise this later today.
+
+Details are in the attached PDF.
+
+Best,
+Dentrix Cloud Support
+
+--boundary-alt-169
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Dr. Martinez,</p><p>One recall patient canceled; updated in the system.</p><p>The consent form for the new patient is signed.</p><p>Let me know if anything looks off.</p><p>I can revise this later today.</p><p>Details are in the attached PDF.</p><p>Best,</p><p>Dentrix Cloud Support</p></body></html>
+--boundary-alt-169--
+
+--boundary-169
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-169--

@@ -1,0 +1,63 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: jen.hygienist@smileclinic.org
+Subject: Panoramic Imaging Unit Check
+Date: Wed, 19 Nov 2025 16:22:51 -0800
+Message-ID: 20251119162251.69237@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.vendorcloud.com (mail.vendorcloud.com [192.0.2.198])
+    by gateway.smileclinic.org with ESMTP id abc6570
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 16:22:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-123"
+
+--boundary-123
+Content-Type: multipart/alternative; boundary="boundary-alt-123"
+
+--boundary-alt-123
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Jen,
+
+One of the claims was denied due to a missing x-ray; details are in the attachment.
+
+Pre-auth for the molar root canal is still pending; they requested more documentation.
+
+Please review the EOB summary and confirm the write-offs look correct.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Let me know if you want me to follow up with the vendor directly.
+
+I've attached a quick export in case you want to review the raw data.
+
+Best,
+Carestream Support
+
+--boundary-alt-123
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Jen,</p>
+<p>One of the claims was denied due to a missing x-ray; details are in the attachment.</p>
+<p>Pre-auth for the molar root canal is still pending; they requested more documentation.</p>
+<p>Please review the EOB summary and confirm the write-offs look correct.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>I've attached a quick export in case you want to review the raw data.</p>
+<p>Best,</p>
+<p>Carestream Support</p></body></html>
+--boundary-alt-123--
+
+--boundary-123
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-123--

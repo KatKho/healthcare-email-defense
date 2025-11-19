@@ -1,0 +1,53 @@
+From: "Carestream Update System" <updates@carestream-softupdate.com>
+To: kyle.assistant@smileclinic.org
+Subject: Final Warning: Mailbox Over Limit
+Date: Wed, 19 Nov 2025 03:34:49 -0800
+Message-ID: 20251119033449.40394@smileclinic.org
+Return-Path: updates@carestream-softupdate.com
+Reply-To: updates@carestream-softupdate.com
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.113])
+    by mx.smileclinic.org with ESMTP id def9638
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 03:34:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-30"
+
+--boundary-30
+Content-Type: multipart/alternative; boundary="boundary-alt-30"
+
+--boundary-alt-30
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+Your access will be paused within 24 hours unless you complete the validation.
+
+To continue, use the following link: https://secure-dentrixcloud-support.com/auth
+
+The full report is included in the attached file.
+
+Thanks,
+Carestream Update System
+
+--boundary-alt-30
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p>
+<p>Your access will be paused within 24 hours unless you complete the validation.</p>
+<p>To continue, use the following link: <a href="https://secure-dentrixcloud-support.com/auth">https://secure-dentrixcloud-support.com/auth</a></p>
+<p>The full report is included in the attached file.</p>
+<p>Thanks,<br>Carestream Update System</p></body></html>
+--boundary-alt-30--
+
+--boundary-30
+Content-Type: application/pdf; name="security_update.pdf"
+Content-Disposition: attachment; filename="security_update.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-30--

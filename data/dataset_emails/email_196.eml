@@ -1,0 +1,43 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: frontdesk@smileclinic.org
+Subject: Updated Afternoon Schedule
+Date: Wed, 19 Nov 2025 18:43:18 -0800
+Message-ID: 20251119184318.92333@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.191])
+    by gateway.smileclinic.org with ESMTP id abc6489
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 18:43:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-196"
+
+--boundary-196
+Content-Type: multipart/alternative; boundary="boundary-alt-196"
+
+--boundary-alt-196
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Sarah,
+
+Updated the inventory sheet this morning.
+
+New composite shades arrived short by two boxes.
+
+This should help things run smoother.
+
+I can revise this later today.
+
+Thanks,
+Patterson Dental Shipping
+
+--boundary-alt-196
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Sarah,</p><p>Updated the inventory sheet this morning.</p><p>New composite shades arrived short by two boxes.</p><p>This should help things run smoother.</p><p>I can revise this later today.</p><p>Thanks,</p><p>Patterson Dental Shipping</p></body></html>
+--boundary-alt-196--
+--boundary-196--

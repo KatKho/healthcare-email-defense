@@ -1,0 +1,39 @@
+From: "Dentrix Cloud Support" <support@dentrixcloud.com>
+To: it@smileclinic.org
+Subject: Daily Sterilization Record
+Date: Wed, 19 Nov 2025 08:30:49 -0800
+Message-ID: 20251119083049.50472@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.49])
+    by gateway.smileclinic.org with ESMTP id def3966
+    for it@smileclinic.org; Wed, 19 Nov 2025 08:30:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-39"
+
+--boundary-39
+Content-Type: multipart/alternative; boundary="boundary-alt-39"
+
+--boundary-alt-39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning David,
+
+This should help keep tomorrow's schedule running smoothly.
+
+Thanks,
+Dentrix Cloud Support
+
+--boundary-alt-39
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning David,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>Thanks,<br>Dentrix Cloud Support</p></body></html>
+--boundary-alt-39--
+--boundary-39--

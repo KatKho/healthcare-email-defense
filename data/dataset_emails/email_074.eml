@@ -1,0 +1,42 @@
+From: "David Chen" <it@smileclinic.org>
+To: billing@smileclinic.org
+Subject: Lab Case Documentation
+Date: Wed, 19 Nov 2025 04:48:49 -0800
+Message-ID: 20251119044849.88068@smileclinic.org
+Return-Path: it@smileclinic.org
+Reply-To: it@smileclinic.org
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.107])
+    by gateway.smileclinic.org with ESMTP id def2404
+    for billing@smileclinic.org; Wed, 19 Nov 2025 04:48:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-24"
+
+--boundary-24
+Content-Type: multipart/alternative; boundary="boundary-alt-24"
+
+--boundary-alt-24
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+Please review the details and let me know if anything needs adjustment.
+
+Please review the details and let me know if anything needs adjustment.
+
+Sincerely,
+David Chen
+
+--boundary-alt-24
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Sincerely,<br>David Chen</p></body></html>
+--boundary-alt-24--
+--boundary-24--

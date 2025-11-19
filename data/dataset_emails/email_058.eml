@@ -1,0 +1,39 @@
+From: "Delta Dental Claims" <claims@deltadental-insurance.com>
+To: billing@smileclinic.org
+Subject: Insurance Claim Notes
+Date: Tue, 18 Nov 2025 22:18:49 -0800
+Message-ID: 20251118221849.97146@smileclinic.org
+Return-Path: claims@deltadental-insurance.com
+Reply-To: claims@deltadental-insurance.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.141])
+    by gateway.smileclinic.org with ESMTP id def6448
+    for billing@smileclinic.org; Tue, 18 Nov 2025 22:18:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-8"
+
+--boundary-8
+Content-Type: multipart/alternative; boundary="boundary-alt-8"
+
+--boundary-alt-8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+I wanted to share today's update before the end of the day.
+
+Regards,
+Delta Dental Claims
+
+--boundary-alt-8
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p>
+<p>I wanted to share today's update before the end of the day.</p>
+<p>Regards,<br>Delta Dental Claims</p></body></html>
+--boundary-alt-8--
+--boundary-8--

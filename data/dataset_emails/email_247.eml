@@ -1,0 +1,50 @@
+From: "QuickBill Verification" <notice@quickbill-serv.com>
+To: billing@smileclinic.org
+Subject: Provider Security Check Failed
+Date: Wed, 19 Nov 2025 10:36:41 -0800
+Message-ID: 20251119103641.72283@mail.smileclinic.org
+Return-Path: notice@quickbill-serv.com
+Reply-To: notice@quickbill-serv.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.22])
+    by gateway.smileclinic.org with ESMTP id xyz7085
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 10:36:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=notice@quickbill-serv.com;
+    dmarc=none header.from=notice@quickbill-serv.com
+Content-Type: multipart/mixed; boundary="boundary-247"
+
+--boundary-247
+Content-Type: multipart/alternative; boundary="boundary-alt-247"
+
+--boundary-alt-247
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+Please complete the secure authentication process below.
+
+A security event was triggered by an unknown device.
+
+Your provider account shows unusual login behavior.
+
+Verification link: https://secure-dentrix-provider-check.com/login
+
+Thank you,
+QuickBill Verification
+
+--boundary-alt-247
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p><p>Please complete the secure authentication process below.</p><p>A security event was triggered by an unknown device.</p><p>Your provider account shows unusual login behavior.</p><p>Verification link: <a href="https://secure-dentrix-provider-check.com/login">https://secure-dentrix-provider-check.com/login</a></p><p>Thank you,</p><p>QuickBill Verification</p></body></html>
+--boundary-alt-247--
+
+--boundary-247
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-247--

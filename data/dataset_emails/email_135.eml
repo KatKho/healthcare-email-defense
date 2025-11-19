@@ -1,0 +1,69 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: it@smileclinic.org
+Subject: Weekly Hygiene Recall List Export
+Date: Wed, 19 Nov 2025 06:11:51 -0800
+Message-ID: 20251119061151.76788@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.158])
+    by mx.smileclinic.org with ESMTP id abc8360
+    for it@smileclinic.org; Wed, 19 Nov 2025 06:11:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-135"
+
+--boundary-135
+Content-Type: multipart/alternative; boundary="boundary-alt-135"
+
+--boundary-alt-135
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning David,
+
+Pre-auth for the molar root canal is still pending; they requested more documentation.
+
+Please review the EOB summary and confirm the write-offs look correct.
+
+Delta is asking for additional charting before approving the perio maintenance.
+
+Let me know if you want me to follow up with the vendor directly.
+
+I've attached a quick export in case you want to review the raw data.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Thanks,
+Kyle Bennett
+
+--boundary-alt-135
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning David,</p>
+<p>Pre-auth for the molar root canal is still pending; they requested more documentation.</p>
+<p>Please review the EOB summary and confirm the write-offs look correct.</p>
+<p>Delta is asking for additional charting before approving the perio maintenance.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>I've attached a quick export in case you want to review the raw data.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Thanks,</p>
+<p>Kyle Bennett</p></body></html>
+--boundary-alt-135--
+
+--boundary-135
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-135--

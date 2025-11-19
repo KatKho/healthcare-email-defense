@@ -1,0 +1,66 @@
+From: "BrightSmile Lab Cases" <cases@brightsmilelab.com>
+To: it@smileclinic.org
+Subject: Lab Case Timing and Shade Confirmation
+Date: Wed, 19 Nov 2025 07:10:51 -0800
+Message-ID: 20251119071051.41774@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.183])
+    by gateway.smileclinic.org with ESMTP id abc7225
+    for it@smileclinic.org; Wed, 19 Nov 2025 07:10:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-144"
+
+--boundary-144
+Content-Type: multipart/alternative; boundary="boundary-alt-144"
+
+--boundary-alt-144
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey David,
+
+We had a brief internet outage around 10:15 AM; I noted it in the log.
+
+The secure email portal timed out for a few patients trying to upload forms.
+
+Backups completed successfully, but the log shows one warning on the file share.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Details are in the attached document.
+
+Regards,
+BrightSmile Lab Cases
+
+--boundary-alt-144
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey David,</p>
+<p>We had a brief internet outage around 10:15 AM; I noted it in the log.</p>
+<p>The secure email portal timed out for a few patients trying to upload forms.</p>
+<p>Backups completed successfully, but the log shows one warning on the file share.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Details are in the attached document.</p>
+<p>Regards,</p>
+<p>BrightSmile Lab Cases</p></body></html>
+--boundary-alt-144--
+
+--boundary-144
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-144--

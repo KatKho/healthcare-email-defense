@@ -1,0 +1,53 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Insurance Claim Notes
+Date: Wed, 19 Nov 2025 07:34:49 -0800
+Message-ID: 20251119073449.89854@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.39])
+    by gateway.smileclinic.org with ESMTP id def8912
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 07:34:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-4"
+
+--boundary-4
+Content-Type: multipart/alternative; boundary="boundary-alt-4"
+
+--boundary-alt-4
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Jen,
+
+I wanted to share today's update before the end of the day.
+
+Nothing urgent here, but I wanted this recorded properly.
+
+Attached is the updated invoice for your review.
+
+Sincerely,
+Sarah Miller
+
+--boundary-alt-4
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Jen,</p>
+<p>I wanted to share today's update before the end of the day.</p>
+<p>Nothing urgent here, but I wanted this recorded properly.</p>
+<p>Attached is the updated invoice for your review.</p>
+<p>Sincerely,<br>Sarah Miller</p></body></html>
+--boundary-alt-4--
+
+--boundary-4
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-4--

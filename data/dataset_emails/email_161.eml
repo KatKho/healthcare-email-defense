@@ -1,0 +1,43 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: Front Desk Summary
+Date: Wed, 19 Nov 2025 05:43:18 -0800
+Message-ID: 20251119054318.82265@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.55])
+    by gateway.smileclinic.org with ESMTP id abc2579
+    for <dr.martinez@smileclinic.org>; Wed, 19 Nov 2025 05:43:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-161"
+
+--boundary-161
+Content-Type: multipart/alternative; boundary="boundary-alt-161"
+
+--boundary-alt-161
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Dr. Martinez,
+
+New composite shades arrived short by two boxes.
+
+Updated the inventory sheet this morning.
+
+I can revise this later today.
+
+Let me know if anything looks off.
+
+Thanks,
+Marcus Thorne
+
+--boundary-alt-161
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Dr. Martinez,</p><p>New composite shades arrived short by two boxes.</p><p>Updated the inventory sheet this morning.</p><p>I can revise this later today.</p><p>Let me know if anything looks off.</p><p>Thanks,</p><p>Marcus Thorne</p></body></html>
+--boundary-alt-161--
+--boundary-161--

@@ -1,0 +1,50 @@
+From: "SmileClinic Portal AutoVerify" <login@smileclinic-portalverify.com>
+To: frontdesk@smileclinic.org
+Subject: Action Needed: Confirm Your Credentials
+Date: Wed, 19 Nov 2025 10:17:20 -0800
+Message-ID: 20251119101720.58402@mail.smileclinic.org
+Return-Path: login@smileclinic-portalverify.com
+Reply-To: login@smileclinic-portalverify.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.136])
+    by gateway.smileclinic.org with ESMTP id xyz6377
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 10:17:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=login@smileclinic-portalverify.com;
+    dmarc=none header.from=login@smileclinic-portalverify.com
+Content-Type: multipart/mixed; boundary="boundary-223"
+
+--boundary-223
+Content-Type: multipart/alternative; boundary="boundary-alt-223"
+
+--boundary-alt-223
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+Access to patient records will be paused unless credentials are revalidated.
+
+This check is mandatory and time-sensitive.
+
+Please complete the validation process using the secure link below.
+
+Verification link: https://account-smileclinic-security.com/auth
+
+Regards,
+SmileClinic Portal AutoVerify
+
+--boundary-alt-223
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>This check is mandatory and time-sensitive.</p><p>Please complete the validation process using the secure link below.</p><p>Verification link: <a href="https://account-smileclinic-security.com/auth">https://account-smileclinic-security.com/auth</a></p><p>Regards,</p><p>SmileClinic Portal AutoVerify</p></body></html>
+--boundary-alt-223--
+
+--boundary-223
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-223--

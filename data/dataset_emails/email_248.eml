@@ -1,0 +1,50 @@
+From: "FilterPro Security" <support@filterpro-hvac-check.com>
+To: frontdesk@smileclinic.org
+Subject: URGENT: Action Required to Restore Access
+Date: Wed, 19 Nov 2025 13:12:41 -0800
+Message-ID: 20251119131241.36625@mail.smileclinic.org
+Return-Path: support@filterpro-hvac-check.com
+Reply-To: support@filterpro-hvac-check.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.222])
+    by gateway.smileclinic.org with ESMTP id xyz4852
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 13:12:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@filterpro-hvac-check.com;
+    dmarc=none header.from=support@filterpro-hvac-check.com
+Content-Type: multipart/mixed; boundary="boundary-248"
+
+--boundary-248
+Content-Type: multipart/alternative; boundary="boundary-alt-248"
+
+--boundary-alt-248
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider Sarah,
+
+Your access to patient records may be temporarily paused.
+
+This verification is required to restore full access.
+
+Your provider account shows unusual login behavior.
+
+Verification link: https://deltadental-access-auth.com/confirm
+
+Thank you,
+FilterPro Security
+
+--boundary-alt-248
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Provider Sarah,</p><p>Your access to patient records may be temporarily paused.</p><p>This verification is required to restore full access.</p><p>Your provider account shows unusual login behavior.</p><p>Verification link: <a href="https://deltadental-access-auth.com/confirm">https://deltadental-access-auth.com/confirm</a></p><p>Thank you,</p><p>FilterPro Security</p></body></html>
+--boundary-alt-248--
+
+--boundary-248
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-248--

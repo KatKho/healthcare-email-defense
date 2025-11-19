@@ -1,0 +1,46 @@
+From: "Dr. Sofia Martinez" <dr.martinez@smileclinic.org>
+To: it@smileclinic.org
+Subject: Update #40 for Clinic Operations
+Date: Wed, 19 Nov 2025 22:09:15 -0000
+Message-ID: 20251119220915.fe10d3@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc123
+    for it@smileclinic.org; Wed, 19 Nov 2025 22:09:15 -0000
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-53e676"
+
+--boundary-53e676
+Content-Type: multipart/alternative; boundary="boundary-alt-4400aa"
+
+--boundary-alt-4400aa
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi It,
+
+This is an operational update for the day. Let me know if anything needs follow-up.
+
+Thanks,
+Dr. Sofia Martinez
+
+--boundary-alt-4400aa
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi It,</p><p>This is an operational update for the day. Let me know if anything needs follow-up.</p><p>Thanks,<br>Dr. Sofia Martinez</p></body></html>
+
+--boundary-alt-4400aa--
+
+--boundary-53e676
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RHVtbXkgUERGIGNvbnRlbnQ=
+
+--boundary-53e676--

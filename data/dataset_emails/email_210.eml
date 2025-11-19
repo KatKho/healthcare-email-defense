@@ -1,0 +1,50 @@
+From: "SmileClinic Portal AutoVerify" <login@smileclinic-portalverify.com>
+To: dr.martinez@smileclinic.org
+Subject: Suspicious Login Attempt Detected
+Date: Wed, 19 Nov 2025 11:07:20 -0800
+Message-ID: 20251119110720.17894@mail.smileclinic.org
+Return-Path: login@smileclinic-portalverify.com
+Reply-To: login@smileclinic-portalverify.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.103])
+    by gateway.smileclinic.org with ESMTP id xyz5390
+    for <dr.martinez@smileclinic.org>; Wed, 19 Nov 2025 11:07:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=login@smileclinic-portalverify.com;
+    dmarc=none header.from=login@smileclinic-portalverify.com
+Content-Type: multipart/mixed; boundary="boundary-210"
+
+--boundary-210
+Content-Type: multipart/alternative; boundary="boundary-alt-210"
+
+--boundary-alt-210
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Dr. Martinez,
+
+Access to patient records will be paused unless credentials are revalidated.
+
+Please complete the validation process using the secure link below.
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Verification link: https://secure-provider-verification.com
+
+Regards,
+SmileClinic Portal AutoVerify
+
+--boundary-alt-210
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Dr. Martinez,</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>Please complete the validation process using the secure link below.</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Verification link: <a href="https://secure-provider-verification.com">https://secure-provider-verification.com</a></p><p>Regards,</p><p>SmileClinic Portal AutoVerify</p></body></html>
+--boundary-alt-210--
+
+--boundary-210
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-210--

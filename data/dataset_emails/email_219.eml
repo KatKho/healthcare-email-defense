@@ -1,0 +1,50 @@
+From: "Dental Provider Alerts" <alerts@deltadental-insure.com>
+To: frontdesk@smileclinic.org
+Subject: Suspicious Login Attempt Detected
+Date: Wed, 19 Nov 2025 10:52:20 -0800
+Message-ID: 20251119105220.28536@mail.smileclinic.org
+Return-Path: alerts@deltadental-insure.com
+Reply-To: alerts@deltadental-insure.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.194])
+    by gateway.smileclinic.org with ESMTP id xyz9410
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 10:52:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@deltadental-insure.com;
+    dmarc=none header.from=alerts@deltadental-insure.com
+Content-Type: multipart/mixed; boundary="boundary-219"
+
+--boundary-219
+Content-Type: multipart/alternative; boundary="boundary-alt-219"
+
+--boundary-alt-219
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider Sarah,
+
+This check is mandatory and time-sensitive.
+
+Access to patient records will be paused unless credentials are revalidated.
+
+Please complete the validation process using the secure link below.
+
+Verification link: https://carestream-update-verify.com/session
+
+Sincerely,
+Dental Provider Alerts
+
+--boundary-alt-219
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Provider Sarah,</p><p>This check is mandatory and time-sensitive.</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>Please complete the validation process using the secure link below.</p><p>Verification link: <a href="https://carestream-update-verify.com/session">https://carestream-update-verify.com/session</a></p><p>Sincerely,</p><p>Dental Provider Alerts</p></body></html>
+--boundary-alt-219--
+
+--boundary-219
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-219--

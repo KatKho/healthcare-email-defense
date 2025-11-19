@@ -1,0 +1,39 @@
+From: "Delta Dental Claims" <claims@deltadental-insurance.com>
+To: dr.martinez@smileclinic.org
+Subject: Lab Case Documentation
+Date: Wed, 19 Nov 2025 07:32:49 -0800
+Message-ID: 20251119073249.90121@smileclinic.org
+Return-Path: claims@deltadental-insurance.com
+Reply-To: claims@deltadental-insurance.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.192])
+    by gateway.smileclinic.org with ESMTP id def8480
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 07:32:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-23"
+
+--boundary-23
+Content-Type: multipart/alternative; boundary="boundary-alt-23"
+
+--boundary-alt-23
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Dr. Martinez,
+
+This should help keep tomorrow's schedule running smoothly.
+
+Regards,
+Delta Dental Claims
+
+--boundary-alt-23
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Dr. Martinez,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>Regards,<br>Delta Dental Claims</p></body></html>
+--boundary-alt-23--
+--boundary-23--

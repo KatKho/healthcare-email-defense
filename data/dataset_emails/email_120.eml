@@ -1,0 +1,51 @@
+From: "David Chen" <it@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Tomorrow's Schedule Adjustments
+Date: Wed, 19 Nov 2025 02:54:51 -0800
+Message-ID: 20251119025451.93741@smileclinic.org
+Return-Path: it@smileclinic.org
+Reply-To: it@smileclinic.org
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.224])
+    by mx.smileclinic.org with ESMTP id abc1064
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 02:54:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-120"
+
+--boundary-120
+Content-Type: multipart/alternative; boundary="boundary-alt-120"
+
+--boundary-alt-120
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Kyle,
+
+The disinfectant wipes backorder has an expected ship date for next week.
+
+We're starting to run low on medium nitrile gloves and prophy paste.
+
+Appreciate it,
+David Chen
+
+--boundary-alt-120
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Kyle,</p>
+<p>The disinfectant wipes backorder has an expected ship date for next week.</p>
+<p>We're starting to run low on medium nitrile gloves and prophy paste.</p>
+<p>Appreciate it,</p>
+<p>David Chen</p></body></html>
+--boundary-alt-120--
+
+--boundary-120
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-120--

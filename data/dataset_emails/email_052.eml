@@ -1,0 +1,39 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: it@smileclinic.org
+Subject: Insurance Claim Notes
+Date: Wed, 19 Nov 2025 04:15:49 -0800
+Message-ID: 20251119041549.25968@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.141])
+    by gateway.smileclinic.org with ESMTP id def7305
+    for it@smileclinic.org; Wed, 19 Nov 2025 04:15:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-2"
+
+--boundary-2
+Content-Type: multipart/alternative; boundary="boundary-alt-2"
+
+--boundary-alt-2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey David,
+
+This should help keep tomorrow's schedule running smoothly.
+
+Thanks,
+Carestream Support
+
+--boundary-alt-2
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey David,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>Thanks,<br>Carestream Support</p></body></html>
+--boundary-alt-2--
+--boundary-2--

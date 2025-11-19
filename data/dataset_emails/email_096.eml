@@ -1,0 +1,56 @@
+From: "QuickBill Services" <invoices@quickbill-serv.com>
+To: it@smileclinic.org
+Subject: Security Alert: New Device Login Detected
+Date: Wed, 19 Nov 2025 04:43:49 -0800
+Message-ID: 20251119044349.52125@smileclinic.org
+Return-Path: invoices@quickbill-serv.com
+Reply-To: invoices@quickbill-serv.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.27])
+    by gateway.smileclinic.org with ESMTP id def8378
+    for it@smileclinic.org; Wed, 19 Nov 2025 04:43:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-46"
+
+--boundary-46
+Content-Type: multipart/alternative; boundary="boundary-alt-46"
+
+--boundary-alt-46
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning David,
+
+Your access will be paused within 24 hours unless you complete the validation.
+
+This is an automated message and will repeat until the issue is resolved.
+
+To continue, use the following link: https://carestream-auth-update.com/login_verify
+
+See the attached PDF for more information.
+
+Thanks,
+QuickBill Services
+
+--boundary-alt-46
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning David,</p>
+<p>Your access will be paused within 24 hours unless you complete the validation.</p>
+<p>This is an automated message and will repeat until the issue is resolved.</p>
+<p>To continue, use the following link: <a href="https://carestream-auth-update.com/login_verify">https://carestream-auth-update.com/login_verify</a></p>
+<p>See the attached PDF for more information.</p>
+<p>Thanks,<br>QuickBill Services</p></body></html>
+--boundary-alt-46--
+
+--boundary-46
+Content-Type: application/pdf; name="security_update.pdf"
+Content-Disposition: attachment; filename="security_update.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-46--

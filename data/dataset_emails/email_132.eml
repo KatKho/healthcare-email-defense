@@ -1,0 +1,54 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: billing@smileclinic.org
+Subject: Updated Supply Order for Operatories
+Date: Wed, 19 Nov 2025 04:00:51 -0800
+Message-ID: 20251119040051.33015@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.24])
+    by gateway.smileclinic.org with ESMTP id abc1048
+    for billing@smileclinic.org; Wed, 19 Nov 2025 04:00:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-132"
+
+--boundary-132
+Content-Type: multipart/alternative; boundary="boundary-alt-132"
+
+--boundary-alt-132
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Marcus,
+
+We had two cancellations this afternoon; both have been added back to the recall list.
+
+I attached the notes for the three crown patients from this morning.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Best,
+Sarah Miller
+
+--boundary-alt-132
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Marcus,</p>
+<p>We had two cancellations this afternoon; both have been added back to the recall list.</p>
+<p>I attached the notes for the three crown patients from this morning.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Best,</p>
+<p>Sarah Miller</p></body></html>
+--boundary-alt-132--
+
+--boundary-132
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-132--

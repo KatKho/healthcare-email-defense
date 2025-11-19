@@ -1,0 +1,51 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Weekly Hygiene Recall List Export
+Date: Wed, 19 Nov 2025 06:59:51 -0800
+Message-ID: 20251119065951.57780@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.89])
+    by gateway.smileclinic.org with ESMTP id abc2471
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 06:59:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-141"
+
+--boundary-141
+Content-Type: multipart/alternative; boundary="boundary-alt-141"
+
+--boundary-alt-141
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Kyle,
+
+We had a brief internet outage around 10:15 AM; I noted it in the log.
+
+Backups completed successfully, but the log shows one warning on the file share.
+
+Appreciate it,
+Marcus Thorne
+
+--boundary-alt-141
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Kyle,</p>
+<p>We had a brief internet outage around 10:15 AM; I noted it in the log.</p>
+<p>Backups completed successfully, but the log shows one warning on the file share.</p>
+<p>Appreciate it,</p>
+<p>Marcus Thorne</p></body></html>
+--boundary-alt-141--
+
+--boundary-141
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-141--

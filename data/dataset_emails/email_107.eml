@@ -1,0 +1,55 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Updated Supply Order for Operatories
+Date: Wed, 19 Nov 2025 01:32:51 -0800
+Message-ID: 20251119013251.84815@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.242])
+    by mx.smileclinic.org with ESMTP id abc6939
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 01:32:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-107"
+
+--boundary-107
+Content-Type: multipart/alternative; boundary="boundary-alt-107"
+
+--boundary-alt-107
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Sarah,
+
+I included the updated inventory sheet for the hygiene rooms.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+If anything in the document looks off, I can revise it later today.
+
+Thanks,
+Marcus Thorne
+
+--boundary-alt-107
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Sarah,</p>
+<p>I included the updated inventory sheet for the hygiene rooms.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Thanks,</p>
+<p>Marcus Thorne</p></body></html>
+--boundary-alt-107--
+--boundary-107--

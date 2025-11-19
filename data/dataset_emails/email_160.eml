@@ -1,0 +1,43 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: frontdesk@smileclinic.org
+Subject: Front Desk Summary
+Date: Wed, 19 Nov 2025 17:01:18 -0800
+Message-ID: 20251119170118.14061@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.143])
+    by gateway.smileclinic.org with ESMTP id abc3783
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 17:01:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-160"
+
+--boundary-160
+Content-Type: multipart/alternative; boundary="boundary-alt-160"
+
+--boundary-alt-160
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Sarah,
+
+Dentrix froze during patient checkout.
+
+The secure portal timed out for two uploads.
+
+Let me know if anything looks off.
+
+I can revise this later today.
+
+Regards,
+Patterson Dental Shipping
+
+--boundary-alt-160
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Sarah,</p><p>Dentrix froze during patient checkout.</p><p>The secure portal timed out for two uploads.</p><p>Let me know if anything looks off.</p><p>I can revise this later today.</p><p>Regards,</p><p>Patterson Dental Shipping</p></body></html>
+--boundary-alt-160--
+--boundary-160--

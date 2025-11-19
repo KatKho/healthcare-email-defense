@@ -1,0 +1,69 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: frontdesk@smileclinic.org
+Subject: Unusual Activity on Your Cloud Imaging Account
+Date: Wed, 19 Nov 2025 14:38:51 -0800
+Message-ID: 20251119143851.24411@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.148])
+    by mx.smileclinic.org with ESMTP id abc6560
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 14:38:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-119"
+
+--boundary-119
+Content-Type: multipart/alternative; boundary="boundary-alt-119"
+
+--boundary-alt-119
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Sarah,
+
+Your SmileClinic provider account has been temporarily restricted due to unusual activity.
+
+To continue, please use the secure link below: https://smileclinic-provider-verify.com/login
+
+A security notice PDF is attached for your records.
+
+If anything in the document looks off, I can revise it later today.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+If anything in the document looks off, I can revise it later today.
+
+If anything in the document looks off, I can revise it later today.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Thanks,
+MedWaste Alerts
+
+--boundary-alt-119
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Sarah,</p>
+<p>Your SmileClinic provider account has been temporarily restricted due to unusual activity.</p>
+<p>To continue, please use the secure link below: <a href="https://smileclinic-provider-verify.com/login">https://smileclinic-provider-verify.com/login</a></p>
+<p>A security notice PDF is attached for your records.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Thanks,</p>
+<p>MedWaste Alerts</p></body></html>
+--boundary-alt-119--
+
+--boundary-119
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-119--

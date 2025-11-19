@@ -1,0 +1,39 @@
+From: "Jennifer Stevens" <jen.hygienist@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: Supply Check for Tomorrow
+Date: Wed, 19 Nov 2025 08:09:18 -0800
+Message-ID: 20251119080918.63186@smileclinic.org
+Return-Path: jen.hygienist@smileclinic.org
+Reply-To: jen.hygienist@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.112])
+    by gateway.smileclinic.org with ESMTP id abc8607
+    for <dr.martinez@smileclinic.org>; Wed, 19 Nov 2025 08:09:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-195"
+
+--boundary-195
+Content-Type: multipart/alternative; boundary="boundary-alt-195"
+
+--boundary-alt-195
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Dr. Martinez,
+
+I attached notes from today's patients.
+
+I can revise this later today.
+
+Regards,
+Jennifer Stevens
+
+--boundary-alt-195
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Dr. Martinez,</p><p>I attached notes from today's patients.</p><p>I can revise this later today.</p><p>Regards,</p><p>Jennifer Stevens</p></body></html>
+--boundary-alt-195--
+--boundary-195--

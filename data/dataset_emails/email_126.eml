@@ -1,0 +1,57 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: kyle.assistant@smileclinic.org
+Subject: Lab Case Timing and Shade Confirmation
+Date: Wed, 19 Nov 2025 01:08:51 -0800
+Message-ID: 20251119010851.68014@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.vendorcloud.com (mail.vendorcloud.com [192.0.2.163])
+    by gateway.smileclinic.org with ESMTP id abc6135
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 01:08:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-126"
+
+--boundary-126
+Content-Type: multipart/alternative; boundary="boundary-alt-126"
+
+--boundary-alt-126
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+Delta is asking for additional charting before approving the perio maintenance.
+
+Let me know if you want me to follow up with the vendor directly.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+If anything in the document looks off, I can revise it later today.
+
+Best,
+Carestream Support
+
+--boundary-alt-126
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p>
+<p>Delta is asking for additional charting before approving the perio maintenance.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Best,</p>
+<p>Carestream Support</p></body></html>
+--boundary-alt-126--
+
+--boundary-126
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-126--

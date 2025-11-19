@@ -1,0 +1,39 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Daily Imaging Log
+Date: Wed, 19 Nov 2025 21:17:18 -0800
+Message-ID: 20251119211718.22100@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.16])
+    by gateway.smileclinic.org with ESMTP id abc1066
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 21:17:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-176"
+
+--boundary-176
+Content-Type: multipart/alternative; boundary="boundary-alt-176"
+
+--boundary-alt-176
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+We're low on gloves and disinfectant wipes.
+
+I can revise this later today.
+
+Best,
+Kyle Bennett
+
+--boundary-alt-176
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p><p>We're low on gloves and disinfectant wipes.</p><p>I can revise this later today.</p><p>Best,</p><p>Kyle Bennett</p></body></html>
+--boundary-alt-176--
+--boundary-176--

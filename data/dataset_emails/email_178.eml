@@ -1,0 +1,41 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Hygiene Recall Updates
+Date: Wed, 19 Nov 2025 07:48:18 -0800
+Message-ID: 20251119074818.68735@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.84])
+    by gateway.smileclinic.org with ESMTP id abc9030
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 07:48:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-178"
+
+--boundary-178
+Content-Type: multipart/alternative; boundary="boundary-alt-178"
+
+--boundary-alt-178
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Jen,
+
+Updated the inventory sheet this morning.
+
+New composite shades arrived short by two boxes.
+
+This should help things run smoother.
+
+Best,
+Kyle Bennett
+
+--boundary-alt-178
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Jen,</p><p>Updated the inventory sheet this morning.</p><p>New composite shades arrived short by two boxes.</p><p>This should help things run smoother.</p><p>Best,</p><p>Kyle Bennett</p></body></html>
+--boundary-alt-178--
+--boundary-178--

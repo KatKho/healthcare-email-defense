@@ -1,0 +1,53 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Updated Supply Order
+Date: Wed, 19 Nov 2025 15:47:49 -0800
+Message-ID: 20251119154749.36885@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.155])
+    by mx.smileclinic.org with ESMTP id def4829
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 15:47:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-44"
+
+--boundary-44
+Content-Type: multipart/alternative; boundary="boundary-alt-44"
+
+--boundary-alt-44
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+This should help keep tomorrow's schedule running smoothly.
+
+This should help keep tomorrow's schedule running smoothly.
+
+I've attached the imaging log we discussed.
+
+Sincerely,
+Sarah Miller
+
+--boundary-alt-44
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>I've attached the imaging log we discussed.</p>
+<p>Sincerely,<br>Sarah Miller</p></body></html>
+--boundary-alt-44--
+
+--boundary-44
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-44--

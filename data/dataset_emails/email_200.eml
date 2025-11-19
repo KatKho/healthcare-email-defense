@@ -1,0 +1,41 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Lab Case Reminder
+Date: Wed, 19 Nov 2025 06:58:18 -0800
+Message-ID: 20251119065818.72388@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.13])
+    by gateway.smileclinic.org with ESMTP id abc1370
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 06:58:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-200"
+
+--boundary-200
+Content-Type: multipart/alternative; boundary="boundary-alt-200"
+
+--boundary-alt-200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+One claim was denied; details in the attachment.
+
+I can revise this later today.
+
+This should help things run smoother.
+
+Thanks,
+Sarah Miller
+
+--boundary-alt-200
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p><p>One claim was denied; details in the attachment.</p><p>I can revise this later today.</p><p>This should help things run smoother.</p><p>Thanks,</p><p>Sarah Miller</p></body></html>
+--boundary-alt-200--
+--boundary-200--

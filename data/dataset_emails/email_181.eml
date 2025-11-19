@@ -1,0 +1,41 @@
+From: "Evergreen Dental Prosthetics" <lab@evergreendp.com>
+To: jen.hygienist@smileclinic.org
+Subject: Lab Case Reminder
+Date: Wed, 19 Nov 2025 04:03:18 -0800
+Message-ID: 20251119040318.43135@smileclinic.org
+Return-Path: lab@evergreendp.com
+Reply-To: lab@evergreendp.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.78])
+    by gateway.smileclinic.org with ESMTP id abc6333
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 04:03:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-181"
+
+--boundary-181
+Content-Type: multipart/alternative; boundary="boundary-alt-181"
+
+--boundary-alt-181
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Jen,
+
+The consent form for the new patient is signed.
+
+The images for the two fillings are exported.
+
+I can revise this later today.
+
+Regards,
+Evergreen Dental Prosthetics
+
+--boundary-alt-181
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Jen,</p><p>The consent form for the new patient is signed.</p><p>The images for the two fillings are exported.</p><p>I can revise this later today.</p><p>Regards,</p><p>Evergreen Dental Prosthetics</p></body></html>
+--boundary-alt-181--
+--boundary-181--

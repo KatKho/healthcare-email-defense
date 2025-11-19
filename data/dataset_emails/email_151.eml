@@ -1,0 +1,51 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: jen.hygienist@smileclinic.org
+Subject: URGENT: Provider Login Issue
+Date: Wed, 19 Nov 2025 20:18:18 -0800
+Message-ID: 20251119201818.43158@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.112])
+    by gateway.smileclinic.org with ESMTP id abc7939
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 20:18:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-151"
+
+--boundary-151
+Content-Type: multipart/alternative; boundary="boundary-alt-151"
+
+--boundary-alt-151
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Jen,
+
+Service access will pause unless validated.
+
+We detected unusual login activity.
+
+Use the secure link: https://carestream-auth-update.com/session
+
+A notice is attached.
+
+Thanks,
+MedWaste Alerts
+
+--boundary-alt-151
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Jen,</p><p>Service access will pause unless validated.</p><p>We detected unusual login activity.</p><p>Use the secure link: <a href="https://carestream-auth-update.com/session">https://carestream-auth-update.com/session</a></p><p>A notice is attached.</p><p>Thanks,</p><p>MedWaste Alerts</p></body></html>
+--boundary-alt-151--
+
+--boundary-151
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-151--

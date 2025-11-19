@@ -1,0 +1,49 @@
+From: "Dr. Alejandro Martinez" <dr.martinez@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Updated Supply Order for Operatories
+Date: Wed, 19 Nov 2025 03:06:51 -0800
+Message-ID: 20251119030651.14005@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.vendorcloud.com (mail.vendorcloud.com [192.0.2.239])
+    by gateway.smileclinic.org with ESMTP id abc3046
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 03:06:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-110"
+
+--boundary-110
+Content-Type: multipart/alternative; boundary="boundary-alt-110"
+
+--boundary-alt-110
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Sarah,
+
+The secure email portal timed out for a few patients trying to upload forms.
+
+The imaging workstation in Operatory 2 dropped off the network twice this morning.
+
+If anything in the document looks off, I can revise it later today.
+
+If anything in the document looks off, I can revise it later today.
+
+Regards,
+Dr. Alejandro Martinez
+
+--boundary-alt-110
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Sarah,</p>
+<p>The secure email portal timed out for a few patients trying to upload forms.</p>
+<p>The imaging workstation in Operatory 2 dropped off the network twice this morning.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Regards,</p>
+<p>Dr. Alejandro Martinez</p></body></html>
+--boundary-alt-110--
+--boundary-110--

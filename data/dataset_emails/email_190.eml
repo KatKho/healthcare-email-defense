@@ -1,0 +1,41 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: jen.hygienist@smileclinic.org
+Subject: Updated Afternoon Schedule
+Date: Wed, 19 Nov 2025 15:28:18 -0800
+Message-ID: 20251119152818.25288@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.122])
+    by gateway.smileclinic.org with ESMTP id abc7675
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 15:28:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-190"
+
+--boundary-190
+Content-Type: multipart/alternative; boundary="boundary-alt-190"
+
+--boundary-alt-190
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Jen,
+
+The consent form for the new patient is signed.
+
+I attached notes from today's patients.
+
+Let me know if anything looks off.
+
+Regards,
+Patterson Dental Shipping
+
+--boundary-alt-190
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Jen,</p><p>The consent form for the new patient is signed.</p><p>I attached notes from today's patients.</p><p>Let me know if anything looks off.</p><p>Regards,</p><p>Patterson Dental Shipping</p></body></html>
+--boundary-alt-190--
+--boundary-190--

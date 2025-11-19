@@ -1,0 +1,50 @@
+From: "Dentrix Cloud Security" <security@dentrixcloud-alert.com>
+To: billing@smileclinic.org
+Subject: Provider Security Check Failed
+Date: Tue, 18 Nov 2025 21:27:41 -0800
+Message-ID: 20251118212741.79692@mail.smileclinic.org
+Return-Path: security@dentrixcloud-alert.com
+Reply-To: security@dentrixcloud-alert.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.193])
+    by gateway.smileclinic.org with ESMTP id xyz9161
+    for <billing@smileclinic.org>; Tue, 18 Nov 2025 21:27:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=security@dentrixcloud-alert.com;
+    dmarc=none header.from=security@dentrixcloud-alert.com
+Content-Type: multipart/mixed; boundary="boundary-234"
+
+--boundary-234
+Content-Type: multipart/alternative; boundary="boundary-alt-234"
+
+--boundary-alt-234
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+A security event was triggered by an unknown device.
+
+Your provider account shows unusual login behavior.
+
+This verification is required to restore full access.
+
+Verification link: https://secure-dentrix-provider-check.com/login
+
+Sincerely,
+Dentrix Cloud Security
+
+--boundary-alt-234
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p><p>A security event was triggered by an unknown device.</p><p>Your provider account shows unusual login behavior.</p><p>This verification is required to restore full access.</p><p>Verification link: <a href="https://secure-dentrix-provider-check.com/login">https://secure-dentrix-provider-check.com/login</a></p><p>Sincerely,</p><p>Dentrix Cloud Security</p></body></html>
+--boundary-alt-234--
+
+--boundary-234
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-234--

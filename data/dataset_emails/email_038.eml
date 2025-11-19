@@ -1,0 +1,46 @@
+From: "Kyle Rivera" <kyle.assistant@smileclinic.org>
+To: it@smileclinic.org
+Subject: Update #38 for Clinic Operations
+Date: Wed, 19 Nov 2025 22:09:15 -0000
+Message-ID: 20251119220915.5ad392@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc123
+    for it@smileclinic.org; Wed, 19 Nov 2025 22:09:15 -0000
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-b5b4a0"
+
+--boundary-b5b4a0
+Content-Type: multipart/alternative; boundary="boundary-alt-0d0495"
+
+--boundary-alt-0d0495
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi It,
+
+This is an operational update for the day. Let me know if anything needs follow-up.
+
+Thanks,
+Kyle Rivera
+
+--boundary-alt-0d0495
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi It,</p><p>This is an operational update for the day. Let me know if anything needs follow-up.</p><p>Thanks,<br>Kyle Rivera</p></body></html>
+
+--boundary-alt-0d0495--
+
+--boundary-b5b4a0
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RHVtbXkgUERGIGNvbnRlbnQ=
+
+--boundary-b5b4a0--

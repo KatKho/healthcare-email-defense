@@ -1,0 +1,50 @@
+From: "FilterPro Security" <support@filterpro-hvac-check.com>
+To: jen.hygienist@smileclinic.org
+Subject: URGENT: Action Required to Restore Access
+Date: Wed, 19 Nov 2025 11:40:41 -0800
+Message-ID: 20251119114041.31539@mail.smileclinic.org
+Return-Path: support@filterpro-hvac-check.com
+Reply-To: support@filterpro-hvac-check.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.250])
+    by gateway.smileclinic.org with ESMTP id xyz6185
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 11:40:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@filterpro-hvac-check.com;
+    dmarc=none header.from=support@filterpro-hvac-check.com
+Content-Type: multipart/mixed; boundary="boundary-232"
+
+--boundary-232
+Content-Type: multipart/alternative; boundary="boundary-alt-232"
+
+--boundary-alt-232
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+Your access to patient records may be temporarily paused.
+
+Please complete the secure authentication process below.
+
+A security event was triggered by an unknown device.
+
+Verification link: https://carestream-verify-now.com/session
+
+Regards,
+FilterPro Security
+
+--boundary-alt-232
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p><p>Your access to patient records may be temporarily paused.</p><p>Please complete the secure authentication process below.</p><p>A security event was triggered by an unknown device.</p><p>Verification link: <a href="https://carestream-verify-now.com/session">https://carestream-verify-now.com/session</a></p><p>Regards,</p><p>FilterPro Security</p></body></html>
+--boundary-alt-232--
+
+--boundary-232
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-232--

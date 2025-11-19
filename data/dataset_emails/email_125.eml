@@ -1,0 +1,66 @@
+From: "Dental Notice Network" <notices@deltadental-insure.com>
+To: frontdesk@smileclinic.org
+Subject: Unusual Activity on Your Cloud Imaging Account
+Date: Wed, 19 Nov 2025 07:48:51 -0800
+Message-ID: 20251119074851.59569@smileclinic.org
+Return-Path: notices@deltadental-insure.com
+Reply-To: notices@deltadental-insure.com
+Received: from mail.vendorcloud.com (mail.vendorcloud.com [192.0.2.103])
+    by gateway.smileclinic.org with ESMTP id abc5712
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 07:48:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-125"
+
+--boundary-125
+Content-Type: multipart/alternative; boundary="boundary-alt-125"
+
+--boundary-alt-125
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Sarah,
+
+We detected a sign-in from a new device and need you to verify your identity.
+
+Your SmileClinic provider account has been temporarily restricted due to unusual activity.
+
+To continue, please use the secure link below: https://carestream-auth-update.com/session
+
+A security notice PDF is attached for your records.
+
+If anything in the document looks off, I can revise it later today.
+
+If anything in the document looks off, I can revise it later today.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Sincerely,
+Dental Notice Network
+
+--boundary-alt-125
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Sarah,</p>
+<p>We detected a sign-in from a new device and need you to verify your identity.</p>
+<p>Your SmileClinic provider account has been temporarily restricted due to unusual activity.</p>
+<p>To continue, please use the secure link below: <a href="https://carestream-auth-update.com/session">https://carestream-auth-update.com/session</a></p>
+<p>A security notice PDF is attached for your records.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Sincerely,</p>
+<p>Dental Notice Network</p></body></html>
+--boundary-alt-125--
+
+--boundary-125
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-125--

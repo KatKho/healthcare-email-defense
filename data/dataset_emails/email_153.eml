@@ -1,0 +1,39 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: it@smileclinic.org
+Subject: Secure Portal Verification
+Date: Wed, 19 Nov 2025 02:39:18 -0800
+Message-ID: 20251119023918.41343@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.100])
+    by gateway.smileclinic.org with ESMTP id abc5933
+    for <it@smileclinic.org>; Wed, 19 Nov 2025 02:39:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-153"
+
+--boundary-153
+Content-Type: multipart/alternative; boundary="boundary-alt-153"
+
+--boundary-alt-153
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon David,
+
+Service access will pause unless validated.
+
+Use the secure link: https://carestream-auth-update.com/session
+
+Regards,
+MedWaste Alerts
+
+--boundary-alt-153
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon David,</p><p>Service access will pause unless validated.</p><p>Use the secure link: <a href="https://carestream-auth-update.com/session">https://carestream-auth-update.com/session</a></p><p>Regards,</p><p>MedWaste Alerts</p></body></html>
+--boundary-alt-153--
+--boundary-153--

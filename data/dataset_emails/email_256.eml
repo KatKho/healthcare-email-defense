@@ -1,0 +1,50 @@
+From: "Dental Provider Alerts" <alerts@deltadental-insure.com>
+To: it@smileclinic.org
+Subject: URGENT: Action Required to Restore Access
+Date: Tue, 18 Nov 2025 23:49:41 -0800
+Message-ID: 20251118234941.11365@mail.smileclinic.org
+Return-Path: alerts@deltadental-insure.com
+Reply-To: alerts@deltadental-insure.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.238])
+    by gateway.smileclinic.org with ESMTP id xyz2651
+    for <it@smileclinic.org>; Tue, 18 Nov 2025 23:49:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@deltadental-insure.com;
+    dmarc=none header.from=alerts@deltadental-insure.com
+Content-Type: multipart/mixed; boundary="boundary-256"
+
+--boundary-256
+Content-Type: multipart/alternative; boundary="boundary-alt-256"
+
+--boundary-alt-256
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+A security event was triggered by an unknown device.
+
+Please complete the secure authentication process below.
+
+Your provider account shows unusual login behavior.
+
+Verification link: https://smileclinic-portal-verify.com/auth
+
+Regards,
+Dental Provider Alerts
+
+--boundary-alt-256
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi David,</p><p>A security event was triggered by an unknown device.</p><p>Please complete the secure authentication process below.</p><p>Your provider account shows unusual login behavior.</p><p>Verification link: <a href="https://smileclinic-portal-verify.com/auth">https://smileclinic-portal-verify.com/auth</a></p><p>Regards,</p><p>Dental Provider Alerts</p></body></html>
+--boundary-alt-256--
+
+--boundary-256
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-256--

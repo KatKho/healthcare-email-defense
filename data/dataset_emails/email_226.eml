@@ -1,0 +1,50 @@
+From: "SmileClinic Portal AutoVerify" <login@smileclinic-portalverify.com>
+To: frontdesk@smileclinic.org
+Subject: Suspicious Login Attempt Detected
+Date: Tue, 18 Nov 2025 23:27:20 -0800
+Message-ID: 20251118232720.75189@mail.smileclinic.org
+Return-Path: login@smileclinic-portalverify.com
+Reply-To: login@smileclinic-portalverify.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.72])
+    by gateway.smileclinic.org with ESMTP id xyz3830
+    for <frontdesk@smileclinic.org>; Tue, 18 Nov 2025 23:27:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=login@smileclinic-portalverify.com;
+    dmarc=none header.from=login@smileclinic-portalverify.com
+Content-Type: multipart/mixed; boundary="boundary-226"
+
+--boundary-226
+Content-Type: multipart/alternative; boundary="boundary-alt-226"
+
+--boundary-alt-226
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Sarah,
+
+This check is mandatory and time-sensitive.
+
+Your provider account has been temporarily restricted due to unusual login attempts.
+
+Please complete the validation process using the secure link below.
+
+Verification link: https://dentrixcloud-support-auth.com/login
+
+Regards,
+SmileClinic Portal AutoVerify
+
+--boundary-alt-226
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Sarah,</p><p>This check is mandatory and time-sensitive.</p><p>Your provider account has been temporarily restricted due to unusual login attempts.</p><p>Please complete the validation process using the secure link below.</p><p>Verification link: <a href="https://dentrixcloud-support-auth.com/login">https://dentrixcloud-support-auth.com/login</a></p><p>Regards,</p><p>SmileClinic Portal AutoVerify</p></body></html>
+--boundary-alt-226--
+
+--boundary-226
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-226--

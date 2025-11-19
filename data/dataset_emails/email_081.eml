@@ -1,0 +1,53 @@
+From: "Dr. Alejandro Martinez" <dr.martinez@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Imaging Unit Log Attached
+Date: Wed, 19 Nov 2025 08:40:49 -0800
+Message-ID: 20251119084049.85608@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.53])
+    by gateway.smileclinic.org with ESMTP id def2772
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 08:40:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-31"
+
+--boundary-31
+Content-Type: multipart/alternative; boundary="boundary-alt-31"
+
+--boundary-alt-31
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+This should help keep tomorrow's schedule running smoothly.
+
+Nothing urgent here, but I wanted this recorded properly.
+
+Attached is the updated invoice for your review.
+
+Thanks,
+Dr. Alejandro Martinez
+
+--boundary-alt-31
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>Nothing urgent here, but I wanted this recorded properly.</p>
+<p>Attached is the updated invoice for your review.</p>
+<p>Thanks,<br>Dr. Alejandro Martinez</p></body></html>
+--boundary-alt-31--
+
+--boundary-31
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-31--

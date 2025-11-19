@@ -1,0 +1,50 @@
+From: "BrightSmile Lab Cases" <cases@brightsmilelab.com>
+To: jen.hygienist@smileclinic.org
+Subject: Equipment Calibration Summary
+Date: Wed, 19 Nov 2025 09:33:49 -0800
+Message-ID: 20251119093349.72497@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.185])
+    by gateway.smileclinic.org with ESMTP id def2258
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 09:33:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-6"
+
+--boundary-6
+Content-Type: multipart/alternative; boundary="boundary-alt-6"
+
+--boundary-alt-6
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Jen,
+
+Please review the details and let me know if anything needs adjustment.
+
+Patch notes are attached.
+
+Thanks,
+BrightSmile Lab Cases
+
+--boundary-alt-6
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Jen,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Patch notes are attached.</p>
+<p>Thanks,<br>BrightSmile Lab Cases</p></body></html>
+--boundary-alt-6--
+
+--boundary-6
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-6--

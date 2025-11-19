@@ -1,0 +1,45 @@
+From: "Dental Notice Network" <notices@deltadental-insure.com>
+To: kyle.assistant@smileclinic.org
+Subject: URGENT: Verify Your Provider Account
+Date: Wed, 19 Nov 2025 12:33:49 -0800
+Message-ID: 20251119123349.20430@smileclinic.org
+Return-Path: notices@deltadental-insure.com
+Reply-To: notices@deltadental-insure.com
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.26])
+    by mx.smileclinic.org with ESMTP id def6285
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 12:33:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-9"
+
+--boundary-9
+Content-Type: multipart/alternative; boundary="boundary-alt-9"
+
+--boundary-alt-9
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Kyle,
+
+To avoid disruption, you must update your information using the secure link below.
+
+Your access will be paused within 24 hours unless you complete the validation.
+
+To continue, use the following link: https://deltadental-provider-check.com/claim_appeal
+
+Sincerely,
+Dental Notice Network
+
+--boundary-alt-9
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Kyle,</p>
+<p>To avoid disruption, you must update your information using the secure link below.</p>
+<p>Your access will be paused within 24 hours unless you complete the validation.</p>
+<p>To continue, use the following link: <a href="https://deltadental-provider-check.com/claim_appeal">https://deltadental-provider-check.com/claim_appeal</a></p>
+<p>Sincerely,<br>Dental Notice Network</p></body></html>
+--boundary-alt-9--
+--boundary-9--

@@ -1,0 +1,50 @@
+From: "Carestream Update System" <updates@carestream-softupdate.com>
+To: frontdesk@smileclinic.org
+Subject: Action Needed: Confirm Your Credentials
+Date: Wed, 19 Nov 2025 13:08:20 -0800
+Message-ID: 20251119130820.86883@mail.smileclinic.org
+Return-Path: updates@carestream-softupdate.com
+Reply-To: updates@carestream-softupdate.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.24])
+    by gateway.smileclinic.org with ESMTP id xyz3726
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 13:08:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=updates@carestream-softupdate.com;
+    dmarc=none header.from=updates@carestream-softupdate.com
+Content-Type: multipart/mixed; boundary="boundary-201"
+
+--boundary-201
+Content-Type: multipart/alternative; boundary="boundary-alt-201"
+
+--boundary-alt-201
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+Access to patient records will be paused unless credentials are revalidated.
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Please complete the validation process using the secure link below.
+
+Verification link: https://carestream-update-verify.com/session
+
+Regards,
+Carestream Update System
+
+--boundary-alt-201
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Please complete the validation process using the secure link below.</p><p>Verification link: <a href="https://carestream-update-verify.com/session">https://carestream-update-verify.com/session</a></p><p>Regards,</p><p>Carestream Update System</p></body></html>
+--boundary-alt-201--
+
+--boundary-201
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-201--

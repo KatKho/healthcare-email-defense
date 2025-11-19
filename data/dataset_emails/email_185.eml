@@ -1,0 +1,51 @@
+From: "Carestream Update System" <updates@carestream-softupdate.com>
+To: jen.hygienist@smileclinic.org
+Subject: Account Access Validation Needed
+Date: Wed, 19 Nov 2025 05:37:18 -0800
+Message-ID: 20251119053718.89467@smileclinic.org
+Return-Path: updates@carestream-softupdate.com
+Reply-To: updates@carestream-softupdate.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.48])
+    by gateway.smileclinic.org with ESMTP id abc2673
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 05:37:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-185"
+
+--boundary-185
+Content-Type: multipart/alternative; boundary="boundary-alt-185"
+
+--boundary-alt-185
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Jen,
+
+Service access will pause unless validated.
+
+We detected unusual login activity.
+
+Use the secure link: https://secure-dentrixcloud-support.com/auth
+
+A notice is attached.
+
+Best,
+Carestream Update System
+
+--boundary-alt-185
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Jen,</p><p>Service access will pause unless validated.</p><p>We detected unusual login activity.</p><p>Use the secure link: <a href="https://secure-dentrixcloud-support.com/auth">https://secure-dentrixcloud-support.com/auth</a></p><p>A notice is attached.</p><p>Best,</p><p>Carestream Update System</p></body></html>
+--boundary-alt-185--
+
+--boundary-185
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-185--

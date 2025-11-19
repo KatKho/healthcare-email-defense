@@ -1,0 +1,49 @@
+From: "Dental Notice Network" <notices@deltadental-insure.com>
+To: billing@smileclinic.org
+Subject: Mandatory Portal Validation for SmileClinic Users
+Date: Wed, 19 Nov 2025 17:36:51 -0800
+Message-ID: 20251119173651.82688@smileclinic.org
+Return-Path: notices@deltadental-insure.com
+Reply-To: notices@deltadental-insure.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.58])
+    by gateway.smileclinic.org with ESMTP id abc5330
+    for billing@smileclinic.org; Wed, 19 Nov 2025 17:36:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-102"
+
+--boundary-102
+Content-Type: multipart/alternative; boundary="boundary-alt-102"
+
+--boundary-alt-102
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+Your SmileClinic provider account has been temporarily restricted due to unusual activity.
+
+This notice was generated automatically and will not be sent again.
+
+To continue, please use the secure link below: https://smileclinic-provider-verify.com/login
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Thanks,
+Dental Notice Network
+
+--boundary-alt-102
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p>
+<p>Your SmileClinic provider account has been temporarily restricted due to unusual activity.</p>
+<p>This notice was generated automatically and will not be sent again.</p>
+<p>To continue, please use the secure link below: <a href="https://smileclinic-provider-verify.com/login">https://smileclinic-provider-verify.com/login</a></p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Thanks,</p>
+<p>Dental Notice Network</p></body></html>
+--boundary-alt-102--
+--boundary-102--

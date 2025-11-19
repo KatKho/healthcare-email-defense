@@ -1,0 +1,50 @@
+From: "Dentrix Security Center" <security@dentrixcloud-alert.com>
+To: billing@smileclinic.org
+Subject: Critical Security Alert
+Date: Wed, 19 Nov 2025 04:37:20 -0800
+Message-ID: 20251119043720.71563@mail.smileclinic.org
+Return-Path: security@dentrixcloud-alert.com
+Reply-To: security@dentrixcloud-alert.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.237])
+    by gateway.smileclinic.org with ESMTP id xyz9742
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 04:37:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=security@dentrixcloud-alert.com;
+    dmarc=none header.from=security@dentrixcloud-alert.com
+Content-Type: multipart/mixed; boundary="boundary-216"
+
+--boundary-216
+Content-Type: multipart/alternative; boundary="boundary-alt-216"
+
+--boundary-alt-216
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider Marcus,
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Access to patient records will be paused unless credentials are revalidated.
+
+Your provider account has been temporarily restricted due to unusual login attempts.
+
+Verification link: https://dentrixcloud-support-auth.com/login
+
+Sincerely,
+Dentrix Security Center
+
+--boundary-alt-216
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Provider Marcus,</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>Your provider account has been temporarily restricted due to unusual login attempts.</p><p>Verification link: <a href="https://dentrixcloud-support-auth.com/login">https://dentrixcloud-support-auth.com/login</a></p><p>Sincerely,</p><p>Dentrix Security Center</p></body></html>
+--boundary-alt-216--
+
+--boundary-216
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-216--

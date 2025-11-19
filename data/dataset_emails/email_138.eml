@@ -1,0 +1,60 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: it@smileclinic.org
+Subject: Front Desk No-Show Summary
+Date: Tue, 18 Nov 2025 22:31:51 -0800
+Message-ID: 20251118223151.76016@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.183])
+    by gateway.smileclinic.org with ESMTP id abc3247
+    for it@smileclinic.org; Tue, 18 Nov 2025 22:31:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-138"
+
+--boundary-138
+Content-Type: multipart/alternative; boundary="boundary-alt-138"
+
+--boundary-alt-138
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello David,
+
+One of the assistants reported that Dentrix was freezing when posting payments.
+
+The secure email portal timed out for a few patients trying to upload forms.
+
+We had a brief internet outage around 10:15 AM; I noted it in the log.
+
+If anything in the document looks off, I can revise it later today.
+
+The attached PDF has all the details summarized.
+
+Best,
+Sarah Miller
+
+--boundary-alt-138
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello David,</p>
+<p>One of the assistants reported that Dentrix was freezing when posting payments.</p>
+<p>The secure email portal timed out for a few patients trying to upload forms.</p>
+<p>We had a brief internet outage around 10:15 AM; I noted it in the log.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>The attached PDF has all the details summarized.</p>
+<p>Best,</p>
+<p>Sarah Miller</p></body></html>
+--boundary-alt-138--
+
+--boundary-138
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-138--

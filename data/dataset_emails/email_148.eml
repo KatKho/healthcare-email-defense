@@ -1,0 +1,60 @@
+From: "Patterson Dental Support" <support@pattersondental.com>
+To: frontdesk@smileclinic.org
+Subject: Front Desk No-Show Summary
+Date: Tue, 18 Nov 2025 22:55:51 -0800
+Message-ID: 20251118225551.24343@smileclinic.org
+Return-Path: support@pattersondental.com
+Reply-To: support@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.248])
+    by gateway.smileclinic.org with ESMTP id abc4621
+    for frontdesk@smileclinic.org; Tue, 18 Nov 2025 22:55:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-148"
+
+--boundary-148
+Content-Type: multipart/alternative; boundary="boundary-alt-148"
+
+--boundary-alt-148
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Sarah,
+
+We had two cancellations this afternoon; both have been added back to the recall list.
+
+Please double-check the consent form for the patient we added at 3:30 PM.
+
+The updated treatment plan for the implant case is included in the document.
+
+Let me know if you want me to follow up with the vendor directly.
+
+If anything in the document looks off, I can revise it later today.
+
+Best,
+Patterson Dental Support
+
+--boundary-alt-148
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Sarah,</p>
+<p>We had two cancellations this afternoon; both have been added back to the recall list.</p>
+<p>Please double-check the consent form for the patient we added at 3:30 PM.</p>
+<p>The updated treatment plan for the implant case is included in the document.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Best,</p>
+<p>Patterson Dental Support</p></body></html>
+--boundary-alt-148--
+
+--boundary-148
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-148--

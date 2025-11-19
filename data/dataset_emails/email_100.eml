@@ -1,0 +1,50 @@
+From: "David Chen" <it@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Waste Pickup Confirmation
+Date: Wed, 19 Nov 2025 07:20:49 -0800
+Message-ID: 20251119072049.89840@smileclinic.org
+Return-Path: it@smileclinic.org
+Reply-To: it@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.147])
+    by gateway.smileclinic.org with ESMTP id def2946
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 07:20:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-50"
+
+--boundary-50
+Content-Type: multipart/alternative; boundary="boundary-alt-50"
+
+--boundary-alt-50
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Kyle,
+
+Please review the details and let me know if anything needs adjustment.
+
+Patch notes are attached.
+
+Regards,
+David Chen
+
+--boundary-alt-50
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Kyle,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Patch notes are attached.</p>
+<p>Regards,<br>David Chen</p></body></html>
+--boundary-alt-50--
+
+--boundary-50
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-50--

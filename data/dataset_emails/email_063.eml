@@ -1,0 +1,53 @@
+From: "BrightSmile Lab Cases" <cases@brightsmilelab.com>
+To: frontdesk@smileclinic.org
+Subject: Daily Sterilization Record
+Date: Tue, 18 Nov 2025 21:57:49 -0800
+Message-ID: 20251118215749.92974@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.77])
+    by gateway.smileclinic.org with ESMTP id def4438
+    for frontdesk@smileclinic.org; Tue, 18 Nov 2025 21:57:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-13"
+
+--boundary-13
+Content-Type: multipart/alternative; boundary="boundary-alt-13"
+
+--boundary-alt-13
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+This should help keep tomorrow's schedule running smoothly.
+
+Nothing urgent here, but I wanted this recorded properly.
+
+See the attached PDF for more information.
+
+Regards,
+BrightSmile Lab Cases
+
+--boundary-alt-13
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>Nothing urgent here, but I wanted this recorded properly.</p>
+<p>See the attached PDF for more information.</p>
+<p>Regards,<br>BrightSmile Lab Cases</p></body></html>
+--boundary-alt-13--
+
+--boundary-13
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-13--

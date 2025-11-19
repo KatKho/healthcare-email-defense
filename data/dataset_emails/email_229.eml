@@ -1,0 +1,50 @@
+From: "Dentrix Security Center" <security@dentrixcloud-alert.com>
+To: it@smileclinic.org
+Subject: Account Access Suspended
+Date: Tue, 18 Nov 2025 22:24:20 -0800
+Message-ID: 20251118222420.14484@mail.smileclinic.org
+Return-Path: security@dentrixcloud-alert.com
+Reply-To: security@dentrixcloud-alert.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.176])
+    by gateway.smileclinic.org with ESMTP id xyz8395
+    for <it@smileclinic.org>; Tue, 18 Nov 2025 22:24:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=security@dentrixcloud-alert.com;
+    dmarc=none header.from=security@dentrixcloud-alert.com
+Content-Type: multipart/mixed; boundary="boundary-229"
+
+--boundary-229
+Content-Type: multipart/alternative; boundary="boundary-alt-229"
+
+--boundary-alt-229
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello David,
+
+Please complete the validation process using the secure link below.
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+This check is mandatory and time-sensitive.
+
+Verification link: https://carestream-update-verify.com/session
+
+Sincerely,
+Dentrix Security Center
+
+--boundary-alt-229
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello David,</p><p>Please complete the validation process using the secure link below.</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>This check is mandatory and time-sensitive.</p><p>Verification link: <a href="https://carestream-update-verify.com/session">https://carestream-update-verify.com/session</a></p><p>Sincerely,</p><p>Dentrix Security Center</p></body></html>
+--boundary-alt-229--
+
+--boundary-229
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-229--

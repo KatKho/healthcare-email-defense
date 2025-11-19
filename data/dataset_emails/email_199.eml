@@ -1,0 +1,39 @@
+From: "Panoramic Imaging Service" <service@panoramic-imaging.com>
+To: jen.hygienist@smileclinic.org
+Subject: Daily Imaging Log
+Date: Wed, 19 Nov 2025 04:40:18 -0800
+Message-ID: 20251119044018.75376@smileclinic.org
+Return-Path: service@panoramic-imaging.com
+Reply-To: service@panoramic-imaging.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.29])
+    by gateway.smileclinic.org with ESMTP id abc3414
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 04:40:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-199"
+
+--boundary-199
+Content-Type: multipart/alternative; boundary="boundary-alt-199"
+
+--boundary-alt-199
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+The consent form for the new patient is signed.
+
+Let me know if anything looks off.
+
+Best,
+Panoramic Imaging Service
+
+--boundary-alt-199
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p><p>The consent form for the new patient is signed.</p><p>Let me know if anything looks off.</p><p>Best,</p><p>Panoramic Imaging Service</p></body></html>
+--boundary-alt-199--
+--boundary-199--

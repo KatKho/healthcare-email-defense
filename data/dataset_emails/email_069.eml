@@ -1,0 +1,50 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: billing@smileclinic.org
+Subject: Waste Pickup Confirmation
+Date: Wed, 19 Nov 2025 16:42:49 -0800
+Message-ID: 20251119164249.61538@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.178])
+    by mx.smileclinic.org with ESMTP id def8740
+    for billing@smileclinic.org; Wed, 19 Nov 2025 16:42:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-19"
+
+--boundary-19
+Content-Type: multipart/alternative; boundary="boundary-alt-19"
+
+--boundary-alt-19
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+The vendor asked that we confirm the information when we have a moment.
+
+Attached is the updated invoice for your review.
+
+Thanks,
+Carestream Support
+
+--boundary-alt-19
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p>
+<p>The vendor asked that we confirm the information when we have a moment.</p>
+<p>Attached is the updated invoice for your review.</p>
+<p>Thanks,<br>Carestream Support</p></body></html>
+--boundary-alt-19--
+
+--boundary-19
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-19--

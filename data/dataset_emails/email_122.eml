@@ -1,0 +1,49 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Sterilization Log for Today's Patients
+Date: Wed, 19 Nov 2025 00:04:51 -0800
+Message-ID: 20251119000451.51337@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.128])
+    by gateway.smileclinic.org with ESMTP id abc4891
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 00:04:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-122"
+
+--boundary-122
+Content-Type: multipart/alternative; boundary="boundary-alt-122"
+
+--boundary-alt-122
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+Can you confirm if the new burs were logged into the supply cabinet?
+
+I included the updated inventory sheet for the hygiene rooms.
+
+If anything in the document looks off, I can revise it later today.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Best,
+Marcus Thorne
+
+--boundary-alt-122
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p>
+<p>Can you confirm if the new burs were logged into the supply cabinet?</p>
+<p>I included the updated inventory sheet for the hygiene rooms.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Best,</p>
+<p>Marcus Thorne</p></body></html>
+--boundary-alt-122--
+--boundary-122--

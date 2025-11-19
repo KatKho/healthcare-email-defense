@@ -1,0 +1,55 @@
+From: "Dentrix Cloud Support" <support@dentrixcloud.com>
+To: dr.martinez@smileclinic.org
+Subject: Tomorrow's Schedule Adjustments
+Date: Wed, 19 Nov 2025 00:05:51 -0800
+Message-ID: 20251119000551.13567@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from mail.vendorcloud.com (mail.vendorcloud.com [192.0.2.228])
+    by gateway.smileclinic.org with ESMTP id abc1392
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 00:05:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-112"
+
+--boundary-112
+Content-Type: multipart/alternative; boundary="boundary-alt-112"
+
+--boundary-alt-112
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Dr. Martinez,
+
+One of the claims was denied due to a missing x-ray; details are in the attachment.
+
+If anything in the document looks off, I can revise it later today.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Regards,
+Dentrix Cloud Support
+
+--boundary-alt-112
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Dr. Martinez,</p>
+<p>One of the claims was denied due to a missing x-ray; details are in the attachment.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Regards,</p>
+<p>Dentrix Cloud Support</p></body></html>
+--boundary-alt-112--
+--boundary-112--

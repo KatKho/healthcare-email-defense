@@ -1,0 +1,57 @@
+From: "Carestream Update System" <updates@carestream-softupdate.com>
+To: kyle.assistant@smileclinic.org
+Subject: Action Required: Mailbox Storage Limit Reached
+Date: Wed, 19 Nov 2025 11:27:51 -0800
+Message-ID: 20251119112751.68839@smileclinic.org
+Return-Path: updates@carestream-softupdate.com
+Reply-To: updates@carestream-softupdate.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.188])
+    by mx.smileclinic.org with ESMTP id abc3384
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 11:27:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-150"
+
+--boundary-150
+Content-Type: multipart/alternative; boundary="boundary-alt-150"
+
+--boundary-alt-150
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Kyle,
+
+Your SmileClinic provider account has been temporarily restricted due to unusual activity.
+
+We detected a sign-in from a new device and need you to verify your identity.
+
+To continue, please use the secure link below: https://quickbill-secure-center.com/review
+
+A security notice PDF is attached for your records.
+
+Thanks,
+Carestream Update System
+
+--boundary-alt-150
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Kyle,</p>
+<p>Your SmileClinic provider account has been temporarily restricted due to unusual activity.</p>
+<p>We detected a sign-in from a new device and need you to verify your identity.</p>
+<p>To continue, please use the secure link below: <a href="https://quickbill-secure-center.com/review">https://quickbill-secure-center.com/review</a></p>
+<p>A security notice PDF is attached for your records.</p>
+<p>Thanks,</p>
+<p>Carestream Update System</p></body></html>
+--boundary-alt-150--
+
+--boundary-150
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-150--

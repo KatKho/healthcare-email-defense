@@ -1,0 +1,39 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: Equipment Calibration Summary
+Date: Wed, 19 Nov 2025 18:23:49 -0800
+Message-ID: 20251119182349.39491@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.49])
+    by gateway.smileclinic.org with ESMTP id def1258
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 18:23:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-27"
+
+--boundary-27
+Content-Type: multipart/alternative; boundary="boundary-alt-27"
+
+--boundary-alt-27
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Dr. Martinez,
+
+Nothing urgent here, but I wanted this recorded properly.
+
+Thanks,
+Kyle Bennett
+
+--boundary-alt-27
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Dr. Martinez,</p>
+<p>Nothing urgent here, but I wanted this recorded properly.</p>
+<p>Thanks,<br>Kyle Bennett</p></body></html>
+--boundary-alt-27--
+--boundary-27--

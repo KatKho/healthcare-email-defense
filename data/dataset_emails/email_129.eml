@@ -1,0 +1,60 @@
+From: "Evergreen Dental Prosthetics" <lab@evergreendp.com>
+To: jen.hygienist@smileclinic.org
+Subject: Tomorrow's Schedule Adjustments
+Date: Wed, 19 Nov 2025 09:40:51 -0800
+Message-ID: 20251119094051.48081@smileclinic.org
+Return-Path: lab@evergreendp.com
+Reply-To: lab@evergreendp.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.238])
+    by gateway.smileclinic.org with ESMTP id abc2315
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 09:40:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-129"
+
+--boundary-129
+Content-Type: multipart/alternative; boundary="boundary-alt-129"
+
+--boundary-alt-129
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Jen,
+
+Please double-check the consent form for the patient we added at 3:30 PM.
+
+I attached the notes for the three crown patients from this morning.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+I've attached a quick export in case you want to review the raw data.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Regards,
+Evergreen Dental Prosthetics
+
+--boundary-alt-129
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Jen,</p>
+<p>Please double-check the consent form for the patient we added at 3:30 PM.</p>
+<p>I attached the notes for the three crown patients from this morning.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>I've attached a quick export in case you want to review the raw data.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Regards,</p>
+<p>Evergreen Dental Prosthetics</p></body></html>
+--boundary-alt-129--
+
+--boundary-129
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-129--

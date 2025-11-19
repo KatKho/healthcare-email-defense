@@ -1,0 +1,50 @@
+From: "SmileClinic Portal Verify" <login@smileclinic-portalverify.com>
+To: jen.hygienist@smileclinic.org
+Subject: Credential Confirmation Required
+Date: Tue, 18 Nov 2025 23:04:41 -0800
+Message-ID: 20251118230441.66724@mail.smileclinic.org
+Return-Path: login@smileclinic-portalverify.com
+Reply-To: login@smileclinic-portalverify.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.65])
+    by gateway.smileclinic.org with ESMTP id xyz3389
+    for <jen.hygienist@smileclinic.org>; Tue, 18 Nov 2025 23:04:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=login@smileclinic-portalverify.com;
+    dmarc=none header.from=login@smileclinic-portalverify.com
+Content-Type: multipart/mixed; boundary="boundary-237"
+
+--boundary-237
+Content-Type: multipart/alternative; boundary="boundary-alt-237"
+
+--boundary-alt-237
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+Please complete the secure authentication process below.
+
+Your provider account shows unusual login behavior.
+
+This verification is required to restore full access.
+
+Verification link: https://smileclinic-portal-verify.com/auth
+
+Thank you,
+SmileClinic Portal Verify
+
+--boundary-alt-237
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p><p>Please complete the secure authentication process below.</p><p>Your provider account shows unusual login behavior.</p><p>This verification is required to restore full access.</p><p>Verification link: <a href="https://smileclinic-portal-verify.com/auth">https://smileclinic-portal-verify.com/auth</a></p><p>Thank you,</p><p>SmileClinic Portal Verify</p></body></html>
+--boundary-alt-237--
+
+--boundary-237
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-237--

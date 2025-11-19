@@ -1,0 +1,51 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: Weekly Hygiene Recall List Export
+Date: Wed, 19 Nov 2025 18:03:51 -0800
+Message-ID: 20251119180351.48882@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.129])
+    by gateway.smileclinic.org with ESMTP id abc7768
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 18:03:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-115"
+
+--boundary-115
+Content-Type: multipart/alternative; boundary="boundary-alt-115"
+
+--boundary-alt-115
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Dr. Martinez,
+
+One of the claims was denied due to a missing x-ray; details are in the attachment.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Sincerely,
+Kyle Bennett
+
+--boundary-alt-115
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Dr. Martinez,</p>
+<p>One of the claims was denied due to a missing x-ray; details are in the attachment.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Sincerely,</p>
+<p>Kyle Bennett</p></body></html>
+--boundary-alt-115--
+
+--boundary-115
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-115--

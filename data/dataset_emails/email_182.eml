@@ -1,0 +1,43 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: frontdesk@smileclinic.org
+Subject: Hygiene Recall Updates
+Date: Wed, 19 Nov 2025 13:12:18 -0800
+Message-ID: 20251119131218.74545@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.144])
+    by gateway.smileclinic.org with ESMTP id abc8005
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 13:12:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-182"
+
+--boundary-182
+Content-Type: multipart/alternative; boundary="boundary-alt-182"
+
+--boundary-alt-182
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Sarah,
+
+One claim was denied; details in the attachment.
+
+Delta is requesting additional documentation.
+
+Let me know if anything looks off.
+
+I can revise this later today.
+
+Best,
+Patterson Dental Shipping
+
+--boundary-alt-182
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Sarah,</p><p>One claim was denied; details in the attachment.</p><p>Delta is requesting additional documentation.</p><p>Let me know if anything looks off.</p><p>I can revise this later today.</p><p>Best,</p><p>Patterson Dental Shipping</p></body></html>
+--boundary-alt-182--
+--boundary-182--

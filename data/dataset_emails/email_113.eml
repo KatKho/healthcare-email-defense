@@ -1,0 +1,69 @@
+From: "BrightSmile Lab Cases" <cases@brightsmilelab.com>
+To: frontdesk@smileclinic.org
+Subject: Sterilization Log for Today's Patients
+Date: Wed, 19 Nov 2025 16:52:51 -0800
+Message-ID: 20251119165251.48892@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.241])
+    by mx.smileclinic.org with ESMTP id abc4191
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 16:52:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-113"
+
+--boundary-113
+Content-Type: multipart/alternative; boundary="boundary-alt-113"
+
+--boundary-alt-113
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+Please review the EOB summary and confirm the write-offs look correct.
+
+MetLife flagged a duplicate claim; we may need to resubmit with corrected dates.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+If anything in the document looks off, I can revise it later today.
+
+Details are in the attached document.
+
+Let me know if you want me to follow up with the vendor directly.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Best,
+BrightSmile Lab Cases
+
+--boundary-alt-113
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p>
+<p>Please review the EOB summary and confirm the write-offs look correct.</p>
+<p>MetLife flagged a duplicate claim; we may need to resubmit with corrected dates.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Details are in the attached document.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Best,</p>
+<p>BrightSmile Lab Cases</p></body></html>
+--boundary-alt-113--
+
+--boundary-113
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-113--

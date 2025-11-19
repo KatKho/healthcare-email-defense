@@ -1,0 +1,50 @@
+From: "QuickBill Verification" <notice@quickbill-serv.com>
+To: kyle.assistant@smileclinic.org
+Subject: Immediate Verification Needed
+Date: Wed, 19 Nov 2025 08:13:41 -0800
+Message-ID: 20251119081341.48934@mail.smileclinic.org
+Return-Path: notice@quickbill-serv.com
+Reply-To: notice@quickbill-serv.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.61])
+    by gateway.smileclinic.org with ESMTP id xyz9077
+    for <kyle.assistant@smileclinic.org>; Wed, 19 Nov 2025 08:13:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=notice@quickbill-serv.com;
+    dmarc=none header.from=notice@quickbill-serv.com
+Content-Type: multipart/mixed; boundary="boundary-241"
+
+--boundary-241
+Content-Type: multipart/alternative; boundary="boundary-alt-241"
+
+--boundary-alt-241
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Kyle,
+
+This verification is required to restore full access.
+
+Please complete the secure authentication process below.
+
+A security event was triggered by an unknown device.
+
+Verification link: https://secure-dentrix-provider-check.com/login
+
+Regards,
+QuickBill Verification
+
+--boundary-alt-241
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Kyle,</p><p>This verification is required to restore full access.</p><p>Please complete the secure authentication process below.</p><p>A security event was triggered by an unknown device.</p><p>Verification link: <a href="https://secure-dentrix-provider-check.com/login">https://secure-dentrix-provider-check.com/login</a></p><p>Regards,</p><p>QuickBill Verification</p></body></html>
+--boundary-alt-241--
+
+--boundary-241
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-241--

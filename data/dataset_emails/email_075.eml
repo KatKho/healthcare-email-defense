@@ -1,0 +1,50 @@
+From: "Dentrix Cloud Support" <support@dentrixcloud.com>
+To: it@smileclinic.org
+Subject: Equipment Calibration Summary
+Date: Wed, 19 Nov 2025 19:23:49 -0800
+Message-ID: 20251119192349.44892@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.178])
+    by mx.smileclinic.org with ESMTP id def2158
+    for it@smileclinic.org; Wed, 19 Nov 2025 19:23:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-25"
+
+--boundary-25
+Content-Type: multipart/alternative; boundary="boundary-alt-25"
+
+--boundary-alt-25
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning David,
+
+This should help keep tomorrow's schedule running smoothly.
+
+The full report is included in the attached file.
+
+Sincerely,
+Dentrix Cloud Support
+
+--boundary-alt-25
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning David,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>The full report is included in the attached file.</p>
+<p>Sincerely,<br>Dentrix Cloud Support</p></body></html>
+--boundary-alt-25--
+
+--boundary-25
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-25--

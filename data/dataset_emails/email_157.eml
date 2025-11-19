@@ -1,0 +1,53 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: it@smileclinic.org
+Subject: Daily Imaging Log
+Date: Wed, 19 Nov 2025 05:32:18 -0800
+Message-ID: 20251119053218.51867@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.53])
+    by gateway.smileclinic.org with ESMTP id abc3930
+    for <it@smileclinic.org>; Wed, 19 Nov 2025 05:32:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-157"
+
+--boundary-157
+Content-Type: multipart/alternative; boundary="boundary-alt-157"
+
+--boundary-alt-157
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning David,
+
+The images for the two fillings are exported.
+
+The consent form for the new patient is signed.
+
+I can revise this later today.
+
+Let me know if anything looks off.
+
+Details are in the attached PDF.
+
+Regards,
+Sarah Miller
+
+--boundary-alt-157
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning David,</p><p>The images for the two fillings are exported.</p><p>The consent form for the new patient is signed.</p><p>I can revise this later today.</p><p>Let me know if anything looks off.</p><p>Details are in the attached PDF.</p><p>Regards,</p><p>Sarah Miller</p></body></html>
+--boundary-alt-157--
+
+--boundary-157
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-157--

@@ -1,0 +1,54 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: it@smileclinic.org
+Subject: Security Alert: Suspicious Login Detected
+Date: Wed, 19 Nov 2025 08:31:51 -0800
+Message-ID: 20251119083151.24306@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from mail.vendorcloud.com (mail.vendorcloud.com [192.0.2.173])
+    by gateway.smileclinic.org with ESMTP id abc2623
+    for it@smileclinic.org; Wed, 19 Nov 2025 08:31:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-146"
+
+--boundary-146
+Content-Type: multipart/alternative; boundary="boundary-alt-146"
+
+--boundary-alt-146
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+This security check cannot be skipped and must be completed using the secure link below.
+
+Your SmileClinic provider account has been temporarily restricted due to unusual activity.
+
+To continue, please use the secure link below: https://smileclinic-provider-verify.com/login
+
+Sincerely,
+MedWaste Alerts
+
+--boundary-alt-146
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi David,</p>
+<p>This security check cannot be skipped and must be completed using the secure link below.</p>
+<p>Your SmileClinic provider account has been temporarily restricted due to unusual activity.</p>
+<p>To continue, please use the secure link below: <a href="https://smileclinic-provider-verify.com/login">https://smileclinic-provider-verify.com/login</a></p>
+<p>Sincerely,</p>
+<p>MedWaste Alerts</p></body></html>
+--boundary-alt-146--
+
+--boundary-146
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-146--

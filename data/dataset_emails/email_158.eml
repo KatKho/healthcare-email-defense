@@ -1,0 +1,39 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Insurance Follow-Up Needed
+Date: Wed, 19 Nov 2025 06:10:18 -0800
+Message-ID: 20251119061018.98235@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.135])
+    by gateway.smileclinic.org with ESMTP id abc7956
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 06:10:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-158"
+
+--boundary-158
+Content-Type: multipart/alternative; boundary="boundary-alt-158"
+
+--boundary-alt-158
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+One claim was denied; details in the attachment.
+
+This should help things run smoother.
+
+Thanks,
+Sarah Miller
+
+--boundary-alt-158
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p><p>One claim was denied; details in the attachment.</p><p>This should help things run smoother.</p><p>Thanks,</p><p>Sarah Miller</p></body></html>
+--boundary-alt-158--
+--boundary-158--

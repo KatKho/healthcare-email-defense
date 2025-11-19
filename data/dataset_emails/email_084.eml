@@ -1,0 +1,56 @@
+From: "QuickBill Services" <invoices@quickbill-serv.com>
+To: kyle.assistant@smileclinic.org
+Subject: Mandatory Portal Validation
+Date: Wed, 19 Nov 2025 08:04:49 -0800
+Message-ID: 20251119080449.88919@smileclinic.org
+Return-Path: invoices@quickbill-serv.com
+Reply-To: invoices@quickbill-serv.com
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.86])
+    by mx.smileclinic.org with ESMTP id def9162
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 08:04:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-34"
+
+--boundary-34
+Content-Type: multipart/alternative; boundary="boundary-alt-34"
+
+--boundary-alt-34
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Kyle,
+
+To avoid disruption, you must update your information using the secure link below.
+
+Your account has been flagged for unusual activity and must be verified immediately.
+
+To continue, use the following link: https://carestream-auth-update.com/login_verify
+
+Attached is the updated invoice for your review.
+
+Thanks,
+QuickBill Services
+
+--boundary-alt-34
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Kyle,</p>
+<p>To avoid disruption, you must update your information using the secure link below.</p>
+<p>Your account has been flagged for unusual activity and must be verified immediately.</p>
+<p>To continue, use the following link: <a href="https://carestream-auth-update.com/login_verify">https://carestream-auth-update.com/login_verify</a></p>
+<p>Attached is the updated invoice for your review.</p>
+<p>Thanks,<br>QuickBill Services</p></body></html>
+--boundary-alt-34--
+
+--boundary-34
+Content-Type: application/pdf; name="security_update.pdf"
+Content-Disposition: attachment; filename="security_update.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-34--

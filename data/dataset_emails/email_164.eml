@@ -1,0 +1,43 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: it@smileclinic.org
+Subject: Front Desk Summary
+Date: Wed, 19 Nov 2025 04:16:18 -0800
+Message-ID: 20251119041618.57856@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.106])
+    by gateway.smileclinic.org with ESMTP id abc5131
+    for <it@smileclinic.org>; Wed, 19 Nov 2025 04:16:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-164"
+
+--boundary-164
+Content-Type: multipart/alternative; boundary="boundary-alt-164"
+
+--boundary-alt-164
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning David,
+
+The operatory PC disconnected twice today.
+
+The secure portal timed out for two uploads.
+
+I can revise this later today.
+
+Let me know if anything looks off.
+
+Regards,
+Marcus Thorne
+
+--boundary-alt-164
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning David,</p><p>The operatory PC disconnected twice today.</p><p>The secure portal timed out for two uploads.</p><p>I can revise this later today.</p><p>Let me know if anything looks off.</p><p>Regards,</p><p>Marcus Thorne</p></body></html>
+--boundary-alt-164--
+--boundary-164--

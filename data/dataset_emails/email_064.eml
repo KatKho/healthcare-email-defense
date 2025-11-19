@@ -1,0 +1,56 @@
+From: "FilterPro Notifications" <updates@filterprohvac.co>
+To: kyle.assistant@smileclinic.org
+Subject: Action Required: Claim Access Suspended
+Date: Wed, 19 Nov 2025 12:45:49 -0800
+Message-ID: 20251119124549.38693@smileclinic.org
+Return-Path: updates@filterprohvac.co
+Reply-To: updates@filterprohvac.co
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.79])
+    by gateway.smileclinic.org with ESMTP id def3231
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 12:45:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-14"
+
+--boundary-14
+Content-Type: multipart/alternative; boundary="boundary-alt-14"
+
+--boundary-alt-14
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Kyle,
+
+We detected a login from an unrecognized device and require you to confirm your identity.
+
+This is an automated message and will repeat until the issue is resolved.
+
+To continue, use the following link: https://carestream-auth-update.com/login_verify
+
+I've attached the imaging log we discussed.
+
+Sincerely,
+FilterPro Notifications
+
+--boundary-alt-14
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Kyle,</p>
+<p>We detected a login from an unrecognized device and require you to confirm your identity.</p>
+<p>This is an automated message and will repeat until the issue is resolved.</p>
+<p>To continue, use the following link: <a href="https://carestream-auth-update.com/login_verify">https://carestream-auth-update.com/login_verify</a></p>
+<p>I've attached the imaging log we discussed.</p>
+<p>Sincerely,<br>FilterPro Notifications</p></body></html>
+--boundary-alt-14--
+
+--boundary-14
+Content-Type: application/pdf; name="security_update.pdf"
+Content-Disposition: attachment; filename="security_update.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-14--

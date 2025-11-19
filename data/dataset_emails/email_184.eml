@@ -1,0 +1,53 @@
+From: "Henry Schein Billing" <invoices@henryschein-dental.com>
+To: billing@smileclinic.org
+Subject: Insurance Follow-Up Needed
+Date: Wed, 19 Nov 2025 18:51:18 -0800
+Message-ID: 20251119185118.55494@smileclinic.org
+Return-Path: invoices@henryschein-dental.com
+Reply-To: invoices@henryschein-dental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.165])
+    by gateway.smileclinic.org with ESMTP id abc3844
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 18:51:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-184"
+
+--boundary-184
+Content-Type: multipart/alternative; boundary="boundary-alt-184"
+
+--boundary-alt-184
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Marcus,
+
+One recall patient canceled; updated in the system.
+
+The images for the two fillings are exported.
+
+This should help things run smoother.
+
+I can revise this later today.
+
+Details are in the attached PDF.
+
+Best,
+Henry Schein Billing
+
+--boundary-alt-184
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Marcus,</p><p>One recall patient canceled; updated in the system.</p><p>The images for the two fillings are exported.</p><p>This should help things run smoother.</p><p>I can revise this later today.</p><p>Details are in the attached PDF.</p><p>Best,</p><p>Henry Schein Billing</p></body></html>
+--boundary-alt-184--
+
+--boundary-184
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-184--

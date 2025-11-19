@@ -1,0 +1,66 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: it@smileclinic.org
+Subject: Security Alert: Suspicious Login Detected
+Date: Wed, 19 Nov 2025 03:50:51 -0800
+Message-ID: 20251119035051.12193@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.226])
+    by gateway.smileclinic.org with ESMTP id abc4570
+    for it@smileclinic.org; Wed, 19 Nov 2025 03:50:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-134"
+
+--boundary-134
+Content-Type: multipart/alternative; boundary="boundary-alt-134"
+
+--boundary-alt-134
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon David,
+
+Your SmileClinic provider account has been temporarily restricted due to unusual activity.
+
+To continue, please use the secure link below: https://smileclinic-provider-verify.com/login
+
+A security notice PDF is attached for your records.
+
+Let me know if you want me to follow up with the vendor directly.
+
+If anything in the document looks off, I can revise it later today.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Appreciate it,
+MedWaste Alerts
+
+--boundary-alt-134
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon David,</p>
+<p>Your SmileClinic provider account has been temporarily restricted due to unusual activity.</p>
+<p>To continue, please use the secure link below: <a href="https://smileclinic-provider-verify.com/login">https://smileclinic-provider-verify.com/login</a></p>
+<p>A security notice PDF is attached for your records.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Appreciate it,</p>
+<p>MedWaste Alerts</p></body></html>
+--boundary-alt-134--
+
+--boundary-134
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-134--

@@ -1,0 +1,50 @@
+From: "Dental Provider Alerts" <alerts@deltadental-insure.com>
+To: jen.hygienist@smileclinic.org
+Subject: Action Needed: Confirm Your Credentials
+Date: Wed, 19 Nov 2025 18:02:20 -0800
+Message-ID: 20251119180220.95791@mail.smileclinic.org
+Return-Path: alerts@deltadental-insure.com
+Reply-To: alerts@deltadental-insure.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.94])
+    by gateway.smileclinic.org with ESMTP id xyz8323
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 18:02:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@deltadental-insure.com;
+    dmarc=none header.from=alerts@deltadental-insure.com
+Content-Type: multipart/mixed; boundary="boundary-222"
+
+--boundary-222
+Content-Type: multipart/alternative; boundary="boundary-alt-222"
+
+--boundary-alt-222
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+Access to patient records will be paused unless credentials are revalidated.
+
+Your provider account has been temporarily restricted due to unusual login attempts.
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Verification link: https://dentrixcloud-support-auth.com/login
+
+Regards,
+Dental Provider Alerts
+
+--boundary-alt-222
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>Your provider account has been temporarily restricted due to unusual login attempts.</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Verification link: <a href="https://dentrixcloud-support-auth.com/login">https://dentrixcloud-support-auth.com/login</a></p><p>Regards,</p><p>Dental Provider Alerts</p></body></html>
+--boundary-alt-222--
+
+--boundary-222
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-222--

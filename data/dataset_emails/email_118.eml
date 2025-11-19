@@ -1,0 +1,49 @@
+From: "QuickBill Services" <invoices@quickbill-serv.com>
+To: kyle.assistant@smileclinic.org
+Subject: Action Required: Mailbox Storage Limit Reached
+Date: Wed, 19 Nov 2025 00:45:51 -0800
+Message-ID: 20251119004551.39599@smileclinic.org
+Return-Path: invoices@quickbill-serv.com
+Reply-To: invoices@quickbill-serv.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.94])
+    by gateway.smileclinic.org with ESMTP id abc9699
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 00:45:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-118"
+
+--boundary-118
+Content-Type: multipart/alternative; boundary="boundary-alt-118"
+
+--boundary-alt-118
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+This notice was generated automatically and will not be sent again.
+
+We detected a sign-in from a new device and need you to verify your identity.
+
+To continue, please use the secure link below: https://deltadental-provider-check.com/validate
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Thanks,
+QuickBill Services
+
+--boundary-alt-118
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p>
+<p>This notice was generated automatically and will not be sent again.</p>
+<p>We detected a sign-in from a new device and need you to verify your identity.</p>
+<p>To continue, please use the secure link below: <a href="https://deltadental-provider-check.com/validate">https://deltadental-provider-check.com/validate</a></p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Thanks,</p>
+<p>QuickBill Services</p></body></html>
+--boundary-alt-118--
+--boundary-118--

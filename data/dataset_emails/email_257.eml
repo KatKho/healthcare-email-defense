@@ -1,0 +1,50 @@
+From: "Dental Provider Alerts" <alerts@deltadental-insure.com>
+To: kyle.assistant@smileclinic.org
+Subject: Your Account Has Been Limited
+Date: Wed, 19 Nov 2025 08:19:41 -0800
+Message-ID: 20251119081941.94806@mail.smileclinic.org
+Return-Path: alerts@deltadental-insure.com
+Reply-To: alerts@deltadental-insure.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.118])
+    by gateway.smileclinic.org with ESMTP id xyz3563
+    for <kyle.assistant@smileclinic.org>; Wed, 19 Nov 2025 08:19:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@deltadental-insure.com;
+    dmarc=none header.from=alerts@deltadental-insure.com
+Content-Type: multipart/mixed; boundary="boundary-257"
+
+--boundary-257
+Content-Type: multipart/alternative; boundary="boundary-alt-257"
+
+--boundary-alt-257
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Kyle,
+
+Please complete the secure authentication process below.
+
+A security event was triggered by an unknown device.
+
+This verification is required to restore full access.
+
+Verification link: https://deltadental-access-auth.com/confirm
+
+Thank you,
+Dental Provider Alerts
+
+--boundary-alt-257
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Kyle,</p><p>Please complete the secure authentication process below.</p><p>A security event was triggered by an unknown device.</p><p>This verification is required to restore full access.</p><p>Verification link: <a href="https://deltadental-access-auth.com/confirm">https://deltadental-access-auth.com/confirm</a></p><p>Thank you,</p><p>Dental Provider Alerts</p></body></html>
+--boundary-alt-257--
+
+--boundary-257
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-257--

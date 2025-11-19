@@ -1,0 +1,50 @@
+From: "FilterPro Security" <support@filterpro-hvac-check.com>
+To: billing@smileclinic.org
+Subject: Critical Security Alert
+Date: Wed, 19 Nov 2025 21:26:20 -0800
+Message-ID: 20251119212620.47218@mail.smileclinic.org
+Return-Path: support@filterpro-hvac-check.com
+Reply-To: support@filterpro-hvac-check.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id xyz7529
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 21:26:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@filterpro-hvac-check.com;
+    dmarc=none header.from=support@filterpro-hvac-check.com
+Content-Type: multipart/mixed; boundary="boundary-212"
+
+--boundary-212
+Content-Type: multipart/alternative; boundary="boundary-alt-212"
+
+--boundary-alt-212
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Marcus,
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Your provider account has been temporarily restricted due to unusual login attempts.
+
+This check is mandatory and time-sensitive.
+
+Verification link: https://deltadental-provider-check.com/validate
+
+Regards,
+FilterPro Security
+
+--boundary-alt-212
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Marcus,</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Your provider account has been temporarily restricted due to unusual login attempts.</p><p>This check is mandatory and time-sensitive.</p><p>Verification link: <a href="https://deltadental-provider-check.com/validate">https://deltadental-provider-check.com/validate</a></p><p>Regards,</p><p>FilterPro Security</p></body></html>
+--boundary-alt-212--
+
+--boundary-212
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-212--

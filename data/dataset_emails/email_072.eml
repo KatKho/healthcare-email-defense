@@ -1,0 +1,53 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Daily Sterilization Record
+Date: Wed, 19 Nov 2025 15:45:49 -0800
+Message-ID: 20251119154549.60159@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.248])
+    by gateway.smileclinic.org with ESMTP id def7160
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 15:45:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-22"
+
+--boundary-22
+Content-Type: multipart/alternative; boundary="boundary-alt-22"
+
+--boundary-alt-22
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+This should help keep tomorrow's schedule running smoothly.
+
+I wanted to share today's update before the end of the day.
+
+The full report is included in the attached file.
+
+Sincerely,
+Sarah Miller
+
+--boundary-alt-22
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>I wanted to share today's update before the end of the day.</p>
+<p>The full report is included in the attached file.</p>
+<p>Sincerely,<br>Sarah Miller</p></body></html>
+--boundary-alt-22--
+
+--boundary-22
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-22--

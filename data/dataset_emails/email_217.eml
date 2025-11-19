@@ -1,0 +1,50 @@
+From: "FilterPro Security" <support@filterpro-hvac-check.com>
+To: jen.hygienist@smileclinic.org
+Subject: Suspicious Login Attempt Detected
+Date: Tue, 18 Nov 2025 23:07:20 -0800
+Message-ID: 20251118230720.10440@mail.smileclinic.org
+Return-Path: support@filterpro-hvac-check.com
+Reply-To: support@filterpro-hvac-check.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.147])
+    by gateway.smileclinic.org with ESMTP id xyz6740
+    for <jen.hygienist@smileclinic.org>; Tue, 18 Nov 2025 23:07:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@filterpro-hvac-check.com;
+    dmarc=none header.from=support@filterpro-hvac-check.com
+Content-Type: multipart/mixed; boundary="boundary-217"
+
+--boundary-217
+Content-Type: multipart/alternative; boundary="boundary-alt-217"
+
+--boundary-alt-217
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+This check is mandatory and time-sensitive.
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Please complete the validation process using the secure link below.
+
+Verification link: https://dentrixcloud-support-auth.com/login
+
+Sincerely,
+FilterPro Security
+
+--boundary-alt-217
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p><p>This check is mandatory and time-sensitive.</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Please complete the validation process using the secure link below.</p><p>Verification link: <a href="https://dentrixcloud-support-auth.com/login">https://dentrixcloud-support-auth.com/login</a></p><p>Sincerely,</p><p>FilterPro Security</p></body></html>
+--boundary-alt-217--
+
+--boundary-217
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-217--

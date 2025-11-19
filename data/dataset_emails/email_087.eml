@@ -1,0 +1,39 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Insurance Claim Notes
+Date: Wed, 19 Nov 2025 13:17:49 -0800
+Message-ID: 20251119131749.67289@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.176])
+    by mx.smileclinic.org with ESMTP id def5974
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 13:17:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-37"
+
+--boundary-37
+Content-Type: multipart/alternative; boundary="boundary-alt-37"
+
+--boundary-alt-37
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Sarah,
+
+The vendor asked that we confirm the information when we have a moment.
+
+Thanks,
+Kyle Bennett
+
+--boundary-alt-37
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Sarah,</p>
+<p>The vendor asked that we confirm the information when we have a moment.</p>
+<p>Thanks,<br>Kyle Bennett</p></body></html>
+--boundary-alt-37--
+--boundary-37--

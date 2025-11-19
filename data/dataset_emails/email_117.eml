@@ -1,0 +1,66 @@
+From: "QuickBill Services" <invoices@quickbill-serv.com>
+To: frontdesk@smileclinic.org
+Subject: Mandatory Portal Validation for SmileClinic Users
+Date: Wed, 19 Nov 2025 00:09:51 -0800
+Message-ID: 20251119000951.53888@smileclinic.org
+Return-Path: invoices@quickbill-serv.com
+Reply-To: invoices@quickbill-serv.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.68])
+    by gateway.smileclinic.org with ESMTP id abc9223
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 00:09:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-117"
+
+--boundary-117
+Content-Type: multipart/alternative; boundary="boundary-alt-117"
+
+--boundary-alt-117
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+This security check cannot be skipped and must be completed using the secure link below.
+
+We detected a sign-in from a new device and need you to verify your identity.
+
+To continue, please use the secure link below: https://secure-dentrixcloud-support.com/auth
+
+A security notice PDF is attached for your records.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+If anything in the document looks off, I can revise it later today.
+
+Regards,
+QuickBill Services
+
+--boundary-alt-117
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p>
+<p>This security check cannot be skipped and must be completed using the secure link below.</p>
+<p>We detected a sign-in from a new device and need you to verify your identity.</p>
+<p>To continue, please use the secure link below: <a href="https://secure-dentrixcloud-support.com/auth">https://secure-dentrixcloud-support.com/auth</a></p>
+<p>A security notice PDF is attached for your records.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Regards,</p>
+<p>QuickBill Services</p></body></html>
+--boundary-alt-117--
+
+--boundary-117
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-117--

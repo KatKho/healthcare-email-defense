@@ -1,0 +1,42 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: jen.hygienist@smileclinic.org
+Subject: Updated Supply Order
+Date: Wed, 19 Nov 2025 00:16:49 -0800
+Message-ID: 20251119001649.41016@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.24])
+    by mx.smileclinic.org with ESMTP id def1915
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 00:16:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-49"
+
+--boundary-49
+Content-Type: multipart/alternative; boundary="boundary-alt-49"
+
+--boundary-alt-49
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+Please review the details and let me know if anything needs adjustment.
+
+Please review the details and let me know if anything needs adjustment.
+
+Thanks,
+Patterson Dental Shipping
+
+--boundary-alt-49
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Thanks,<br>Patterson Dental Shipping</p></body></html>
+--boundary-alt-49--
+--boundary-49--

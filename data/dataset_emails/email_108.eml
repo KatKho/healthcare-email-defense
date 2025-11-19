@@ -1,0 +1,69 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: it@smileclinic.org
+Subject: Updated Supply Order for Operatories
+Date: Wed, 19 Nov 2025 14:09:51 -0800
+Message-ID: 20251119140951.94228@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.51])
+    by gateway.smileclinic.org with ESMTP id abc2431
+    for it@smileclinic.org; Wed, 19 Nov 2025 14:09:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-108"
+
+--boundary-108
+Content-Type: multipart/alternative; boundary="boundary-alt-108"
+
+--boundary-alt-108
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey David,
+
+Can you confirm if the new burs were logged into the supply cabinet?
+
+Let me know if you want me to follow up with the vendor directly.
+
+If anything in the document looks off, I can revise it later today.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+The attached PDF has all the details summarized.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Best,
+Marcus Thorne
+
+--boundary-alt-108
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey David,</p>
+<p>Can you confirm if the new burs were logged into the supply cabinet?</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>The attached PDF has all the details summarized.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Best,</p>
+<p>Marcus Thorne</p></body></html>
+--boundary-alt-108--
+
+--boundary-108
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-108--

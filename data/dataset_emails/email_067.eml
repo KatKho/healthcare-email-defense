@@ -1,0 +1,42 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Insurance Claim Notes
+Date: Wed, 19 Nov 2025 00:00:49 -0800
+Message-ID: 20251119000049.47082@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.54])
+    by mx.smileclinic.org with ESMTP id def8987
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 00:00:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-17"
+
+--boundary-17
+Content-Type: multipart/alternative; boundary="boundary-alt-17"
+
+--boundary-alt-17
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+This should help keep tomorrow's schedule running smoothly.
+
+Nothing urgent here, but I wanted this recorded properly.
+
+Regards,
+Kyle Bennett
+
+--boundary-alt-17
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>Nothing urgent here, but I wanted this recorded properly.</p>
+<p>Regards,<br>Kyle Bennett</p></body></html>
+--boundary-alt-17--
+--boundary-17--

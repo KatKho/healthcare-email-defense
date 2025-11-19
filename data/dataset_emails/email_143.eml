@@ -1,0 +1,55 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: dr.martinez@smileclinic.org
+Subject: Insurance Pre-Authorization Notes
+Date: Wed, 19 Nov 2025 08:00:51 -0800
+Message-ID: 20251119080051.56459@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.162])
+    by gateway.smileclinic.org with ESMTP id abc8133
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 08:00:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-143"
+
+--boundary-143
+Content-Type: multipart/alternative; boundary="boundary-alt-143"
+
+--boundary-alt-143
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Dr. Martinez,
+
+The new composite shades came in, but two boxes were short on units.
+
+We're starting to run low on medium nitrile gloves and prophy paste.
+
+The disinfectant wipes backorder has an expected ship date for next week.
+
+If anything in the document looks off, I can revise it later today.
+
+Let me know if you want me to follow up with the vendor directly.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Best,
+Carestream Support
+
+--boundary-alt-143
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Dr. Martinez,</p>
+<p>The new composite shades came in, but two boxes were short on units.</p>
+<p>We're starting to run low on medium nitrile gloves and prophy paste.</p>
+<p>The disinfectant wipes backorder has an expected ship date for next week.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Best,</p>
+<p>Carestream Support</p></body></html>
+--boundary-alt-143--
+--boundary-143--

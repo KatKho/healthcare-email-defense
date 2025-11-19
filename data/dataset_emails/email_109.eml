@@ -1,0 +1,52 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: billing@smileclinic.org
+Subject: Panoramic Imaging Unit Check
+Date: Wed, 19 Nov 2025 01:10:51 -0800
+Message-ID: 20251119011051.96995@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.214])
+    by gateway.smileclinic.org with ESMTP id abc9690
+    for billing@smileclinic.org; Wed, 19 Nov 2025 01:10:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-109"
+
+--boundary-109
+Content-Type: multipart/alternative; boundary="boundary-alt-109"
+
+--boundary-alt-109
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+The imaging workstation in Operatory 2 dropped off the network twice this morning.
+
+We had a brief internet outage around 10:15 AM; I noted it in the log.
+
+The secure email portal timed out for a few patients trying to upload forms.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Best,
+Kyle Bennett
+
+--boundary-alt-109
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p>
+<p>The imaging workstation in Operatory 2 dropped off the network twice this morning.</p>
+<p>We had a brief internet outage around 10:15 AM; I noted it in the log.</p>
+<p>The secure email portal timed out for a few patients trying to upload forms.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Best,</p>
+<p>Kyle Bennett</p></body></html>
+--boundary-alt-109--
+--boundary-109--

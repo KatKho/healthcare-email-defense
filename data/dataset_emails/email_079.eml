@@ -1,0 +1,50 @@
+From: "BrightSmile Lab Cases" <cases@brightsmilelab.com>
+To: billing@smileclinic.org
+Subject: Lab Case Documentation
+Date: Tue, 18 Nov 2025 21:52:49 -0800
+Message-ID: 20251118215249.33664@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.206])
+    by gateway.smileclinic.org with ESMTP id def2079
+    for billing@smileclinic.org; Tue, 18 Nov 2025 21:52:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-29"
+
+--boundary-29
+Content-Type: multipart/alternative; boundary="boundary-alt-29"
+
+--boundary-alt-29
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Marcus,
+
+The vendor asked that we confirm the information when we have a moment.
+
+Patch notes are attached.
+
+Thanks,
+BrightSmile Lab Cases
+
+--boundary-alt-29
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Marcus,</p>
+<p>The vendor asked that we confirm the information when we have a moment.</p>
+<p>Patch notes are attached.</p>
+<p>Thanks,<br>BrightSmile Lab Cases</p></body></html>
+--boundary-alt-29--
+
+--boundary-29
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-29--

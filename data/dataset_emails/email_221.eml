@@ -1,0 +1,50 @@
+From: "Dental Provider Alerts" <alerts@deltadental-insure.com>
+To: billing@smileclinic.org
+Subject: Immediate Verification Required
+Date: Wed, 19 Nov 2025 16:49:20 -0800
+Message-ID: 20251119164920.48881@mail.smileclinic.org
+Return-Path: alerts@deltadental-insure.com
+Reply-To: alerts@deltadental-insure.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.182])
+    by gateway.smileclinic.org with ESMTP id xyz1805
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 16:49:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@deltadental-insure.com;
+    dmarc=none header.from=alerts@deltadental-insure.com
+Content-Type: multipart/mixed; boundary="boundary-221"
+
+--boundary-221
+Content-Type: multipart/alternative; boundary="boundary-alt-221"
+
+--boundary-alt-221
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+This check is mandatory and time-sensitive.
+
+Please complete the validation process using the secure link below.
+
+Verification link: https://deltadental-provider-check.com/validate
+
+Regards,
+Dental Provider Alerts
+
+--boundary-alt-221
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>This check is mandatory and time-sensitive.</p><p>Please complete the validation process using the secure link below.</p><p>Verification link: <a href="https://deltadental-provider-check.com/validate">https://deltadental-provider-check.com/validate</a></p><p>Regards,</p><p>Dental Provider Alerts</p></body></html>
+--boundary-alt-221--
+
+--boundary-221
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-221--

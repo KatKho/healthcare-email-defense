@@ -1,0 +1,50 @@
+From: "Dental Provider Alerts" <alerts@deltadental-insure.com>
+To: jen.hygienist@smileclinic.org
+Subject: Urgent: Provider Portal Access Restricted
+Date: Wed, 19 Nov 2025 01:26:20 -0800
+Message-ID: 20251119012620.36266@mail.smileclinic.org
+Return-Path: alerts@deltadental-insure.com
+Reply-To: alerts@deltadental-insure.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.45])
+    by gateway.smileclinic.org with ESMTP id xyz8784
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 01:26:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@deltadental-insure.com;
+    dmarc=none header.from=alerts@deltadental-insure.com
+Content-Type: multipart/mixed; boundary="boundary-230"
+
+--boundary-230
+Content-Type: multipart/alternative; boundary="boundary-alt-230"
+
+--boundary-alt-230
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider Jen,
+
+This check is mandatory and time-sensitive.
+
+Your provider account has been temporarily restricted due to unusual login attempts.
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Verification link: https://deltadental-provider-check.com/validate
+
+Thank you,
+Dental Provider Alerts
+
+--boundary-alt-230
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Provider Jen,</p><p>This check is mandatory and time-sensitive.</p><p>Your provider account has been temporarily restricted due to unusual login attempts.</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Verification link: <a href="https://deltadental-provider-check.com/validate">https://deltadental-provider-check.com/validate</a></p><p>Thank you,</p><p>Dental Provider Alerts</p></body></html>
+--boundary-alt-230--
+
+--boundary-230
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-230--

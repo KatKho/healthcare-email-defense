@@ -1,0 +1,39 @@
+From: "Jennifer Stevens" <jen.hygienist@smileclinic.org>
+To: billing@smileclinic.org
+Subject: Insurance Claim Notes
+Date: Tue, 18 Nov 2025 23:55:49 -0800
+Message-ID: 20251118235549.85024@smileclinic.org
+Return-Path: jen.hygienist@smileclinic.org
+Reply-To: jen.hygienist@smileclinic.org
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.123])
+    by gateway.smileclinic.org with ESMTP id def1939
+    for billing@smileclinic.org; Tue, 18 Nov 2025 23:55:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-48"
+
+--boundary-48
+Content-Type: multipart/alternative; boundary="boundary-alt-48"
+
+--boundary-alt-48
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Marcus,
+
+Please review the details and let me know if anything needs adjustment.
+
+Thanks,
+Jennifer Stevens
+
+--boundary-alt-48
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Marcus,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Thanks,<br>Jennifer Stevens</p></body></html>
+--boundary-alt-48--
+--boundary-48--

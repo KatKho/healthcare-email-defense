@@ -1,0 +1,42 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: dr.martinez@smileclinic.org
+Subject: Equipment Calibration Summary
+Date: Wed, 19 Nov 2025 02:17:49 -0800
+Message-ID: 20251119021749.43898@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.66])
+    by gateway.smileclinic.org with ESMTP id def7217
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 02:17:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-36"
+
+--boundary-36
+Content-Type: multipart/alternative; boundary="boundary-alt-36"
+
+--boundary-alt-36
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Dr. Martinez,
+
+Nothing urgent here, but I wanted this recorded properly.
+
+This should help keep tomorrow's schedule running smoothly.
+
+Regards,
+Patterson Dental Shipping
+
+--boundary-alt-36
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Dr. Martinez,</p>
+<p>Nothing urgent here, but I wanted this recorded properly.</p>
+<p>This should help keep tomorrow's schedule running smoothly.</p>
+<p>Regards,<br>Patterson Dental Shipping</p></body></html>
+--boundary-alt-36--
+--boundary-36--

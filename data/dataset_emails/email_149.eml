@@ -1,0 +1,51 @@
+From: "Carestream Update System" <updates@carestream-softupdate.com>
+To: it@smileclinic.org
+Subject: Security Alert: Suspicious Login Detected
+Date: Wed, 19 Nov 2025 20:59:51 -0800
+Message-ID: 20251119205951.99975@smileclinic.org
+Return-Path: updates@carestream-softupdate.com
+Reply-To: updates@carestream-softupdate.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.148])
+    by mx.smileclinic.org with ESMTP id abc9130
+    for it@smileclinic.org; Wed, 19 Nov 2025 20:59:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-149"
+
+--boundary-149
+Content-Type: multipart/alternative; boundary="boundary-alt-149"
+
+--boundary-alt-149
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello David,
+
+This security check cannot be skipped and must be completed using the secure link below.
+
+We detected a sign-in from a new device and need you to verify your identity.
+
+Sincerely,
+Carestream Update System
+
+--boundary-alt-149
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello David,</p>
+<p>This security check cannot be skipped and must be completed using the secure link below.</p>
+<p>We detected a sign-in from a new device and need you to verify your identity.</p>
+<p>Sincerely,</p>
+<p>Carestream Update System</p></body></html>
+--boundary-alt-149--
+
+--boundary-149
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-149--

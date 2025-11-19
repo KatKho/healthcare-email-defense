@@ -1,0 +1,50 @@
+From: "Dentrix Cloud Security" <security@dentrixcloud-alert.com>
+To: frontdesk@smileclinic.org
+Subject: Suspicious Activity Detected
+Date: Wed, 19 Nov 2025 06:06:41 -0800
+Message-ID: 20251119060641.43326@mail.smileclinic.org
+Return-Path: security@dentrixcloud-alert.com
+Reply-To: security@dentrixcloud-alert.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.131])
+    by gateway.smileclinic.org with ESMTP id xyz2232
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 06:06:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=security@dentrixcloud-alert.com;
+    dmarc=none header.from=security@dentrixcloud-alert.com
+Content-Type: multipart/mixed; boundary="boundary-250"
+
+--boundary-250
+Content-Type: multipart/alternative; boundary="boundary-alt-250"
+
+--boundary-alt-250
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+A security event was triggered by an unknown device.
+
+Please complete the secure authentication process below.
+
+This verification is required to restore full access.
+
+Verification link: https://deltadental-access-auth.com/confirm
+
+Thank you,
+Dentrix Cloud Security
+
+--boundary-alt-250
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p><p>A security event was triggered by an unknown device.</p><p>Please complete the secure authentication process below.</p><p>This verification is required to restore full access.</p><p>Verification link: <a href="https://deltadental-access-auth.com/confirm">https://deltadental-access-auth.com/confirm</a></p><p>Thank you,</p><p>Dentrix Cloud Security</p></body></html>
+--boundary-alt-250--
+
+--boundary-250
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-250--

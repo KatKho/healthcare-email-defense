@@ -1,0 +1,51 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Front Desk Summary
+Date: Wed, 19 Nov 2025 21:23:18 -0800
+Message-ID: 20251119212318.38217@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.152])
+    by gateway.smileclinic.org with ESMTP id abc7293
+    for <kyle.assistant@smileclinic.org>; Wed, 19 Nov 2025 21:23:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-183"
+
+--boundary-183
+Content-Type: multipart/alternative; boundary="boundary-alt-183"
+
+--boundary-alt-183
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Kyle,
+
+We're low on gloves and disinfectant wipes.
+
+New composite shades arrived short by two boxes.
+
+This should help things run smoother.
+
+Details are in the attached PDF.
+
+Thanks,
+Sarah Miller
+
+--boundary-alt-183
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Kyle,</p><p>We're low on gloves and disinfectant wipes.</p><p>New composite shades arrived short by two boxes.</p><p>This should help things run smoother.</p><p>Details are in the attached PDF.</p><p>Thanks,</p><p>Sarah Miller</p></body></html>
+--boundary-alt-183--
+
+--boundary-183
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-183--

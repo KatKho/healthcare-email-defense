@@ -1,0 +1,42 @@
+From: "Delta Dental Claims" <claims@deltadental-insurance.com>
+To: jen.hygienist@smileclinic.org
+Subject: Daily Sterilization Record
+Date: Wed, 19 Nov 2025 05:35:49 -0800
+Message-ID: 20251119053549.42367@smileclinic.org
+Return-Path: claims@deltadental-insurance.com
+Reply-To: claims@deltadental-insurance.com
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.213])
+    by mx.smileclinic.org with ESMTP id def5596
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 05:35:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-38"
+
+--boundary-38
+Content-Type: multipart/alternative; boundary="boundary-alt-38"
+
+--boundary-alt-38
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Jen,
+
+Please review the details and let me know if anything needs adjustment.
+
+The vendor asked that we confirm the information when we have a moment.
+
+Thanks,
+Delta Dental Claims
+
+--boundary-alt-38
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Jen,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>The vendor asked that we confirm the information when we have a moment.</p>
+<p>Thanks,<br>Delta Dental Claims</p></body></html>
+--boundary-alt-38--
+--boundary-38--

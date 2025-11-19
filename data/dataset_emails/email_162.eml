@@ -1,0 +1,49 @@
+From: "BrightSmile Lab Billing" <billing@brightsmilelab.com>
+To: it@smileclinic.org
+Subject: Updated Afternoon Schedule
+Date: Wed, 19 Nov 2025 07:01:18 -0800
+Message-ID: 20251119070118.82348@smileclinic.org
+Return-Path: billing@brightsmilelab.com
+Reply-To: billing@brightsmilelab.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.167])
+    by gateway.smileclinic.org with ESMTP id abc7593
+    for <it@smileclinic.org>; Wed, 19 Nov 2025 07:01:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-162"
+
+--boundary-162
+Content-Type: multipart/alternative; boundary="boundary-alt-162"
+
+--boundary-alt-162
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning David,
+
+New composite shades arrived short by two boxes.
+
+Let me know if anything looks off.
+
+Details are in the attached PDF.
+
+Best,
+BrightSmile Lab Billing
+
+--boundary-alt-162
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning David,</p><p>New composite shades arrived short by two boxes.</p><p>Let me know if anything looks off.</p><p>Details are in the attached PDF.</p><p>Best,</p><p>BrightSmile Lab Billing</p></body></html>
+--boundary-alt-162--
+
+--boundary-162
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-162--

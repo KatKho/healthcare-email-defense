@@ -1,0 +1,41 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: frontdesk@smileclinic.org
+Subject: Suspicious Activity Detected
+Date: Wed, 19 Nov 2025 03:03:18 -0800
+Message-ID: 20251119030318.48946@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.97])
+    by gateway.smileclinic.org with ESMTP id abc3080
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 03:03:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-171"
+
+--boundary-171
+Content-Type: multipart/alternative; boundary="boundary-alt-171"
+
+--boundary-alt-171
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Sarah,
+
+Your provider account requires immediate verification.
+
+Service access will pause unless validated.
+
+Use the secure link: https://carestream-auth-update.com/session
+
+Thanks,
+MedWaste Alerts
+
+--boundary-alt-171
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Sarah,</p><p>Your provider account requires immediate verification.</p><p>Service access will pause unless validated.</p><p>Use the secure link: <a href="https://carestream-auth-update.com/session">https://carestream-auth-update.com/session</a></p><p>Thanks,</p><p>MedWaste Alerts</p></body></html>
+--boundary-alt-171--
+--boundary-171--

@@ -1,0 +1,63 @@
+From: "Jennifer Stevens" <jen.hygienist@smileclinic.org>
+To: billing@smileclinic.org
+Subject: Insurance Pre-Authorization Notes
+Date: Wed, 19 Nov 2025 07:06:51 -0800
+Message-ID: 20251119070651.17589@smileclinic.org
+Return-Path: jen.hygienist@smileclinic.org
+Reply-To: jen.hygienist@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.237])
+    by gateway.smileclinic.org with ESMTP id abc3603
+    for billing@smileclinic.org; Wed, 19 Nov 2025 07:06:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-114"
+
+--boundary-114
+Content-Type: multipart/alternative; boundary="boundary-alt-114"
+
+--boundary-alt-114
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Marcus,
+
+Delta is asking for additional charting before approving the perio maintenance.
+
+If anything in the document looks off, I can revise it later today.
+
+Let me know if you want me to follow up with the vendor directly.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Details are in the attached document.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Sincerely,
+Jennifer Stevens
+
+--boundary-alt-114
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Marcus,</p>
+<p>Delta is asking for additional charting before approving the perio maintenance.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Details are in the attached document.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Sincerely,</p>
+<p>Jennifer Stevens</p></body></html>
+--boundary-alt-114--
+
+--boundary-114
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-114--

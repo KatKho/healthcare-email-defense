@@ -1,0 +1,61 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Front Desk No-Show Summary
+Date: Tue, 18 Nov 2025 22:11:51 -0800
+Message-ID: 20251118221151.20938@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.162])
+    by gateway.smileclinic.org with ESMTP id abc9900
+    for jen.hygienist@smileclinic.org; Tue, 18 Nov 2025 22:11:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-121"
+
+--boundary-121
+Content-Type: multipart/alternative; boundary="boundary-alt-121"
+
+--boundary-alt-121
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Jen,
+
+We had a brief internet outage around 10:15 AM; I noted it in the log.
+
+One of the assistants reported that Dentrix was freezing when posting payments.
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Let me know if you want me to follow up with the vendor directly.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Thanks,
+Sarah Miller
+
+--boundary-alt-121
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Jen,</p>
+<p>We had a brief internet outage around 10:15 AM; I noted it in the log.</p>
+<p>One of the assistants reported that Dentrix was freezing when posting payments.</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Thanks,</p>
+<p>Sarah Miller</p></body></html>
+--boundary-alt-121--
+--boundary-121--

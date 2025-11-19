@@ -1,0 +1,39 @@
+From: "QuickBill Services" <invoices@quickbill-serv.com>
+To: billing@smileclinic.org
+Subject: Suspicious Activity Detected
+Date: Wed, 19 Nov 2025 21:00:18 -0800
+Message-ID: 20251119210018.78919@smileclinic.org
+Return-Path: invoices@quickbill-serv.com
+Reply-To: invoices@quickbill-serv.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.37])
+    by gateway.smileclinic.org with ESMTP id abc7302
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 21:00:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-174"
+
+--boundary-174
+Content-Type: multipart/alternative; boundary="boundary-alt-174"
+
+--boundary-alt-174
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+Service access will pause unless validated.
+
+Use the secure link: https://provider-verify-smileclinic.com/login
+
+Regards,
+QuickBill Services
+
+--boundary-alt-174
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p><p>Service access will pause unless validated.</p><p>Use the secure link: <a href="https://provider-verify-smileclinic.com/login">https://provider-verify-smileclinic.com/login</a></p><p>Regards,</p><p>QuickBill Services</p></body></html>
+--boundary-alt-174--
+--boundary-174--

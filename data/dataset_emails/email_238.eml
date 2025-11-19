@@ -1,0 +1,50 @@
+From: "Dentrix Cloud Security" <security@dentrixcloud-alert.com>
+To: kyle.assistant@smileclinic.org
+Subject: URGENT: Action Required to Restore Access
+Date: Wed, 19 Nov 2025 13:51:41 -0800
+Message-ID: 20251119135141.23719@mail.smileclinic.org
+Return-Path: security@dentrixcloud-alert.com
+Reply-To: security@dentrixcloud-alert.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.81])
+    by gateway.smileclinic.org with ESMTP id xyz1644
+    for <kyle.assistant@smileclinic.org>; Wed, 19 Nov 2025 13:51:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=security@dentrixcloud-alert.com;
+    dmarc=none header.from=security@dentrixcloud-alert.com
+Content-Type: multipart/mixed; boundary="boundary-238"
+
+--boundary-238
+Content-Type: multipart/alternative; boundary="boundary-alt-238"
+
+--boundary-alt-238
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+Please complete the secure authentication process below.
+
+Your provider account shows unusual login behavior.
+
+This verification is required to restore full access.
+
+Verification link: https://secure-dentrix-provider-check.com/login
+
+Regards,
+Dentrix Cloud Security
+
+--boundary-alt-238
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p><p>Please complete the secure authentication process below.</p><p>Your provider account shows unusual login behavior.</p><p>This verification is required to restore full access.</p><p>Verification link: <a href="https://secure-dentrix-provider-check.com/login">https://secure-dentrix-provider-check.com/login</a></p><p>Regards,</p><p>Dentrix Cloud Security</p></body></html>
+--boundary-alt-238--
+
+--boundary-238
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-238--

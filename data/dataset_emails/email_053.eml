@@ -1,0 +1,39 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: it@smileclinic.org
+Subject: Imaging Unit Log Attached
+Date: Tue, 18 Nov 2025 23:25:49 -0800
+Message-ID: 20251118232549.45381@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.94])
+    by gateway.smileclinic.org with ESMTP id def6051
+    for it@smileclinic.org; Tue, 18 Nov 2025 23:25:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-3"
+
+--boundary-3
+Content-Type: multipart/alternative; boundary="boundary-alt-3"
+
+--boundary-alt-3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello David,
+
+Please review the details and let me know if anything needs adjustment.
+
+Sincerely,
+Patterson Dental Shipping
+
+--boundary-alt-3
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello David,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Sincerely,<br>Patterson Dental Shipping</p></body></html>
+--boundary-alt-3--
+--boundary-3--

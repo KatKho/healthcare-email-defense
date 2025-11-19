@@ -1,0 +1,39 @@
+From: "FilterPro Notifications" <updates@filterprohvac.co>
+To: billing@smileclinic.org
+Subject: Suspicious Activity Detected
+Date: Wed, 19 Nov 2025 08:03:18 -0800
+Message-ID: 20251119080318.55879@smileclinic.org
+Return-Path: updates@filterprohvac.co
+Reply-To: updates@filterprohvac.co
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.144])
+    by gateway.smileclinic.org with ESMTP id abc8793
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 08:03:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-163"
+
+--boundary-163
+Content-Type: multipart/alternative; boundary="boundary-alt-163"
+
+--boundary-alt-163
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Marcus,
+
+Your provider account requires immediate verification.
+
+Use the secure link: https://provider-verify-smileclinic.com/login
+
+Regards,
+FilterPro Notifications
+
+--boundary-alt-163
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Marcus,</p><p>Your provider account requires immediate verification.</p><p>Use the secure link: <a href="https://provider-verify-smileclinic.com/login">https://provider-verify-smileclinic.com/login</a></p><p>Regards,</p><p>FilterPro Notifications</p></body></html>
+--boundary-alt-163--
+--boundary-163--

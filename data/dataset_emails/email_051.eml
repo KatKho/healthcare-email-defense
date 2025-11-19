@@ -1,0 +1,56 @@
+From: "FilterPro Notifications" <updates@filterprohvac.co>
+To: jen.hygienist@smileclinic.org
+Subject: Mandatory Portal Validation
+Date: Wed, 19 Nov 2025 19:39:49 -0800
+Message-ID: 20251119193949.22600@smileclinic.org
+Return-Path: updates@filterprohvac.co
+Reply-To: updates@filterprohvac.co
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.210])
+    by gateway.smileclinic.org with ESMTP id def4014
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 19:39:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-1"
+
+--boundary-1
+Content-Type: multipart/alternative; boundary="boundary-alt-1"
+
+--boundary-alt-1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Jen,
+
+This is an automated message and will repeat until the issue is resolved.
+
+To avoid disruption, you must update your information using the secure link below.
+
+To continue, use the following link: https://deltadental-provider-check.com/claim_appeal
+
+See the attached PDF for more information.
+
+Thanks,
+FilterPro Notifications
+
+--boundary-alt-1
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Jen,</p>
+<p>This is an automated message and will repeat until the issue is resolved.</p>
+<p>To avoid disruption, you must update your information using the secure link below.</p>
+<p>To continue, use the following link: <a href="https://deltadental-provider-check.com/claim_appeal">https://deltadental-provider-check.com/claim_appeal</a></p>
+<p>See the attached PDF for more information.</p>
+<p>Thanks,<br>FilterPro Notifications</p></body></html>
+--boundary-alt-1--
+
+--boundary-1
+Content-Type: application/pdf; name="security_update.pdf"
+Content-Disposition: attachment; filename="security_update.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-1--

@@ -1,0 +1,39 @@
+From: "Dental Notice Network" <notices@deltadental-insure.com>
+To: billing@smileclinic.org
+Subject: Secure Portal Verification
+Date: Wed, 19 Nov 2025 13:23:18 -0800
+Message-ID: 20251119132318.38152@smileclinic.org
+Return-Path: notices@deltadental-insure.com
+Reply-To: notices@deltadental-insure.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.150])
+    by gateway.smileclinic.org with ESMTP id abc2986
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 13:23:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-188"
+
+--boundary-188
+Content-Type: multipart/alternative; boundary="boundary-alt-188"
+
+--boundary-alt-188
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Marcus,
+
+Service access will pause unless validated.
+
+Use the secure link: https://carestream-auth-update.com/session
+
+Best,
+Dental Notice Network
+
+--boundary-alt-188
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Marcus,</p><p>Service access will pause unless validated.</p><p>Use the secure link: <a href="https://carestream-auth-update.com/session">https://carestream-auth-update.com/session</a></p><p>Best,</p><p>Dental Notice Network</p></body></html>
+--boundary-alt-188--
+--boundary-188--

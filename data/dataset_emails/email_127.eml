@@ -1,0 +1,55 @@
+From: "Dentrix Cloud Support" <support@dentrixcloud.com>
+To: kyle.assistant@smileclinic.org
+Subject: Sterilization Log for Today's Patients
+Date: Wed, 19 Nov 2025 00:16:51 -0800
+Message-ID: 20251119001651.59864@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.57])
+    by mx.smileclinic.org with ESMTP id abc6584
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 00:16:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-127"
+
+--boundary-127
+Content-Type: multipart/alternative; boundary="boundary-alt-127"
+
+--boundary-alt-127
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+One of the claims was denied due to a missing x-ray; details are in the attachment.
+
+MetLife flagged a duplicate claim; we may need to resubmit with corrected dates.
+
+If anything in the document looks off, I can revise it later today.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+Sincerely,
+Dentrix Cloud Support
+
+--boundary-alt-127
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p>
+<p>One of the claims was denied due to a missing x-ray; details are in the attachment.</p>
+<p>MetLife flagged a duplicate claim; we may need to resubmit with corrected dates.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>Sincerely,</p>
+<p>Dentrix Cloud Support</p></body></html>
+--boundary-alt-127--
+--boundary-127--

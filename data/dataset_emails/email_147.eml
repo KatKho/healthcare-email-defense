@@ -1,0 +1,57 @@
+From: "Dr. Alejandro Martinez" <dr.martinez@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Weekly Hygiene Recall List Export
+Date: Wed, 19 Nov 2025 19:41:51 -0800
+Message-ID: 20251119194151.52708@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.116])
+    by gateway.smileclinic.org with ESMTP id abc7701
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 19:41:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-147"
+
+--boundary-147
+Content-Type: multipart/alternative; boundary="boundary-alt-147"
+
+--boundary-alt-147
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Sarah,
+
+The new composite shades came in, but two boxes were short on units.
+
+I included the updated inventory sheet for the hygiene rooms.
+
+Can you confirm if the new burs were logged into the supply cabinet?
+
+Feel free to add any comments directly into the document before we finalize it.
+
+Thanks,
+Dr. Alejandro Martinez
+
+--boundary-alt-147
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Sarah,</p>
+<p>The new composite shades came in, but two boxes were short on units.</p>
+<p>I included the updated inventory sheet for the hygiene rooms.</p>
+<p>Can you confirm if the new burs were logged into the supply cabinet?</p>
+<p>Feel free to add any comments directly into the document before we finalize it.</p>
+<p>Thanks,</p>
+<p>Dr. Alejandro Martinez</p></body></html>
+--boundary-alt-147--
+
+--boundary-147
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-147--

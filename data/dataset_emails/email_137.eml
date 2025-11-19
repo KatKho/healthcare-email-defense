@@ -1,0 +1,60 @@
+From: "QuickBill Services" <invoices@quickbill-serv.com>
+To: kyle.assistant@smileclinic.org
+Subject: Final Warning: Claim Access Temporarily Suspended
+Date: Wed, 19 Nov 2025 15:17:51 -0800
+Message-ID: 20251119151751.84659@smileclinic.org
+Return-Path: invoices@quickbill-serv.com
+Reply-To: invoices@quickbill-serv.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.70])
+    by gateway.smileclinic.org with ESMTP id abc4489
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 15:17:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-137"
+
+--boundary-137
+Content-Type: multipart/alternative; boundary="boundary-alt-137"
+
+--boundary-alt-137
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Kyle,
+
+This notice was generated automatically and will not be sent again.
+
+If you do not complete the verification, your access to claims and imaging may be paused.
+
+To continue, please use the secure link below: https://smileclinic-provider-verify.com/login
+
+A security notice PDF is attached for your records.
+
+Let me know if you want me to follow up with the vendor directly.
+
+Best,
+QuickBill Services
+
+--boundary-alt-137
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Kyle,</p>
+<p>This notice was generated automatically and will not be sent again.</p>
+<p>If you do not complete the verification, your access to claims and imaging may be paused.</p>
+<p>To continue, please use the secure link below: <a href="https://smileclinic-provider-verify.com/login">https://smileclinic-provider-verify.com/login</a></p>
+<p>A security notice PDF is attached for your records.</p>
+<p>Let me know if you want me to follow up with the vendor directly.</p>
+<p>Best,</p>
+<p>QuickBill Services</p></body></html>
+--boundary-alt-137--
+
+--boundary-137
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-137--

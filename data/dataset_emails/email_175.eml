@@ -1,0 +1,53 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Daily Imaging Log
+Date: Tue, 18 Nov 2025 23:29:18 -0800
+Message-ID: 20251118232918.47950@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.149])
+    by gateway.smileclinic.org with ESMTP id abc9400
+    for <frontdesk@smileclinic.org>; Tue, 18 Nov 2025 23:29:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-175"
+
+--boundary-175
+Content-Type: multipart/alternative; boundary="boundary-alt-175"
+
+--boundary-alt-175
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+Delta is requesting additional documentation.
+
+Pre-auth still pending review.
+
+I can revise this later today.
+
+Let me know if anything looks off.
+
+Details are in the attached PDF.
+
+Best,
+Marcus Thorne
+
+--boundary-alt-175
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p><p>Delta is requesting additional documentation.</p><p>Pre-auth still pending review.</p><p>I can revise this later today.</p><p>Let me know if anything looks off.</p><p>Details are in the attached PDF.</p><p>Best,</p><p>Marcus Thorne</p></body></html>
+--boundary-alt-175--
+
+--boundary-175
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-175--

@@ -1,0 +1,69 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: dr.martinez@smileclinic.org
+Subject: Front Desk No-Show Summary
+Date: Wed, 19 Nov 2025 08:24:51 -0800
+Message-ID: 20251119082451.57539@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.240])
+    by gateway.smileclinic.org with ESMTP id abc8996
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 08:24:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-142"
+
+--boundary-142
+Content-Type: multipart/alternative; boundary="boundary-alt-142"
+
+--boundary-alt-142
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Dr. Martinez,
+
+MetLife flagged a duplicate claim; we may need to resubmit with corrected dates.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+If anything in the document looks off, I can revise it later today.
+
+Details are in the attached document.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Regards,
+Carestream Support
+
+--boundary-alt-142
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Dr. Martinez,</p>
+<p>MetLife flagged a duplicate claim; we may need to resubmit with corrected dates.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>If anything in the document looks off, I can revise it later today.</p>
+<p>Details are in the attached document.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Regards,</p>
+<p>Carestream Support</p></body></html>
+--boundary-alt-142--
+
+--boundary-142
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-142--

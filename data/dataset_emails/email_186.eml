@@ -1,0 +1,53 @@
+From: "Patterson Dental Shipping" <shipping@pattersondental.com>
+To: jen.hygienist@smileclinic.org
+Subject: Insurance Follow-Up Needed
+Date: Wed, 19 Nov 2025 03:26:18 -0800
+Message-ID: 20251119032618.10514@smileclinic.org
+Return-Path: shipping@pattersondental.com
+Reply-To: shipping@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.83])
+    by gateway.smileclinic.org with ESMTP id abc6147
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 03:26:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-186"
+
+--boundary-186
+Content-Type: multipart/alternative; boundary="boundary-alt-186"
+
+--boundary-alt-186
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Jen,
+
+Pre-auth still pending review.
+
+Delta is requesting additional documentation.
+
+Let me know if anything looks off.
+
+I can revise this later today.
+
+Details are in the attached PDF.
+
+Thanks,
+Patterson Dental Shipping
+
+--boundary-alt-186
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Jen,</p><p>Pre-auth still pending review.</p><p>Delta is requesting additional documentation.</p><p>Let me know if anything looks off.</p><p>I can revise this later today.</p><p>Details are in the attached PDF.</p><p>Thanks,</p><p>Patterson Dental Shipping</p></body></html>
+--boundary-alt-186--
+
+--boundary-186
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-186--

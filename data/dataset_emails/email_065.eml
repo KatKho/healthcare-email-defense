@@ -1,0 +1,42 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Tomorrow's Patient Schedule
+Date: Wed, 19 Nov 2025 17:05:49 -0800
+Message-ID: 20251119170549.23275@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.pattersondental.com (mail.pattersondental.com [192.0.2.32])
+    by mx.smileclinic.org with ESMTP id def9756
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 17:05:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-15"
+
+--boundary-15
+Content-Type: multipart/alternative; boundary="boundary-alt-15"
+
+--boundary-alt-15
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Jen,
+
+I wanted to share today's update before the end of the day.
+
+If something doesn't look right, I can follow up with the vendor.
+
+Thanks,
+Kyle Bennett
+
+--boundary-alt-15
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Jen,</p>
+<p>I wanted to share today's update before the end of the day.</p>
+<p>If something doesn't look right, I can follow up with the vendor.</p>
+<p>Thanks,<br>Kyle Bennett</p></body></html>
+--boundary-alt-15--
+--boundary-15--

@@ -1,0 +1,56 @@
+From: "Dental Notice Network" <notices@deltadental-insure.com>
+To: frontdesk@smileclinic.org
+Subject: Security Alert: New Device Login Detected
+Date: Wed, 19 Nov 2025 03:44:49 -0800
+Message-ID: 20251119034449.90224@smileclinic.org
+Return-Path: notices@deltadental-insure.com
+Reply-To: notices@deltadental-insure.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.241])
+    by gateway.smileclinic.org with ESMTP id def2906
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 03:44:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-7"
+
+--boundary-7
+Content-Type: multipart/alternative; boundary="boundary-alt-7"
+
+--boundary-alt-7
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Sarah,
+
+Your access will be paused within 24 hours unless you complete the validation.
+
+To avoid disruption, you must update your information using the secure link below.
+
+To continue, use the following link: https://deltadental-provider-check.com/claim_appeal
+
+Attached is the updated invoice for your review.
+
+Sincerely,
+Dental Notice Network
+
+--boundary-alt-7
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hey Sarah,</p>
+<p>Your access will be paused within 24 hours unless you complete the validation.</p>
+<p>To avoid disruption, you must update your information using the secure link below.</p>
+<p>To continue, use the following link: <a href="https://deltadental-provider-check.com/claim_appeal">https://deltadental-provider-check.com/claim_appeal</a></p>
+<p>Attached is the updated invoice for your review.</p>
+<p>Sincerely,<br>Dental Notice Network</p></body></html>
+--boundary-alt-7--
+
+--boundary-7
+Content-Type: application/pdf; name="security_update.pdf"
+Content-Disposition: attachment; filename="security_update.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgdGVzdGluZyBhdHRhY2htZW50cyBpbiB0aGUgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-7--

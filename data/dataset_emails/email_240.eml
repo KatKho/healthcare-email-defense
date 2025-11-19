@@ -1,0 +1,50 @@
+From: "Dentrix Cloud Security" <security@dentrixcloud-alert.com>
+To: billing@smileclinic.org
+Subject: Your Account Has Been Limited
+Date: Wed, 19 Nov 2025 04:25:41 -0800
+Message-ID: 20251119042541.19790@mail.smileclinic.org
+Return-Path: security@dentrixcloud-alert.com
+Reply-To: security@dentrixcloud-alert.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.103])
+    by gateway.smileclinic.org with ESMTP id xyz3114
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 04:25:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=security@dentrixcloud-alert.com;
+    dmarc=none header.from=security@dentrixcloud-alert.com
+Content-Type: multipart/mixed; boundary="boundary-240"
+
+--boundary-240
+Content-Type: multipart/alternative; boundary="boundary-alt-240"
+
+--boundary-alt-240
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Marcus,
+
+Your access to patient records may be temporarily paused.
+
+Please complete the secure authentication process below.
+
+This verification is required to restore full access.
+
+Verification link: https://secure-dentrix-provider-check.com/login
+
+Sincerely,
+Dentrix Cloud Security
+
+--boundary-alt-240
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Marcus,</p><p>Your access to patient records may be temporarily paused.</p><p>Please complete the secure authentication process below.</p><p>This verification is required to restore full access.</p><p>Verification link: <a href="https://secure-dentrix-provider-check.com/login">https://secure-dentrix-provider-check.com/login</a></p><p>Sincerely,</p><p>Dentrix Cloud Security</p></body></html>
+--boundary-alt-240--
+
+--boundary-240
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-240--

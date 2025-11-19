@@ -1,0 +1,41 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: billing@smileclinic.org
+Subject: Lab Case Reminder
+Date: Wed, 19 Nov 2025 15:07:18 -0800
+Message-ID: 20251119150718.64911@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.189])
+    by gateway.smileclinic.org with ESMTP id abc7175
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 15:07:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-179"
+
+--boundary-179
+Content-Type: multipart/alternative; boundary="boundary-alt-179"
+
+--boundary-alt-179
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+The operatory PC disconnected twice today.
+
+Let me know if anything looks off.
+
+This should help things run smoother.
+
+Best,
+Carestream Support
+
+--boundary-alt-179
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Marcus,</p><p>The operatory PC disconnected twice today.</p><p>Let me know if anything looks off.</p><p>This should help things run smoother.</p><p>Best,</p><p>Carestream Support</p></body></html>
+--boundary-alt-179--
+--boundary-179--

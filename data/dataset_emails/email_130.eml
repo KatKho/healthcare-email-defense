@@ -1,0 +1,54 @@
+From: "Dentrix Cloud Support" <support@dentrixcloud.com>
+To: it@smileclinic.org
+Subject: Weekly Hygiene Recall List Export
+Date: Wed, 19 Nov 2025 00:03:51 -0800
+Message-ID: 20251119000351.72977@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.75])
+    by gateway.smileclinic.org with ESMTP id abc9951
+    for it@smileclinic.org; Wed, 19 Nov 2025 00:03:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-130"
+
+--boundary-130
+Content-Type: multipart/alternative; boundary="boundary-alt-130"
+
+--boundary-alt-130
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+We had a brief internet outage around 10:15 AM; I noted it in the log.
+
+Backups completed successfully, but the log shows one warning on the file share.
+
+The secure email portal timed out for a few patients trying to upload forms.
+
+Thanks,
+Dentrix Cloud Support
+
+--boundary-alt-130
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi David,</p>
+<p>We had a brief internet outage around 10:15 AM; I noted it in the log.</p>
+<p>Backups completed successfully, but the log shows one warning on the file share.</p>
+<p>The secure email portal timed out for a few patients trying to upload forms.</p>
+<p>Thanks,</p>
+<p>Dentrix Cloud Support</p></body></html>
+--boundary-alt-130--
+
+--boundary-130
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-130--

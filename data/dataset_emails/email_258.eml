@@ -1,0 +1,50 @@
+From: "FilterPro Security" <support@filterpro-hvac-check.com>
+To: kyle.assistant@smileclinic.org
+Subject: Credential Confirmation Required
+Date: Wed, 19 Nov 2025 15:30:41 -0800
+Message-ID: 20251119153041.38640@mail.smileclinic.org
+Return-Path: support@filterpro-hvac-check.com
+Reply-To: support@filterpro-hvac-check.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.194])
+    by gateway.smileclinic.org with ESMTP id xyz3718
+    for <kyle.assistant@smileclinic.org>; Wed, 19 Nov 2025 15:30:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@filterpro-hvac-check.com;
+    dmarc=none header.from=support@filterpro-hvac-check.com
+Content-Type: multipart/mixed; boundary="boundary-258"
+
+--boundary-258
+Content-Type: multipart/alternative; boundary="boundary-alt-258"
+
+--boundary-alt-258
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+This verification is required to restore full access.
+
+Please complete the secure authentication process below.
+
+Your access to patient records may be temporarily paused.
+
+Verification link: https://carestream-verify-now.com/session
+
+Thank you,
+FilterPro Security
+
+--boundary-alt-258
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p><p>This verification is required to restore full access.</p><p>Please complete the secure authentication process below.</p><p>Your access to patient records may be temporarily paused.</p><p>Verification link: <a href="https://carestream-verify-now.com/session">https://carestream-verify-now.com/session</a></p><p>Thank you,</p><p>FilterPro Security</p></body></html>
+--boundary-alt-258--
+
+--boundary-258
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-258--

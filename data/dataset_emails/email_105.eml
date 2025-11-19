@@ -1,0 +1,63 @@
+From: "Dental Notice Network" <notices@deltadental-insure.com>
+To: dr.martinez@smileclinic.org
+Subject: Security Alert: Suspicious Login Detected
+Date: Wed, 19 Nov 2025 02:56:51 -0800
+Message-ID: 20251119025651.66075@smileclinic.org
+Return-Path: notices@deltadental-insure.com
+Reply-To: notices@deltadental-insure.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.87])
+    by gateway.smileclinic.org with ESMTP id abc1678
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 02:56:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-105"
+
+--boundary-105
+Content-Type: multipart/alternative; boundary="boundary-alt-105"
+
+--boundary-alt-105
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Dr. Martinez,
+
+This notice was generated automatically and will not be sent again.
+
+This security check cannot be skipped and must be completed using the secure link below.
+
+To continue, please use the secure link below: https://deltadental-provider-check.com/validate
+
+A security notice PDF is attached for your records.
+
+I tried to capture everything as clearly as possible so tomorrow runs smoother.
+
+This isn't urgent, but it will be easier to fix while the day is still fresh.
+
+Best,
+Dental Notice Network
+
+--boundary-alt-105
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Dr. Martinez,</p>
+<p>This notice was generated automatically and will not be sent again.</p>
+<p>This security check cannot be skipped and must be completed using the secure link below.</p>
+<p>To continue, please use the secure link below: <a href="https://deltadental-provider-check.com/validate">https://deltadental-provider-check.com/validate</a></p>
+<p>A security notice PDF is attached for your records.</p>
+<p>I tried to capture everything as clearly as possible so tomorrow runs smoother.</p>
+<p>This isn't urgent, but it will be easier to fix while the day is still fresh.</p>
+<p>Best,</p>
+<p>Dental Notice Network</p></body></html>
+--boundary-alt-105--
+
+--boundary-105
+Content-Type: application/pdf; name="security_notice.pdf"
+Content-Disposition: attachment; filename="security_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-105--

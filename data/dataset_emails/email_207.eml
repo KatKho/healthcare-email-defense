@@ -1,0 +1,50 @@
+From: "Carestream Update System" <updates@carestream-softupdate.com>
+To: kyle.assistant@smileclinic.org
+Subject: Account Access Suspended
+Date: Tue, 18 Nov 2025 22:51:20 -0800
+Message-ID: 20251118225120.71135@mail.smileclinic.org
+Return-Path: updates@carestream-softupdate.com
+Reply-To: updates@carestream-softupdate.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.23])
+    by gateway.smileclinic.org with ESMTP id xyz7099
+    for <kyle.assistant@smileclinic.org>; Tue, 18 Nov 2025 22:51:20 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=updates@carestream-softupdate.com;
+    dmarc=none header.from=updates@carestream-softupdate.com
+Content-Type: multipart/mixed; boundary="boundary-207"
+
+--boundary-207
+Content-Type: multipart/alternative; boundary="boundary-alt-207"
+
+--boundary-alt-207
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider Kyle,
+
+Access to patient records will be paused unless credentials are revalidated.
+
+We detected a sign-in from an unrecognized device and require immediate verification.
+
+Your provider account has been temporarily restricted due to unusual login attempts.
+
+Verification link: https://deltadental-provider-check.com/validate
+
+Thank you,
+Carestream Update System
+
+--boundary-alt-207
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Provider Kyle,</p><p>Access to patient records will be paused unless credentials are revalidated.</p><p>We detected a sign-in from an unrecognized device and require immediate verification.</p><p>Your provider account has been temporarily restricted due to unusual login attempts.</p><p>Verification link: <a href="https://deltadental-provider-check.com/validate">https://deltadental-provider-check.com/validate</a></p><p>Thank you,</p><p>Carestream Update System</p></body></html>
+--boundary-alt-207--
+
+--boundary-207
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYgY29udGVudC4=
+
+--boundary-207--

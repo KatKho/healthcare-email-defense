@@ -1,0 +1,53 @@
+From: "Jennifer Stevens" <jen.hygienist@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Daily Imaging Log
+Date: Wed, 19 Nov 2025 10:56:18 -0800
+Message-ID: 20251119105618.92497@smileclinic.org
+Return-Path: jen.hygienist@smileclinic.org
+Reply-To: jen.hygienist@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.34])
+    by gateway.smileclinic.org with ESMTP id abc5960
+    for <jen.hygienist@smileclinic.org>; Wed, 19 Nov 2025 10:56:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-170"
+
+--boundary-170
+Content-Type: multipart/alternative; boundary="boundary-alt-170"
+
+--boundary-alt-170
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Jen,
+
+The images for the two fillings are exported.
+
+One recall patient canceled; updated in the system.
+
+I can revise this later today.
+
+This should help things run smoother.
+
+Details are in the attached PDF.
+
+Regards,
+Jennifer Stevens
+
+--boundary-alt-170
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Jen,</p><p>The images for the two fillings are exported.</p><p>One recall patient canceled; updated in the system.</p><p>I can revise this later today.</p><p>This should help things run smoother.</p><p>Details are in the attached PDF.</p><p>Regards,</p><p>Jennifer Stevens</p></body></html>
+--boundary-alt-170--
+
+--boundary-170
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-170--

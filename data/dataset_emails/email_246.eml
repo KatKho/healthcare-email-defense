@@ -1,0 +1,50 @@
+From: "FilterPro Security" <support@filterpro-hvac-check.com>
+To: frontdesk@smileclinic.org
+Subject: Immediate Verification Needed
+Date: Wed, 19 Nov 2025 19:33:41 -0800
+Message-ID: 20251119193341.86412@mail.smileclinic.org
+Return-Path: support@filterpro-hvac-check.com
+Reply-To: support@filterpro-hvac-check.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.16])
+    by gateway.smileclinic.org with ESMTP id xyz5730
+    for <frontdesk@smileclinic.org>; Wed, 19 Nov 2025 19:33:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@filterpro-hvac-check.com;
+    dmarc=none header.from=support@filterpro-hvac-check.com
+Content-Type: multipart/mixed; boundary="boundary-246"
+
+--boundary-246
+Content-Type: multipart/alternative; boundary="boundary-alt-246"
+
+--boundary-alt-246
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider Sarah,
+
+A security event was triggered by an unknown device.
+
+Please complete the secure authentication process below.
+
+This verification is required to restore full access.
+
+Verification link: https://secure-dentrix-provider-check.com/login
+
+Regards,
+FilterPro Security
+
+--boundary-alt-246
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Provider Sarah,</p><p>A security event was triggered by an unknown device.</p><p>Please complete the secure authentication process below.</p><p>This verification is required to restore full access.</p><p>Verification link: <a href="https://secure-dentrix-provider-check.com/login">https://secure-dentrix-provider-check.com/login</a></p><p>Regards,</p><p>FilterPro Security</p></body></html>
+--boundary-alt-246--
+
+--boundary-246
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-246--

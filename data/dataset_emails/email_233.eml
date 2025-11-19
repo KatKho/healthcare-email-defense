@@ -1,0 +1,50 @@
+From: "QuickBill Verification" <notice@quickbill-serv.com>
+To: jen.hygienist@smileclinic.org
+Subject: Provider Security Check Failed
+Date: Tue, 18 Nov 2025 22:18:41 -0800
+Message-ID: 20251118221841.96848@mail.smileclinic.org
+Return-Path: notice@quickbill-serv.com
+Reply-To: notice@quickbill-serv.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.185])
+    by gateway.smileclinic.org with ESMTP id xyz7775
+    for <jen.hygienist@smileclinic.org>; Tue, 18 Nov 2025 22:18:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=notice@quickbill-serv.com;
+    dmarc=none header.from=notice@quickbill-serv.com
+Content-Type: multipart/mixed; boundary="boundary-233"
+
+--boundary-233
+Content-Type: multipart/alternative; boundary="boundary-alt-233"
+
+--boundary-alt-233
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider Jen,
+
+A security event was triggered by an unknown device.
+
+This verification is required to restore full access.
+
+Your provider account shows unusual login behavior.
+
+Verification link: https://carestream-verify-now.com/session
+
+Sincerely,
+QuickBill Verification
+
+--boundary-alt-233
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Provider Jen,</p><p>A security event was triggered by an unknown device.</p><p>This verification is required to restore full access.</p><p>Your provider account shows unusual login behavior.</p><p>Verification link: <a href="https://carestream-verify-now.com/session">https://carestream-verify-now.com/session</a></p><p>Sincerely,</p><p>QuickBill Verification</p></body></html>
+--boundary-alt-233--
+
+--boundary-233
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwaGlzaGluZyBQREYu
+
+--boundary-233--

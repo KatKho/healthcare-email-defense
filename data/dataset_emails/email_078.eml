@@ -1,0 +1,42 @@
+From: "BrightSmile Lab Cases" <cases@brightsmilelab.com>
+To: frontdesk@smileclinic.org
+Subject: Equipment Calibration Summary
+Date: Tue, 18 Nov 2025 22:46:49 -0800
+Message-ID: 20251118224649.79195@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from relay.smileclinic.org (relay.smileclinic.org [192.0.2.21])
+    by gateway.smileclinic.org with ESMTP id def7117
+    for frontdesk@smileclinic.org; Tue, 18 Nov 2025 22:46:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-28"
+
+--boundary-28
+Content-Type: multipart/alternative; boundary="boundary-alt-28"
+
+--boundary-alt-28
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Sarah,
+
+Please review the details and let me know if anything needs adjustment.
+
+Please review the details and let me know if anything needs adjustment.
+
+Sincerely,
+BrightSmile Lab Cases
+
+--boundary-alt-28
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Sarah,</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Please review the details and let me know if anything needs adjustment.</p>
+<p>Sincerely,<br>BrightSmile Lab Cases</p></body></html>
+--boundary-alt-28--
+--boundary-28--

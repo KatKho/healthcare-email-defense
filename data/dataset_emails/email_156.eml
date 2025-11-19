@@ -1,0 +1,51 @@
+From: "BrightSmile Lab Billing" <billing@brightsmilelab.com>
+To: billing@smileclinic.org
+Subject: Insurance Follow-Up Needed
+Date: Wed, 19 Nov 2025 08:10:18 -0800
+Message-ID: 20251119081018.87465@smileclinic.org
+Return-Path: billing@brightsmilelab.com
+Reply-To: billing@brightsmilelab.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.75])
+    by gateway.smileclinic.org with ESMTP id abc3711
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 08:10:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-156"
+
+--boundary-156
+Content-Type: multipart/alternative; boundary="boundary-alt-156"
+
+--boundary-alt-156
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Marcus,
+
+The operatory PC disconnected twice today.
+
+Dentrix froze during patient checkout.
+
+Let me know if anything looks off.
+
+Details are in the attached PDF.
+
+Best,
+BrightSmile Lab Billing
+
+--boundary-alt-156
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good morning Marcus,</p><p>The operatory PC disconnected twice today.</p><p>Dentrix froze during patient checkout.</p><p>Let me know if anything looks off.</p><p>Details are in the attached PDF.</p><p>Best,</p><p>BrightSmile Lab Billing</p></body></html>
+--boundary-alt-156--
+
+--boundary-156
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-156--

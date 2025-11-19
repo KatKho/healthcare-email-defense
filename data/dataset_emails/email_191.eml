@@ -1,0 +1,51 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: billing@smileclinic.org
+Subject: Secure Portal Verification
+Date: Wed, 19 Nov 2025 08:26:18 -0800
+Message-ID: 20251119082618.77156@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.152])
+    by gateway.smileclinic.org with ESMTP id abc5982
+    for <billing@smileclinic.org>; Wed, 19 Nov 2025 08:26:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-191"
+
+--boundary-191
+Content-Type: multipart/alternative; boundary="boundary-alt-191"
+
+--boundary-alt-191
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon Marcus,
+
+Your provider account requires immediate verification.
+
+We detected unusual login activity.
+
+Use the secure link: https://provider-verify-smileclinic.com/login
+
+A notice is attached.
+
+Regards,
+MedWaste Alerts
+
+--boundary-alt-191
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Good afternoon Marcus,</p><p>Your provider account requires immediate verification.</p><p>We detected unusual login activity.</p><p>Use the secure link: <a href="https://provider-verify-smileclinic.com/login">https://provider-verify-smileclinic.com/login</a></p><p>A notice is attached.</p><p>Regards,</p><p>MedWaste Alerts</p></body></html>
+--boundary-alt-191--
+
+--boundary-191
+Content-Type: application/pdf; name="notice.pdf"
+Content-Disposition: attachment; filename="notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBQREYgY29udGVudCBmb3IgYXR0YWNobWVudC4=
+
+--boundary-191--

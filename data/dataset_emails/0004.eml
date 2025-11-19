@@ -1,0 +1,40 @@
+From: "Henry Schein Orders" <orders@henryschein-dental.com>
+To: frontdesk@smileclinic.org
+Subject: Supply Shipment Manifest
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10004@smileclinic.org
+Return-Path: orders@henryschein-dental.com
+Reply-To: orders@henryschein-dental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def4564
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-4"
+
+--boundary-4
+Content-Type: multipart/alternative; boundary="boundary-alt-4"
+
+--boundary-alt-4
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Attached is the shipment manifest for your weekly supplies. Verify quantities upon arrival.
+
+--boundary-alt-4
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Attached is the shipment manifest for your weekly supplies. Verify quantities upon arrival.</p></body></html>
+--boundary-alt-4--
+
+--boundary-4
+Content-Type: application/pdf; name="manifest.pdf"
+Content-Disposition: attachment; filename="manifest.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgZmFrZSBwZGYgY29udGVudCBmb3IgdGVzdGluZw==
+
+--boundary-4--

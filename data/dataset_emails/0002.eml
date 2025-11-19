@@ -1,0 +1,45 @@
+From: "BrightSmile Dental Lab" <cases@brightsmilelab.com>
+To: kyle.assistant@smileclinic.org
+Subject: Case Photos Included – Zirconia Crown
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10002@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def4562
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-2"
+
+--boundary-2
+Content-Type: multipart/alternative; boundary="boundary-alt-2"
+
+--boundary-alt-2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Kyle,
+
+We've completed the zirconia crown fabrication. Photos are attached for your review before shipment.
+
+Regards,
+BrightSmile Lab
+
+--boundary-alt-2
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello Kyle,<br><br>We've completed the zirconia crown fabrication. Photos are attached for your review before shipment.<br><br>Regards,<br>BrightSmile Lab</p></body></html>
+--boundary-alt-2--
+
+--boundary-2
+Content-Type: application/pdf; name="crown_photos.pdf"
+Content-Disposition: attachment; filename="crown_photos.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgZmFrZSBwZGYgY29udGVudCBmb3IgdGVzdGluZw==
+
+--boundary-2--

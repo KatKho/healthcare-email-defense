@@ -1,0 +1,34 @@
+From: "Fake IT Alert" <security@ruraltech-ithelp.com>
+To: it@smileclinic.org
+Subject: Critical Security Breach – Reset Now
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10010@smileclinic.org
+Return-Path: security@ruraltech-ithelp.com
+Reply-To: security@ruraltech-ithelp.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def45610
+    for it@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-10"
+
+--boundary-10
+Content-Type: multipart/alternative; boundary="boundary-alt-10"
+
+--boundary-alt-10
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Your system has been compromised. Reset your credentials immediately:
+http://ruraltech-itreset.com
+
+--boundary-alt-10
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Your system has been compromised. Reset your credentials immediately:<br>http://ruraltech-itreset.com</p></body></html>
+--boundary-alt-10--
+
+--boundary-10--

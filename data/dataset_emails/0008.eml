@@ -1,0 +1,40 @@
+From: "UHCDental Provider" <provider@uhcdental.com>
+To: billing@smileclinic.org
+Subject: Claim Adjustment Notice
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10008@smileclinic.org
+Return-Path: provider@uhcdental.com
+Reply-To: provider@uhcdental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def4568
+    for billing@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-8"
+
+--boundary-8
+Content-Type: multipart/alternative; boundary="boundary-alt-8"
+
+--boundary-alt-8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+A recent claim has been adjusted. Details are attached.
+
+--boundary-alt-8
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>A recent claim has been adjusted. Details are attached.</p></body></html>
+--boundary-alt-8--
+
+--boundary-8
+Content-Type: application/pdf; name="claim_adjustment.pdf"
+Content-Disposition: attachment; filename="claim_adjustment.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgZmFrZSBwZGYgY29udGVudCBmb3IgdGVzdGluZw==
+
+--boundary-8--

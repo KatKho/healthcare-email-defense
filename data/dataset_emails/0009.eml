@@ -1,0 +1,40 @@
+From: "Carestream Support" <updates@carestreamsoft.com>
+To: it@smileclinic.org
+Subject: Security Patch Release Notes
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10009@smileclinic.org
+Return-Path: updates@carestreamsoft.com
+Reply-To: updates@carestreamsoft.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def4569
+    for it@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-9"
+
+--boundary-9
+Content-Type: multipart/alternative; boundary="boundary-alt-9"
+
+--boundary-alt-9
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+A new security patch is available. Patch notes are attached.
+
+--boundary-alt-9
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>A new security patch is available. Patch notes are attached.</p></body></html>
+--boundary-alt-9--
+
+--boundary-9
+Content-Type: application/pdf; name="patch_notes.pdf"
+Content-Disposition: attachment; filename="patch_notes.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgZmFrZSBwZGYgY29udGVudCBmb3IgdGVzdGluZw==
+
+--boundary-9--

@@ -1,32 +1,34 @@
-const fs = require('fs');
-const path = require('path');
+import fs from "fs";
+import path from "path";
 
-// Paths
-const datasetPath = path.join(__dirname, 'data', 'synthetic_emails.json');
-const emailsDir = path.join(__dirname, 'emails');
+const EMAIL_DIR = "./data/dataset_emails";
 
-// Ensure emails folder exists
-if (!fs.existsSync(emailsDir)) {
-  fs.mkdirSync(emailsDir);
+function pickRandomEmail() {
+  const files = fs.readdirSync(EMAIL_DIR)
+    .filter(f => f.endsWith(".eml"));
+
+  const random = files[Math.floor(Math.random() * files.length)];
+  const fullPath = path.join(EMAIL_DIR, random);
+
+  const mimeContent = fs.readFileSync(fullPath, "utf8");
+
+  return { file: random, mime: mimeContent };
 }
 
-// Load JSON dataset
-const dataset = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+function emitEmail() {
+  const { file, mime } = pickRandomEmail();
 
-// Select random email
-const randomEmail = dataset[Math.floor(Math.random() * dataset.length)];
-const timestamp = Date.now();
+  const timestamp = Date.now();
+  const outputDir = "./emails";
+  const outPath = path.join(outputDir, `${timestamp}.eml`);
 
-// Add timestamp
-const emailWithTimestamp = {
-  ...randomEmail,
-  received_at: new Date().toISOString(),
-  id: timestamp
-};
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
 
-// Save email
-const filePath = path.join(emailsDir, `${timestamp}.json`);
-fs.writeFileSync(filePath, JSON.stringify(emailWithTimestamp, null, 2));
+  fs.writeFileSync(outPath, mime, "utf8");
 
-console.log(`[INFO] Selected random email: ${randomEmail.subject}`);
-console.log(`[INFO] Saved to emails/${timestamp}.json`);
+  console.log(`Emitted: ${outPath} (source: ${file})`);
+}
+
+emitEmail();

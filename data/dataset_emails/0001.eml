@@ -1,0 +1,45 @@
+From: "Dr. Sofia Martinez" <dr.martinez@smileclinic.org>
+To: jen.hygienist@smileclinic.org
+Subject: Updated Treatment Plan – Please Review
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10001@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def4561
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-1"
+
+--boundary-1
+Content-Type: multipart/alternative; boundary="boundary-alt-1"
+
+--boundary-alt-1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Jen,
+
+Attached is the updated treatment plan for Mr. Halpern. Please verify the perio charting notes before tomorrow’s appointment.
+
+Thanks,
+Dr. Martinez
+
+--boundary-alt-1
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Jen,<br><br>Attached is the updated treatment plan for Mr. Halpern. Please verify the perio charting notes before tomorrow’s appointment.<br><br>Thanks,<br>Dr. Martinez</p></body></html>
+--boundary-alt-1--
+
+--boundary-1
+Content-Type: application/pdf; name="treatment_plan.pdf"
+Content-Disposition: attachment; filename="treatment_plan.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgZmFrZSBwZGYgY29udGVudCBmb3IgdGVzdGluZw==
+
+--boundary-1--

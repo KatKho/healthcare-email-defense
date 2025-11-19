@@ -1,0 +1,33 @@
+From: "MedWaste Disposal" <pickups@medwastedisposal.com>
+To: frontdesk@smileclinic.org
+Subject: Pickup Confirmation – Tuesday
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10007@smileclinic.org
+Return-Path: pickups@medwastedisposal.com
+Reply-To: pickups@medwastedisposal.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def4567
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-7"
+
+--boundary-7
+Content-Type: multipart/alternative; boundary="boundary-alt-7"
+
+--boundary-alt-7
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+This email confirms your bio-waste pickup for Tuesday at 10 AM.
+
+--boundary-alt-7
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>This email confirms your bio-waste pickup for Tuesday at 10 AM.</p></body></html>
+--boundary-alt-7--
+
+--boundary-7--

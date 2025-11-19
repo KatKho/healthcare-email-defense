@@ -1,0 +1,40 @@
+From: "Delta Dental Provider Support" <provider.support@deltadental-insurance.com>
+To: billing@smileclinic.org
+Subject: Provider Contract Update
+Date: Wed, 19 Nov 2025 03:56:43 -0800
+Message-ID: 20251119035643.10005@smileclinic.org
+Return-Path: provider.support@deltadental-insurance.com
+Reply-To: provider.support@deltadental-insurance.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id def4565
+    for billing@smileclinic.org; Wed, 19 Nov 2025 03:56:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-5"
+
+--boundary-5
+Content-Type: multipart/alternative; boundary="boundary-alt-5"
+
+--boundary-alt-5
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Your updated provider contract is attached. Please review changes to reimbursement rates.
+
+--boundary-alt-5
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Your updated provider contract is attached. Please review changes to reimbursement rates.</p></body></html>
+--boundary-alt-5--
+
+--boundary-5
+Content-Type: application/pdf; name="contract_update.pdf"
+Content-Disposition: attachment; filename="contract_update.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgZmFrZSBwZGYgY29udGVudCBmb3IgdGVzdGluZw==
+
+--boundary-5--

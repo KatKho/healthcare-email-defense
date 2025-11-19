@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In Basket - EPIC</title>
+    <title>In Basket - Smile Dental Clinic</title>
     <style>
         * {
             margin: 0;
@@ -18,11 +18,38 @@
         }
 
         body.login-mode {
-            background: linear-gradient(135deg, #0072CE 0%, #005a9e 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.login-mode::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         body.view-mode {
@@ -31,29 +58,56 @@
 
         /* Login Styles */
         .login-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
             width: 100%;
-            max-width: 420px;
-            padding: 40px;
+            max-width: 450px;
+            padding: 50px 40px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
         }
 
         .login-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+        }
+
+        .login-header::before {
+            content: '🦷';
+            display: block;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .login-header h1 {
-            color: #0072CE;
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .login-header p {
-            color: #4a5568;
-            font-size: 0.9rem;
+            color: #64748b;
+            font-size: 0.95rem;
+            font-weight: 400;
         }
 
         .form-group {
@@ -271,29 +325,56 @@
 
         .smart-card-btn {
             width: 100%;
-            padding: 12px;
-            background: white;
-            border: 2px solid #0072CE;
-            border-radius: 4px;
-            font-size: 0.95rem;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
-            color: #0072CE;
+            color: white;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .smart-card-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .smart-card-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .smart-card-btn:hover {
-            background: #f0f4ff;
-            border-color: #005a9e;
-            color: #005a9e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .smart-card-btn:active {
+            transform: translateY(0);
         }
 
         .smart-card-icon {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         .smart-card-container {
@@ -305,15 +386,21 @@
         }
 
         .card-slot {
-            width: 120px;
-            height: 80px;
-            margin: 30px auto;
-            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
-            border: 3px solid #a0aec0;
-            border-radius: 8px;
+            width: 140px;
+            height: 90px;
+            margin: 35px auto;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 3px solid #cbd5e0;
+            border-radius: 16px;
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card-slot:hover {
+            border-color: #667eea;
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 16px rgba(102, 126, 234, 0.2);
         }
 
         .card-slot::before {
@@ -337,19 +424,20 @@
             position: absolute;
             top: 50%;
             left: -100%;
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(135deg, #0072CE 0%, #005a9e 100%);
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            width: 110px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
             transform: translateY(-50%);
-            transition: left 0.8s ease-in-out;
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .card-inserted.animating {
@@ -358,14 +446,20 @@
         }
 
         .card-chip {
-            width: 20px;
-            height: 20px;
-            background: #ffd700;
-            border-radius: 2px;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border-radius: 4px;
             position: absolute;
-            top: 10px;
-            right: 10px;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+            top: 8px;
+            right: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(255, 215, 0, 0.3);
+            animation: chipGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes chipGlow {
+            0%, 100% { box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(255, 215, 0, 0.6); }
         }
 
         .detection-status {
@@ -375,10 +469,11 @@
         }
 
         .detection-message {
-            font-size: 1rem;
-            color: #2d3748;
-            margin-bottom: 10px;
-            font-weight: 500;
+            font-size: 1.05rem;
+            color: #334155;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
         .detection-animation {
@@ -417,13 +512,14 @@
         }
 
         .card-info {
-            background: #e7f3ff;
-            border-left: 3px solid #0072CE;
-            padding: 12px;
-            border-radius: 4px;
-            margin-top: 20px;
-            font-size: 0.85rem;
-            color: #2d3748;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+            border-left: 4px solid #667eea;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: #334155;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
         }
 
         .card-info strong {
@@ -431,11 +527,12 @@
         }
 
         .card-user-info {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f7f9fc;
-            border-radius: 4px;
-            border: 1px solid #E4E8EF;
+            margin-top: 18px;
+            padding: 18px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .card-user-info-row {
@@ -874,17 +971,6 @@
             color: #856404;
         }
 
-        .detection-rationale {
-            background: #fffaf0;
-            border-left: 2px solid #fbd38d;
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            color: #4a5568;
-            line-height: 1.6;
-            font-size: 13px;
-        }
-
         .action-buttons {
             display: flex;
             flex-direction: column;
@@ -976,7 +1062,7 @@
         <!-- Smart Card Login -->
         <div class="login-container" id="loginContainer">
             <div class="login-header">
-                <h1>Healthcare Email Defense System</h1>
+                <h1>Smile Dental Clinic Email System</h1>
             </div>
             <div style="text-align: center; margin: 30px 0;">
                 <p style="color: #4a5568; font-size: 0.95rem; margin-bottom: 20px;">
@@ -1073,8 +1159,8 @@
     <div class="view-container" id="viewSection">
         <div class="top-bar">
         <div class="user-info">
-            <div class="user-name" id="userName">Nurse Li</div>
-            <div class="department">ER Department</div>
+            <div class="user-name" id="userName">Kyle Assistant</div>
+            <div class="department">Smile Dental Clinic</div>
         </div>
         <div class="nav-icons">
             <div class="nav-icon" title="Inbox">📥</div>
@@ -1094,25 +1180,25 @@
                     <span>All Messages</span>
                     <span class="folder-count" id="countAll">0</span>
                 </li>
-                <li class="folder-item" onclick="switchFolder('Results')">
-                    <span>Results</span>
-                    <span class="folder-count" id="countResults">0</span>
+                <li class="folder-item" onclick="switchFolder('Lab Results')">
+                    <span>Lab Results</span>
+                    <span class="folder-count" id="countLabResults">0</span>
                 </li>
-                <li class="folder-item" onclick="switchFolder('Patient Calls')">
-                    <span>Patient Calls</span>
-                    <span class="folder-count" id="countCalls">0</span>
+                <li class="folder-item" onclick="switchFolder('Appointments')">
+                    <span>Appointments</span>
+                    <span class="folder-count" id="countAppointments">0</span>
                 </li>
-                <li class="folder-item" onclick="switchFolder('Refill Requests')">
-                    <span>Refill Requests</span>
-                    <span class="folder-count" id="countRefills">0</span>
+                <li class="folder-item" onclick="switchFolder('Supplies')">
+                    <span>Supplies</span>
+                    <span class="folder-count" id="countSupplies">0</span>
                 </li>
                 <li class="folder-item" onclick="switchFolder('Team Messages')">
                     <span>Team Messages</span>
                     <span class="folder-count" id="countTeam">0</span>
                 </li>
-                <li class="folder-item" onclick="switchFolder('Billing')">
-                    <span>Billing</span>
-                    <span class="folder-count" id="countBilling">0</span>
+                <li class="folder-item" onclick="switchFolder('Insurance')">
+                    <span>Insurance</span>
+                    <span class="folder-count" id="countInsurance">0</span>
                 </li>
             </ul>
         </div>
@@ -1330,8 +1416,8 @@
             const cardInfo = document.getElementById('cardInfo');
             const cardUserInfo = document.getElementById('cardUserInfo');
             
-            // Only nurse role for this page
-            const selectedUser = { name: 'Nurse Li', id: 'EMP-2024-001', dept: 'ER Department', role: 'nurse' };
+            // Only dental assistant role for this page
+            const selectedUser = { name: 'Kyle Assistant', id: 'EMP-2024-001', dept: 'Smile Dental Clinic', role: 'dentalAssistant' };
             
             detectionMessage.textContent = 'Authentication successful!';
             detectionAnimation.style.display = 'none';
@@ -1366,7 +1452,7 @@
             document.getElementById('bodyElement').className = 'view-mode';
             
             // Initialize view
-            const userName = sessionStorage.getItem('username') || 'Nurse Li';
+            const userName = sessionStorage.getItem('username') || 'Kyle Assistant';
             document.getElementById('userName').textContent = userName;
             
             // If this is a new login, reset all email states
@@ -1405,7 +1491,7 @@
         }
 
         // Check authentication on load
-        if (sessionStorage.getItem('authenticated') === 'true' && sessionStorage.getItem('role') === 'nurse') {
+        if (sessionStorage.getItem('authenticated') === 'true' && sessionStorage.getItem('role') === 'dentalAssistant') {
             // Page refresh - don't reset, just load existing state
             showView(false);
         } else {
@@ -1425,145 +1511,148 @@
         }
 
         // Set user name from session
-        const userName = sessionStorage.getItem('username') || 'Nurse Li';
+        const userName = sessionStorage.getItem('username') || 'Kyle Assistant';
         if (document.getElementById('userName')) {
             document.getElementById('userName').textContent = userName;
         }
 
-        // Enhanced email data structure
+        // Enhanced email data structure - Dental Clinic Scenario
         const emails = [
             {
                 id: 'email1',
-                sender: 'Lab Results System',
-                to: 'Nurse Li',
-                subject: 'Lab Results: Patient #2387',
+                sender: 'billing@brightsmilelab.com',
+                to: 'kyle.assistant@smileclinic.org',
+                subject: 'URGENT: Crown ready for pickup - Patient #4521',
                 timestamp: '2 hours ago',
                 labels: ['Urgent', 'Suspicious'],
-                confidence: 0.67,
-                rationale: 'New domain detected; unverified link contained in message body.',
                 status: 'suspicious',
                 read: false,
                 requiresCosign: false,
-                folder: 'Results',
-                patient: { name: 'Jane Doe', mrn: '2387', dob: '05/15/1982' },
-                encounter: 'ER Visit 10/29/2025',
-                attachments: ['LabReport_2387.pdf'],
+                folder: 'Lab Results',
+                patient: { name: 'Michael Chen', mrn: '4521', dob: '03/22/1975' },
+                encounter: 'Crown Prep 10/29/2025',
+                attachments: ['CrownSpec_4521.pdf'],
                 actionRequired: 'Review',
-                content: `Dear Healthcare Provider,
+                content: `Dear Smile Dental Clinic,
 
-We have received lab results for Patient #2387 (Jane Doe, DOB: 05/15/1982).
+URGENT: Crown restoration for Patient #4521 (Michael Chen, DOB: 03/22/1975) is ready for pickup.
 
-URGENT: Abnormal test results detected.
+The crown has been completed and is ready for delivery. Please confirm pickup time by clicking here: [Confirm Pickup](https://brightsmilelab-verify.com/pickup?id=4521)
 
-Please review the attached report by clicking here: [View Results](https://medlab-info.com/results/verify?id=2387)
+Crown Details:
+- Material: Porcelain fused to metal
+- Shade: A2
+- Delivery Date: Today
+- Estimated Cost: $850.00
 
-Critical values:
-- Hemoglobin: 8.2 g/dL (Low - Normal: 12.0-15.5)
-- Platelet count: 95,000/μL (Low - Normal: 150,000-450,000)
-
-Immediate action may be required. Please contact the lab if you have any questions.
+Please contact us immediately to schedule pickup. Failure to confirm may delay patient treatment.
 
 Best regards,
-Medical Lab Services
-lab-report@medlab-info.com`
+Bright Smile Lab Services
+billing@brightsmilelab.com`
             },
             {
                 id: 'email2',
-                sender: 'Billing Department',
-                to: 'Nurse Li',
-                subject: 'Monthly Statement - October 2025',
+                sender: 'claims@deltadental-insurance.com',
+                to: 'kyle.assistant@smileclinic.org',
+                subject: 'Insurance claim status update - Claim #INS-2025-789',
                 timestamp: '1 day ago',
                 labels: [],
-                confidence: 0.95,
-                rationale: '',
                 status: 'safe',
                 read: true,
                 requiresCosign: false,
-                folder: 'Billing',
-                patient: null,
-                encounter: null,
-                attachments: [],
+                folder: 'Insurance',
+                patient: { name: 'Emily Rodriguez', mrn: '3892' },
+                encounter: 'Root Canal 10/25/2025',
+                attachments: ['Claim_INS-2025-789.pdf'],
                 actionRequired: null,
-                content: `Dear Nurse Li,
+                content: `Hello Smile Dental Clinic,
 
-Your monthly billing statement for October 2025 is now available.
+Your insurance claim #INS-2025-789 for patient Emily Rodriguez has been processed.
 
-Statement Summary:
-- Total Charges: $2,450.00
-- Insurance Coverage: $2,200.00
-- Patient Responsibility: $250.00
+Claim Summary:
+- Procedure: Root Canal (Code: D3310)
+- Submitted Amount: $1,200.00
+- Approved Amount: $960.00
+- Patient Responsibility: $240.00
+- Status: Approved
 
-Please review your statement in the patient portal.
+Payment will be processed within 5-7 business days. Please review the attached claim details.
 
-If you have any questions, please contact our billing department.
+If you have any questions, please contact our claims department.
 
 Thank you,
-Hospital Billing Department`
+Delta Dental Insurance Services
+claims@deltadental-insurance.com`
             },
             {
                 id: 'email3',
-                sender: 'Nurse Chang',
-                to: 'Nurse Li',
-                subject: 'Patient discharge notification',
+                sender: 'dr.martinez@smileclinic.org',
+                to: 'kyle.assistant@smileclinic.org',
+                subject: 'Patient appointment reminder - Tomorrow 2 PM',
                 timestamp: '3 hours ago',
                 labels: ['Urgent'],
-                confidence: 0.88,
-                rationale: '',
                 status: 'safe',
                 read: false,
                 requiresCosign: false,
                 folder: 'Team Messages',
-                patient: { name: 'John Smith', mrn: '12345' },
-                encounter: 'ER Visit 10/29/2025',
+                patient: { name: 'Robert Williams', mrn: '2156' },
+                encounter: 'Follow-up Appointment 10/30/2025',
                 attachments: [],
                 actionRequired: 'Acknowledge',
-                content: `Hi Nurse Li,
+                content: `Hi Kyle,
 
-URGENT: Patient John Smith (Room 304) is ready for discharge.
+URGENT: Reminder for tomorrow's appointment.
 
-Discharge Summary:
-- Patient ID: #12345
-- Room: 304
-- Discharge Time: 3:00 PM today
-- Transport Required: Yes
+Patient: Robert Williams (MRN: #2156)
+Appointment Time: 2:00 PM
+Procedure: Extraction follow-up
+Special Notes: Patient requested early arrival for X-ray review
 
-Please ensure all discharge paperwork is completed and patient belongings are ready.
+Please ensure:
+- X-ray images are ready for review
+- Extraction site healing check
+- Post-op instructions prepared
+
+Let me know if you need anything else.
 
 Thanks,
-Nurse Chang
-ER Department`
+Dr. Martinez
+Smile Dental Clinic`
             },
             {
                 id: 'email4',
-                sender: 'Pharmacy',
-                to: 'Nurse Li',
-                subject: 'Prescription ready for pickup',
+                sender: 'orders@henryschein-dental.com',
+                to: 'kyle.assistant@smileclinic.org',
+                subject: 'Supply order confirmation - Order #SUP-1029',
                 timestamp: '5 hours ago',
                 labels: [],
-                confidence: 0.92,
-                rationale: '',
                 status: 'safe',
                 read: true,
                 requiresCosign: false,
-                folder: 'Refill Requests',
-                patient: { name: 'Sarah Johnson', mrn: '67890' },
-                encounter: 'Outpatient Visit 10/28/2025',
-                attachments: [],
+                folder: 'Supplies',
+                patient: null,
+                encounter: null,
+                attachments: ['Order_SUP-1029.pdf'],
                 actionRequired: null,
-                content: `Hello,
+                content: `Hello Smile Dental Clinic,
 
-This is a notification that a prescription is ready for pickup at the hospital pharmacy.
+Your supply order #SUP-1029 has been confirmed and is being processed.
 
-Prescription Details:
-- Patient: Sarah Johnson
-- Prescription: Amoxicillin 500mg
-- Quantity: 30 tablets
-- Ready for pickup: Now
+Order Summary:
+- Nitrile Gloves (Medium): 10 boxes
+- Dental Floss: 5 cases
+- Anesthetic Cartridges: 2 boxes
+- Disposable Bibs: 3 boxes
 
-Please have the patient collect the prescription before the end of the day.
+Total Amount: $485.00
+Estimated Delivery: 2-3 business days
 
-Thank you,
-Hospital Pharmacy`
+Invoice will be sent separately. Please review the attached order confirmation.
+
+Thank you for your business,
+Henry Schein Dental
+orders@henryschein-dental.com`
             }
         ];
 
@@ -1601,19 +1690,19 @@ Hospital Pharmacy`
         function updateFolderCounts() {
             const counts = {
                 'All': emails.length,
-                'Results': emails.filter(e => e.folder === 'Results').length,
-                'Patient Calls': emails.filter(e => e.folder === 'Patient Calls').length,
-                'Refill Requests': emails.filter(e => e.folder === 'Refill Requests').length,
+                'Lab Results': emails.filter(e => e.folder === 'Lab Results').length,
+                'Appointments': emails.filter(e => e.folder === 'Appointments').length,
+                'Supplies': emails.filter(e => e.folder === 'Supplies').length,
                 'Team Messages': emails.filter(e => e.folder === 'Team Messages').length,
-                'Billing': emails.filter(e => e.folder === 'Billing').length
+                'Insurance': emails.filter(e => e.folder === 'Insurance').length
             };
 
             document.getElementById('countAll').textContent = counts['All'];
-            document.getElementById('countResults').textContent = counts['Results'];
-            document.getElementById('countCalls').textContent = counts['Patient Calls'];
-            document.getElementById('countRefills').textContent = counts['Refill Requests'];
+            document.getElementById('countLabResults').textContent = counts['Lab Results'];
+            document.getElementById('countAppointments').textContent = counts['Appointments'];
+            document.getElementById('countSupplies').textContent = counts['Supplies'];
             document.getElementById('countTeam').textContent = counts['Team Messages'];
-            document.getElementById('countBilling').textContent = counts['Billing'];
+            document.getElementById('countInsurance').textContent = counts['Insurance'];
         }
 
         // Switch folder
@@ -1714,7 +1803,6 @@ Hospital Pharmacy`
                 <div class="detail-tabs">
                     <button class="detail-tab active" onclick="switchTab('message')">Message</button>
                     <button class="detail-tab" onclick="switchTab('patient')">Patient Info</button>
-                    ${isSuspicious ? `<button class="detail-tab" onclick="switchTab('audit')">Audit Trail</button>` : ''}
                 </div>
                 <div class="detail-content" id="detailContent">
                     ${renderMessageTab(email)}
@@ -1768,12 +1856,6 @@ Hospital Pharmacy`
 ${email.content || 'No content available.'}
                     </div>
                 </div>
-                ${isSuspicious || isUrgent ? `
-                    <div class="detection-rationale">
-                        <strong>Why flagged?</strong><br>
-                        ${email.rationale || 'This email has been flagged for review.'}
-                    </div>
-                ` : ''}
                 <div class="action-buttons">
                     ${isSuspicious ? `
                         <button class="btn btn-report" onclick="reportEmail('${email.id}')">
@@ -1814,39 +1896,6 @@ ${email.content || 'No content available.'}
             `;
         }
 
-        function renderAuditTab(email) {
-            const reportData = localStorage.getItem(`emailReport_${email.id}`);
-            let auditLog = [];
-            
-            if (reportData) {
-                const report = JSON.parse(reportData);
-                auditLog.push({
-                    time: report.reportedTime || new Date().toISOString(),
-                    action: 'Reported',
-                    actor: report.reportedBy || userName,
-                    role: 'nurse'
-                });
-            }
-            
-            if (auditLog.length === 0) {
-                return '<div style="padding: 20px; color: #718096;">No audit trail available.</div>';
-            }
-            
-            return `
-                <div class="info-section">
-                    ${auditLog.map(log => `
-                        <div class="info-row" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #E4E8EF;">
-                            <div>
-                                <div style="font-weight: 600; color: #2d3748; margin-bottom: 4px;">${log.action}</div>
-                                <div style="font-size: 11px; color: #718096;">${log.actor} (${log.role})</div>
-                                <div style="font-size: 11px; color: #718096;">${new Date(log.time).toLocaleString()}</div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
         function switchTab(tab) {
             const email = emails.find(e => e.id === selectedEmailId);
             if (!email) return;
@@ -1859,8 +1908,6 @@ ${email.content || 'No content available.'}
                 content.innerHTML = renderMessageTab(email);
             } else if (tab === 'patient') {
                 content.innerHTML = renderPatientTab(email);
-            } else if (tab === 'audit') {
-                content.innerHTML = renderAuditTab(email);
             }
         }
 

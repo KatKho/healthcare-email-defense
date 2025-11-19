@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In Basket - EPIC</title>
+    <title>In Basket - Smile Dental Clinic</title>
     <style>
         * {
             margin: 0;
@@ -1028,8 +1028,8 @@
         <!-- Smart Card Login -->
         <div class="login-container" id="loginContainer">
             <div class="login-header">
-                <h1>Healthcare Email Defense System</h1>
-                <p>Department Lead Access</p>
+                <h1>Smile Dental Clinic Email System</h1>
+                <p>Dental Lead Access</p>
             </div>
             <div style="text-align: center; margin: 30px 0;">
                 <p style="color: #4a5568; font-size: 0.95rem; margin-bottom: 20px;">
@@ -1078,7 +1078,7 @@
                     <span class="card-user-info-value" id="cardUserID">-</span>
                 </div>
                 <div class="card-user-info-row">
-                    <span class="card-user-info-label">Department:</span>
+                    <span class="card-user-info-label">Clinic:</span>
                     <span class="card-user-info-value" id="cardUserDept">-</span>
                 </div>
             </div>
@@ -1126,7 +1126,7 @@
     <div class="view-container" id="viewSection">
         <div class="top-bar">
         <div class="user-info">
-            <div class="user-name" id="userName">Dr. Chen (Department Lead)</div>
+            <div class="user-name" id="userName">Dr. Martinez (Dental Lead)</div>
         </div>
         <div class="nav-tabs">
             <button class="nav-tab active" onclick="switchTab('quarantine')">Quarantine Queue</button>
@@ -1395,7 +1395,7 @@
             const cardUserInfo = document.getElementById('cardUserInfo');
             
             // Only lead role for this page
-            const selectedUser = { name: 'Dr. Chen', id: 'EMP-2024-002', dept: 'ER Department', role: 'lead' };
+            const selectedUser = { name: 'Dr. Martinez', id: 'EMP-2024-002', dept: 'Smile Dental Clinic', role: 'lead' };
             
             detectionMessage.textContent = 'Authentication successful!';
             detectionAnimation.style.display = 'none';
@@ -1430,8 +1430,8 @@
             document.getElementById('bodyElement').className = 'view-mode';
             
             // Initialize view
-            const userName = sessionStorage.getItem('username') || 'Dr. Chen';
-            document.getElementById('userName').textContent = userName + ' (Department Lead)';
+            const userName = sessionStorage.getItem('username') || 'Dr. Martinez';
+            document.getElementById('userName').textContent = userName + ' (Dental Lead)';
             
             updateFolderCounts();
             renderEmailList();
@@ -1465,49 +1465,49 @@
         }
 
         // Set user name from session
-        const userName = sessionStorage.getItem('username') || 'Dr. Chen';
+        const userName = sessionStorage.getItem('username') || 'Dr. Martinez';
         if (document.getElementById('userName')) {
-            document.getElementById('userName').textContent = userName + ' (Department Lead)';
+            document.getElementById('userName').textContent = userName + ' (Dental Lead)';
         }
 
         let selectedEmailId = null;
         let pendingReleaseEmailId = null;
         let currentFolder = 'Quarantine';
 
-        // Base email data
+        // Base email data - Dental Clinic Scenario
         const baseEmails = [
             {
                 id: 'email1',
-                sender: 'Lab Results System',
-                to: 'Nurse Li',
-                subject: 'Lab Results: Patient #2387',
+                sender: 'billing@brightsmilelab.com',
+                to: 'kyle.assistant@smileclinic.org',
+                subject: 'URGENT: Crown ready for pickup - Patient #4521',
                 timestamp: '2 hours ago',
                 labels: ['Urgent', 'Suspicious'],
                 confidence: 0.67,
                 rationale: 'New domain detected; unverified link contained in message body.',
                 status: 'suspicious',
-                folder: 'Results',
-                patient: { name: 'Jane Doe', mrn: '2387', dob: '05/15/1982' },
-                encounter: 'ER Visit 10/29/2025',
-                attachments: ['LabReport_2387.pdf'],
+                folder: 'Lab Results',
+                patient: { name: 'Michael Chen', mrn: '4521', dob: '03/22/1975' },
+                encounter: 'Crown Prep 10/29/2025',
+                attachments: ['CrownSpec_4521.pdf'],
                 domainReputation: 'Medium Risk',
-                content: `Dear Healthcare Provider,
+                content: `Dear Smile Dental Clinic,
 
-We have received lab results for Patient #2387 (Jane Doe, DOB: 05/15/1982).
+URGENT: Crown restoration for Patient #4521 (Michael Chen, DOB: 03/22/1975) is ready for pickup.
 
-URGENT: Abnormal test results detected.
+The crown has been completed and is ready for delivery. Please confirm pickup time by clicking here: [Confirm Pickup](https://brightsmilelab-verify.com/pickup?id=4521)
 
-Please review the attached report by clicking here: [View Results](https://medlab-info.com/results/verify?id=2387)
+Crown Details:
+- Material: Porcelain fused to metal
+- Shade: A2
+- Delivery Date: Today
+- Estimated Cost: $850.00
 
-Critical values:
-- Hemoglobin: 8.2 g/dL (Low - Normal: 12.0-15.5)
-- Platelet count: 95,000/μL (Low - Normal: 150,000-450,000)
-
-Immediate action may be required. Please contact the lab if you have any questions.
+Please contact us immediately to schedule pickup. Failure to confirm may delay patient treatment.
 
 Best regards,
-Medical Lab Services
-lab-report@medlab-info.com`
+Bright Smile Lab Services
+billing@brightsmilelab.com`
             }
         ];
 
@@ -1523,7 +1523,7 @@ lab-report@medlab-info.com`
                         reportedEmails.push({
                             ...email,
                             status: report.status,
-                            reportedBy: report.reportedBy || 'Nurse Li',
+                                reportedBy: report.reportedBy || 'Kyle Assistant',
                             reportedTime: report.reportedTime || '30 minutes ago',
                             releasedBy: report.releasedBy,
                             releasedTime: report.releasedTime,
@@ -1547,7 +1547,7 @@ lab-report@medlab-info.com`
                             reportedEmails.push({
                                 ...baseEmail,
                                 status: 'reported',
-                                reportedBy: reportData.reportedBy || 'Nurse Li',
+                                reportedBy: reportData.reportedBy || 'Kyle Assistant',
                                 reportedTime: reportData.reportedTime || '30 minutes ago'
                             });
                         }

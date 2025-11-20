@@ -1,4 +1,4 @@
-name: Deploy to Lightsail
+name: Deploy Frontend to Lightsail
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.LIGHTSAIL_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to Lightsail
+      - name: Deploy frontend to Lightsail
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/lightsail_key \
             ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_HOST }} "
@@ -31,14 +31,18 @@ jobs:
               echo '--- Switching to project directory ---'
               cd ~/healthcare-email-defense || exit 1
 
-              echo '--- Fetching latest code ---'
+              echo '--- Pulling latest frontend code ---'
               git fetch --all
-
-              echo '--- Resetting to origin/main (force sync) ---'
               git reset --hard origin/main
 
-              echo '--- Installing dependencies ---'
+              echo '--- Installing dependencies (frontend only) ---'
               npm install --silent
 
-              echo '--- Deployment complete ---'
+              echo '--- Restarting frontend server only ---'
+              pm2 restart healthcare-demo || pm2 start server.js --name healthcare-demo --interpreter=node
+
+              echo '--- Saving PM2 state ---'
+              pm2 save
+
+              echo '--- Frontend deployment complete. ---'
             "

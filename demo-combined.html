@@ -595,7 +595,7 @@
         <div class="user-name">Michael Chen</div>
         <div class="user-role">IT Security Administrator · Level 2</div>
         <div style="font-size: 0.75rem; color: #cbd5f5;">
-          Session: 2h 14m · Last action: 3 min ago
+          Session: 2h 14m · Last action: <span id="lastActionText">just now</span>
         </div>
       </div>
     </div>
@@ -610,7 +610,7 @@
       </div>
       <div class="status-item">
         <span class="status-indicator warning"></span>
-        <span>Queue: <span id="queueCountHeader">3 pending</span></span>
+        <span>Queue: <span id="queueCountHeader">0 pending</span></span>
       </div>
       <div class="status-item">
         <span class="status-indicator"></span>
@@ -640,7 +640,7 @@
               Queue of emails requiring human-in-the-loop (HITL) review
             </div>
           </div>
-          <button class="btn btn-outline btn-sm" id="loadSampleBtn">Load sample data</button>
+          <button class="btn btn-outline btn-sm" id="refreshQueueBtn">Refresh from pipeline</button>
         </div>
         <div class="metric-row" style="margin-top: 4px;">
           <div class="metric-card">
@@ -650,7 +650,7 @@
           </div>
           <div class="metric-card">
             <div class="metric-label">Reviewed Today</div>
-            <div class="metric-value" id="metricReviewedToday">0</div>
+            <div class="metric-value" id="metricReviewedToday">–</div>
             <div class="metric-pill">Since 12:00am</div>
           </div>
           <div class="metric-card">
@@ -802,8 +802,8 @@
               System-level metrics for email processing and safety performance
             </div>
           </div>
-          <button class="btn btn-outline btn-sm" id="loadPerfBtn">
-            Load sample metrics
+          <button class="btn btn-outline btn-sm" id="refreshPerfBtn">
+            Refresh metrics
           </button>
         </div>
 
@@ -931,7 +931,7 @@
             <tbody id="activityLogTableBody">
             <tr>
               <td colspan="9" style="text-align:center; padding:16px; color: var(--text-secondary);">
-                No history yet. Load sample data from the IT Review tab.
+                No history yet. Use the date filters to load recent activity.
               </td>
             </tr>
             </tbody>
@@ -1013,7 +1013,7 @@
 
 <script>
   /************************************************************
-   * SIMPLE STATE (replace with real data later)
+   * STATE
    ************************************************************/
   let itQueue = [];
   let quarantineQueue = [];
@@ -1021,6 +1021,8 @@
 
   let currentReasoningItem = null;
   let currentReviewItem = null;
+
+  const DEFAULT_ACTOR = "mchen"; // For demo: maps to Michael Chen
 
   /************************************************************
    * TABS
@@ -1041,157 +1043,168 @@
   });
 
   /************************************************************
-   * SAMPLE DATA LOADERS
+   * BACKEND LOADERS
    ************************************************************/
-  const sampleItQueue = [
-    {
-      id: "item1",
-      sender: "hr@evmc-clinic.org",
-      recipient: "nurse.lee@evmc-clinic.org",
-      subject: "URGENT: Benefits portal password reset",
-      classification: "phishing",
-      confidence: 0.89,
-      status: "pending",
-      receivedAt: "10:14 AM",
-      riskScore: 87,
-      phi: false,
-      reasoning: {
-        aiOutcome: "Pending – requires IT review",
-        aiSummary:
-          "AI classified this email as phishing with 89% confidence due to suspicious reset link, sender domain mismatch, and credential-harvesting language.",
-        indicators: {
-          credentialLanguage: "Detected – 'confirm your credentials', 'reset now'",
-          urgencyLanguage: "Detected – 'immediately', 'avoid suspension'",
-          suspiciousLinks: "Link points to evmc-benefits-login.com (no TLS history)",
-          manipulativeTone: "Detected; fear-based (account suspension)",
-          senderRisk: "Medium – domain newly registered (7 days)",
-          phiPresence: "No PHI patterns detected"
-        },
-        technicalFindings: {
-          phishingKeywordScore: 0.82,
-          healthcareKeywordScore: 0.10,
-          urgencyScore: 0.76,
-          typosquatting: "Possible – domain visually similar to official",
-          domainRegistered: "7 days ago",
-          cacheHits: "2 previous blocks for similar domain"
-        },
-        aiRecommendation: "Quarantine and require IT approval before release",
-        itDecision: "Pending"
-      }
-    },
-    {
-      id: "item2",
-      sender: "lab-results@evmc-lab.org",
-      recipient: "dr.smith@evmc-clinic.org",
-      subject: "Stat lab result: Panel 10392",
-      classification: "safe",
-      confidence: 0.93,
-      status: "pending",
-      receivedAt: "10:27 AM",
-      riskScore: 15,
-      phi: true,
-      reasoning: {
-        aiOutcome: "Safe but urgent clinical email",
-        aiSummary:
-          "AI detected urgent clinical lab content with PHI present; routing to HITL to ensure safe delivery path under HIPAA constraints.",
-        indicators: {
-          credentialLanguage: "None detected",
-          urgencyLanguage: "Detected – 'STAT', 'immediate review'",
-          suspiciousLinks: "None – internal lab result viewer",
-          manipulativeTone: "None – clinical tone",
-          senderRisk: "Low – trusted internal domain",
-          phiPresence: "Yes – lab identifiers / potential PHI"
-        },
-        technicalFindings: {
-          phishingKeywordScore: 0.05,
-          healthcareKeywordScore: 0.91,
-          urgencyScore: 0.84,
-          typosquatting: "No",
-          domainRegistered: "8 years ago",
-          cacheHits: "147 previous safe deliveries"
-        },
-        aiRecommendation:
-          "Allow but log; ensure PHI scrubber policies are satisfied.",
-        itDecision: "Pending"
-      }
+
+  async function loadHitlQueue() {
+    try {
+      const resp = await fetch("/api/hitl/pending");
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.error || "Backend error");
+
+      const items = data.items || [];
+      itQueue = items.map((raw) => {
+        const createdTs = raw.created_ts || raw.timestamp;
+        let receivedAt = "–";
+        if (createdTs) {
+          const d = new Date(createdTs);
+          receivedAt = d.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        }
+        const confidence =
+          typeof raw.confidence === "number"
+            ? raw.confidence
+            : typeof raw.summary?.confidence === "number"
+            ? raw.summary.confidence
+            : 0;
+
+        return {
+          id: raw.id,
+          sender: raw.from_addr || raw.from || "unknown",
+          recipient: raw.to_addr || raw.to || "unknown",
+          subject: raw.subject || "(no subject)",
+          classification:
+            raw.classification ||
+            raw.class ||
+            raw.summary?.classification ||
+            "unknown",
+          confidence,
+          status: raw.status || "pending",
+          receivedAt,
+          riskScore: raw.risk || raw.sender_risk || 0,
+          phi: raw.phi_entities > 0,
+          _backend: raw,
+        };
+      });
+
+      renderItQueue();
+      touchLastAction("Queue refreshed");
+    } catch (err) {
+      console.error("Failed to load HITL queue:", err);
     }
-  ];
-
-  const sampleQuarantine = [
-    {
-      id: "q1",
-      timestamp: "2025-11-18 09:03",
-      sender: "security@evmc-compliance.net",
-      recipient: "frontdesk@evmc-clinic.org",
-      subject: "ACTION REQUIRED: HIPAA Compliance portal",
-      riskScore: 92,
-      classification: "phishing",
-      confidence: 0.94,
-      phi: false,
-      hitlStatus: "awaiting IT confirmation"
-    },
-    {
-      id: "q2",
-      timestamp: "2025-11-18 08:41",
-      sender: "it.support@evmc-clinic.org",
-      recipient: "admin@evmc-clinic.org",
-      subject: "Multi-factor enrollment incomplete",
-      riskScore: 68,
-      classification: "suspicious",
-      confidence: 0.78,
-      phi: false,
-      hitlStatus: "quarantined (auto)"
-    }
-  ];
-
-  function loadSampleQueues() {
-    itQueue = JSON.parse(JSON.stringify(sampleItQueue));
-    quarantineQueue = JSON.parse(JSON.stringify(sampleQuarantine));
-
-    // Derive simple sample activity log from these
-    activityLog = itQueue.map((item, idx) => ({
-      id: "log-" + item.id,
-      timestamp: "2025-11-18 10:" + (10 + idx * 3),
-      sender: item.sender,
-      recipient: item.recipient,
-      subject: item.subject,
-      classification: item.classification,
-      aiDecision:
-        item.classification === "phishing" ? "Quarantine recommended" : "Allow",
-      itDecision: "Pending",
-      latency: "–"
-    }));
-
-    renderItQueue();
-    renderQuarantine();
-    renderMetricsFromQueues();
-    renderActivityLog();
-
-    alert("Sample queue + quarantine data loaded.");
   }
 
-  function loadSamplePerformanceMetrics() {
-    // very simple sample numbers
-    document.getElementById("metricEmails7d").textContent = "12,482";
-    document.getElementById("metricAvgTime").textContent = "1.9s";
-    document.getElementById("metricQuarantineRate").textContent = "2.7%";
-    document.getElementById("metricPHIRate").textContent = "31%";
-    document.getElementById("metricErrorRate").textContent = "3.1%";
+  async function loadPerformanceMetrics() {
+    try {
+      const resp = await fetch("/api/metrics?windowDays=7");
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.message || "Backend error");
 
-    alert("Sample performance metrics loaded (charts are placeholders).");
+      renderPerfMetrics(data.metrics);
+      touchLastAction("Metrics refreshed");
+    } catch (err) {
+      console.error("Failed to load performance metrics:", err);
+    }
   }
 
-  document.getElementById("loadSampleBtn").addEventListener("click", loadSampleQueues);
-  document.getElementById("loadPerfBtn").addEventListener("click", loadSamplePerformanceMetrics);
-  document.getElementById("clearQuarantineBtn").addEventListener("click", () => {
-    if (quarantineQueue.length === 0) {
-      alert("Quarantine is already empty.");
+  async function loadHistoryFromBackend() {
+    const fromInput = document.getElementById("histDateFrom");
+    const toInput = document.getElementById("histDateTo");
+    const from = fromInput.value;
+    const to = toInput.value;
+    if (!from || !to) {
       return;
     }
-    if (confirm("Clear all quarantined emails? (demo only)")) {
+
+    try {
+      const resp = await fetch(`/api/history?from=${from}&to=${to}`);
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.message || "Backend error");
+
+      const history = data.history || [];
+      activityLog = history;
+
+      // Derive quarantine from history: anything QUARANTINE or blocked by HITL
+      quarantineQueue = history
+        .filter(
+          (h) =>
+            h.decisionCode === "QUARANTINE" || h.hitl_verdict === "block"
+        )
+        .map((h) => ({
+          id: h.id,
+          timestamp: h.timestamp,
+          sender: h.sender,
+          recipient: h.recipient,
+          subject: h.subject,
+          riskScore: h.risk,
+          classification: h.classification,
+          confidence: h.confidence,
+          phi: (h.phi_entities || 0) > 0,
+          hitlStatus: h.hitl_status || h.itDecision || "quarantined",
+        }));
+
+      renderActivityLog();
+      renderQuarantine();
+      touchLastAction("History refreshed");
+    } catch (err) {
+      console.error("Failed to load activity history:", err);
+    }
+  }
+
+  function initDateFilters() {
+    const fromInput = document.getElementById("histDateFrom");
+    const toInput = document.getElementById("histDateTo");
+
+    const today = new Date();
+    const toStr = today.toISOString().slice(0, 10);
+    const fromDate = new Date(today);
+    fromDate.setDate(fromDate.getDate() - 2);
+    const fromStr = fromDate.toISOString().slice(0, 10);
+
+    fromInput.value = fromStr;
+    toInput.value = toStr;
+  }
+
+  function touchLastAction(label) {
+    const el = document.getElementById("lastActionText");
+    if (el) {
+      el.textContent = label + " · " + new Date().toLocaleTimeString();
+    }
+  }
+
+  /************************************************************
+   * BUTTON / FILTER WIRING
+   ************************************************************/
+  document.getElementById("refreshQueueBtn").addEventListener("click", async () => {
+    await loadHitlQueue();
+    await loadHistoryFromBackend();
+  });
+
+  document.getElementById("refreshPerfBtn").addEventListener("click", () => {
+    loadPerformanceMetrics();
+  });
+
+  document.getElementById("clearQuarantineBtn").addEventListener("click", () => {
+    if (quarantineQueue.length === 0) {
+      alert("Quarantine is already empty (frontend only).");
+      return;
+    }
+    if (confirm("Clear all quarantined emails from this view? (frontend only)")) {
       quarantineQueue = [];
       renderQuarantine();
     }
+  });
+
+  document.getElementById("histDateFrom").addEventListener("change", () => {
+    loadHistoryFromBackend();
+  });
+  document.getElementById("histDateTo").addEventListener("change", () => {
+    loadHistoryFromBackend();
   });
 
   /************************************************************
@@ -1206,17 +1219,41 @@
       return;
     }
 
-    tbody.innerHTML = itQueue
+    const classFilter = document.getElementById("reviewFilterClass").value;
+    const statusFilter = document.getElementById("reviewFilterStatus").value;
+
+    const filtered = itQueue.filter((item) => {
+      if (classFilter !== "all" && item.classification !== classFilter) {
+        return false;
+      }
+      if (statusFilter !== "all" && item.status !== statusFilter) {
+        return false;
+      }
+      return true;
+    });
+
+    if (!filtered.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No items match the current filters.</td></tr>';
+      updateTopCounts();
+      return;
+    }
+
+    tbody.innerHTML = filtered
       .map((item) => {
+        const confidencePct =
+          typeof item.confidence === "number"
+            ? Math.round(item.confidence * 100) + "%"
+            : "–";
         return `
       <tr>
         <td>${item.sender}</td>
         <td>${item.recipient}</td>
         <td>${item.subject}</td>
         <td>
-          ${renderClassificationBadge(item.classification)}
+          ${renderClassificationBadge(item.classification, item.confidence)}
         </td>
-        <td>${Math.round(item.confidence * 100)}%</td>
+        <td>${confidencePct}</td>
         <td>
           <span class="badge badge-pending">${item.status === "pending" ? "Pending review" : item.status}</span>
         </td>
@@ -1274,11 +1311,66 @@
     const tbody = document.getElementById("activityLogTableBody");
     if (!activityLog.length) {
       tbody.innerHTML =
-        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No history yet. Load sample data from the IT Review tab.</td></tr>';
+        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No history yet. Use the date filters to load recent activity.</td></tr>';
       return;
     }
 
-    tbody.innerHTML = activityLog
+    // Simple frontend filters (classification, status, search)
+    const classFilter = document.getElementById("histFilterClass").value;
+    const statusFilter = document.getElementById("histFilterStatus").value;
+    const searchTerm = document
+      .getElementById("histFilterSearch")
+      .value.toLowerCase()
+      .trim();
+
+    const filtered = activityLog.filter((log) => {
+      if (classFilter !== "all" && log.classification !== classFilter) {
+        return false;
+      }
+
+      if (statusFilter !== "all") {
+        if (statusFilter === "quarantined") {
+          if (
+            log.decisionCode !== "QUARANTINE" &&
+            log.hitl_verdict !== "block"
+          ) {
+            return false;
+          }
+        } else if (statusFilter === "delivered") {
+          if (
+            !(log.decisionCode === "ALLOW" || log.hitl_verdict === "allow")
+          ) {
+            return false;
+          }
+        } else if (statusFilter === "hitl") {
+          if (log.hitl_status === "none") {
+            return false;
+          }
+        }
+      }
+
+      if (searchTerm) {
+        const blob =
+          (log.sender || "") +
+          " " +
+          (log.recipient || "") +
+          " " +
+          (log.subject || "");
+        if (!blob.toLowerCase().includes(searchTerm)) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+
+    if (!filtered.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No entries match the current filters.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered
       .map((log) => {
         return `
       <tr>
@@ -1286,7 +1378,7 @@
         <td>${log.sender}</td>
         <td>${log.recipient}</td>
         <td>${log.subject}</td>
-        <td>${renderClassificationBadge(log.classification)}</td>
+        <td>${renderClassificationBadge(log.classification, log.confidence)}</td>
         <td>${log.aiDecision}</td>
         <td>${log.itDecision}</td>
         <td>${log.latency}</td>
@@ -1298,15 +1390,41 @@
       .join("");
   }
 
+  function renderPerfMetrics(metrics) {
+    if (!metrics) return;
+    const total = metrics.total || 0;
+    const quarantined = metrics.quarantined || 0;
+    const phiDetected = metrics.phiDetected || 0;
+    const errors = metrics.errors || 0;
+    const avgElapsed = metrics.avgElapsed || 0;
+
+    const quarantineRate = total ? ((quarantined / total) * 100).toFixed(1) + "%" : "0%";
+    const phiRate = total ? ((phiDetected / total) * 100).toFixed(1) + "%" : "0%";
+    const errorRate = total ? ((errors / total) * 100).toFixed(1) + "%" : "0%";
+
+    let avgTimeText = "–";
+    if (avgElapsed) {
+      if (avgElapsed >= 1000) {
+        avgTimeText = (avgElapsed / 1000).toFixed(2) + "s";
+      } else {
+        avgTimeText = Math.round(avgElapsed) + "ms";
+      }
+    }
+
+    document.getElementById("metricEmails7d").textContent = total.toString();
+    document.getElementById("metricAvgTime").textContent = avgTimeText;
+    document.getElementById("metricQuarantineRate").textContent = quarantineRate;
+    document.getElementById("metricPHIRate").textContent = phiRate;
+    document.getElementById("metricErrorRate").textContent = errorRate;
+  }
+
   function renderMetricsFromQueues() {
     const pendingCount = itQueue.filter((x) => x.status === "pending").length;
-    const reviewedToday = 5; // simple demo
-    const reviewAccuracy = "92%"; // demo
 
     document.getElementById("metricPending").textContent = pendingCount;
-    document.getElementById("metricReviewedToday").textContent = reviewedToday;
-    document.getElementById("metricReviewAccuracy").textContent = reviewAccuracy;
-    document.getElementById("metricReviewTime").textContent = "34s";
+    document.getElementById("metricReviewedToday").textContent = "–";
+    document.getElementById("metricReviewAccuracy").textContent = "–";
+    document.getElementById("metricReviewTime").textContent = "–";
     document.getElementById("queueCountHeader").textContent =
       pendingCount + " pending";
   }
@@ -1319,7 +1437,10 @@
   }
 
   function renderClassificationBadge(classification, confidence) {
-    const percent = confidence ? ` ${Math.round(confidence * 100)}%` : "";
+    const percent =
+      typeof confidence === "number"
+        ? " " + Math.round(confidence * 100) + "%"
+        : "";
     if (classification === "phishing") {
       return `<span class="badge badge-phishing">Phishing${percent}</span>`;
     }
@@ -1330,108 +1451,36 @@
   }
 
   /************************************************************
-   * REASONING MODAL
+   * REASONING MODAL (simplified wiring to backend logs later)
    ************************************************************/
   function openReasoningModal(id) {
     const item = itQueue.find((i) => i.id === id);
     if (!item) return;
     currentReasoningItem = item;
 
-    const r = item.reasoning;
     const body = document.getElementById("reasoningModalBody");
+
+    const confidenceText =
+      typeof item.confidence === "number"
+        ? Math.round(item.confidence * 100) + "%"
+        : "–";
 
     body.innerHTML = `
       <div class="modal-section">
-        <div class="section-title">Historical investigation report</div>
-        <div class="key-value">
-          <div class="key-label">Final outcome:</div>
-          <div class="value-text">${r.aiOutcome || "Pending"}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">Processed at:</div>
-          <div class="value-text">Today · ${item.receivedAt}</div>
-        </div>
+        <div class="section-title">AI summary</div>
+        <p>This email was classified as <strong>${item.classification ||
+          "unknown"}</strong> with confidence <strong>${confidenceText}</strong>.</p>
       </div>
-
       <div class="modal-section">
         <div class="section-title">Email context</div>
-        <div class="key-value">
-          <div class="key-label">From:</div>
-          <div class="value-text">${item.sender}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">To:</div>
-          <div class="value-text">${item.recipient}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">Subject:</div>
-          <div class="value-text">${item.subject}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">AI Classification:</div>
-          <div class="value-text">${item.classification}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">Confidence:</div>
-          <div class="value-text">${Math.round(item.confidence * 100)}%</div>
-        </div>
+        <p><strong>From:</strong> ${item.sender}</p>
+        <p><strong>To:</strong> ${item.recipient}</p>
+        <p><strong>Subject:</strong> ${item.subject}</p>
+        <p><strong>Status:</strong> ${item.status}</p>
       </div>
-
       <div class="modal-section">
-        <div class="section-title">AI analysis summary</div>
-        <p style="margin-bottom:6px;">${r.aiSummary || "—"}</p>
-      </div>
-
-      <div class="modal-section">
-        <div class="section-title">Threat indicators</div>
-        <ul class="threat-list">
-          <li><span class="bullet-dot"></span><span>Credential language: <strong>${r.indicators.credentialLanguage}</strong></span></li>
-          <li><span class="bullet-dot"></span><span>Urgency language: <strong>${r.indicators.urgencyLanguage}</strong></span></li>
-          <li><span class="bullet-dot"></span><span>Suspicious links: <strong>${r.indicators.suspiciousLinks}</strong></span></li>
-          <li><span class="bullet-dot"></span><span>Manipulative tone: <strong>${r.indicators.manipulativeTone}</strong></span></li>
-          <li><span class="bullet-dot"></span><span>Sender risk: <strong>${r.indicators.senderRisk}</strong></span></li>
-          <li><span class="bullet-dot"></span><span>PHI presence: <strong>${r.indicators.phiPresence}</strong></span></li>
-        </ul>
-      </div>
-
-      <div class="modal-section">
-        <div class="section-title">Technical findings</div>
-        <div class="key-value">
-          <div class="key-label">phishing_keyword_score:</div>
-          <div>${r.technicalFindings.phishingKeywordScore}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">healthcare_keyword_score:</div>
-          <div>${r.technicalFindings.healthcareKeywordScore}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">urgency_score:</div>
-          <div>${r.technicalFindings.urgencyScore}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">typosquatting:</div>
-          <div>${r.technicalFindings.typosquatting}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">domain registered:</div>
-          <div>${r.technicalFindings.domainRegistered}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">cache hits:</div>
-          <div>${r.technicalFindings.cacheHits}</div>
-        </div>
-      </div>
-
-      <div class="modal-section">
-        <div class="section-title">AI recommendation vs IT decision</div>
-        <div class="key-value">
-          <div class="key-label">AI recommendation:</div>
-          <div>${r.aiRecommendation}</div>
-        </div>
-        <div class="key-value">
-          <div class="key-label">IT decision:</div>
-          <div>${r.itDecision}</div>
-        </div>
+        <div class="section-title">Notes</div>
+        <p>In this demo, token-level reasoning is stored in the backend decision log in S3. Once we finalize the schema, this panel can load the full LLM explanation for each message.</p>
       </div>
     `;
 
@@ -1447,7 +1496,9 @@
   function openReasoningFromQuarantine(id) {
     const item = quarantineQueue.find((i) => i.id === id);
     if (!item) return;
-    alert("In a real build, this would show reasoning connected to quarantine logs.\nFor now, open reasoning from IT Review items.");
+    alert(
+      "In this build, detailed AI reasoning for quarantined items is available in the backend logs. This modal can be wired similarly to the IT Review reasoning panel."
+    );
   }
 
   function closeReasoningModal() {
@@ -1491,15 +1542,18 @@
     currentReviewItem = item;
 
     const body = document.getElementById("reviewModalBody");
+    const confidenceText =
+      typeof item.confidence === "number"
+        ? Math.round(item.confidence * 100) + "%"
+        : "–";
+
     body.innerHTML = `
       <div class="modal-section">
         <div class="section-title">Summary</div>
         <p><strong>Sender:</strong> ${item.sender}</p>
         <p><strong>Recipient:</strong> ${item.recipient}</p>
         <p><strong>Subject:</strong> ${item.subject}</p>
-        <p><strong>AI classification:</strong> ${item.classification} (${Math.round(
-          item.confidence * 100
-        )}%)</p>
+        <p><strong>AI classification:</strong> ${item.classification} (${confidenceText})</p>
       </div>
 
       <div class="modal-section">
@@ -1520,50 +1574,44 @@
     currentReviewItem = null;
   }
 
-  function applyReviewDecision(action) {
+  async function applyReviewDecision(action) {
     if (!currentReviewItem) return;
     const item = currentReviewItem;
+    const verdict = action === "send" ? "allow" : "block";
 
-    if (action === "send") {
-      item.status = "released";
-      // update activity log entry if exists
-      const log = activityLog.find((l) => l.subject === item.subject);
-      if (log) {
-        log.itDecision = "Sent";
-        log.latency = "32s";
+    try {
+      const resp = await fetch(
+        `/api/hitl/${encodeURIComponent(item.id)}/verdict`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            verdict,
+            actor: DEFAULT_ACTOR,
+            notes: "",
+          }),
+        }
+      );
+      const data = await resp.json();
+      if (!data.success) {
+        alert(
+          "Failed to apply verdict: " + (data.error || "Unknown error from backend.")
+        );
+        return;
       }
-    } else if (action === "quarantine") {
-      item.status = "quarantined";
-      // push into quarantine if not there already (demo)
-      if (!quarantineQueue.find((q) => q.subject === item.subject)) {
-        quarantineQueue.push({
-          id: "q-" + item.id,
-          timestamp: "2025-11-18 10:40",
-          sender: item.sender,
-          recipient: item.recipient,
-          subject: item.subject,
-          riskScore: item.reasoning?.technicalFindings?.phishingKeywordScore
-            ? Math.round(
-                item.reasoning.technicalFindings.phishingKeywordScore * 100
-              )
-            : 80,
-          classification: item.classification,
-          confidence: item.confidence,
-          phi: item.reasoning?.indicators?.phiPresence?.includes("Yes") || false,
-          hitlStatus: "quarantined (IT)"
-        });
-      }
-      const log = activityLog.find((l) => l.subject === item.subject);
-      if (log) {
-        log.itDecision = "Quarantined";
-        log.latency = "45s";
-      }
+
+      // Refresh queues, history + metrics so UI matches backend state
+      await loadHitlQueue();
+      await loadHistoryFromBackend();
+      await loadPerformanceMetrics();
+      closeReviewModal();
+      touchLastAction(
+        verdict === "allow" ? "Email allowed by IT" : "Email quarantined by IT"
+      );
+    } catch (err) {
+      console.error("Error applying verdict:", err);
+      alert("Failed to apply verdict: " + err.message);
     }
-
-    renderItQueue();
-    renderQuarantine();
-    renderActivityLog();
-    closeReviewModal();
   }
 
   /************************************************************
@@ -1584,7 +1632,7 @@
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
         <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
-          [Demo placeholder: in the real system, this would show PHI-scrubbed MIME content for this email.]
+          [Demo placeholder: in the real system, this would show PHI-scrubbed MIME content for this email, pulled from the decision log.]
         </p>
       </div>
     `;
@@ -1634,7 +1682,7 @@
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
         <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
-          [Demo placeholder: sanitized email body associated with this log entry.]
+          [Demo placeholder: sanitized email body associated with this log entry. In a full build, this would be a PHI-safe view of the original MIME.]
         </p>
       </div>
     `;
@@ -1646,12 +1694,19 @@
   }
 
   /************************************************************
-   * INITIALIZE (empty state)
+   * INITIALIZE
    ************************************************************/
-  renderItQueue();
-  renderQuarantine();
-  renderActivityLog();
+  function initialize() {
+    renderItQueue();
+    renderQuarantine();
+    renderActivityLog();
+    initDateFilters();
+    loadHitlQueue();
+    loadPerformanceMetrics();
+    loadHistoryFromBackend();
+  }
+
+  initialize();
 </script>
 </body>
 </html>
-```

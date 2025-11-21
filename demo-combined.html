@@ -1025,6 +1025,242 @@
   const DEFAULT_ACTOR = "mchen"; // For demo: maps to Michael Chen
 
   /************************************************************
+   * NORMALIZATION HELPERS
+   * Map flexible log_doc JSON → flat fields UI expects
+   ************************************************************/
+
+  function getSafe(obj, path, fallback) {
+    try {
+      const parts = path.split(".");
+      let cur = obj;
+      for (const p of parts) {
+        if (cur == null) return fallback;
+        cur = cur[p];
+      }
+      return cur === undefined ? fallback : cur;
+    } catch {
+      return fallback;
+    }
+  }
+
+  // Pulls all the "core" pieces out of either:
+  //   raw.log_doc (preferred) OR raw directly (if API already flattened).
+  function normalizeCommonFields(raw) {
+    const log = raw.log_doc || raw.log || raw;
+    const compact = log.compact || {};
+    const summary = log.summary || {};
+    const senderIntel = log.sender_intel || {};
+    const ids = senderIntel.ids || {};
+    const queue = log.queue || {};
+    const hitl = log.hitl || {};
+    const decisionAgent = log.decision_agent || {};
+    const content = log.content || {};
+
+    const sender =
+      getSafe(compact, "from.addr",
+        compact.from_addr ||
+        ids.from_addr ||
+        log.sender ||
+        log.from_addr ||
+        "unknown");
+
+    const recipientRaw =
+      compact.to ||
+      log.recipient ||
+      log.to_addr ||
+      compact.rcpt_to ||
+      log.to;
+
+    let recipient = "unknown";
+    if (Array.isArray(recipientRaw)) {
+      recipient = recipientRaw.join(", ");
+    } else if (recipientRaw) {
+      recipient = recipientRaw;
+    }
+
+    const subject =
+      compact.subject ||
+      log.subject ||
+      "(no subject)";
+
+    const classification =
+      summary.classification ||
+      log.classification ||
+      decisionAgent.classification ||
+      "unknown";
+
+    let confidence = summary.confidence;
+    if (typeof confidence !== "number") confidence = log.confidence;
+    if (typeof confidence !== "number" && typeof decisionAgent.confidence === "number") {
+      confidence = decisionAgent.confidence;
+    }
+    if (typeof confidence !== "number") confidence = 0;
+
+    const risk =
+      summary.sender_risk ??
+      log.sender_risk ??
+      summary.risk ??
+      log.risk ??
+      0;
+
+    const phiEntities =
+      summary.phi_entities ??
+      summary.phi_count ??
+      getSafe(summary, "phi.count", undefined) ??
+      log.phi_entities ??
+      log.phi_count ??
+      0;
+
+    const hasPhi =
+      summary.has_phi === true ||
+      summary.has_phi === "true" ||
+      (typeof phiEntities === "number" && phiEntities > 0);
+
+    const decisionCode =
+      log.decision ||
+      decisionAgent.decision ||
+      log.decisionCode;
+
+    const queueStatus = queue.status || log.queue_status || "";
+    const hitlStatus = hitl.status || log.hitl_status || "";
+    const hitlVerdict = hitl.verdict || log.hitl_verdict || "";
+
+    const ts =
+      log.timestamp ||
+      log.decision_ts ||
+      log.created_ts ||
+      log.queue_ts;
+
+    const id =
+      log.id ||
+      log.run_id ||
+      raw.id ||
+      raw.run_id ||
+      raw.pk ||
+      raw.sk;
+
+    return {
+      log,
+      compact,
+      summary,
+      senderIntel,
+      ids,
+      queue,
+      hitl,
+      decisionAgent,
+      content,
+      sender,
+      recipient,
+      subject,
+      classification,
+      confidence,
+      risk,
+      hasPhi,
+      decisionCode,
+      queueStatus,
+      hitlStatus,
+      hitlVerdict,
+      timestamp: ts,
+      id,
+    };
+  }
+
+  // Normalize for the IT Review queue (/api/hitl/pending)
+  function normalizeQueueItem(raw) {
+    const base = normalizeCommonFields(raw);
+
+    let status = "pending";
+    if (base.hitlStatus === "completed") {
+      if (base.queueStatus === "quarantined" || base.decisionCode === "QUARANTINE") {
+        status = "quarantined";
+      } else {
+        status = "released";
+      }
+    } else if (base.queueStatus === "quarantined") {
+      status = "quarantined";
+    }
+
+    let receivedAt = "–";
+    if (base.timestamp) {
+      const d = new Date(base.timestamp);
+      if (!isNaN(d.getTime())) {
+        receivedAt = d.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+    }
+
+    return {
+      id: base.id,
+      sender: base.sender,
+      recipient: base.recipient,
+      subject: base.subject,
+      classification: base.classification,
+      confidence: base.confidence,
+      status,
+      receivedAt,
+      riskScore: base.risk,
+      phi: base.hasPhi,
+      decisionCode: base.decisionCode,
+      queueStatus: base.queueStatus,
+      hitlStatus: base.hitlStatus,
+      hitlVerdict: base.hitlVerdict,
+      rawLog: base.log,
+      _backend: raw,
+    };
+  }
+
+  // Normalize for history/activity log (/api/history) & quarantine view
+  function normalizeHistoryItem(raw) {
+    const base = normalizeCommonFields(raw);
+
+    let latencyMs =
+      base.log.latency_ms ??
+      base.log.elapsed_ms ??
+      getSafe(base.log, "timings.elapsed_ms", undefined);
+
+    let latencyText = "–";
+    if (typeof latencyMs === "number") {
+      latencyText =
+        latencyMs >= 1000
+          ? (latencyMs / 1000).toFixed(2) + "s"
+          : Math.round(latencyMs) + "ms";
+    }
+
+    const aiDecision = base.decisionCode || "–";
+
+    let itDecision = "–";
+    if (base.hitlStatus === "completed") {
+      if (base.hitlVerdict === "allow") itDecision = "Allowed";
+      else if (base.hitlVerdict === "block") itDecision = "Quarantined";
+      else itDecision = "Completed";
+    }
+
+    const tsText = base.timestamp || "–";
+
+    return {
+      id: base.id,
+      timestamp: tsText,
+      sender: base.sender,
+      recipient: base.recipient,
+      subject: base.subject,
+      classification: base.classification,
+      confidence: base.confidence,
+      aiDecision,
+      itDecision,
+      latency: latencyText,
+      decisionCode: base.decisionCode,
+      hitlStatus: base.hitlStatus,
+      hitlVerdict: base.hitlVerdict,
+      riskScore: base.risk,
+      phi: base.hasPhi,
+      rawLog: base.log,
+      _backend: raw,
+    };
+  }
+
+  /************************************************************
    * TABS
    ************************************************************/
   document.querySelectorAll(".tab-btn").forEach((btn) => {
@@ -1054,41 +1290,7 @@
       if (!data.success) throw new Error(data.error || "Backend error");
 
       const items = data.items || [];
-      itQueue = items.map((raw) => {
-        const createdTs = raw.created_ts || raw.timestamp;
-        let receivedAt = "–";
-        if (createdTs) {
-          const d = new Date(createdTs);
-          receivedAt = d.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-        }
-        const confidence =
-          typeof raw.confidence === "number"
-            ? raw.confidence
-            : typeof raw.summary?.confidence === "number"
-            ? raw.summary.confidence
-            : 0;
-
-        return {
-          id: raw.id,
-          sender: raw.from_addr || raw.from || "unknown",
-          recipient: raw.to_addr || raw.to || "unknown",
-          subject: raw.subject || "(no subject)",
-          classification:
-            raw.classification ||
-            raw.class ||
-            raw.summary?.classification ||
-            "unknown",
-          confidence,
-          status: raw.status || "pending",
-          receivedAt,
-          riskScore: raw.risk || raw.sender_risk || 0,
-          phi: raw.phi_entities > 0,
-          _backend: raw,
-        };
-      });
+      itQueue = items.map((raw) => normalizeQueueItem(raw));
 
       renderItQueue();
       touchLastAction("Queue refreshed");
@@ -1127,26 +1329,15 @@
       if (!data.success) throw new Error(data.message || "Backend error");
 
       const history = data.history || [];
-      activityLog = history;
+
+      // Normalize for UI
+      activityLog = history.map((raw) => normalizeHistoryItem(raw));
 
       // Derive quarantine from history: anything QUARANTINE or blocked by HITL
-      quarantineQueue = history
-        .filter(
-          (h) =>
-            h.decisionCode === "QUARANTINE" || h.hitl_verdict === "block"
-        )
-        .map((h) => ({
-          id: h.id,
-          timestamp: h.timestamp,
-          sender: h.sender,
-          recipient: h.recipient,
-          subject: h.subject,
-          riskScore: h.risk,
-          classification: h.classification,
-          confidence: h.confidence,
-          phi: (h.phi_entities || 0) > 0,
-          hitlStatus: h.hitl_status || h.itDecision || "quarantined",
-        }));
+      quarantineQueue = activityLog.filter(
+        (h) =>
+          h.decisionCode === "QUARANTINE" || h.hitlVerdict === "block"
+      );
 
       renderActivityLog();
       renderQuarantine();
@@ -1332,18 +1523,18 @@
         if (statusFilter === "quarantined") {
           if (
             log.decisionCode !== "QUARANTINE" &&
-            log.hitl_verdict !== "block"
+            log.hitlVerdict !== "block"
           ) {
             return false;
           }
         } else if (statusFilter === "delivered") {
           if (
-            !(log.decisionCode === "ALLOW" || log.hitl_verdict === "allow")
+            !(log.decisionCode === "ALLOW" || log.hitlVerdict === "allow")
           ) {
             return false;
           }
         } else if (statusFilter === "hitl") {
-          if (log.hitl_status === "none") {
+          if (!log.hitlStatus || log.hitlStatus === "none") {
             return false;
           }
         }
@@ -1451,7 +1642,7 @@
   }
 
   /************************************************************
-   * REASONING MODAL (simplified wiring to backend logs later)
+   * REASONING MODAL (still simple, now backed by normalized fields)
    ************************************************************/
   function openReasoningModal(id) {
     const item = itQueue.find((i) => i.id === id);

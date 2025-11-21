@@ -54,12 +54,16 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 const s3 = new AWS.S3();
 
 const HITL_TABLE = process.env.HITL_TABLE || "sender_intel_hitl_queue";
-const METRICS_BUCKET =
-  process.env.METRICS_BUCKET || "sc-intel-decisions-455185968614-us-east-2";
+
+// These now exactly match your .env names
+const DECISIONS_BUCKET =
+  process.env.S3_DECISIONS_BUCKET ||
+  "sc-intel-decisions-455185968614-us-east-2";
+const DECISIONS_PREFIX = process.env.S3_DECISIONS_PREFIX || "runs";
+
 const FEEDBACK_TABLE =
   process.env.FEEDBACK_TABLE || "sender_feedback_table";
 
-// Helper: resolve controller function name from env
 function resolveControllerFunctionName() {
   return (
     process.env.SENDER_INTEL_CONTROLLER_FUNCTION ||
@@ -76,10 +80,7 @@ function pad2(n) {
 // EXPRESS MIDDLEWARE
 // ----------------------
 
-// Serve static files (index.html, JS, CSS, etc.)
 app.use(express.static("."));
-
-// Parse JSON request bodies
 app.use(express.json());
 
 // ----------------------
@@ -183,6 +184,7 @@ async function applyLearningFromVerdict(item, verdict, actor, ts) {
 
 // ----------------------
 // HITL API: LIST PENDING QUEUE ITEMS
+// Enriches DDB items with S3 decision log data
 // ----------------------
 
 app.get("/api/hitl/pending", async (req, res) => {
@@ -194,14 +196,104 @@ app.get("/api/hitl/pending", async (req, res) => {
       FilterExpression: "#status = :pending",
       ExpressionAttributeNames: { "#status": "status" },
       ExpressionAttributeValues: { ":pending": "pending" },
-      Limit: 100, // enough for demo
+      Limit: 100,
     };
 
     const data = await dynamo.scan(params).promise();
+    const items = data.Items || [];
+
+    const enrichedItems = await Promise.all(
+      items.map(async (item) => {
+        const enriched = { ...item };
+
+        if (item.log_bucket && item.log_key) {
+          try {
+            const obj = await s3
+              .getObject({
+                Bucket: item.log_bucket,
+                Key: item.log_key,
+              })
+              .promise();
+
+            const bodyText = obj.Body.toString("utf8");
+            const log = JSON.parse(bodyText);
+
+            const summary = log.summary || {};
+            const compact = log.compact || {};
+            const decisionAgent = log.decision_agent || {};
+            const signals = decisionAgent.signals || {};
+            const hitl = log.hitl || {};
+            const queueDoc = log.queue || {};
+
+            enriched.summary = summary;
+            enriched.compact = compact;
+            enriched.decision = log.decision;
+            enriched.decision_reasons = log.decision_reasons || [];
+            enriched.hitl = hitl;
+            enriched.queue_doc = queueDoc;
+            enriched.decision_agent = decisionAgent;
+
+            enriched.to_addr =
+              item.to_addr ||
+              compact.to ||
+              signals.to_addr ||
+              "unknown";
+
+            enriched.classification =
+              item.classification ||
+              summary.classification ||
+              signals.classification ||
+              "unknown";
+
+            if (typeof summary.confidence === "number") {
+              enriched.confidence = summary.confidence;
+            } else if (typeof signals.confidence === "number") {
+              enriched.confidence = signals.confidence;
+            }
+
+            const riskFromSummary = summary.sender_risk;
+            const riskFromAgent = decisionAgent.risk;
+            enriched.sender_risk =
+              typeof riskFromSummary === "number"
+                ? riskFromSummary
+                : typeof riskFromAgent === "number"
+                ? riskFromAgent
+                : item.risk ?? null;
+
+            const phiFromAgent = decisionAgent.signals?.phi_entities;
+            const phiFromSummary = summary.has_phi ? 1 : 0;
+            const phiFromTopLevel =
+              typeof log.phi_entities === "number" ? log.phi_entities : null;
+
+            enriched.phi_entities =
+              typeof phiFromAgent === "number"
+                ? phiFromAgent
+                : phiFromTopLevel !== null
+                ? phiFromTopLevel
+                : phiFromSummary;
+
+            if (hitl.status && hitl.status !== item.status) {
+              enriched.hitl_status = hitl.status;
+            } else {
+              enriched.hitl_status = "required";
+            }
+          } catch (err) {
+            console.error(
+              "[HITL] Failed to enrich item from S3 log:",
+              item.log_bucket,
+              item.log_key,
+              err
+            );
+          }
+        }
+
+        return enriched;
+      })
+    );
 
     res.json({
       success: true,
-      items: data.Items || [],
+      items: enrichedItems,
     });
   } catch (err) {
     console.error("[HITL] List pending failed:", err);
@@ -232,7 +324,6 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
   const ts = new Date().toISOString();
 
   try {
-    // 1) Fetch the queue item
     const getResp = await dynamo
       .get({
         TableName: HITL_TABLE,
@@ -248,7 +339,6 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
       });
     }
 
-    // 2) Update the queue item as resolved
     await dynamo
       .update({
         TableName: HITL_TABLE,
@@ -268,7 +358,6 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
       })
       .promise();
 
-    // 3) Patch the S3 log if we have bucket/key
     let s3Location = null;
     if (item.log_bucket && item.log_key) {
       const obj = await s3
@@ -289,15 +378,12 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
         ts,
       };
 
-      // Top-level hitl
       doc.hitl = newHitl;
 
-      // decision_agent.hitl if present
       if (doc.decision_agent && doc.decision_agent.hitl) {
         doc.decision_agent.hitl = newHitl;
       }
 
-      // Queue status
       doc.queue = doc.queue || {};
       doc.queue.status = "resolved";
       doc.queue.resolved_ts = ts;
@@ -314,7 +400,6 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
       s3Location = { bucket: item.log_bucket, key: item.log_key };
     }
 
-    // 4) Learning hook
     await applyLearningFromVerdict(item, verdict, actorName, ts);
 
     res.json({
@@ -338,6 +423,7 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
 
 // ----------------------
 // PERFORMANCE METRICS API
+// Uses decision logs in S3_DECISIONS_BUCKET / S3_DECISIONS_PREFIX
 // ----------------------
 
 app.get("/api/metrics", async (req, res) => {
@@ -347,15 +433,13 @@ app.get("/api/metrics", async (req, res) => {
   const metrics = {
     total: 0,
     quarantined: 0,
-    it_review: 0,
-    allow: 0,
-    errors: 0,
-    avgElapsed: 0,
     phiDetected: 0,
-    classificationDist: {},
+    errors: 0, // IT overrides ↓
+    avgElapsed: 0,
   };
 
   let elapsedSum = 0;
+  let elapsedCount = 0;
 
   try {
     const prefixes = [];
@@ -364,7 +448,7 @@ app.get("/api/metrics", async (req, res) => {
       const year = d.year();
       const month = pad2(d.month() + 1);
       const day = pad2(d.date());
-      prefixes.push(`runs/${year}/${month}/${day}/`);
+      prefixes.push(`${DECISIONS_PREFIX}/${year}/${month}/${day}/`);
     }
 
     for (const prefix of prefixes) {
@@ -373,7 +457,7 @@ app.get("/api/metrics", async (req, res) => {
       do {
         const listResp = await s3
           .listObjectsV2({
-            Bucket: METRICS_BUCKET,
+            Bucket: DECISIONS_BUCKET,
             Prefix: prefix,
             ContinuationToken: continuationToken,
           })
@@ -383,27 +467,54 @@ app.get("/api/metrics", async (req, res) => {
           if (!obj.Key.endsWith(".json")) continue;
 
           const data = await s3
-            .getObject({ Bucket: METRICS_BUCKET, Key: obj.Key })
+            .getObject({ Bucket: DECISIONS_BUCKET, Key: obj.Key })
             .promise();
           const body = JSON.parse(data.Body.toString("utf8"));
 
           metrics.total++;
-          if (body.elapsed_ms != null) {
-            elapsedSum += body.elapsed_ms;
+
+          if (body.decision === "QUARANTINE") {
+            metrics.quarantined++;
           }
 
-          const dCode = body.decision;
-          if (dCode === "ALLOW") metrics.allow++;
-          else if (dCode === "IT_REVIEW") metrics.it_review++;
-          else if (dCode === "QUARANTINE") metrics.quarantined++;
+          const hasPhiSummary = body.summary?.has_phi === true;
+          const phiFromAgent = body.decision_agent?.signals?.phi_entities;
+          const phiFromTop = body.phi_entities;
 
-          if (body.phi?.entities_detected > 0) metrics.phiDetected++;
+          if (
+            hasPhiSummary ||
+            (typeof phiFromAgent === "number" && phiFromAgent > 0) ||
+            (typeof phiFromTop === "number" && phiFromTop > 0)
+          ) {
+            metrics.phiDetected++;
+          }
 
-          const cls = body.summary?.classification || "unknown";
-          metrics.classificationDist[cls] =
-            (metrics.classificationDist[cls] || 0) + 1;
+          let elapsedMs = null;
+          if (typeof body.elapsed_ms === "number") {
+            elapsedMs = body.elapsed_ms;
+          } else if (typeof body.timings?.elapsed_ms === "number") {
+            elapsedMs = body.timings.elapsed_ms;
+          } else if (
+            typeof body.sender_intel?.raw?.features?.["osint.elapsed_ms"] ===
+            "number"
+          ) {
+            elapsedMs =
+              body.sender_intel.raw.features["osint.elapsed_ms"];
+          }
 
-          if (body.statusCode && body.statusCode !== 200) {
+          if (elapsedMs != null) {
+            elapsedSum += elapsedMs;
+            elapsedCount++;
+          }
+
+          const aiDecision = body.decision_agent?.decision || body.decision;
+          const hitlVerdict = body.hitl?.verdict;
+
+          if (
+            hitlVerdict &&
+            aiDecision &&
+            hitlVerdict.toUpperCase() !== aiDecision.toUpperCase()
+          ) {
             metrics.errors++;
           }
         }
@@ -414,7 +525,8 @@ app.get("/api/metrics", async (req, res) => {
       } while (continuationToken);
     }
 
-    metrics.avgElapsed = metrics.total ? elapsedSum / metrics.total : 0;
+    metrics.avgElapsed =
+      elapsedCount > 0 ? elapsedSum / elapsedCount : 0;
 
     res.json({ success: true, metrics });
   } catch (err) {
@@ -455,7 +567,7 @@ app.get("/api/history", async (req, res) => {
       const year = d.year();
       const month = pad2(d.month() + 1);
       const day = pad2(d.date());
-      prefixes.push(`runs/${year}/${month}/${day}/`);
+      prefixes.push(`${DECISIONS_PREFIX}/${year}/${month}/${day}/`);
     }
 
     const history = [];
@@ -465,7 +577,7 @@ app.get("/api/history", async (req, res) => {
       do {
         const listResp = await s3
           .listObjectsV2({
-            Bucket: METRICS_BUCKET,
+            Bucket: DECISIONS_BUCKET,
             Prefix: prefix,
             ContinuationToken: continuationToken,
           })
@@ -475,14 +587,14 @@ app.get("/api/history", async (req, res) => {
           if (!obj.Key.endsWith(".json")) continue;
 
           const data = await s3
-            .getObject({ Bucket: METRICS_BUCKET, Key: obj.Key })
+            .getObject({ Bucket: DECISIONS_BUCKET, Key: obj.Key })
             .promise();
           const body = JSON.parse(data.Body.toString("utf8"));
 
           const tsRaw =
             body.timestamp ||
             body.compact?.date_iso ||
-            obj.LastModified?.toISOString();
+            (obj.LastModified ? obj.LastModified.toISOString() : null);
           const ts = dayjs.utc(tsRaw);
           if (!ts.isValid()) continue;
           if (ts.isBefore(start) || ts.isAfter(end)) continue;
@@ -496,34 +608,72 @@ app.get("/api/history", async (req, res) => {
             body.decision_agent?.signals?.to_addr ||
             "unknown";
           const subject = body.compact?.subject || "(no subject)";
-          const classification = body.summary?.classification || "unknown";
+          const classification =
+            body.summary?.classification ||
+            body.decision_agent?.signals?.classification ||
+            "unknown";
           const confidence =
             typeof body.summary?.confidence === "number"
               ? body.summary.confidence
+              : typeof body.decision_agent?.signals?.confidence === "number"
+              ? body.decision_agent.signals.confidence
               : null;
-          const risk = body.summary?.sender_risk || 0;
-          const phiEntities = body.phi?.entities_detected || 0;
+          const risk =
+            typeof body.summary?.sender_risk === "number"
+              ? body.summary.sender_risk
+              : typeof body.decision_agent?.risk === "number"
+              ? body.decision_agent.risk
+              : 0;
+
+          const phiFromAgent =
+            body.decision_agent?.signals?.phi_entities;
+          const phiFromTop =
+            typeof body.phi_entities === "number"
+              ? body.phi_entities
+              : null;
+          const phiFromSummary = body.summary?.has_phi ? 1 : 0;
+
+          const phiEntities =
+            typeof phiFromAgent === "number"
+              ? phiFromAgent
+              : phiFromTop !== null
+              ? phiFromTop
+              : phiFromSummary;
+
           const hitlStatus = body.hitl?.status || "none";
           const hitlVerdict = body.hitl?.verdict || null;
 
-          const decisionCode = body.decision;
+          const aiDecision =
+            body.decision_agent?.decision || body.decision;
           let aiDecisionText = "Unknown";
-          if (decisionCode === "ALLOW") aiDecisionText = "Allowed";
-          else if (decisionCode === "IT_REVIEW")
-            aiDecisionText = "Requires HITL review";
-          else if (decisionCode === "QUARANTINE")
+          if (aiDecision === "ALLOW") aiDecisionText = "Allowed";
+          else if (aiDecision === "QUARANTINE")
             aiDecisionText = "Quarantined";
 
           let itDecisionText = "—";
           if (hitlVerdict === "allow") itDecisionText = "Sent";
           else if (hitlVerdict === "block") itDecisionText = "Quarantined";
 
+          let elapsedMs = null;
+          if (typeof body.elapsed_ms === "number") {
+            elapsedMs = body.elapsed_ms;
+          } else if (typeof body.timings?.elapsed_ms === "number") {
+            elapsedMs = body.timings.elapsed_ms;
+          } else if (
+            typeof body.sender_intel?.raw?.features?.[
+              "osint.elapsed_ms"
+            ] === "number"
+          ) {
+            elapsedMs =
+              body.sender_intel.raw.features["osint.elapsed_ms"];
+          }
+
           let latencyText = "–";
-          if (body.elapsed_ms != null) {
-            if (body.elapsed_ms >= 1000) {
-              latencyText = (body.elapsed_ms / 1000).toFixed(1) + "s";
+          if (elapsedMs != null) {
+            if (elapsedMs >= 1000) {
+              latencyText = (elapsedMs / 1000).toFixed(1) + "s";
             } else {
-              latencyText = body.elapsed_ms + "ms";
+              latencyText = `${elapsedMs}ms`;
             }
           }
 
@@ -543,12 +693,12 @@ app.get("/api/history", async (req, res) => {
             aiDecision: aiDecisionText,
             itDecision: itDecisionText,
             latency: latencyText,
-            decisionCode,
+            decisionCode: body.decision,
             hitl_status: hitlStatus,
             hitl_verdict: hitlVerdict,
             risk,
             phi_entities: phiEntities,
-            s3_bucket: METRICS_BUCKET,
+            s3_bucket: DECISIONS_BUCKET,
             s3_key: obj.Key,
           });
         }
@@ -584,7 +734,6 @@ app.post("/api/email/analyze-full", async (req, res) => {
 
     const { mime_raw, mime_b64 } = req.body;
 
-    // Basic validation
     if (!mime_raw && !mime_b64) {
       return res.status(400).json({
         success: false,
@@ -597,7 +746,6 @@ app.post("/api/email/analyze-full", async (req, res) => {
     console.log("🚀 [FULL] Invoking Lambda:", functionName);
     console.log("    Region:", process.env.AWS_REGION || "us-east-2");
 
-    // Build payload for the controller Lambda
     const payload = {};
     if (mime_raw) {
       payload.mime_raw = mime_raw;
@@ -605,7 +753,6 @@ app.post("/api/email/analyze-full", async (req, res) => {
       payload.mime_b64 = mime_b64;
     }
 
-    // Invoke Lambda synchronously
     const lambdaResponse = await lambda
       .invoke({
         FunctionName: functionName,
@@ -614,7 +761,6 @@ app.post("/api/email/analyze-full", async (req, res) => {
       })
       .promise();
 
-    // Parse Lambda response payload
     const responsePayload = JSON.parse(lambdaResponse.Payload || "{}");
 
     console.log("✅ [FULL] Lambda response received");
@@ -622,7 +768,6 @@ app.post("/api/email/analyze-full", async (req, res) => {
     console.log("    Risk:", responsePayload.risk);
     console.log("    PHI entities:", responsePayload.phi_entities);
 
-    // Check for function-level error
     if (lambdaResponse.FunctionError) {
       console.error("❌ [FULL] Lambda function error:", responsePayload);
       return res.status(500).json({
@@ -632,7 +777,6 @@ app.post("/api/email/analyze-full", async (req, res) => {
       });
     }
 
-    // Return the Lambda’s decision envelope to the frontend
     res.json({
       success: true,
       data: responsePayload,
@@ -658,7 +802,6 @@ app.post("/api/analyze", async (req, res) => {
 
     const { emailContent, context } = req.body;
 
-    // Validate input
     if (!emailContent) {
       return res.status(400).json({
         success: false,
@@ -666,7 +809,6 @@ app.post("/api/analyze", async (req, res) => {
       });
     }
 
-    // AWS Lambda API Gateway URL
     const lambdaUrl = process.env.AWS_LAMBDA_ENDPOINT;
 
     if (!lambdaUrl || lambdaUrl === "PLACEHOLDER_URL") {
@@ -679,7 +821,6 @@ app.post("/api/analyze", async (req, res) => {
 
     console.log("🚀 [SIMPLE] Forwarding request to AWS Lambda:", lambdaUrl);
 
-    // Forward request to AWS Lambda
     const lambdaResponse = await fetch(lambdaUrl, {
       method: "POST",
       headers: {
@@ -692,7 +833,6 @@ app.post("/api/analyze", async (req, res) => {
       timeout: 30000,
     });
 
-    // Check Lambda response status
     if (!lambdaResponse.ok) {
       const errorText = await lambdaResponse.text();
       console.error(
@@ -707,11 +847,9 @@ app.post("/api/analyze", async (req, res) => {
       });
     }
 
-    // Parse Lambda response data
     const lambdaData = await lambdaResponse.json();
     console.log("✅ [SIMPLE] Lambda response successful");
 
-    // Return Lambda response to frontend
     res.json({
       success: true,
       data: lambdaData,
@@ -756,7 +894,8 @@ app.get("/api/health", (req, res) => {
     awsRegion: process.env.AWS_REGION || "us-east-2",
     demoEmitterRunning: isEmitterRunning(),
     hitlTable: HITL_TABLE,
-    metricsBucket: METRICS_BUCKET,
+    decisionsBucket: DECISIONS_BUCKET,
+    decisionsPrefix: DECISIONS_PREFIX,
     feedbackTable: FEEDBACK_TABLE,
   });
 });
@@ -790,7 +929,9 @@ app.listen(PORT, "0.0.0.0", () => {
     `📡 Full pipeline Lambda (SENDER_INTEL_CONTROLLER_FUNCTION / SENDER_CONTROLLER_FN): ${resolveControllerFunctionName()}`
   );
   console.log(`📂 HITL queue table: ${HITL_TABLE}`);
-  console.log(`📊 Metrics bucket: ${METRICS_BUCKET}`);
+  console.log(
+    `📊 Decisions bucket: ${DECISIONS_BUCKET} (prefix: ${DECISIONS_PREFIX}/...)`
+  );
   console.log(`🧠 Feedback table: ${FEEDBACK_TABLE}`);
   console.log(
     "Make sure to set OPENROUTER_API_KEY in your .env file if you use OpenRouter features."

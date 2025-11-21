@@ -255,12 +255,49 @@
       border-bottom: 1px solid #e5e7eb;
     }
 
+    /* SORTABLE HEADERS */
     th {
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--text-secondary);
       background: #f8fafc;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.1s;
+    }
+
+    th:hover {
+      background: #e2e8f0;
+      color: var(--primary-dark);
+    }
+
+    th::after {
+      content: ' ⇅';
+      font-size: 0.7em;
+      color: #cbd5e1;
+      margin-left: 4px;
+    }
+    
+    th.sort-asc::after {
+      content: ' ▲';
+      color: var(--primary);
+    }
+
+    th.sort-desc::after {
+      content: ' ▼';
+      color: var(--primary);
+    }
+
+    th.no-sort {
+      cursor: default;
+    }
+    th.no-sort::after {
+      content: '';
+    }
+    th.no-sort:hover {
+      background: #f8fafc;
+      color: var(--text-secondary);
     }
 
     tr:hover td {
@@ -389,7 +426,7 @@
       min-width: 200px;
     }
 
-    /* Charts (simple placeholders) */
+    /* Charts */
     .charts-row {
       display: grid;
       grid-template-columns: 2fr 1.2fr;
@@ -405,7 +442,6 @@
       flex-direction: column;
     }
 
-    /* Replaced .chart-placeholder with canvas containers */
     .chart-container {
       position: relative;
       height: 200px;
@@ -689,17 +725,17 @@
           </div>
         </div>
         <div class="table-wrapper">
-          <table>
+          <table id="itReviewTable">
             <thead>
             <tr>
-              <th>Sender</th>
-              <th>Recipient</th>
-              <th>Subject</th>
-              <th>Classification</th>
-              <th>Confidence</th>
-              <th>Status</th>
-              <th>Received</th>
-              <th style="width: 210px;">Actions</th>
+              <th onclick="handleSort('review', 'sender')">Sender</th>
+              <th onclick="handleSort('review', 'recipient')">Recipient</th>
+              <th onclick="handleSort('review', 'subject')">Subject</th>
+              <th onclick="handleSort('review', 'classification')">Classification</th>
+              <th onclick="handleSort('review', 'confidence')">Confidence</th>
+              <th onclick="handleSort('review', 'status')">Status</th>
+              <th onclick="handleSort('review', 'timestamp')" class="sort-desc">Received</th>
+              <th class="no-sort" style="width: 210px;">Actions</th>
             </tr>
             </thead>
             <tbody id="itReviewTableBody">
@@ -756,23 +792,22 @@
         </div>
 
         <div class="table-wrapper">
-          <table>
+          <table id="quarantineTable">
             <thead>
             <tr>
-              <th>Timestamp</th>
-              <th>Sender</th>
-              <th>Recipient</th>
-              <th>Subject</th>
-              <th>Risk</th>
-              <th>Classification</th>
-              <th>PHI</th>
-              <th>HITL Status</th>
-              <th style="width: 150px;">Actions</th>
+              <th onclick="handleSort('quarantine', 'timestamp')" class="sort-desc">Timestamp</th>
+              <th onclick="handleSort('quarantine', 'sender')">Sender</th>
+              <th onclick="handleSort('quarantine', 'recipient')">Recipient</th>
+              <th onclick="handleSort('quarantine', 'subject')">Subject</th>
+              <th onclick="handleSort('quarantine', 'riskScore')">Risk</th>
+              <th onclick="handleSort('quarantine', 'classification')">Classification</th>
+              <th onclick="handleSort('quarantine', 'phi')">PHI</th>
+              <th class="no-sort" style="width: 150px;">Actions</th>
             </tr>
             </thead>
             <tbody id="quarantineTableBody">
             <tr>
-              <td colspan="9" style="text-align:center; padding:16px; color: var(--text-secondary);">
+              <td colspan="8" style="text-align:center; padding:16px; color: var(--text-secondary);">
                 No emails currently quarantined.
               </td>
             </tr>
@@ -908,18 +943,18 @@
         </div>
 
         <div class="table-wrapper">
-          <table>
+          <table id="activityTable">
             <thead>
             <tr>
-              <th>Timestamp</th>
-              <th>Sender</th>
-              <th>Recipient</th>
-              <th>Subject</th>
-              <th>Classification</th>
-              <th>AI Decision</th>
-              <th>IT Decision</th>
-              <th>Latency</th>
-              <th style="width: 80px;">Details</th>
+              <th onclick="handleSort('history', 'timestamp')" class="sort-desc">Timestamp</th>
+              <th onclick="handleSort('history', 'sender')">Sender</th>
+              <th onclick="handleSort('history', 'recipient')">Recipient</th>
+              <th onclick="handleSort('history', 'subject')">Subject</th>
+              <th onclick="handleSort('history', 'classification')">Classification</th>
+              <th onclick="handleSort('history', 'aiDecision')">AI Decision</th>
+              <th onclick="handleSort('history', 'itDecision')">IT Decision</th>
+              <th onclick="handleSort('history', 'latency')">Latency</th>
+              <th class="no-sort" style="width: 80px;">Details</th>
             </tr>
             </thead>
             <tbody id="activityLogTableBody">
@@ -1014,6 +1049,13 @@
   let chartDecisions = null;
   let chartClassification = null;
   let chartVolume = null;
+
+  // SORTING STATE
+  const sortState = {
+    review: { col: 'timestamp', dir: 'desc' },
+    quarantine: { col: 'timestamp', dir: 'desc' },
+    history: { col: 'timestamp', dir: 'desc' }
+  };
 
   const DEFAULT_ACTOR = "mchen"; // For demo: maps to Michael Chen
 
@@ -1190,7 +1232,9 @@
     if (base.timestamp) {
       const d = new Date(base.timestamp);
       if (!isNaN(d.getTime())) {
-        receivedAt = d.toLocaleTimeString([], {
+        receivedAt = d.toLocaleString([], {
+          month: "short",
+          day: "numeric",
           hour: "2-digit",
           minute: "2-digit",
         });
@@ -1206,6 +1250,7 @@
       confidence: base.confidence,
       status,
       receivedAt,
+      timestamp: base.timestamp, // Raw timestamp for sorting
       riskScore: base.risk,
       phi: base.hasPhi,
       decisionCode: base.decisionCode,
@@ -1244,11 +1289,9 @@
       else itDecision = "Completed";
     }
 
-    const tsText = base.timestamp || "–";
-
     return {
       id: base.id,
-      timestamp: tsText,
+      timestamp: base.timestamp,
       sender: base.sender,
       recipient: base.recipient,
       subject: base.subject,
@@ -1267,6 +1310,84 @@
       rawLog: base.log,
       _backend: raw,
     };
+  }
+
+  /************************************************************
+   * SORTING LOGIC
+   ************************************************************/
+  function handleSort(tableType, column) {
+    const currentState = sortState[tableType];
+    if (currentState.col === column) {
+      // toggle direction
+      currentState.dir = currentState.dir === 'asc' ? 'desc' : 'asc';
+    } else {
+      // new column, default to desc for dates/numbers, asc for text
+      if (['confidence', 'riskScore', 'timestamp'].includes(column)) {
+        currentState.dir = 'desc';
+      } else {
+        currentState.dir = 'asc';
+      }
+      currentState.col = column;
+    }
+
+    // Update UI Arrows
+    updateSortIcons(tableType);
+
+    // Re-render appropriate table
+    if (tableType === 'review') renderItQueue();
+    else if (tableType === 'quarantine') renderQuarantine();
+    else if (tableType === 'history') renderActivityLog();
+  }
+
+  function updateSortIcons(tableType) {
+    let tableId = '';
+    if (tableType === 'review') tableId = 'itReviewTable';
+    if (tableType === 'quarantine') tableId = 'quarantineTable';
+    if (tableType === 'history') tableId = 'activityTable';
+
+    const table = document.getElementById(tableId);
+    const ths = table.querySelectorAll('th');
+    ths.forEach(th => {
+      th.classList.remove('sort-asc', 'sort-desc');
+      // Check if this th matches current sort
+      if (th.getAttribute('onclick') && th.getAttribute('onclick').includes(`'${sortState[tableType].col}'`)) {
+        th.classList.add(`sort-${sortState[tableType].dir}`);
+      }
+    });
+  }
+
+  function getSortedData(data, tableType) {
+    const { col, dir } = sortState[tableType];
+    const sorted = [...data].sort((a, b) => {
+      let valA = a[col];
+      let valB = b[col];
+
+      // Handle nulls
+      if (valA == null) valA = "";
+      if (valB == null) valB = "";
+
+      // String comparison (case insensitive)
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        // Check if it's a date string
+        if (col === 'timestamp' || col === 'receivedAt') {
+            const tA = new Date(valA).getTime();
+            const tB = new Date(valB).getTime();
+            // Handle Invalid Dates safely
+            const vA = isNaN(tA) ? 0 : tA;
+            const vB = isNaN(tB) ? 0 : tB;
+            return vA - vB;
+        }
+        return valA.localeCompare(valB);
+      }
+      
+      // Number comparison
+      return valA - valB;
+    });
+
+    if (dir === 'desc') {
+      sorted.reverse();
+    }
+    return sorted;
   }
 
   /************************************************************
@@ -1420,31 +1541,24 @@
     const classFilter = document.getElementById("reviewFilterClass").value;
     const statusFilter = document.getElementById("reviewFilterStatus").value;
 
-    if (!itQueue.length) {
-      tbody.innerHTML =
-        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails currently waiting for review.</td></tr>';
-      updateTopCounts();
-      return;
-    }
-
+    // 1. Filter
     const filtered = itQueue.filter((item) => {
-      if (classFilter !== "all" && item.classification !== classFilter) {
-        return false;
-      }
-      if (statusFilter !== "all" && item.status !== statusFilter) {
-        return false;
-      }
+      if (classFilter !== "all" && item.classification !== classFilter) return false;
+      if (statusFilter !== "all" && item.status !== statusFilter) return false;
       return true;
     });
 
-    if (!filtered.length) {
+    // 2. Sort
+    const sorted = getSortedData(filtered, 'review');
+
+    if (!sorted.length) {
       tbody.innerHTML =
-        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No items match the current filters.</td></tr>';
+        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails match current filters.</td></tr>';
       updateTopCounts();
       return;
     }
 
-    tbody.innerHTML = filtered
+    tbody.innerHTML = sorted
       .map((item) => {
         const confidencePct =
           typeof item.confidence === "number"
@@ -1473,20 +1587,25 @@
       .join("");
 
     updateTopCounts();
+    updateSortIcons('review'); // Update arrows
   }
 
   function renderQuarantine() {
     const tbody = document.getElementById("quarantineTableBody");
-    if (!quarantineQueue.length) {
+    
+    // 1. Sort (Quarantine doesn't have filters in this demo, but we sort the full list)
+    const sorted = getSortedData(quarantineQueue, 'quarantine');
+
+    if (!sorted.length) {
       tbody.innerHTML =
-        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No emails currently quarantined.</td></tr>';
+        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails currently quarantined.</td></tr>';
       document.getElementById("metricQuarantineTotal").textContent = "0";
       document.getElementById("metricQuarantinePHI").textContent = "0";
       return;
     }
 
     let phiCount = 0;
-    tbody.innerHTML = quarantineQueue
+    tbody.innerHTML = sorted
       .map((item) => {
         if (item.phi) phiCount++;
         return `
@@ -1498,7 +1617,6 @@
         <td>${item.riskScore}</td>
         <td>${renderClassificationBadge(item.classification, item.confidence)}</td>
         <td>${item.phi ? '<span class="badge badge-suspicious">PHI</span>' : "–"}</td>
-        <td>${item.hitlStatus}</td>
         <td>
           <button class="btn btn-outline btn-sm" onclick="openDetailsFromQuarantine('${item.id}')">View</button>
           <button class="btn btn-outline btn-sm" onclick="openReasoningFromQuarantine('${item.id}')">Reasoning</button>
@@ -1507,75 +1625,49 @@
       })
       .join("");
 
-    document.getElementById("metricQuarantineTotal").textContent =
-      quarantineQueue.length;
+    document.getElementById("metricQuarantineTotal").textContent = quarantineQueue.length;
     document.getElementById("metricQuarantinePHI").textContent = phiCount;
+    updateSortIcons('quarantine');
   }
 
   function renderActivityLog() {
     const tbody = document.getElementById("activityLogTableBody");
-    if (!activityLog.length) {
-      tbody.innerHTML =
-        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No history yet. Use the date filters to load recent activity.</td></tr>';
-      return;
-    }
-
-    // Simple frontend filters (classification, status, search)
+    
     const classFilter = document.getElementById("histFilterClass").value;
     const statusFilter = document.getElementById("histFilterStatus").value;
-    const searchTerm = document
-      .getElementById("histFilterSearch")
-      .value.toLowerCase()
-      .trim();
+    const searchTerm = document.getElementById("histFilterSearch").value.toLowerCase().trim();
 
+    // 1. Filter
     const filtered = activityLog.filter((log) => {
-      if (classFilter !== "all" && log.classification !== classFilter) {
-        return false;
-      }
+      if (classFilter !== "all" && log.classification !== classFilter) return false;
 
       if (statusFilter !== "all") {
         if (statusFilter === "quarantined") {
-          if (
-            log.decisionCode !== "QUARANTINE" &&
-            log.hitlVerdict !== "block"
-          ) {
-            return false;
-          }
+          if (log.decisionCode !== "QUARANTINE" && log.hitlVerdict !== "block") return false;
         } else if (statusFilter === "delivered") {
-          if (
-            !(log.decisionCode === "ALLOW" || log.hitlVerdict === "allow")
-          ) {
-            return false;
-          }
+          if (!(log.decisionCode === "ALLOW" || log.hitlVerdict === "allow")) return false;
         } else if (statusFilter === "hitl") {
-          if (!log.hitlStatus || log.hitlStatus === "none") {
-            return false;
-          }
+          if (!log.hitlStatus || log.hitlStatus === "none") return false;
         }
       }
 
       if (searchTerm) {
-        const blob =
-          (log.sender || "") +
-          " " +
-          (log.recipient || "") +
-          " " +
-          (log.subject || "");
-        if (!blob.toLowerCase().includes(searchTerm)) {
-          return false;
-        }
+        const blob = (log.sender || "") + " " + (log.recipient || "") + " " + (log.subject || "");
+        if (!blob.toLowerCase().includes(searchTerm)) return false;
       }
-
       return true;
     });
 
-    if (!filtered.length) {
+    // 2. Sort
+    const sorted = getSortedData(filtered, 'history');
+
+    if (!sorted.length) {
       tbody.innerHTML =
         '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No entries match the current filters.</td></tr>';
       return;
     }
 
-    tbody.innerHTML = filtered
+    tbody.innerHTML = sorted
       .map((log) => {
         return `
       <tr>
@@ -1593,6 +1685,8 @@
       </tr>`;
       })
       .join("");
+      
+    updateSortIcons('history');
   }
 
   function renderPerfMetrics(metrics) {
@@ -1653,7 +1747,6 @@
     const ctxClass = document.getElementById('chartClassification').getContext('2d');
     if (chartClassification) chartClassification.destroy();
     
-    // Safely extract classification counts
     const dist = metrics.classificationDist || {};
     const safe = dist['safe'] || 0;
     const phishing = dist['phishing'] || 0;
@@ -1687,7 +1780,6 @@
     if (chartVolume) chartVolume.destroy();
     
     const trend = metrics.trend || [];
-    // Sort trend by date just in case
     trend.sort((a, b) => a.date.localeCompare(b.date));
     
     chartVolume = new Chart(ctxVol, {
@@ -1941,14 +2033,17 @@
         return;
       }
 
-      // Refresh queues, history + metrics so UI matches backend state
-      await loadHitlQueue();
-      await loadHistoryFromBackend();
-      await loadPerformanceMetrics();
+      // Close modal immediately for better UX
       closeReviewModal();
       touchLastAction(
         verdict === "allow" ? "Email allowed by IT" : "Email quarantined by IT"
       );
+
+      // Refresh queues in background
+      await loadHitlQueue();
+      await loadHistoryFromBackend();
+      await loadPerformanceMetrics();
+      
     } catch (err) {
       console.error("Error applying verdict:", err);
       alert("Failed to apply verdict: " + err.message);

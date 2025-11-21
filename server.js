@@ -974,6 +974,95 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+
+// ----------------------
+// HITL DASHBOARD METRICS (Cards)
+// ----------------------
+app.get("/api/hitl/stats", async (req, res) => {
+  try {
+    const now = dayjs().utc();
+    const todayStr = now.format("YYYY-MM-DD");
+
+    // Scan DDB (ok for demo scale, for prod use GSIs)
+    let items = [];
+    let lastEval;
+    do {
+      const result = await dynamo.scan({
+        TableName: HITL_TABLE,
+        ExclusiveStartKey: lastEval
+      }).promise();
+      items = items.concat(result.Items || []);
+      lastEval = result.LastEvaluatedKey;
+    } while (lastEval);
+
+    let pending = 0;
+    let reviewedToday = 0;
+    let totalResolved = 0;
+    let agreements = 0;
+    let totalDurationSec = 0;
+
+    for (const item of items) {
+      const status = item.status || "";
+      
+      // 1. Pending Count
+      if (status === "pending") {
+        pending++;
+        continue;
+      }
+
+      // 2. Filter for Resolved
+      if (status !== "resolved") continue;
+      
+      totalResolved++;
+
+      // 3. Reviewed Today
+      // resolved_ts format: "2025-11-21T01:33:25Z"
+      const resolvedTs = item.resolved_ts ? dayjs(item.resolved_ts) : null;
+      if (resolvedTs && resolvedTs.isValid()) {
+        if (resolvedTs.format("YYYY-MM-DD") === todayStr) {
+          reviewedToday++;
+        }
+
+        // 4. Avg Review Time
+        const createdTs = item.created_ts ? dayjs(item.created_ts) : null;
+        if (createdTs && createdTs.isValid()) {
+          const diff = resolvedTs.diff(createdTs, "second");
+          if (diff > 0) totalDurationSec += diff;
+        }
+      }
+
+      // 5. Accuracy (AI Decision vs Human Verdict)
+      // item.decision = "ALLOW" | "QUARANTINE"
+      // item.verdict = "allow" | "block"
+      const aiDec = (item.decision || "").toUpperCase();
+      const humDec = (item.verdict || "").toLowerCase();
+
+      let agreed = false;
+      if (aiDec === "ALLOW" && humDec === "allow") agreed = true;
+      else if (aiDec === "QUARANTINE" && humDec === "block") agreed = true;
+      
+      // Note: If AI said "IT_REVIEW", we generally don't count that against accuracy
+      // as it correctly asked for help.
+      if (agreed) agreements++;
+    }
+
+    const accuracy = totalResolved > 0 ? (agreements / totalResolved) : 0;
+    const avgTime = totalResolved > 0 ? (totalDurationSec / totalResolved) : 0;
+
+    res.json({
+      success: true,
+      pending,
+      reviewedToday,
+      accuracy,      // 0.0 to 1.0
+      avgTimeSeconds: avgTime
+    });
+
+  } catch (err) {
+    console.error("[HITL] Stats error:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // ----------------------
 // SERVER START
 // ----------------------

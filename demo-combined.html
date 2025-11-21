@@ -1061,7 +1061,6 @@
 
   /************************************************************
    * NORMALIZATION HELPERS
-   * Map flexible log_doc JSON → flat fields UI expects
    ************************************************************/
 
   function getSafe(obj, path, fallback) {
@@ -1091,18 +1090,10 @@
 
     const sender =
       getSafe(compact, "from.addr",
-        compact.from_addr ||
-        ids.from_addr ||
-        log.sender ||
-        log.from_addr ||
-        "unknown");
+        compact.from_addr || ids.from_addr || log.sender || log.from_addr || "unknown");
 
     const recipientRaw =
-      compact.to ||
-      log.recipient ||
-      log.to_addr ||
-      compact.rcpt_to ||
-      log.to;
+      compact.to || log.recipient || log.to_addr || compact.rcpt_to || log.to;
 
     let recipient = "unknown";
     if (Array.isArray(recipientRaw)) {
@@ -1111,16 +1102,10 @@
       recipient = recipientRaw;
     }
 
-    const subject =
-      compact.subject ||
-      log.subject ||
-      "(no subject)";
+    const subject = compact.subject || log.subject || "(no subject)";
 
     const classification =
-      summary.classification ||
-      log.classification ||
-      decisionAgent.classification ||
-      "unknown";
+      summary.classification || log.classification || decisionAgent.classification || "unknown";
 
     let confidence = summary.confidence;
     if (typeof confidence !== "number") confidence = log.confidence;
@@ -1130,87 +1115,36 @@
     if (typeof confidence !== "number") confidence = 0;
 
     const risk =
-      summary.sender_risk ??
-      log.sender_risk ??
-      summary.risk ??
-      log.risk ??
-      0;
+      summary.sender_risk ?? log.sender_risk ?? summary.risk ?? log.risk ?? 0;
 
     const phiEntities =
-      summary.phi_entities ??
-      summary.phi_count ??
-      getSafe(summary, "phi.count", undefined) ??
-      log.phi_entities ??
-      log.phi_count ??
-      0;
+      summary.phi_entities ?? summary.phi_count ?? getSafe(summary, "phi.count", undefined) ??
+      log.phi_entities ?? log.phi_count ?? 0;
 
     const hasPhi =
-      summary.has_phi === true ||
-      summary.has_phi === "true" ||
-      (typeof phiEntities === "number" && phiEntities > 0);
+      summary.has_phi === true || summary.has_phi === "true" || (typeof phiEntities === "number" && phiEntities > 0);
 
-    const decisionCode =
-      log.decision ||
-      decisionAgent.decision ||
-      log.decisionCode;
+    const decisionCode = log.decision || decisionAgent.decision || log.decisionCode;
 
     const queueStatus = queue.status || log.queue_status || "";
     const hitlStatus = hitl.status || log.hitl_status || "";
     const hitlVerdict = hitl.verdict || log.hitl_verdict || "";
 
-    const ts =
-      log.timestamp ||
-      log.decision_ts ||
-      log.created_ts ||
-      log.queue_ts;
+    const ts = log.timestamp || log.decision_ts || log.created_ts || log.queue_ts;
 
-    const id =
-      log.id ||
-      log.run_id ||
-      raw.id ||
-      raw.run_id ||
-      raw.pk ||
-      raw.sk;
+    const id = log.id || log.run_id || raw.id || raw.run_id || raw.pk || raw.sk;
 
     const bodyPreview = 
-      log.body_preview || 
-      content.body_preview || 
-      log.preview || 
-      content.preview || 
-      "";
+      log.body_preview || content.body_preview || log.preview || content.preview || "";
 
     const reasoning = 
-      log.reasoning || 
-      decisionAgent.reasoning || 
-      decisionAgent.explanation || 
-      log.explanation || 
-      "";
+      log.reasoning || decisionAgent.reasoning || decisionAgent.explanation || log.explanation || "";
 
     return {
-      log,
-      compact,
-      summary,
-      senderIntel,
-      ids,
-      queue,
-      hitl,
-      decisionAgent,
-      content,
-      sender,
-      recipient,
-      subject,
-      classification,
-      confidence,
-      risk,
-      hasPhi,
-      decisionCode,
-      queueStatus,
-      hitlStatus,
-      hitlVerdict,
-      timestamp: ts,
-      id,
-      bodyPreview, 
-      reasoning
+      log, compact, summary, senderIntel, ids, queue, hitl, decisionAgent, content,
+      sender, recipient, subject, classification, confidence, risk, hasPhi,
+      decisionCode, queueStatus, hitlStatus, hitlVerdict, timestamp: ts, id,
+      bodyPreview, reasoning
     };
   }
 
@@ -1219,11 +1153,7 @@
 
     let status = "pending";
     if (base.hitlStatus === "completed") {
-      if (base.queueStatus === "quarantined" || base.decisionCode === "QUARANTINE") {
-        status = "quarantined";
-      } else {
-        status = "released";
-      }
+      status = (base.queueStatus === "quarantined" || base.decisionCode === "QUARANTINE") ? "quarantined" : "released";
     } else if (base.queueStatus === "quarantined") {
       status = "quarantined";
     }
@@ -1233,10 +1163,7 @@
       const d = new Date(base.timestamp);
       if (!isNaN(d.getTime())) {
         receivedAt = d.toLocaleString([], {
-          month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
+          month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
         });
       }
     }
@@ -1250,7 +1177,7 @@
       confidence: base.confidence,
       status,
       receivedAt,
-      timestamp: base.timestamp, // Raw timestamp for sorting
+      timestamp: base.timestamp,
       riskScore: base.risk,
       phi: base.hasPhi,
       decisionCode: base.decisionCode,
@@ -1267,21 +1194,13 @@
   function normalizeHistoryItem(raw) {
     const base = normalizeCommonFields(raw);
 
-    let latencyMs =
-      base.log.latency_ms ??
-      base.log.elapsed_ms ??
-      getSafe(base.log, "timings.elapsed_ms", undefined);
-
+    let latencyMs = base.log.latency_ms ?? base.log.elapsed_ms ?? getSafe(base.log, "timings.elapsed_ms", undefined);
     let latencyText = "–";
     if (typeof latencyMs === "number") {
-      latencyText =
-        latencyMs >= 1000
-          ? (latencyMs / 1000).toFixed(2) + "s"
-          : Math.round(latencyMs) + "ms";
+      latencyText = latencyMs >= 1000 ? (latencyMs / 1000).toFixed(2) + "s" : Math.round(latencyMs) + "ms";
     }
 
     const aiDecision = base.decisionCode || "–";
-
     let itDecision = "–";
     if (base.hitlStatus === "completed") {
       if (base.hitlVerdict === "allow") itDecision = "Allowed";
@@ -1318,10 +1237,8 @@
   function handleSort(tableType, column) {
     const currentState = sortState[tableType];
     if (currentState.col === column) {
-      // toggle direction
       currentState.dir = currentState.dir === 'asc' ? 'desc' : 'asc';
     } else {
-      // new column, default to desc for dates/numbers, asc for text
       if (['confidence', 'riskScore', 'timestamp'].includes(column)) {
         currentState.dir = 'desc';
       } else {
@@ -1329,11 +1246,7 @@
       }
       currentState.col = column;
     }
-
-    // Update UI Arrows
     updateSortIcons(tableType);
-
-    // Re-render appropriate table
     if (tableType === 'review') renderItQueue();
     else if (tableType === 'quarantine') renderQuarantine();
     else if (tableType === 'history') renderActivityLog();
@@ -1346,10 +1259,8 @@
     if (tableType === 'history') tableId = 'activityTable';
 
     const table = document.getElementById(tableId);
-    const ths = table.querySelectorAll('th');
-    ths.forEach(th => {
+    table.querySelectorAll('th').forEach(th => {
       th.classList.remove('sort-asc', 'sort-desc');
-      // Check if this th matches current sort
       if (th.getAttribute('onclick') && th.getAttribute('onclick').includes(`'${sortState[tableType].col}'`)) {
         th.classList.add(`sort-${sortState[tableType].dir}`);
       }
@@ -1361,32 +1272,22 @@
     const sorted = [...data].sort((a, b) => {
       let valA = a[col];
       let valB = b[col];
-
-      // Handle nulls
       if (valA == null) valA = "";
       if (valB == null) valB = "";
 
-      // String comparison (case insensitive)
       if (typeof valA === 'string' && typeof valB === 'string') {
-        // Check if it's a date string
         if (col === 'timestamp' || col === 'receivedAt') {
             const tA = new Date(valA).getTime();
             const tB = new Date(valB).getTime();
-            // Handle Invalid Dates safely
             const vA = isNaN(tA) ? 0 : tA;
             const vB = isNaN(tB) ? 0 : tB;
             return vA - vB;
         }
         return valA.localeCompare(valB);
       }
-      
-      // Number comparison
       return valA - valB;
     });
-
-    if (dir === 'desc') {
-      sorted.reverse();
-    }
+    if (dir === 'desc') sorted.reverse();
     return sorted;
   }
 
@@ -1396,14 +1297,9 @@
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const tabId = btn.dataset.tab;
-      document
-        .querySelectorAll(".tab-btn")
-        .forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-
-      document
-        .querySelectorAll(".tab-content")
-        .forEach((sec) => sec.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach((sec) => sec.classList.remove("active"));
       document.getElementById(tabId).classList.add("active");
     });
   });
@@ -1419,13 +1315,47 @@
       const data = await resp.json();
       if (!data.success) throw new Error(data.error || "Backend error");
 
-      const items = data.items || [];
-      itQueue = items.map((raw) => normalizeQueueItem(raw));
-
+      itQueue = (data.items || []).map(normalizeQueueItem);
       renderItQueue();
       touchLastAction("Queue refreshed");
     } catch (err) {
       console.error("Failed to load HITL queue:", err);
+    }
+  }
+
+  // NEW: Fetch Stats for the 3 cards
+  async function loadHitlStats() {
+    try {
+      const resp = await fetch("/api/hitl/stats");
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      const data = await resp.json();
+      
+      if (data.success) {
+        // 1. Pending
+        document.getElementById("metricPending").textContent = data.pending;
+        document.getElementById("queueCountHeader").textContent = data.pending + " pending";
+
+        // 2. Reviewed Today
+        document.getElementById("metricReviewedToday").textContent = data.reviewedToday;
+
+        // 3. Accuracy
+        const acc = Math.round(data.accuracy * 100);
+        document.getElementById("metricReviewAccuracy").textContent = acc + "%";
+
+        // 4. Time
+        let timeText = "0s";
+        const sec = data.avgTimeSeconds;
+        if (sec >= 60) {
+          const m = Math.floor(sec / 60);
+          const s = Math.round(sec % 60);
+          timeText = `${m}m ${s}s`;
+        } else if (sec > 0) {
+          timeText = Math.round(sec) + "s";
+        }
+        document.getElementById("metricReviewTime").textContent = timeText;
+      }
+    } catch(err) {
+      console.error("Failed to load HITL stats:", err);
     }
   }
 
@@ -1448,9 +1378,7 @@
     const toInput = document.getElementById("histDateTo");
     const from = fromInput.value;
     const to = toInput.value;
-    if (!from || !to) {
-      return;
-    }
+    if (!from || !to) return;
 
     try {
       const resp = await fetch(`/api/history?from=${from}&to=${to}`);
@@ -1459,11 +1387,10 @@
       if (!data.success) throw new Error(data.message || "Backend error");
 
       const history = data.history || [];
-      activityLog = history.map((raw) => normalizeHistoryItem(raw));
+      activityLog = history.map(normalizeHistoryItem);
 
       quarantineQueue = activityLog.filter(
-        (h) =>
-          h.decisionCode === "QUARANTINE" || h.hitlVerdict === "block"
+        (h) => h.decisionCode === "QUARANTINE" || h.hitlVerdict === "block"
       );
 
       renderActivityLog();
@@ -1477,22 +1404,18 @@
   function initDateFilters() {
     const fromInput = document.getElementById("histDateFrom");
     const toInput = document.getElementById("histDateTo");
-
     const today = new Date();
     const toStr = today.toISOString().slice(0, 10);
     const fromDate = new Date(today);
     fromDate.setDate(fromDate.getDate() - 2);
     const fromStr = fromDate.toISOString().slice(0, 10);
-
     fromInput.value = fromStr;
     toInput.value = toStr;
   }
 
   function touchLastAction(label) {
     const el = document.getElementById("lastActionText");
-    if (el) {
-      el.textContent = label + " · " + new Date().toLocaleTimeString();
-    }
+    if (el) el.textContent = label + " · " + new Date().toLocaleTimeString();
   }
 
   /************************************************************
@@ -1500,6 +1423,7 @@
    ************************************************************/
   document.getElementById("refreshQueueBtn").addEventListener("click", async () => {
     await loadHitlQueue();
+    await loadHitlStats(); // Added this
     await loadHistoryFromBackend();
   });
 
@@ -1518,20 +1442,13 @@
     }
   });
 
-  // FILTER EVENT LISTENERS
   document.getElementById("reviewFilterClass").addEventListener("change", renderItQueue);
   document.getElementById("reviewFilterStatus").addEventListener("change", renderItQueue);
-  
   document.getElementById("histFilterClass").addEventListener("change", renderActivityLog);
   document.getElementById("histFilterStatus").addEventListener("change", renderActivityLog);
   document.getElementById("histFilterSearch").addEventListener("keyup", renderActivityLog);
-
-  document.getElementById("histDateFrom").addEventListener("change", () => {
-    loadHistoryFromBackend();
-  });
-  document.getElementById("histDateTo").addEventListener("change", () => {
-    loadHistoryFromBackend();
-  });
+  document.getElementById("histDateFrom").addEventListener("change", loadHistoryFromBackend);
+  document.getElementById("histDateTo").addEventListener("change", loadHistoryFromBackend);
 
   /************************************************************
    * RENDER FUNCTIONS
@@ -1541,41 +1458,30 @@
     const classFilter = document.getElementById("reviewFilterClass").value;
     const statusFilter = document.getElementById("reviewFilterStatus").value;
 
-    // 1. Filter
     const filtered = itQueue.filter((item) => {
       if (classFilter !== "all" && item.classification !== classFilter) return false;
       if (statusFilter !== "all" && item.status !== statusFilter) return false;
       return true;
     });
 
-    // 2. Sort
     const sorted = getSortedData(filtered, 'review');
 
     if (!sorted.length) {
-      tbody.innerHTML =
-        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails match current filters.</td></tr>';
-      updateTopCounts();
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails match current filters.</td></tr>';
+      // Removed updateTopCounts() here because loadHitlStats handles the cards now
       return;
     }
 
-    tbody.innerHTML = sorted
-      .map((item) => {
-        const confidencePct =
-          typeof item.confidence === "number"
-            ? Math.round(item.confidence * 100) + "%"
-            : "–";
-        return `
+    tbody.innerHTML = sorted.map((item) => {
+      const confidencePct = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
+      return `
       <tr>
         <td>${item.sender}</td>
         <td>${item.recipient}</td>
         <td>${item.subject}</td>
-        <td>
-          ${renderClassificationBadge(item.classification, item.confidence)}
-        </td>
+        <td>${renderClassificationBadge(item.classification, item.confidence)}</td>
         <td>${confidencePct}</td>
-        <td>
-          <span class="badge badge-pending">${item.status === "pending" ? "Pending review" : item.status}</span>
-        </td>
+        <td><span class="badge badge-pending">${item.status === "pending" ? "Pending review" : item.status}</span></td>
         <td>${item.receivedAt}</td>
         <td>
           <button class="btn btn-primary btn-sm" onclick="openReviewModal('${item.id}')">Review</button>
@@ -1583,32 +1489,26 @@
           <button class="btn btn-outline btn-sm" onclick="openReasoningModal('${item.id}')">Reasoning</button>
         </td>
       </tr>`;
-      })
-      .join("");
+    }).join("");
 
-    updateTopCounts();
-    updateSortIcons('review'); // Update arrows
+    updateSortIcons('review');
   }
 
   function renderQuarantine() {
     const tbody = document.getElementById("quarantineTableBody");
-    
-    // 1. Sort (Quarantine doesn't have filters in this demo, but we sort the full list)
     const sorted = getSortedData(quarantineQueue, 'quarantine');
 
     if (!sorted.length) {
-      tbody.innerHTML =
-        '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails currently quarantined.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails currently quarantined.</td></tr>';
       document.getElementById("metricQuarantineTotal").textContent = "0";
       document.getElementById("metricQuarantinePHI").textContent = "0";
       return;
     }
 
     let phiCount = 0;
-    tbody.innerHTML = sorted
-      .map((item) => {
-        if (item.phi) phiCount++;
-        return `
+    tbody.innerHTML = sorted.map((item) => {
+      if (item.phi) phiCount++;
+      return `
       <tr>
         <td>${item.timestamp}</td>
         <td>${item.sender}</td>
@@ -1622,8 +1522,7 @@
           <button class="btn btn-outline btn-sm" onclick="openReasoningFromQuarantine('${item.id}')">Reasoning</button>
         </td>
       </tr>`;
-      })
-      .join("");
+    }).join("");
 
     document.getElementById("metricQuarantineTotal").textContent = quarantineQueue.length;
     document.getElementById("metricQuarantinePHI").textContent = phiCount;
@@ -1632,15 +1531,12 @@
 
   function renderActivityLog() {
     const tbody = document.getElementById("activityLogTableBody");
-    
     const classFilter = document.getElementById("histFilterClass").value;
     const statusFilter = document.getElementById("histFilterStatus").value;
     const searchTerm = document.getElementById("histFilterSearch").value.toLowerCase().trim();
 
-    // 1. Filter
     const filtered = activityLog.filter((log) => {
       if (classFilter !== "all" && log.classification !== classFilter) return false;
-
       if (statusFilter !== "all") {
         if (statusFilter === "quarantined") {
           if (log.decisionCode !== "QUARANTINE" && log.hitlVerdict !== "block") return false;
@@ -1650,7 +1546,6 @@
           if (!log.hitlStatus || log.hitlStatus === "none") return false;
         }
       }
-
       if (searchTerm) {
         const blob = (log.sender || "") + " " + (log.recipient || "") + " " + (log.subject || "");
         if (!blob.toLowerCase().includes(searchTerm)) return false;
@@ -1658,18 +1553,14 @@
       return true;
     });
 
-    // 2. Sort
     const sorted = getSortedData(filtered, 'history');
 
     if (!sorted.length) {
-      tbody.innerHTML =
-        '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No entries match the current filters.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:16px; color:#6b7280;">No entries match the current filters.</td></tr>';
       return;
     }
 
-    tbody.innerHTML = sorted
-      .map((log) => {
-        return `
+    tbody.innerHTML = sorted.map((log) => `
       <tr>
         <td>${log.timestamp}</td>
         <td>${log.sender}</td>
@@ -1682,9 +1573,7 @@
         <td>
           <button class="btn btn-outline btn-sm" onclick="openDetailsFromLog('${log.id}')">Details</button>
         </td>
-      </tr>`;
-      })
-      .join("");
+      </tr>`).join("");
       
     updateSortIcons('history');
   }
@@ -1703,11 +1592,7 @@
 
     let avgTimeText = "–";
     if (avgElapsed) {
-      if (avgElapsed >= 1000) {
-        avgTimeText = (avgElapsed / 1000).toFixed(2) + "s";
-      } else {
-        avgTimeText = Math.round(avgElapsed) + "ms";
-      }
+      avgTimeText = avgElapsed >= 1000 ? (avgElapsed / 1000).toFixed(2) + "s" : Math.round(avgElapsed) + "ms";
     }
 
     document.getElementById("metricEmails7d").textContent = total.toString();
@@ -1715,13 +1600,10 @@
     document.getElementById("metricQuarantineRate").textContent = quarantineRate;
     document.getElementById("metricPHIRate").textContent = phiRate;
     document.getElementById("metricErrorRate").textContent = errorRate;
-    
-    // Render Charts
     renderCharts(metrics);
   }
 
   function renderCharts(metrics) {
-    // 1. Decision Distribution (Doughnut)
     const ctxDec = document.getElementById('chartDecisions').getContext('2d');
     if (chartDecisions) chartDecisions.destroy();
     chartDecisions = new Chart(ctxDec, {
@@ -1734,19 +1616,11 @@
           borderWidth: 1
         }]
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
-        }
-      }
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } } }
     });
 
-    // 2. Classification Mix (Doughnut)
     const ctxClass = document.getElementById('chartClassification').getContext('2d');
     if (chartClassification) chartClassification.destroy();
-    
     const dist = metrics.classificationDist || {};
     const safe = dist['safe'] || 0;
     const phishing = dist['phishing'] || 0;
@@ -1766,19 +1640,11 @@
           borderWidth: 1
         }]
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
-        }
-      }
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } } }
     });
 
-    // 3. Volume Trend (Line)
     const ctxVol = document.getElementById('chartVolume').getContext('2d');
     if (chartVolume) chartVolume.destroy();
-    
     const trend = metrics.trend || [];
     trend.sort((a, b) => a.date.localeCompare(b.date));
     
@@ -1797,76 +1663,34 @@
         }]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          y: { beginAtZero: true, ticks: { precision: 0 } },
-          x: { ticks: { font: { size: 10 } } }
-        }
+        responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { ticks: { font: { size: 10 } } } }
       }
     });
   }
 
-  function renderMetricsFromQueues() {
-    const pendingCount = itQueue.filter((x) => x.status === "pending").length;
-
-    document.getElementById("metricPending").textContent = pendingCount;
-    document.getElementById("metricReviewedToday").textContent = "–";
-    document.getElementById("metricReviewAccuracy").textContent = "–";
-    document.getElementById("metricReviewTime").textContent = "–";
-    document.getElementById("queueCountHeader").textContent =
-      pendingCount + " pending";
-  }
-
-  function updateTopCounts() {
-    const pendingCount = itQueue.filter((x) => x.status === "pending").length;
-    document.getElementById("metricPending").textContent = pendingCount;
-    document.getElementById("queueCountHeader").textContent =
-      pendingCount + " pending";
-  }
-
   function renderClassificationBadge(classification, confidence) {
-    const percent =
-      typeof confidence === "number"
-        ? " " + Math.round(confidence * 100) + "%"
-        : "";
-    if (classification === "phishing") {
-      return `<span class="badge badge-phishing">Phishing${percent}</span>`;
-    }
-    if (classification === "suspicious") {
-      return `<span class="badge badge-suspicious">Suspicious${percent}</span>`;
-    }
+    const percent = typeof confidence === "number" ? " " + Math.round(confidence * 100) + "%" : "";
+    if (classification === "phishing") return `<span class="badge badge-phishing">Phishing${percent}</span>`;
+    if (classification === "suspicious") return `<span class="badge badge-suspicious">Suspicious${percent}</span>`;
     return `<span class="badge badge-safe">Safe${percent}</span>`;
   }
 
   /************************************************************
-   * REASONING MODAL
+   * MODALS & ACTIONS
    ************************************************************/
   function openReasoningModal(id) {
     const item = itQueue.find((i) => i.id === id);
     if (!item) return;
     currentReasoningItem = item;
-
     const body = document.getElementById("reasoningModalBody");
-
-    const confidenceText =
-      typeof item.confidence === "number"
-        ? Math.round(item.confidence * 100) + "%"
-        : "–";
-    
-    // UPDATED: Use real reasoning if present
-    const reasoningContent = item.reasoning 
-      ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>`
-      : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
+    const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
+    const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
 
     body.innerHTML = `
       <div class="modal-section">
         <div class="section-title">AI summary</div>
-        <p>This email was classified as <strong>${item.classification ||
-          "unknown"}</strong> with confidence <strong>${confidenceText}</strong>.</p>
+        <p>This email was classified as <strong>${item.classification || "unknown"}</strong> with confidence <strong>${confidenceText}</strong>.</p>
       </div>
       <div class="modal-section">
         <div class="section-title">Email context</div>
@@ -1878,39 +1702,26 @@
       <div class="modal-section">
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
-      </div>
-    `;
-
-    // reset feedback UI
+      </div>`;
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
     document.getElementById("thumbDownBtn").classList.remove("active-thumb");
     document.getElementById("reasoningFeedbackText").value = "";
     document.getElementById("reasoningFeedbackBox").style.display = "none";
-
     document.getElementById("reasoningModalBackdrop").classList.add("active");
   }
 
   function openReasoningFromQuarantine(id) {
     const item = quarantineQueue.find((i) => i.id === id);
     if (!item) return;
-    
     currentReasoningItem = item;
     const body = document.getElementById("reasoningModalBody");
-
-    const confidenceText =
-      typeof item.confidence === "number"
-        ? Math.round(item.confidence * 100) + "%"
-        : "–";
-    
-    const reasoningContent = item.reasoning 
-      ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>`
-      : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
+    const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
+    const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
 
     body.innerHTML = `
       <div class="modal-section">
         <div class="section-title">AI summary</div>
-        <p>This email was classified as <strong>${item.classification ||
-          "unknown"}</strong> with confidence <strong>${confidenceText}</strong>.</p>
+        <p>This email was classified as <strong>${item.classification || "unknown"}</strong> with confidence <strong>${confidenceText}</strong>.</p>
       </div>
       <div class="modal-section">
         <div class="section-title">Email context</div>
@@ -1922,63 +1733,46 @@
       <div class="modal-section">
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
-      </div>
-    `;
-
-    // reset feedback UI
+      </div>`;
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
     document.getElementById("thumbDownBtn").classList.remove("active-thumb");
     document.getElementById("reasoningFeedbackText").value = "";
     document.getElementById("reasoningFeedbackBox").style.display = "none";
-
     document.getElementById("reasoningModalBackdrop").classList.add("active");
   }
 
   function closeReasoningModal() {
-    document
-      .getElementById("reasoningModalBackdrop")
-      .classList.remove("active");
+    document.getElementById("reasoningModalBackdrop").classList.remove("active");
   }
 
   function setThumbFeedback(dir) {
     const up = document.getElementById("thumbUpBtn");
     const down = document.getElementById("thumbDownBtn");
     const fbBox = document.getElementById("reasoningFeedbackBox");
-
     if (dir === "up") {
       up.classList.add("active-thumb");
       down.classList.remove("active-thumb");
       fbBox.style.display = "block";
-      fbBox.querySelector("textarea").placeholder =
-        "Optional: what worked well about this reasoning?";
+      fbBox.querySelector("textarea").placeholder = "Optional: what worked well about this reasoning?";
     } else {
       down.classList.add("active-thumb");
       up.classList.remove("active-thumb");
       fbBox.style.display = "block";
-      fbBox.querySelector("textarea").placeholder =
-        "Optional: what did the reasoning miss or get wrong?";
+      fbBox.querySelector("textarea").placeholder = "Optional: what did the reasoning miss or get wrong?";
     }
   }
 
   function submitReasoningFeedback() {
-    // In real app, send to backend.
     alert("Feedback recorded (demo only).");
     closeReasoningModal();
   }
 
-  /************************************************************
-   * IT REVIEW MODAL
-   ************************************************************/
   function openReviewModal(id) {
     const item = itQueue.find((i) => i.id === id);
     if (!item) return;
     currentReviewItem = item;
-
     const body = document.getElementById("reviewModalBody");
-    const confidenceText =
-      typeof item.confidence === "number"
-        ? Math.round(item.confidence * 100) + "%"
-        : "–";
+    const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1988,7 +1782,6 @@
         <p><strong>Subject:</strong> ${item.subject}</p>
         <p><strong>AI classification:</strong> ${item.classification} (${confidenceText})</p>
       </div>
-
       <div class="modal-section">
         <div class="section-title">Decision</div>
         <p style="margin-bottom:6px;">Choose how to handle this email:</p>
@@ -1996,9 +1789,7 @@
           <li><strong>Send / Allow</strong> – deliver to recipient inbox and log decision.</li>
           <li><strong>Quarantine</strong> – keep in quarantine and block delivery.</li>
         </ul>
-      </div>
-    `;
-
+      </div>`;
     document.getElementById("reviewModalBackdrop").classList.add("active");
   }
 
@@ -2013,55 +1804,35 @@
     const verdict = action === "send" ? "allow" : "block";
 
     try {
-      const resp = await fetch(
-        `/api/hitl/${encodeURIComponent(item.id)}/verdict`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            verdict,
-            actor: DEFAULT_ACTOR,
-            notes: "",
-          }),
-        }
-      );
+      const resp = await fetch(`/api/hitl/${encodeURIComponent(item.id)}/verdict`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ verdict, actor: DEFAULT_ACTOR, notes: "" }),
+      });
       const data = await resp.json();
       if (!data.success) {
-        alert(
-          "Failed to apply verdict: " + (data.error || "Unknown error from backend.")
-        );
+        alert("Failed to apply verdict: " + (data.error || "Unknown error from backend."));
         return;
       }
 
-      // Close modal immediately for better UX
       closeReviewModal();
-      touchLastAction(
-        verdict === "allow" ? "Email allowed by IT" : "Email quarantined by IT"
-      );
+      touchLastAction(verdict === "allow" ? "Email allowed by IT" : "Email quarantined by IT");
 
-      // Refresh queues in background
       await loadHitlQueue();
+      await loadHitlStats();
       await loadHistoryFromBackend();
       await loadPerformanceMetrics();
-      
     } catch (err) {
       console.error("Error applying verdict:", err);
       alert("Failed to apply verdict: " + err.message);
     }
   }
 
-  /************************************************************
-   * DETAILS MODAL
-   ************************************************************/
   function openDetailsModal(id) {
     const item = itQueue.find((i) => i.id === id);
     if (!item) return;
     const body = document.getElementById("detailsModalBody");
-    
-    // UPDATED: Use real body preview if present
-    const bodyContent = item.bodyPreview 
-      ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${item.bodyPreview}</pre>`
-      : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
+    const bodyContent = item.bodyPreview ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${item.bodyPreview}</pre>` : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
 
     body.innerHTML = `
       <div class="modal-section">
@@ -2074,8 +1845,7 @@
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
         ${bodyContent}
-      </div>
-    `;
+      </div>`;
     document.getElementById("detailsModalBackdrop").classList.add("active");
   }
 
@@ -2083,11 +1853,7 @@
     const item = quarantineQueue.find((i) => i.id === id);
     if (!item) return;
     const body = document.getElementById("detailsModalBody");
-
-    // UPDATED: Use real body preview
-    const bodyContent = item.bodyPreview 
-      ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${item.bodyPreview}</pre>`
-      : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
+    const bodyContent = item.bodyPreview ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${item.bodyPreview}</pre>` : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
 
     body.innerHTML = `
       <div class="modal-section">
@@ -2104,8 +1870,7 @@
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
         ${bodyContent}
-      </div>
-    `;
+      </div>`;
     document.getElementById("detailsModalBackdrop").classList.add("active");
   }
 
@@ -2113,11 +1878,7 @@
     const log = activityLog.find((l) => l.id === id);
     if (!log) return;
     const body = document.getElementById("detailsModalBody");
-
-    // UPDATED: Use real body preview
-    const bodyContent = log.bodyPreview 
-      ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${log.bodyPreview}</pre>`
-      : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
+    const bodyContent = log.bodyPreview ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${log.bodyPreview}</pre>` : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
 
     body.innerHTML = `
       <div class="modal-section">
@@ -2132,8 +1893,7 @@
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
         ${bodyContent}
-      </div>
-    `;
+      </div>`;
     document.getElementById("detailsModalBackdrop").classList.add("active");
   }
 
@@ -2150,6 +1910,7 @@
     renderActivityLog();
     initDateFilters();
     loadHitlQueue();
+    loadHitlStats();
     loadPerformanceMetrics();
     loadHistoryFromBackend();
   }

@@ -577,7 +577,6 @@
 </head>
 <body>
 <div class="container">
-  <!-- HEADER -->
   <header class="header">
     <div class="header-top">
       <div>Network: EVMC-SECURE · Environment: PRODUCTION</div>
@@ -619,7 +618,6 @@
     </div>
   </header>
 
-  <!-- TABS -->
   <nav class="nav-tabs">
     <button class="tab-btn active" data-tab="it-review">IT Review Queue</button>
     <button class="tab-btn" data-tab="quarantine">Quarantine</button>
@@ -627,11 +625,8 @@
     <button class="tab-btn" data-tab="activity-log">History / Activity Log</button>
   </nav>
 
-  <!-- CONTENT -->
   <main class="content">
-    <!-- IT REVIEW QUEUE TAB -->
     <section id="it-review" class="tab-content active">
-      <!-- TOP CARDS -->
       <div class="card">
         <div class="card-header">
           <div>
@@ -666,7 +661,6 @@
         </div>
       </div>
 
-      <!-- ACTIVE REVIEW QUEUE TABLE -->
       <div class="card">
         <div class="card-header">
           <div>
@@ -723,7 +717,6 @@
       </div>
     </section>
 
-    <!-- QUARANTINE TAB -->
     <section id="quarantine" class="tab-content">
       <div class="card">
         <div class="card-header">
@@ -792,7 +785,6 @@
       </div>
     </section>
 
-    <!-- PERFORMANCE METRICS TAB -->
     <section id="performance" class="tab-content">
       <div class="card">
         <div class="card-header">
@@ -867,7 +859,6 @@
       </div>
     </section>
 
-    <!-- HISTORY / ACTIVITY LOG TAB -->
     <section id="activity-log" class="tab-content">
       <div class="card">
         <div class="card-header">
@@ -942,7 +933,6 @@
   </main>
 </div>
 
-<!-- DETAILED REASONING MODAL -->
 <div id="reasoningModalBackdrop" class="modal-backdrop">
   <div class="modal">
     <div class="modal-header">
@@ -950,8 +940,7 @@
       <button class="btn-ghost" onclick="closeReasoningModal()" style="color:#e5e7eb; font-size:1.1rem;">✕</button>
     </div>
     <div class="modal-body" id="reasoningModalBody">
-      <!-- Filled dynamically -->
-    </div>
+      </div>
     <div class="modal-footer">
       <div style="flex:1;">
         <div class="feedback-row">
@@ -975,7 +964,6 @@
   </div>
 </div>
 
-<!-- IT REVIEW MODAL -->
 <div id="reviewModalBackdrop" class="modal-backdrop">
   <div class="modal" style="max-width:720px;">
     <div class="modal-header">
@@ -983,8 +971,7 @@
       <button class="btn-ghost" onclick="closeReviewModal()" style="color:#e5e7eb; font-size:1.1rem;">✕</button>
     </div>
     <div class="modal-body" id="reviewModalBody">
-      <!-- Filled dynamically -->
-    </div>
+      </div>
     <div class="modal-footer">
       <div style="display:flex; gap:8px;">
         <button class="btn btn-primary btn-sm" onclick="applyReviewDecision('send')">Send / Allow</button>
@@ -995,7 +982,6 @@
   </div>
 </div>
 
-<!-- EMAIL DETAILS MODAL -->
 <div id="detailsModalBackdrop" class="modal-backdrop">
   <div class="modal" style="max-width:780px;">
     <div class="modal-header">
@@ -1003,8 +989,7 @@
       <button class="btn-ghost" onclick="closeDetailsModal()" style="color:#e5e7eb; font-size:1.1rem;">✕</button>
     </div>
     <div class="modal-body" id="detailsModalBody">
-      <!-- Filled dynamically -->
-    </div>
+      </div>
     <div class="modal-footer">
       <button class="btn btn-outline btn-sm" onclick="closeDetailsModal()">Close</button>
     </div>
@@ -1139,6 +1124,22 @@
       raw.pk ||
       raw.sk;
 
+    // --- NEW: Capture Body Preview and Reasoning ---
+    const bodyPreview = 
+      log.body_preview || 
+      content.body_preview || 
+      log.preview || 
+      content.preview || 
+      "";
+
+    const reasoning = 
+      log.reasoning || 
+      decisionAgent.reasoning || 
+      decisionAgent.explanation || 
+      log.explanation || 
+      "";
+    // -----------------------------------------------
+
     return {
       log,
       compact,
@@ -1162,6 +1163,8 @@
       hitlVerdict,
       timestamp: ts,
       id,
+      bodyPreview, 
+      reasoning
     };
   }
 
@@ -1206,6 +1209,8 @@
       queueStatus: base.queueStatus,
       hitlStatus: base.hitlStatus,
       hitlVerdict: base.hitlVerdict,
+      bodyPreview: base.bodyPreview, // Pass through
+      reasoning: base.reasoning,     // Pass through
       rawLog: base.log,
       _backend: raw,
     };
@@ -1255,6 +1260,8 @@
       hitlVerdict: base.hitlVerdict,
       riskScore: base.risk,
       phi: base.hasPhi,
+      bodyPreview: base.bodyPreview, // Pass through
+      reasoning: base.reasoning,     // Pass through
       rawLog: base.log,
       _backend: raw,
     };
@@ -1642,7 +1649,7 @@
   }
 
   /************************************************************
-   * REASONING MODAL (still simple, now backed by normalized fields)
+   * REASONING MODAL
    ************************************************************/
   function openReasoningModal(id) {
     const item = itQueue.find((i) => i.id === id);
@@ -1655,6 +1662,11 @@
       typeof item.confidence === "number"
         ? Math.round(item.confidence * 100) + "%"
         : "–";
+    
+    // UPDATED: Use real reasoning if present
+    const reasoningContent = item.reasoning 
+      ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>`
+      : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1670,8 +1682,8 @@
         <p><strong>Status:</strong> ${item.status}</p>
       </div>
       <div class="modal-section">
-        <div class="section-title">Notes</div>
-        <p>In this demo, token-level reasoning is stored in the backend decision log in S3. Once we finalize the schema, this panel can load the full LLM explanation for each message.</p>
+        <div class="section-title">Reasoning</div>
+        ${reasoningContent}
       </div>
     `;
 
@@ -1687,9 +1699,45 @@
   function openReasoningFromQuarantine(id) {
     const item = quarantineQueue.find((i) => i.id === id);
     if (!item) return;
-    alert(
-      "In this build, detailed AI reasoning for quarantined items is available in the backend logs. This modal can be wired similarly to the IT Review reasoning panel."
-    );
+    
+    currentReasoningItem = item;
+    const body = document.getElementById("reasoningModalBody");
+
+    const confidenceText =
+      typeof item.confidence === "number"
+        ? Math.round(item.confidence * 100) + "%"
+        : "–";
+    
+    const reasoningContent = item.reasoning 
+      ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>`
+      : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
+
+    body.innerHTML = `
+      <div class="modal-section">
+        <div class="section-title">AI summary</div>
+        <p>This email was classified as <strong>${item.classification ||
+          "unknown"}</strong> with confidence <strong>${confidenceText}</strong>.</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Email context</div>
+        <p><strong>From:</strong> ${item.sender}</p>
+        <p><strong>To:</strong> ${item.recipient}</p>
+        <p><strong>Subject:</strong> ${item.subject}</p>
+        <p><strong>Status:</strong> ${item.hitlStatus || item.queueStatus || "quarantined"}</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Reasoning</div>
+        ${reasoningContent}
+      </div>
+    `;
+
+    // reset feedback UI
+    document.getElementById("thumbUpBtn").classList.remove("active-thumb");
+    document.getElementById("thumbDownBtn").classList.remove("active-thumb");
+    document.getElementById("reasoningFeedbackText").value = "";
+    document.getElementById("reasoningFeedbackBox").style.display = "none";
+
+    document.getElementById("reasoningModalBackdrop").classList.add("active");
   }
 
   function closeReasoningModal() {
@@ -1812,6 +1860,12 @@
     const item = itQueue.find((i) => i.id === id);
     if (!item) return;
     const body = document.getElementById("detailsModalBody");
+    
+    // UPDATED: Use real body preview if present
+    const bodyContent = item.bodyPreview 
+      ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${item.bodyPreview}</pre>`
+      : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
+
     body.innerHTML = `
       <div class="modal-section">
         <div class="section-title">Headers</div>
@@ -1822,9 +1876,7 @@
       </div>
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
-        <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
-          [Demo placeholder: in the real system, this would show PHI-scrubbed MIME content for this email, pulled from the decision log.]
-        </p>
+        ${bodyContent}
       </div>
     `;
     document.getElementById("detailsModalBackdrop").classList.add("active");
@@ -1834,6 +1886,12 @@
     const item = quarantineQueue.find((i) => i.id === id);
     if (!item) return;
     const body = document.getElementById("detailsModalBody");
+
+    // UPDATED: Use real body preview
+    const bodyContent = item.bodyPreview 
+      ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${item.bodyPreview}</pre>`
+      : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
+
     body.innerHTML = `
       <div class="modal-section">
         <div class="section-title">Headers</div>
@@ -1848,9 +1906,7 @@
       </div>
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
-        <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
-          [Demo placeholder: PHI-scrubbed MIME body for quarantined email.]
-        </p>
+        ${bodyContent}
       </div>
     `;
     document.getElementById("detailsModalBackdrop").classList.add("active");
@@ -1860,6 +1916,12 @@
     const log = activityLog.find((l) => l.id === id);
     if (!log) return;
     const body = document.getElementById("detailsModalBody");
+
+    // UPDATED: Use real body preview
+    const bodyContent = log.bodyPreview 
+      ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${log.bodyPreview}</pre>`
+      : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
+
     body.innerHTML = `
       <div class="modal-section">
         <div class="section-title">Event summary</div>
@@ -1872,9 +1934,7 @@
       </div>
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
-        <p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">
-          [Demo placeholder: sanitized email body associated with this log entry. In a full build, this would be a PHI-safe view of the original MIME.]
-        </p>
+        ${bodyContent}
       </div>
     `;
     document.getElementById("detailsModalBackdrop").classList.add("active");

@@ -87,7 +87,6 @@ function pad2(n) {
 
 /**
  * Pull a PHI-scrubbed body for UI display.
- * Your pipeline currently uses compact.body_preview.
  */
 function extractBodyPreview(doc) {
   if (!doc) return null;
@@ -105,13 +104,11 @@ function extractBodyPreview(doc) {
 
 /**
  * Pull the best-available reasoning text.
- * UPDATED: Now prioritizes doc.content.notes[0].reasoning based on your JSON structure.
  */
 function extractReasoning(doc) {
   if (!doc) return null;
 
-  // 1. Content Analysis Reasoning (Highest Priority - from your JSON example)
-  // Path: content.notes[0].reasoning
+  // 1. Content Analysis Reasoning (Highest Priority)
   if (doc.content && Array.isArray(doc.content.notes) && doc.content.notes.length > 0) {
     const primaryNote = doc.content.notes[0];
     if (Array.isArray(primaryNote.reasoning)) {
@@ -131,7 +128,7 @@ function extractReasoning(doc) {
     return doc.summary.reasoning;
   }
 
-  // 4. Decision Agent "reasoning" or "explanation"
+  // 4. Decision Agent
   if (doc.decision_agent) {
     if (typeof doc.decision_agent.reasoning === "string") {
       return doc.decision_agent.reasoning;
@@ -147,7 +144,7 @@ function extractReasoning(doc) {
   // 5. Top level "explanation"
   if (typeof doc.explanation === "string") return doc.explanation;
 
-  // 6. Legacy / fallback "decision_reasons" (Lowest priority)
+  // 6. Legacy / fallback
   if (Array.isArray(doc.decision_reasons)) {
     return doc.decision_reasons.join("\n\n");
   }
@@ -321,13 +318,11 @@ app.get("/api/hitl/pending", async (req, res) => {
             classification,
             confidence,
             hitl_status: hitlStatus,
-            // body / reasoning for the modals:
             body_preview: bodyPreview,
             body_sanitized: bodyPreview,
             sanitizedBody: bodyPreview,
             reasoning: reasoningText,
             ai_notes: reasoningText,
-            // expose log fragments for advanced UIs:
             log_compact: doc.compact || null,
             log_summary: doc.summary || null,
             log_decision: doc.decision || null,
@@ -366,7 +361,7 @@ app.get("/api/hitl/pending", async (req, res) => {
 });
 
 // ----------------------
-// HITL API: APPLY VERDICT (ALLOW/BLOCK)
+// HITL API: APPLY VERDICT
 // ----------------------
 
 app.post("/api/hitl/:id/verdict", async (req, res) => {
@@ -498,9 +493,17 @@ app.get("/api/metrics", async (req, res) => {
     avgElapsed: 0,
     phiDetected: 0,
     classificationDist: {},
+    trend: [] // Array of { date: 'YYYY-MM-DD', count: N }
   };
 
   let elapsedSum = 0;
+  const dailyCounts = {}; // Map date -> count
+
+  // Initialize daily counts for the window
+  for (let i = windowDays - 1; i >= 0; i--) {
+    const d = now.subtract(i, "day").format("YYYY-MM-DD");
+    dailyCounts[d] = 0;
+  }
 
   try {
     const prefixes = [];
@@ -527,6 +530,7 @@ app.get("/api/metrics", async (req, res) => {
         for (const obj of listResp.Contents || []) {
           if (!obj.Key.endsWith(".json")) continue;
 
+          // Fetch minimal body if possible, or full body
           const data = await s3
             .getObject({ Bucket: METRICS_BUCKET, Key: obj.Key })
             .promise();
@@ -551,6 +555,15 @@ app.get("/api/metrics", async (req, res) => {
           if (body.statusCode && body.statusCode !== 200) {
             metrics.errors++;
           }
+
+          // Trend Logic
+          const tsStr = body.timestamp || body.compact?.date_iso || obj.LastModified;
+          if (tsStr) {
+            const dateKey = dayjs(tsStr).utc().format("YYYY-MM-DD");
+            if (dailyCounts.hasOwnProperty(dateKey)) {
+              dailyCounts[dateKey]++;
+            }
+          }
         }
 
         continuationToken = listResp.IsTruncated
@@ -560,6 +573,12 @@ app.get("/api/metrics", async (req, res) => {
     }
 
     metrics.avgElapsed = metrics.total ? elapsedSum / metrics.total : 0;
+
+    // Flatten dailyCounts to array
+    metrics.trend = Object.entries(dailyCounts).map(([date, count]) => ({
+      date,
+      count
+    }));
 
     res.json({ success: true, metrics });
   } catch (err) {
@@ -698,7 +717,6 @@ app.get("/api/history", async (req, res) => {
             phi_entities: phiEntities,
             s3_bucket: METRICS_BUCKET,
             s3_key: obj.Key,
-            // fields for Details / Reasoning modals:
             body_preview: bodyPreview,
             body_sanitized: bodyPreview,
             sanitizedBody: bodyPreview,

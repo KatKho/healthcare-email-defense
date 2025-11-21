@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>SecureMail Guardian – IT Administrator Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
       margin: 0;
@@ -400,19 +401,15 @@
       border-radius: 6px;
       padding: 12px;
       border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
     }
 
-    .chart-placeholder {
-      height: 150px;
-      background: repeating-linear-gradient(
-        -45deg,
-        #e5e7eb,
-        #e5e7eb 4px,
-        #f3f4f6 4px,
-        #f3f4f6 8px
-      );
-      border-radius: 4px;
-      margin-top: 8px;
+    /* Replaced .chart-placeholder with canvas containers */
+    .chart-container {
+      position: relative;
+      height: 200px;
+      width: 100%;
     }
 
     /* Modals */
@@ -838,14 +835,18 @@
             <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">
               Count of automatic vs HITL decisions (last 7 days)
             </div>
-            <div class="chart-placeholder"></div>
+            <div class="chart-container">
+              <canvas id="chartDecisions"></canvas>
+            </div>
           </div>
           <div class="chart-box">
             <div class="section-title">Classification mix</div>
             <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">
               Safe vs phishing vs suspicious
             </div>
-            <div class="chart-placeholder"></div>
+            <div class="chart-container">
+              <canvas id="chartClassification"></canvas>
+            </div>
           </div>
         </div>
 
@@ -854,7 +855,9 @@
           <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">
             Emails processed per day over last 7 days
           </div>
-          <div class="chart-placeholder" style="height: 120px;"></div>
+          <div class="chart-container" style="height: 200px;">
+            <canvas id="chartVolume"></canvas>
+          </div>
         </div>
       </div>
     </section>
@@ -1006,6 +1009,11 @@
 
   let currentReasoningItem = null;
   let currentReviewItem = null;
+  
+  // Chart instances
+  let chartDecisions = null;
+  let chartClassification = null;
+  let chartVolume = null;
 
   const DEFAULT_ACTOR = "mchen"; // For demo: maps to Michael Chen
 
@@ -1028,8 +1036,6 @@
     }
   }
 
-  // Pulls all the "core" pieces out of either:
-  //   raw.log_doc (preferred) OR raw directly (if API already flattened).
   function normalizeCommonFields(raw) {
     const log = raw.log_doc || raw.log || raw;
     const compact = log.compact || {};
@@ -1124,7 +1130,6 @@
       raw.pk ||
       raw.sk;
 
-    // --- NEW: Capture Body Preview and Reasoning ---
     const bodyPreview = 
       log.body_preview || 
       content.body_preview || 
@@ -1138,7 +1143,6 @@
       decisionAgent.explanation || 
       log.explanation || 
       "";
-    // -----------------------------------------------
 
     return {
       log,
@@ -1168,7 +1172,6 @@
     };
   }
 
-  // Normalize for the IT Review queue (/api/hitl/pending)
   function normalizeQueueItem(raw) {
     const base = normalizeCommonFields(raw);
 
@@ -1209,14 +1212,13 @@
       queueStatus: base.queueStatus,
       hitlStatus: base.hitlStatus,
       hitlVerdict: base.hitlVerdict,
-      bodyPreview: base.bodyPreview, // Pass through
-      reasoning: base.reasoning,     // Pass through
+      bodyPreview: base.bodyPreview,
+      reasoning: base.reasoning,
       rawLog: base.log,
       _backend: raw,
     };
   }
 
-  // Normalize for history/activity log (/api/history) & quarantine view
   function normalizeHistoryItem(raw) {
     const base = normalizeCommonFields(raw);
 
@@ -1260,8 +1262,8 @@
       hitlVerdict: base.hitlVerdict,
       riskScore: base.risk,
       phi: base.hasPhi,
-      bodyPreview: base.bodyPreview, // Pass through
-      reasoning: base.reasoning,     // Pass through
+      bodyPreview: base.bodyPreview,
+      reasoning: base.reasoning,
       rawLog: base.log,
       _backend: raw,
     };
@@ -1336,11 +1338,8 @@
       if (!data.success) throw new Error(data.message || "Backend error");
 
       const history = data.history || [];
-
-      // Normalize for UI
       activityLog = history.map((raw) => normalizeHistoryItem(raw));
 
-      // Derive quarantine from history: anything QUARANTINE or blocked by HITL
       quarantineQueue = activityLog.filter(
         (h) =>
           h.decisionCode === "QUARANTINE" || h.hitlVerdict === "block"
@@ -1398,6 +1397,14 @@
     }
   });
 
+  // FILTER EVENT LISTENERS
+  document.getElementById("reviewFilterClass").addEventListener("change", renderItQueue);
+  document.getElementById("reviewFilterStatus").addEventListener("change", renderItQueue);
+  
+  document.getElementById("histFilterClass").addEventListener("change", renderActivityLog);
+  document.getElementById("histFilterStatus").addEventListener("change", renderActivityLog);
+  document.getElementById("histFilterSearch").addEventListener("keyup", renderActivityLog);
+
   document.getElementById("histDateFrom").addEventListener("change", () => {
     loadHistoryFromBackend();
   });
@@ -1410,15 +1417,15 @@
    ************************************************************/
   function renderItQueue() {
     const tbody = document.getElementById("itReviewTableBody");
+    const classFilter = document.getElementById("reviewFilterClass").value;
+    const statusFilter = document.getElementById("reviewFilterStatus").value;
+
     if (!itQueue.length) {
       tbody.innerHTML =
         '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails currently waiting for review.</td></tr>';
       updateTopCounts();
       return;
     }
-
-    const classFilter = document.getElementById("reviewFilterClass").value;
-    const statusFilter = document.getElementById("reviewFilterStatus").value;
 
     const filtered = itQueue.filter((item) => {
       if (classFilter !== "all" && item.classification !== classFilter) {
@@ -1614,6 +1621,101 @@
     document.getElementById("metricQuarantineRate").textContent = quarantineRate;
     document.getElementById("metricPHIRate").textContent = phiRate;
     document.getElementById("metricErrorRate").textContent = errorRate;
+    
+    // Render Charts
+    renderCharts(metrics);
+  }
+
+  function renderCharts(metrics) {
+    // 1. Decision Distribution (Doughnut)
+    const ctxDec = document.getElementById('chartDecisions').getContext('2d');
+    if (chartDecisions) chartDecisions.destroy();
+    chartDecisions = new Chart(ctxDec, {
+      type: 'doughnut',
+      data: {
+        labels: ['Allowed', 'Quarantined', 'HITL Review'],
+        datasets: [{
+          data: [metrics.allow || 0, metrics.quarantined || 0, metrics.it_review || 0],
+          backgroundColor: ['#22c55e', '#ef4444', '#3b82f6'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
+        }
+      }
+    });
+
+    // 2. Classification Mix (Doughnut)
+    const ctxClass = document.getElementById('chartClassification').getContext('2d');
+    if (chartClassification) chartClassification.destroy();
+    
+    // Safely extract classification counts
+    const dist = metrics.classificationDist || {};
+    const safe = dist['safe'] || 0;
+    const phishing = dist['phishing'] || 0;
+    const suspicious = dist['suspicious'] || 0;
+    const other = Object.keys(dist).reduce((acc, key) => {
+       if(!['safe', 'phishing', 'suspicious'].includes(key)) return acc + dist[key];
+       return acc;
+    }, 0);
+
+    chartClassification = new Chart(ctxClass, {
+      type: 'doughnut',
+      data: {
+        labels: ['Safe', 'Phishing', 'Suspicious', 'Other'],
+        datasets: [{
+          data: [safe, phishing, suspicious, other],
+          backgroundColor: ['#22c55e', '#ef4444', '#f59e0b', '#9ca3af'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
+        }
+      }
+    });
+
+    // 3. Volume Trend (Line)
+    const ctxVol = document.getElementById('chartVolume').getContext('2d');
+    if (chartVolume) chartVolume.destroy();
+    
+    const trend = metrics.trend || [];
+    // Sort trend by date just in case
+    trend.sort((a, b) => a.date.localeCompare(b.date));
+    
+    chartVolume = new Chart(ctxVol, {
+      type: 'line',
+      data: {
+        labels: trend.map(t => t.date),
+        datasets: [{
+          label: 'Emails Processed',
+          data: trend.map(t => t.count),
+          borderColor: '#0073cc',
+          backgroundColor: 'rgba(0, 115, 204, 0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true, ticks: { precision: 0 } },
+          x: { ticks: { font: { size: 10 } } }
+        }
+      }
+    });
   }
 
   function renderMetricsFromQueues() {

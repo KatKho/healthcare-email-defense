@@ -1155,11 +1155,18 @@
     const reasoning = 
       log.reasoning || decisionAgent.reasoning || decisionAgent.explanation || log.explanation || "";
 
+    // UPDATED: Extract risk notes safely
+    const senderRiskNotes = 
+      raw.sender_risk_notes || 
+      summary.sender_risk_notes || 
+      getSafe(log, "sender_intel.raw.features.risk.notes", []) || 
+      [];
+
     return {
       log, compact, summary, senderIntel, ids, queue, hitl, decisionAgent, content,
       sender, recipient, subject, classification, confidence, risk, hasPhi,
       decisionCode, queueStatus, hitlStatus, hitlVerdict, timestamp: ts, id,
-      bodyPreview, reasoning
+      bodyPreview, reasoning, senderRiskNotes
     };
   }
 
@@ -1203,6 +1210,7 @@
       hitlVerdict: base.hitlVerdict,
       bodyPreview: base.bodyPreview,
       reasoning: base.reasoning,
+      senderRiskNotes: base.senderRiskNotes, // Pass through
       rawLog: base.log,
       _backend: raw,
     };
@@ -1243,6 +1251,7 @@
       phi: base.hasPhi,
       bodyPreview: base.bodyPreview,
       reasoning: base.reasoning,
+      senderRiskNotes: base.senderRiskNotes, // Pass through
       rawLog: base.log,
       s3_bucket: base.log.s3_bucket || base._backend.s3_bucket,
       s3_key: base.log.s3_key || base._backend.s3_key,
@@ -1718,6 +1727,41 @@
   /************************************************************
    * MODALS & ACTIONS
    ************************************************************/
+  
+  // Unified Helper for Sender Info
+  function renderSenderInfo(notes, item) {
+    const list = (notes && Array.isArray(notes)) ? notes : [];
+    
+    // Determine if we should show negative signals (Phishing/Quarantined)
+    // Note: We check against "QUARANTINE" (from AI) or "block" (from IT)
+    const showNegativeSignals = 
+        (item && item.classification === 'phishing') || 
+        (item && item.queueStatus === 'quarantined') || 
+        (item && item.decisionCode === 'QUARANTINE') ||
+        (item && item.hitlVerdict === 'block');
+
+    const filtered = list.filter(n => {
+        if (n.includes("security.txt")) return false; // Always hide security.txt noise
+        if (n.includes("LinkedIn")) {
+            // Only show "No LinkedIn" if it's a high-risk context
+            return showNegativeSignals; 
+        }
+        return true;
+    });
+
+    if (filtered.length === 0) {
+      filtered.push("Unknown Sender"); 
+    }
+
+    return `
+      <div style="margin-top:12px; background:#eff6ff; padding:10px; border-radius:6px; border:1px solid #bfdbfe;">
+        <strong style="color:#1e40af; font-size:0.8rem; display:block; margin-bottom:4px;">Sender Information:</strong>
+        <ul style="margin:0 0 0 18px; padding:0; color:#1e3a8a; font-size:0.8rem;">
+          ${filtered.map(n => `<li style="margin-bottom:2px;">${n}</li>`).join("")}
+        </ul>
+      </div>`;
+  }
+
   function openReasoningModal(id) {
     const item = itQueue.find((i) => i.id === id);
     if (!item) return;
@@ -1725,6 +1769,7 @@
     const body = document.getElementById("reasoningModalBody");
     const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
     const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
+    const senderInfoHtml = renderSenderInfo(item.senderRiskNotes, item);
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1741,6 +1786,7 @@
       <div class="modal-section">
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
+        ${senderInfoHtml}
       </div>`;
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
     document.getElementById("thumbDownBtn").classList.remove("active-thumb");
@@ -1756,6 +1802,7 @@
     const body = document.getElementById("reasoningModalBody");
     const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
     const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
+    const senderInfoHtml = renderSenderInfo(item.senderRiskNotes, item);
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1772,6 +1819,7 @@
       <div class="modal-section">
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
+        ${senderInfoHtml}
       </div>`;
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
     document.getElementById("thumbDownBtn").classList.remove("active-thumb");
@@ -1780,7 +1828,6 @@
     document.getElementById("reasoningModalBackdrop").classList.add("active");
   }
 
-  // NEW: Open Reasoning from Activity Log
   function openReasoningFromLog(id) {
     const item = activityLog.find((i) => i.id === id);
     if (!item) return;
@@ -1788,6 +1835,7 @@
     const body = document.getElementById("reasoningModalBody");
     const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
     const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
+    const senderInfoHtml = renderSenderInfo(item.senderRiskNotes, item);
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1804,6 +1852,7 @@
       <div class="modal-section">
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
+        ${senderInfoHtml}
       </div>`;
     
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");

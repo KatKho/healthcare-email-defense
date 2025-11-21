@@ -274,6 +274,12 @@ app.get("/api/hitl/pending", async (req, res) => {
 
           const bodyPreview = extractBodyPreview(doc);
           const reasoningText = extractReasoning(doc);
+          
+          // UPDATED: Extract sender risk notes from S3 doc
+          const senderRiskNotes = 
+            doc.summary?.sender_risk_notes || 
+            doc.sender_intel?.raw?.features?.risk?.notes || 
+            [];
 
           const fromAddr =
             doc.compact?.from?.addr || item.from_addr || "unknown";
@@ -301,6 +307,7 @@ app.get("/api/hitl/pending", async (req, res) => {
             body_sanitized: bodyPreview,
             sanitizedBody: bodyPreview,
             reasoning: reasoningText,
+            sender_risk_notes: senderRiskNotes, // Add this to response
             ai_notes: reasoningText,
             log_compact: doc.compact || null,
             log_summary: doc.summary || null,
@@ -770,6 +777,12 @@ app.get("/api/history", async (req, res) => {
           const bodyPreview = extractBodyPreview(body);
           const reasoningText = extractReasoning(body);
 
+          // UPDATED: Extract sender risk notes
+          const senderRiskNotes = 
+            body.summary?.sender_risk_notes || 
+            body.sender_intel?.raw?.features?.risk?.notes || 
+            [];
+
           history.push({
             id: runId,
             timestamp: ts.toISOString(),
@@ -792,6 +805,7 @@ app.get("/api/history", async (req, res) => {
             body_sanitized: bodyPreview,
             sanitizedBody: bodyPreview,
             reasoning: reasoningText,
+            sender_risk_notes: senderRiskNotes, // Add to history
             ai_notes: reasoningText,
           });
         }

@@ -799,7 +799,6 @@
               <th onclick="handleSort('quarantine', 'sender')">Sender</th>
               <th onclick="handleSort('quarantine', 'recipient')">Recipient</th>
               <th onclick="handleSort('quarantine', 'subject')">Subject</th>
-              <th onclick="handleSort('quarantine', 'riskScore')">Risk</th>
               <th onclick="handleSort('quarantine', 'classification')">Classification</th>
               <th onclick="handleSort('quarantine', 'phi')">PHI</th>
               <th class="no-sort" style="width: 150px;">Actions</th>
@@ -807,7 +806,7 @@
             </thead>
             <tbody id="quarantineTableBody">
             <tr>
-              <td colspan="8" style="text-align:center; padding:16px; color: var(--text-secondary);">
+              <td colspan="7" style="text-align:center; padding:16px; color: var(--text-secondary);">
                 No emails currently quarantined.
               </td>
             </tr>
@@ -845,6 +844,11 @@
             <div class="metric-label">Quarantine rate</div>
             <div class="metric-value" id="metricQuarantineRate">–</div>
             <div class="metric-pill">% of all emails</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">IT Review Rate</div>
+            <div class="metric-value" id="metricItReviewRate">–</div>
+            <div class="metric-pill">% sent to IT review</div>
           </div>
           <div class="metric-card">
             <div class="metric-label">PHI detection rate</div>
@@ -892,6 +896,16 @@
           </div>
           <div class="chart-container" style="height: 200px;">
             <canvas id="chartVolume"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-box" style="margin-top: 14px;">
+          <div class="section-title">IT Review volume trend</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">
+            Number of emails sent to IT Review per day over last 7 days
+          </div>
+          <div class="chart-container" style="height: 200px;">
+            <canvas id="chartHitlTrend"></canvas>
           </div>
         </div>
       </div>
@@ -954,7 +968,7 @@
               <th onclick="handleSort('history', 'aiDecision')">AI Decision</th>
               <th onclick="handleSort('history', 'itDecision')">IT Decision</th>
               <th onclick="handleSort('history', 'latency')">Latency</th>
-              <th class="no-sort" style="width: 80px;">Details</th>
+              <th class="no-sort" style="width: 170px;">Actions</th>
             </tr>
             </thead>
             <tbody id="activityLogTableBody">
@@ -1049,6 +1063,7 @@
   let chartDecisions = null;
   let chartClassification = null;
   let chartVolume = null;
+  let chartHitlTrend = null; // NEW
 
   // SORTING STATE
   const sortState = {
@@ -1152,8 +1167,10 @@
     const base = normalizeCommonFields(raw);
 
     let status = "pending";
-    if (base.hitlStatus === "completed") {
-      status = (base.queueStatus === "quarantined" || base.decisionCode === "QUARANTINE") ? "quarantined" : "released";
+    if (base.hitlStatus === "completed" || base.hitlStatus === "resolved") {
+      status = (base.queueStatus === "quarantined" || base.decisionCode === "QUARANTINE" || base.hitlVerdict === "block") 
+        ? "quarantined" 
+        : "released";
     } else if (base.queueStatus === "quarantined") {
       status = "quarantined";
     }
@@ -1202,7 +1219,7 @@
 
     const aiDecision = base.decisionCode || "–";
     let itDecision = "–";
-    if (base.hitlStatus === "completed") {
+    if (base.hitlStatus === "completed" || base.hitlStatus === "resolved") {
       if (base.hitlVerdict === "allow") itDecision = "Allowed";
       else if (base.hitlVerdict === "block") itDecision = "Quarantined";
       else itDecision = "Completed";
@@ -1227,6 +1244,8 @@
       bodyPreview: base.bodyPreview,
       reasoning: base.reasoning,
       rawLog: base.log,
+      s3_bucket: base.log.s3_bucket || base._backend.s3_bucket,
+      s3_key: base.log.s3_key || base._backend.s3_key,
       _backend: raw,
     };
   }
@@ -1323,7 +1342,6 @@
     }
   }
 
-  // NEW: Fetch Stats for the 3 cards
   async function loadHitlStats() {
     try {
       const resp = await fetch("/api/hitl/stats");
@@ -1331,18 +1349,11 @@
       const data = await resp.json();
       
       if (data.success) {
-        // 1. Pending
         document.getElementById("metricPending").textContent = data.pending;
         document.getElementById("queueCountHeader").textContent = data.pending + " pending";
-
-        // 2. Reviewed Today
         document.getElementById("metricReviewedToday").textContent = data.reviewedToday;
-
-        // 3. Accuracy
         const acc = Math.round(data.accuracy * 100);
         document.getElementById("metricReviewAccuracy").textContent = acc + "%";
-
-        // 4. Time
         let timeText = "0s";
         const sec = data.avgTimeSeconds;
         if (sec >= 60) {
@@ -1423,7 +1434,7 @@
    ************************************************************/
   document.getElementById("refreshQueueBtn").addEventListener("click", async () => {
     await loadHitlQueue();
-    await loadHitlStats(); // Added this
+    await loadHitlStats(); 
     await loadHistoryFromBackend();
   });
 
@@ -1468,7 +1479,6 @@
 
     if (!sorted.length) {
       tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails match current filters.</td></tr>';
-      // Removed updateTopCounts() here because loadHitlStats handles the cards now
       return;
     }
 
@@ -1572,6 +1582,7 @@
         <td>${log.latency}</td>
         <td>
           <button class="btn btn-outline btn-sm" onclick="openDetailsFromLog('${log.id}')">Details</button>
+          <button class="btn btn-outline btn-sm" onclick="openReasoningFromLog('${log.id}')">Reasoning</button>
         </td>
       </tr>`).join("");
       
@@ -1585,10 +1596,12 @@
     const phiDetected = metrics.phiDetected || 0;
     const errors = metrics.errors || 0;
     const avgElapsed = metrics.avgElapsed || 0;
+    const itReviewCount = metrics.it_review || 0; // From backend count
 
     const quarantineRate = total ? ((quarantined / total) * 100).toFixed(1) + "%" : "0%";
     const phiRate = total ? ((phiDetected / total) * 100).toFixed(1) + "%" : "0%";
     const errorRate = total ? ((errors / total) * 100).toFixed(1) + "%" : "0%";
+    const itReviewRate = total ? ((itReviewCount / total) * 100).toFixed(1) + "%" : "0%";
 
     let avgTimeText = "–";
     if (avgElapsed) {
@@ -1600,6 +1613,7 @@
     document.getElementById("metricQuarantineRate").textContent = quarantineRate;
     document.getElementById("metricPHIRate").textContent = phiRate;
     document.getElementById("metricErrorRate").textContent = errorRate;
+    document.getElementById("metricItReviewRate").textContent = itReviewRate;
     renderCharts(metrics);
   }
 
@@ -1657,6 +1671,32 @@
           data: trend.map(t => t.count),
           borderColor: '#0073cc',
           backgroundColor: 'rgba(0, 115, 204, 0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { ticks: { font: { size: 10 } } } }
+      }
+    });
+
+    // NEW CHART: IT Review Trend
+    const ctxHitl = document.getElementById('chartHitlTrend').getContext('2d');
+    if (chartHitlTrend) chartHitlTrend.destroy();
+    const hitlTrend = metrics.hitlTrend || [];
+    hitlTrend.sort((a, b) => a.date.localeCompare(b.date));
+
+    chartHitlTrend = new Chart(ctxHitl, {
+      type: 'line',
+      data: {
+        labels: hitlTrend.map(t => t.date),
+        datasets: [{
+          label: 'Sent to IT Review',
+          data: hitlTrend.map(t => t.count),
+          borderColor: '#f97316', // Orange for warning/action
+          backgroundColor: 'rgba(249, 115, 22, 0.1)',
           fill: true,
           tension: 0.3,
           pointRadius: 4
@@ -1734,6 +1774,39 @@
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
       </div>`;
+    document.getElementById("thumbUpBtn").classList.remove("active-thumb");
+    document.getElementById("thumbDownBtn").classList.remove("active-thumb");
+    document.getElementById("reasoningFeedbackText").value = "";
+    document.getElementById("reasoningFeedbackBox").style.display = "none";
+    document.getElementById("reasoningModalBackdrop").classList.add("active");
+  }
+
+  // NEW: Open Reasoning from Activity Log
+  function openReasoningFromLog(id) {
+    const item = activityLog.find((i) => i.id === id);
+    if (!item) return;
+    currentReasoningItem = item;
+    const body = document.getElementById("reasoningModalBody");
+    const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
+    const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
+
+    body.innerHTML = `
+      <div class="modal-section">
+        <div class="section-title">AI summary</div>
+        <p>This email was classified as <strong>${item.classification || "unknown"}</strong> with confidence <strong>${confidenceText}</strong>.</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Email context</div>
+        <p><strong>From:</strong> ${item.sender}</p>
+        <p><strong>To:</strong> ${item.recipient}</p>
+        <p><strong>Subject:</strong> ${item.subject}</p>
+        <p><strong>Status:</strong> ${item.hitlStatus || "completed"}</p>
+      </div>
+      <div class="modal-section">
+        <div class="section-title">Reasoning</div>
+        ${reasoningContent}
+      </div>`;
+    
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
     document.getElementById("thumbDownBtn").classList.remove("active-thumb");
     document.getElementById("reasoningFeedbackText").value = "";
@@ -1878,23 +1951,75 @@
     const log = activityLog.find((l) => l.id === id);
     if (!log) return;
     const body = document.getElementById("detailsModalBody");
+
+    const wasBlocked = log.decisionCode === 'QUARANTINE' || log.hitlVerdict === 'block';
+    const feedbackAction = wasBlocked ? "allow" : "block";
+    const feedbackBtnText = wasBlocked ? "Mark as Safe (Allow)" : "Mark as Malicious (Block)";
+    const btnStyle = wasBlocked ? "background-color: #10b981; color: white; border: none;" : "background-color: #ef4444; color: white; border: none;";
+
     const bodyContent = log.bodyPreview ? `<pre style="white-space: pre-wrap; background:#f9fafb; padding:8px; border-radius:4px; font-size:0.85rem;">${log.bodyPreview}</pre>` : `<p style="font-family:monospace; background:#f9fafb; padding:8px; border-radius:4px;">[No body preview available]</p>`;
 
     body.innerHTML = `
       <div class="modal-section">
         <div class="section-title">Event summary</div>
-        <p><strong>Timestamp:</strong> ${log.timestamp}</p>
-        <p><strong>Sender:</strong> ${log.sender}</p>
-        <p><strong>Recipient:</strong> ${log.recipient}</p>
-        <p><strong>Subject:</strong> ${log.subject}</p>
-        <p><strong>AI decision:</strong> ${log.aiDecision}</p>
-        <p><strong>IT decision:</strong> ${log.itDecision}</p>
+        <div class="key-value">
+          <div class="key-label">Timestamp</div><div class="value-text">${log.timestamp}</div>
+          <div class="key-label">Sender</div><div class="value-text">${log.sender}</div>
+          <div class="key-label">Recipient</div><div class="value-text">${log.recipient}</div>
+          <div class="key-label">Subject</div><div class="value-text">${log.subject}</div>
+          <div class="key-label">AI Decision</div><div class="value-text">${log.aiDecision}</div>
+          <div class="key-label">IT Decision</div><div class="value-text">${log.itDecision}</div>
+        </div>
       </div>
+      
       <div class="modal-section">
         <div class="section-title">Body (sanitized)</div>
         ${bodyContent}
-      </div>`;
+      </div>
+
+      <div class="modal-section" style="background: #f0f9ff; padding: 12px; border-radius: 6px; border: 1px solid #bae6fd;">
+        <div class="section-title" style="color: #0369a1;">Admin Review & Feedback</div>
+        <p style="margin-bottom:10px; font-size: 0.85rem; color: #334155;">
+          Is the current status <strong>${wasBlocked ? "Quarantined" : "Allowed"}</strong> incorrect? 
+          Submitting feedback will update the sender's Trust Score for future emails.
+        </p>
+        <div style="display:flex; gap: 10px; align-items: center;">
+          <button class="btn btn-sm" style="${btnStyle}" onclick="submitHistoryFeedback('${log.s3_bucket}', '${log.s3_key}', '${feedbackAction}')">
+            ${feedbackBtnText}
+          </button>
+          <input type="text" id="feedbackNotes-${log.id}" placeholder="Optional notes (e.g. 'Legitimate vendor invoice')" style="flex:1; padding: 5px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.8rem;">
+        </div>
+      </div>
+    `;
     document.getElementById("detailsModalBackdrop").classList.add("active");
+  }
+
+  async function submitHistoryFeedback(bucket, key, verdict) {
+    const notesInput = document.querySelector("input[id^='feedbackNotes-']");
+    const notes = notesInput ? notesInput.value : "";
+
+    if(!confirm(`Are you sure you want to mark this sender as ${verdict.toUpperCase()}? This will influence future AI decisions.`)) {
+        return;
+    }
+
+    try {
+      const resp = await fetch("/api/history/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bucket, key, verdict, notes, actor: DEFAULT_ACTOR })
+      });
+      
+      const data = await resp.json();
+      if (data.success) {
+        alert("Feedback submitted successfully. The Trust Score for this sender has been updated.");
+        closeDetailsModal();
+      } else {
+        alert("Error submitting feedback: " + (data.error || "Unknown error"));
+      }
+    } catch(err) {
+      console.error(err);
+      alert("Network error submitting feedback.");
+    }
   }
 
   function closeDetailsModal() {

@@ -1509,7 +1509,7 @@
     const sorted = getSortedData(quarantineQueue, 'quarantine');
 
     if (!sorted.length) {
-      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails currently quarantined.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:16px; color:#6b7280;">No emails currently quarantined.</td></tr>';
       document.getElementById("metricQuarantineTotal").textContent = "0";
       document.getElementById("metricQuarantinePHI").textContent = "0";
       return;
@@ -1524,7 +1524,6 @@
         <td>${item.sender}</td>
         <td>${item.recipient}</td>
         <td>${item.subject}</td>
-        <td>${item.riskScore}</td>
         <td>${renderClassificationBadge(item.classification, item.confidence)}</td>
         <td>${item.phi ? '<span class="badge badge-suspicious">PHI</span>' : "–"}</td>
         <td>

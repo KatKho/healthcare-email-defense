@@ -1516,143 +1516,337 @@
             document.getElementById('userName').textContent = userName;
         }
 
-        // Enhanced email data structure - Dental Clinic Scenario
+        // Email data sourced from synthetic_emails.json
         const emails = [
+            // --- 🚨 High Risk / Phishing Examples (5 items) ---
             {
-                id: 'email1',
-                sender: 'billing@brightsmilelab.com',
-                to: 'kyle.assistant@smileclinic.org',
-                subject: 'URGENT: Crown ready for pickup - Patient #4521',
-                timestamp: '2 hours ago',
+                id: 'email_syn_01',
+                sender: 'security@hospital-it.org',
+                to: 'Kyle Assistant',
+                subject: 'Security alert: Verify your account now',
+                timestamp: '15 mins ago',
                 labels: ['Urgent', 'Suspicious'],
                 status: 'suspicious',
                 read: false,
                 requiresCosign: false,
-                folder: 'Lab Results',
-                patient: { name: 'Michael Chen', mrn: '4521', dob: '03/22/1975' },
-                encounter: 'Crown Prep 10/29/2025',
-                attachments: ['CrownSpec_4521.pdf'],
-                actionRequired: 'Review',
-                content: `Dear Smile Dental Clinic,
-
-URGENT: Crown restoration for Patient #4521 (Michael Chen, DOB: 03/22/1975) is ready for pickup.
-
-The crown has been completed and is ready for delivery. Please confirm pickup time by clicking here: [Confirm Pickup](https://brightsmilelab-verify.com/pickup?id=4521)
-
-Crown Details:
-- Material: Porcelain fused to metal
-- Shade: A2
-- Delivery Date: Today
-- Estimated Cost: $850.00
-
-Please contact us immediately to schedule pickup. Failure to confirm may delay patient treatment.
-
-Best regards,
-Bright Smile Lab Services
-billing@brightsmilelab.com`
+                folder: 'All',
+                patient: null,
+                attachments: [],
+                actionRequired: 'Verify',
+                rationale: 'External domain mimicking internal IT; urgent credential request.',
+                content: `We detected unusual sign-in activity on your account. To restore normal access, please verify your account now at https://hospital-it-reset.org. Do not share your credentials with anyone.`
             },
             {
-                id: 'email2',
-                sender: 'claims@deltadental-insurance.com',
-                to: 'kyle.assistant@smileclinic.org',
-                subject: 'Insurance claim status update - Claim #INS-2025-789',
-                timestamp: '1 day ago',
+                id: 'email_syn_02',
+                sender: 'finance@hospital-payroll.com',
+                to: 'Kyle Assistant',
+                subject: 'ACTION REQUIRED: Payroll details confirmation',
+                timestamp: '45 mins ago',
+                labels: ['Urgent', 'Suspicious'],
+                status: 'suspicious',
+                read: false,
+                requiresCosign: true,
+                folder: 'All',
+                patient: null,
+                attachments: [],
+                actionRequired: 'Review',
+                rationale: 'Financial urgency from unknown payroll domain.',
+                content: `We were unable to process your payroll run. Please confirm your bank account details at the link below to avoid delays: http://hospital-payroll-secure.com/login\n\nIf you did not request this change, contact Payroll immediately.`
+            },
+            {
+                id: 'email_syn_03',
+                sender: 'docs@docusign-verify.org',
+                to: 'Kyle Assistant',
+                subject: 'Document requires signature to release funds',
+                timestamp: '2 hours ago',
+                labels: ['Suspicious'],
+                status: 'suspicious',
+                read: false,
+                requiresCosign: false,
+                folder: 'All',
+                patient: null,
+                attachments: [],
+                actionRequired: 'Review',
+                rationale: 'Unexpected document signature request from generic domain.',
+                content: `A document requires your signature to proceed with the scheduled funds release. Please review and sign the document here: http://docusign-verify.org. If you did not expect this request, contact the sender before taking action.`
+            },
+            {
+                id: 'email_syn_04',
+                sender: 'voice@voicemail-access.org',
+                to: 'Kyle Assistant',
+                subject: 'Voicemail with confidential info – listen now',
+                timestamp: '3 hours ago',
+                labels: ['Suspicious'],
+                status: 'suspicious',
+                read: true,
+                requiresCosign: false,
+                folder: 'All',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                rationale: 'Voicemail phishing lure using urgency.',
+                content: `You have a new voicemail that may contain confidential information. Listen to the message here: http://voicemail-access.org. If unexpected, report it to the helpdesk and do not forward the link.`
+            },
+            {
+                id: 'email_syn_05',
+                sender: 'access@remote-verify.org',
+                to: 'Kyle Assistant',
+                subject: 'Immediate: Remote access credential revalidation',
+                timestamp: 'Yesterday',
+                labels: ['Urgent', 'Suspicious'],
+                status: 'suspicious',
+                read: true,
+                requiresCosign: false,
+                folder: 'All',
+                patient: null,
+                attachments: [],
+                actionRequired: 'Verify',
+                rationale: 'Unauthorized request for credentials via link.',
+                content: `Your remote access credentials must be revalidated. Please enter your network username and password at the link provided to prevent access interruption.`
+            },
+            // --- 🏥 Internal / Safe Notifications (10 items) ---
+            {
+                id: 'email_syn_06',
+                sender: 'no-reply@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Monthly IT maintenance window - Saturday 02:00-05:00',
+                timestamp: '1 hour ago',
                 labels: [],
                 status: 'safe',
                 read: true,
                 requiresCosign: false,
-                folder: 'Insurance',
-                patient: { name: 'Emily Rodriguez', mrn: '3892' },
-                encounter: 'Root Canal 10/25/2025',
-                attachments: ['Claim_INS-2025-789.pdf'],
+                folder: 'Team Messages',
+                patient: null,
+                attachments: [],
                 actionRequired: null,
-                content: `Hello Smile Dental Clinic,
-
-Your insurance claim #INS-2025-789 for patient Emily Rodriguez has been processed.
-
-Claim Summary:
-- Procedure: Root Canal (Code: D3310)
-- Submitted Amount: $1,200.00
-- Approved Amount: $960.00
-- Patient Responsibility: $240.00
-- Status: Approved
-
-Payment will be processed within 5-7 business days. Please review the attached claim details.
-
-If you have any questions, please contact our claims department.
-
-Thank you,
-Delta Dental Insurance Services
-claims@deltadental-insurance.com`
+                content: `Our scheduled IT maintenance will occur Saturday from 02:00 to 05:00. Services may be temporarily unavailable. No action required unless you experience issues after the window.`
             },
             {
-                id: 'email3',
-                sender: 'dr.martinez@smileclinic.org',
-                to: 'kyle.assistant@smileclinic.org',
-                subject: 'Patient appointment reminder - Tomorrow 2 PM',
-                timestamp: '3 hours ago',
-                labels: ['Urgent'],
+                id: 'email_syn_07',
+                sender: 'patient-portal@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'New message from Dr. Alvarez',
+                timestamp: '2 hours ago',
+                labels: [],
                 status: 'safe',
                 read: false,
                 requiresCosign: false,
-                folder: 'Team Messages',
-                patient: { name: 'Robert Williams', mrn: '2156' },
-                encounter: 'Follow-up Appointment 10/30/2025',
+                folder: 'Lab Results',
+                patient: { name: 'Jane Doe', mrn: '8821' },
+                encounter: 'Check-up',
                 attachments: [],
-                actionRequired: 'Acknowledge',
-                content: `Hi Kyle,
-
-URGENT: Reminder for tomorrow's appointment.
-
-Patient: Robert Williams (MRN: #2156)
-Appointment Time: 2:00 PM
-Procedure: Extraction follow-up
-Special Notes: Patient requested early arrival for X-ray review
-
-Please ensure:
-- X-ray images are ready for review
-- Extraction site healing check
-- Post-op instructions prepared
-
-Let me know if you need anything else.
-
-Thanks,
-Dr. Martinez
-Smile Dental Clinic`
+                actionRequired: 'Read',
+                content: `You have a new secure message from Dr. Alvarez in the patient portal regarding your recent lab results. Log in to view the message.`
             },
             {
-                id: 'email4',
-                sender: 'orders@henryschein-dental.com',
-                to: 'kyle.assistant@smileclinic.org',
-                subject: 'Supply order confirmation - Order #SUP-1029',
+                id: 'email_syn_08',
+                sender: 'scheduling@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Shift swap request approved',
+                timestamp: '4 hours ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Team Messages',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                content: `Your request to swap shifts on June 12 was approved. Please confirm coverage in the staffing portal.`
+            },
+            {
+                id: 'email_syn_09',
+                sender: 'pharmacy@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'New controlled substance handling policy',
+                timestamp: 'Yesterday',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Team Messages',
+                patient: null,
+                attachments: ['Policy_Update.pdf'],
+                actionRequired: 'Acknowledge',
+                content: `Please review the updated controlled substance handling policy attached. All staff who handle controlled meds must complete the short acknowledgment form in the LMS.`
+            },
+            {
+                id: 'email_syn_10',
+                sender: 'hr@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Open enrollment reminder - benefits elections due',
+                timestamp: 'Yesterday',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Team Messages',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                content: `Open enrollment closes next Friday. Review your benefit options and submit elections through the HR portal. Contact HR if you need help.`
+            },
+            {
+                id: 'email_syn_11',
+                sender: 'cafeteria@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Menu update for this week',
+                timestamp: '2 days ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'All',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                content: `The cafeteria menu for this week includes new healthier options. Check the attached schedule.`
+            },
+            {
+                id: 'email_syn_12',
+                sender: 'compliance@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Quarterly compliance audit schedule',
+                timestamp: '2 days ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Team Messages',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                content: `The quarterly compliance audit will occur the week of July 14. Please ensure staff training records are current and accessible.`
+            },
+            {
+                id: 'email_syn_13',
+                sender: 'transport@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Transport team delay notice',
+                timestamp: '3 days ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Appointments',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                content: `Transport teams are experiencing delays due to high patient volume. Please allow extra time.`
+            },
+            {
+                id: 'email_syn_14',
+                sender: 'events@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Annual staff appreciation event',
+                timestamp: '3 days ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Team Messages',
+                patient: null,
+                attachments: [],
+                actionRequired: 'RSVP',
+                content: `Join us for the annual staff appreciation breakfast this Friday in the cafeteria.`
+            },
+            {
+                id: 'email_syn_15',
+                sender: 'it-support@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Password reset request completed',
+                timestamp: '4 days ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'All',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                content: `Your password reset was completed successfully. If you did not request this, contact it-support immediately or submit a ticket.`
+            },
+            // --- 📦 Vendor / Business Emails (5 items) ---
+            {
+                id: 'email_syn_16',
+                sender: 'vendor@lab-supplies.com',
+                to: 'Kyle Assistant',
+                subject: 'Order confirmation - centrifuge replacement parts',
                 timestamp: '5 hours ago',
+                labels: [],
+                status: 'safe',
+                read: false,
+                requiresCosign: false,
+                folder: 'Supplies',
+                patient: null,
+                attachments: ['Invoice_9921.pdf'],
+                actionRequired: null,
+                content: `Thank you for your order. Order #12345 is confirmed. Estimated delivery: 3 business days. Invoice will follow via the vendor portal.`
+            },
+            {
+                id: 'email_syn_17',
+                sender: 'billing@vendor-healthsupplies.net',
+                to: 'Kyle Assistant',
+                subject: 'Urgent: Invoice requires immediate payment',
+                timestamp: '6 hours ago',
+                labels: ['Urgent', 'Suspicious'],
+                status: 'suspicious',
+                read: false,
+                requiresCosign: false,
+                folder: 'Insurance',
+                patient: null,
+                attachments: [],
+                actionRequired: 'Payment',
+                rationale: 'Payment urgency from external vendor domain.',
+                content: `Attention: A payment for your department could not be completed. Please review the attached invoice and confirm the updated bank details so we can process payment today.`
+            },
+            {
+                id: 'email_syn_18',
+                sender: 'supply@hospital-org.com',
+                to: 'Kyle Assistant',
+                subject: 'Backorder notice - gloves size medium',
+                timestamp: 'Yesterday',
                 labels: [],
                 status: 'safe',
                 read: true,
                 requiresCosign: false,
                 folder: 'Supplies',
                 patient: null,
-                encounter: null,
-                attachments: ['Order_SUP-1029.pdf'],
+                attachments: [],
                 actionRequired: null,
-                content: `Hello Smile Dental Clinic,
-
-Your supply order #SUP-1029 has been confirmed and is being processed.
-
-Order Summary:
-- Nitrile Gloves (Medium): 10 boxes
-- Dental Floss: 5 cases
-- Anesthetic Cartridges: 2 boxes
-- Disposable Bibs: 3 boxes
-
-Total Amount: $485.00
-Estimated Delivery: 2-3 business days
-
-Invoice will be sent separately. Please review the attached order confirmation.
-
-Thank you for your business,
-Henry Schein Dental
-orders@henryschein-dental.com`
+                content: `Glove shipments are delayed due to vendor shortages. Next delivery expected in two weeks.`
+            },
+            {
+                id: 'email_syn_19',
+                sender: 'donations@hospital-foundation.org',
+                to: 'Kyle Assistant',
+                subject: 'Thank you for your support — donation receipt',
+                timestamp: '2 days ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'All',
+                patient: null,
+                attachments: ['Receipt.pdf'],
+                actionRequired: null,
+                content: `Thank you for your generous donation. Your tax receipt is attached. Contact the foundation if you need anything else.`
+            },
+            {
+                id: 'email_syn_20',
+                sender: 'research@university-affil.edu',
+                to: 'Kyle Assistant',
+                subject: 'IRB approval notice for protocol 2025-78',
+                timestamp: '3 days ago',
+                labels: [],
+                status: 'safe',
+                read: true,
+                requiresCosign: false,
+                folder: 'Lab Results',
+                patient: null,
+                attachments: [],
+                actionRequired: null,
+                content: `IRB approval granted for protocol 2025-78. Please review the approval letter and follow-up requirements attached.`
             }
         ];
 

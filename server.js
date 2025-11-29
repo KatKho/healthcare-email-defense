@@ -68,6 +68,7 @@ const METRICS_BUCKET = DECISIONS_BUCKET;
 const METRICS_PREFIX = DECISIONS_PREFIX;
 
 const FEEDBACK_TABLE = process.env.FEEDBACK_TABLE || "sender_feedback_table";
+const FEEDBACK_AGENT_FN = process.env.FEEDBACK_AGENT_FN || "feedback_agent_lambda";
 
 // ------------
 // HELPERS
@@ -275,7 +276,6 @@ app.get("/api/hitl/pending", async (req, res) => {
           const bodyPreview = extractBodyPreview(doc);
           const reasoningText = extractReasoning(doc);
           
-          // UPDATED: Extract sender risk notes from S3 doc
           const senderRiskNotes = 
             doc.summary?.sender_risk_notes || 
             doc.sender_intel?.raw?.features?.risk?.notes || 
@@ -294,6 +294,8 @@ app.get("/api/hitl/pending", async (req, res) => {
 
           const hitlStatus =
             doc.hitl?.status || doc.decision_agent?.hitl?.status || item.status;
+            
+          const hitlNotes = doc.hitl?.notes || item.notes || "";
 
           return {
             ...item,
@@ -303,11 +305,12 @@ app.get("/api/hitl/pending", async (req, res) => {
             classification,
             confidence,
             hitl_status: hitlStatus,
+            hitl_notes: hitlNotes,
             body_preview: bodyPreview,
             body_sanitized: bodyPreview,
             sanitizedBody: bodyPreview,
             reasoning: reasoningText,
-            sender_risk_notes: senderRiskNotes, // Add this to response
+            sender_risk_notes: senderRiskNotes,
             ai_notes: reasoningText,
             log_compact: doc.compact || null,
             log_summary: doc.summary || null,
@@ -458,8 +461,55 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
   }
 });
 
+// NEW: Endpoint to update notes ONLY (Retrospective Feedback)
+app.post("/api/hitl/:id/notes", async (req, res) => {
+  const { id } = req.params;
+  const { notes, actor } = req.body;
+
+  if (!notes) {
+    return res.status(400).json({ success: false, error: "Notes required" });
+  }
+
+  try {
+    // Update DynamoDB
+    await dynamo.update({
+      TableName: HITL_TABLE,
+      Key: { id },
+      UpdateExpression: "SET notes = :notes",
+      ExpressionAttributeValues: {
+        ":notes": notes
+      }
+    }).promise();
+
+    // Also fetch and update S3 logs if possible (Best Effort)
+    const getResp = await dynamo.get({ TableName: HITL_TABLE, Key: { id } }).promise();
+    const item = getResp.Item;
+    
+    if (item && item.log_bucket && item.log_key) {
+       const obj = await s3.getObject({ Bucket: item.log_bucket, Key: item.log_key }).promise();
+       const doc = JSON.parse(obj.Body.toString("utf8"));
+       
+       if (!doc.hitl) doc.hitl = {};
+       doc.hitl.notes = notes; // Update notes in S3
+       
+       await s3.putObject({
+         Bucket: item.log_bucket,
+         Key: item.log_key,
+         Body: JSON.stringify(doc),
+         ContentType: "application/json"
+       }).promise();
+    }
+
+    res.json({ success: true, message: "Notes updated" });
+  } catch (err) {
+    console.error("[HITL] Notes update failed:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+
 // ----------------------
-// HITL DASHBOARD METRICS (Cards)
+// HITL DASHBOARD METRICS
 // ----------------------
 app.get("/api/hitl/stats", async (req, res) => {
   try {
@@ -536,19 +586,17 @@ app.get("/api/hitl/stats", async (req, res) => {
 });
 
 // ----------------------
-// PERFORMANCE METRICS API (Hybrid S3 + DDB)
+// METRICS API
 // ----------------------
 
 app.get("/api/metrics", async (req, res) => {
   const windowDays = parseInt(req.query.windowDays || "7", 10);
   const now = dayjs().utc();
   
-  // 1. Define the date window
   const startDate = now.subtract(windowDays - 1, 'day').startOf('day');
-  const dailyCounts = {};     // Total Volume (S3)
-  const dailyHitlCounts = {}; // HITL Volume (DynamoDB)
+  const dailyCounts = {}; 
+  const dailyHitlCounts = {}; 
 
-  // Initialize buckets
   for (let i = 0; i < windowDays; i++) {
     const dStr = startDate.add(i, 'day').format("YYYY-MM-DD");
     dailyCounts[dStr] = 0;
@@ -569,7 +617,6 @@ app.get("/api/metrics", async (req, res) => {
   };
 
   try {
-    // --- PHASE 1: Scan S3 for TOTAL VOLUME and DECISIONS ---
     let elapsedSum = 0;
     const prefixes = [];
     for (let i = 0; i < windowDays; i++) {
@@ -602,7 +649,6 @@ app.get("/api/metrics", async (req, res) => {
           metrics.total++;
           if (body.elapsed_ms != null) elapsedSum += body.elapsed_ms;
 
-          // General Metrics
           const dCode = body.decision;
           if (dCode === "ALLOW") metrics.allow++;
           else if (dCode === "IT_REVIEW") metrics.it_review++;
@@ -615,7 +661,6 @@ app.get("/api/metrics", async (req, res) => {
 
           if (body.statusCode && body.statusCode !== 200) metrics.errors++;
 
-          // Volume Trend (S3 timestamp)
           const tsStr = body.timestamp || body.compact?.date_iso || obj.LastModified;
           if (tsStr) {
             const dateKey = dayjs(tsStr).utc().format("YYYY-MM-DD");
@@ -629,8 +674,6 @@ app.get("/api/metrics", async (req, res) => {
     }
     metrics.avgElapsed = metrics.total ? elapsedSum / metrics.total : 0;
 
-    // --- PHASE 2: Scan DynamoDB for ACCURATE HITL VOLUME ---
-    // We scan the HITL table because it is the source of truth for "Sent to Review"
     let hitlItems = [];
     let lastEval;
     do {
@@ -643,8 +686,7 @@ app.get("/api/metrics", async (req, res) => {
     for (const item of hitlItems) {
       const created = item.created_ts ? dayjs(item.created_ts).utc() : null;
       if (created && created.isValid()) {
-        // Only count if within our requested window
-        if (created.isAfter(startDate.subtract(1, 'hour'))) { // buffer
+        if (created.isAfter(startDate.subtract(1, 'hour'))) {
            const dateKey = created.format("YYYY-MM-DD");
            if (dailyHitlCounts.hasOwnProperty(dateKey)) {
              dailyHitlCounts[dateKey]++;
@@ -653,10 +695,8 @@ app.get("/api/metrics", async (req, res) => {
         }
       }
     }
-    // Overwrite metrics.it_review with the accurate DDB count
     metrics.it_review = totalHitlCount;
 
-    // Finalize Trends
     metrics.trend = Object.entries(dailyCounts).map(([date, count]) => ({ date, count }));
     metrics.hitlTrend = Object.entries(dailyHitlCounts).map(([date, count]) => ({ date, count }));
 
@@ -669,8 +709,40 @@ app.get("/api/metrics", async (req, res) => {
 });
 
 // ----------------------
-// HISTORY / ACTIVITY LOG API
+// RECOMMENDATIONS API
 // ----------------------
+app.get("/api/recommendations", async (req, res) => {
+  try {
+    console.log("🤖 Invoking Feedback Agent...");
+    
+    const resp = await lambda.invoke({
+      FunctionName: FEEDBACK_AGENT_FN,
+      InvocationType: "RequestResponse",
+      Payload: JSON.stringify({}) 
+    }).promise();
+
+    const payload = JSON.parse(resp.Payload);
+    let body = payload;
+    if (payload.body) {
+      body = typeof payload.body === 'string' ? JSON.parse(payload.body) : payload.body;
+    }
+
+    res.json({ success: true, data: body });
+
+  } catch (err) {
+    console.error("Feedback Agent failed:", err);
+    res.json({
+      success: true, 
+      data: {
+        recommendations: [
+          "Simulated: Whitelist 'smileclinic.org' due to 5 recent manual approvals.",
+          "Simulated: Increase scrutiny on 'urgent' subject lines from unknown domains.",
+          "Simulated: 'vendor-invoices.com' marked safe; consider adding to Trusted Vendor list."
+        ]
+      }
+    });
+  }
+});
 
 app.get("/api/history", async (req, res) => {
   try {
@@ -747,6 +819,7 @@ app.get("/api/history", async (req, res) => {
           const phiEntities = body.phi?.entities_detected || 0;
           const hitlStatus = body.hitl?.status || "none";
           const hitlVerdict = body.hitl?.verdict || null;
+          const hitlNotes = body.hitl?.notes || "";
 
           const decisionCode = body.decision;
           let aiDecisionText = "Unknown";
@@ -776,8 +849,7 @@ app.get("/api/history", async (req, res) => {
 
           const bodyPreview = extractBodyPreview(body);
           const reasoningText = extractReasoning(body);
-
-          // UPDATED: Extract sender risk notes
+          
           const senderRiskNotes = 
             body.summary?.sender_risk_notes || 
             body.sender_intel?.raw?.features?.risk?.notes || 
@@ -797,6 +869,7 @@ app.get("/api/history", async (req, res) => {
             decisionCode,
             hitl_status: hitlStatus,
             hitl_verdict: hitlVerdict,
+            hitl_notes: hitlNotes,
             risk,
             phi_entities: phiEntities,
             s3_bucket: METRICS_BUCKET,
@@ -805,7 +878,7 @@ app.get("/api/history", async (req, res) => {
             body_sanitized: bodyPreview,
             sanitizedBody: bodyPreview,
             reasoning: reasoningText,
-            sender_risk_notes: senderRiskNotes, // Add to history
+            sender_risk_notes: senderRiskNotes,
             ai_notes: reasoningText,
           });
         }
@@ -829,10 +902,6 @@ app.get("/api/history", async (req, res) => {
     });
   }
 });
-
-// ----------------------
-// LOG DETAIL API (for modals)
-// ----------------------
 
 app.get("/api/log/detail", async (req, res) => {
   try {

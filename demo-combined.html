@@ -909,6 +909,28 @@
           </div>
         </div>
       </div>
+      
+      <div class="card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1px solid #bae6fd;">
+        <div class="card-header">
+          <div>
+            <div class="card-title" style="color: #0369a1; display: flex; align-items: center; gap: 8px;">
+              <span>✨ AI Policy Advisor</span>
+              <span class="badge" style="background: #fff; color: #0369a1;">Beta</span>
+            </div>
+            <div class="card-subtitle" style="color: #334155;">
+              Autonomous analysis of your manual feedback to reduce alert fatigue.
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="generateRecsBtn" onclick="loadRecommendations()">
+            Generate Insights
+          </button>
+        </div>
+        <div id="recsContainer" style="padding: 10px 0;">
+          <p style="font-size: 0.9rem; color: #64748b; font-style: italic;">
+            Click "Generate Insights" to have the AI analyze your recent allow/block decisions.
+          </p>
+        </div>
+      </div>
     </section>
 
     <section id="activity-log" class="tab-content">
@@ -1144,6 +1166,7 @@
     const queueStatus = queue.status || log.queue_status || "";
     const hitlStatus = hitl.status || log.hitl_status || "";
     const hitlVerdict = hitl.verdict || log.hitl_verdict || "";
+    const hitlNotes = hitl.notes || ""; // Explicitly grab HITL notes
 
     const ts = log.timestamp || log.decision_ts || log.created_ts || log.queue_ts;
 
@@ -1165,7 +1188,7 @@
     return {
       log, compact, summary, senderIntel, ids, queue, hitl, decisionAgent, content,
       sender, recipient, subject, classification, confidence, risk, hasPhi,
-      decisionCode, queueStatus, hitlStatus, hitlVerdict, timestamp: ts, id,
+      decisionCode, queueStatus, hitlStatus, hitlVerdict, hitlNotes, timestamp: ts, id,
       bodyPreview, reasoning, senderRiskNotes
     };
   }
@@ -1208,6 +1231,7 @@
       queueStatus: base.queueStatus,
       hitlStatus: base.hitlStatus,
       hitlVerdict: base.hitlVerdict,
+      notes: base.hitlNotes, // normalized notes
       bodyPreview: base.bodyPreview,
       reasoning: base.reasoning,
       senderRiskNotes: base.senderRiskNotes, // Pass through
@@ -1249,6 +1273,7 @@
       hitlVerdict: base.hitlVerdict,
       riskScore: base.risk,
       phi: base.hasPhi,
+      notes: base.hitlNotes, // normalized notes
       bodyPreview: base.bodyPreview,
       reasoning: base.reasoning,
       senderRiskNotes: base.senderRiskNotes, // Pass through
@@ -1469,6 +1494,51 @@
   document.getElementById("histFilterSearch").addEventListener("keyup", renderActivityLog);
   document.getElementById("histDateFrom").addEventListener("change", loadHistoryFromBackend);
   document.getElementById("histDateTo").addEventListener("change", loadHistoryFromBackend);
+  
+  /************************************************************
+   * RECOMMENDATIONS
+   ************************************************************/
+  async function loadRecommendations() {
+    const container = document.getElementById("recsContainer");
+    const btn = document.getElementById("generateRecsBtn");
+    
+    btn.disabled = true;
+    btn.textContent = "Analyzing...";
+    container.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 10px; color: #0284c7;">
+        <div class="bullet-dot" style="background: #0284c7; animation: pulse 1s infinite;"></div>
+        <span>Analyzing recent feedback patterns...</span>
+      </div>
+    `;
+
+    try {
+      const resp = await fetch("/api/recommendations");
+      const data = await resp.json();
+      
+      if (data.success && data.data && data.data.recommendations) {
+        const recs = data.data.recommendations;
+        
+        if (recs.length === 0) {
+             container.innerHTML = `<p style="color: #475569; padding: 10px;">No sufficient feedback data yet to generate insights.</p>`;
+        } else {
+            const html = recs.map(r => `
+              <div style="background: white; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; border-left: 4px solid #0ea5e9; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                <div style="font-weight: 500; font-size: 0.9rem; color: #0f172a;">${r}</div>
+              </div>
+            `).join("");
+            container.innerHTML = html;
+        }
+      } else {
+        container.innerHTML = `<p style="color: #ef4444;">Failed to generate insights.</p>`;
+      }
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = `<p style="color: #ef4444;">System error connecting to Advisor Agent.</p>`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Refresh Insights";
+    }
+  }
 
   /************************************************************
    * RENDER FUNCTIONS
@@ -1754,9 +1824,9 @@
     }
 
     return `
-      <div style="margin-top:12px; background:#eff6ff; padding:10px; border-radius:6px; border:1px solid #bfdbfe;">
-        <strong style="color:#1e40af; font-size:0.8rem; display:block; margin-bottom:4px;">Sender Information:</strong>
-        <ul style="margin:0 0 0 18px; padding:0; color:#1e3a8a; font-size:0.8rem;">
+      <div style="margin-top:12px; background:#f1f5f9; padding:10px; border-radius:6px; border:1px solid #cbd5e1;">
+        <strong style="color:#334155; font-size:0.8rem; display:block; margin-bottom:4px;">Sender Information:</strong>
+        <ul style="margin:0 0 0 18px; padding:0; color:#475569; font-size:0.8rem;">
           ${filtered.map(n => `<li style="margin-bottom:2px;">${n}</li>`).join("")}
         </ul>
       </div>`;
@@ -1770,6 +1840,17 @@
     const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
     const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
     const senderInfoHtml = renderSenderInfo(item.senderRiskNotes, item);
+
+    // Handle existing feedback/notes in view
+    let notesSection = "";
+    if (item.notes) {
+       notesSection = `
+         <div style="margin-top:10px; padding:10px; background:#fefce8; border:1px solid #fef08a; border-radius:6px;">
+            <strong style="color:#854d0e; font-size:0.8rem;">Previous Admin Notes:</strong>
+            <p style="margin:4px 0 0 0; font-size:0.85rem; color:#713f12;">${item.notes}</p>
+         </div>`;
+       // Hide input if notes exist? Or allow append? For now, show it as read-only info.
+    }
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1787,15 +1868,22 @@
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
         ${senderInfoHtml}
+        ${notesSection}
       </div>`;
+
+    // Reset feedback UI
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
     document.getElementById("thumbDownBtn").classList.remove("active-thumb");
-    document.getElementById("reasoningFeedbackText").value = "";
+    const fbText = document.getElementById("reasoningFeedbackText");
+    fbText.value = "";
+    fbText.placeholder = "Optional: Add retrospective notes or feedback...";
     document.getElementById("reasoningFeedbackBox").style.display = "none";
+
     document.getElementById("reasoningModalBackdrop").classList.add("active");
   }
 
   function openReasoningFromQuarantine(id) {
+    // Same logic, reuse helper ideally, but for safety copy logic:
     const item = quarantineQueue.find((i) => i.id === id);
     if (!item) return;
     currentReasoningItem = item;
@@ -1803,6 +1891,15 @@
     const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
     const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
     const senderInfoHtml = renderSenderInfo(item.senderRiskNotes, item);
+
+    let notesSection = "";
+    if (item.notes) {
+       notesSection = `
+         <div style="margin-top:10px; padding:10px; background:#fefce8; border:1px solid #fef08a; border-radius:6px;">
+            <strong style="color:#854d0e; font-size:0.8rem;">Previous Admin Notes:</strong>
+            <p style="margin:4px 0 0 0; font-size:0.85rem; color:#713f12;">${item.notes}</p>
+         </div>`;
+    }
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1820,7 +1917,9 @@
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
         ${senderInfoHtml}
+        ${notesSection}
       </div>`;
+      
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
     document.getElementById("thumbDownBtn").classList.remove("active-thumb");
     document.getElementById("reasoningFeedbackText").value = "";
@@ -1836,6 +1935,15 @@
     const confidenceText = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
     const reasoningContent = item.reasoning ? `<p style="white-space: pre-wrap;">${item.reasoning}</p>` : `<p style="color:#6b7280; font-style:italic;">No detailed reasoning provided by backend.</p>`;
     const senderInfoHtml = renderSenderInfo(item.senderRiskNotes, item);
+
+    let notesSection = "";
+    if (item.notes) {
+       notesSection = `
+         <div style="margin-top:10px; padding:10px; background:#fefce8; border:1px solid #fef08a; border-radius:6px;">
+            <strong style="color:#854d0e; font-size:0.8rem;">Previous Admin Notes:</strong>
+            <p style="margin:4px 0 0 0; font-size:0.85rem; color:#713f12;">${item.notes}</p>
+         </div>`;
+    }
 
     body.innerHTML = `
       <div class="modal-section">
@@ -1853,6 +1961,7 @@
         <div class="section-title">Reasoning</div>
         ${reasoningContent}
         ${senderInfoHtml}
+        ${notesSection}
       </div>`;
     
     document.getElementById("thumbUpBtn").classList.remove("active-thumb");
@@ -1870,22 +1979,61 @@
     const up = document.getElementById("thumbUpBtn");
     const down = document.getElementById("thumbDownBtn");
     const fbBox = document.getElementById("reasoningFeedbackBox");
+    
+    // Toggle logic
     if (dir === "up") {
-      up.classList.add("active-thumb");
-      down.classList.remove("active-thumb");
-      fbBox.style.display = "block";
-      fbBox.querySelector("textarea").placeholder = "Optional: what worked well about this reasoning?";
+      if (up.classList.contains("active-thumb")) {
+         up.classList.remove("active-thumb");
+         fbBox.style.display = "none";
+      } else {
+         up.classList.add("active-thumb");
+         down.classList.remove("active-thumb");
+         fbBox.style.display = "block";
+      }
     } else {
-      down.classList.add("active-thumb");
-      up.classList.remove("active-thumb");
-      fbBox.style.display = "block";
-      fbBox.querySelector("textarea").placeholder = "Optional: what did the reasoning miss or get wrong?";
+      if (down.classList.contains("active-thumb")) {
+         down.classList.remove("active-thumb");
+         fbBox.style.display = "none";
+      } else {
+         down.classList.add("active-thumb");
+         up.classList.remove("active-thumb");
+         fbBox.style.display = "block";
+      }
     }
   }
 
-  function submitReasoningFeedback() {
-    alert("Feedback recorded (demo only).");
-    closeReasoningModal();
+  async function submitReasoningFeedback() {
+    const item = currentReasoningItem;
+    if (!item) return;
+
+    const feedbackText = document.getElementById("reasoningFeedbackText").value;
+    if (!feedbackText.trim()) {
+       alert("Please enter some notes before saving.");
+       return;
+    }
+    
+    try {
+      // New Endpoint for retrospective notes
+      const resp = await fetch(`/api/hitl/${encodeURIComponent(item.id)}/notes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notes: feedbackText, actor: DEFAULT_ACTOR })
+      });
+      
+      const data = await resp.json();
+      if (data.success) {
+        alert("Notes updated successfully.");
+        closeReasoningModal();
+        // Refresh data to show new notes
+        await loadHitlQueue();
+        await loadHistoryFromBackend(); 
+      } else {
+        alert("Error updating notes: " + (data.error || "Unknown error"));
+      }
+    } catch (err) {
+      console.error("Error submitting feedback:", err);
+      alert("Network error submitting feedback.");
+    }
   }
 
   function openReviewModal(id) {
@@ -1910,6 +2058,7 @@
           <li><strong>Send / Allow</strong> – deliver to recipient inbox and log decision.</li>
           <li><strong>Quarantine</strong> – keep in quarantine and block delivery.</li>
         </ul>
+        <textarea id="reviewNotesInput" class="feedback-textarea" placeholder="Optional: Add reasoning for your decision..." style="margin-top:10px; height:80px;"></textarea>
       </div>`;
     document.getElementById("reviewModalBackdrop").classList.add("active");
   }
@@ -1923,12 +2072,13 @@
     if (!currentReviewItem) return;
     const item = currentReviewItem;
     const verdict = action === "send" ? "allow" : "block";
+    const notes = document.getElementById("reviewNotesInput").value;
 
     try {
       const resp = await fetch(`/api/hitl/${encodeURIComponent(item.id)}/verdict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ verdict, actor: DEFAULT_ACTOR, notes: "" }),
+        body: JSON.stringify({ verdict, actor: DEFAULT_ACTOR, notes: notes }),
       });
       const data = await resp.json();
       if (!data.success) {

@@ -523,8 +523,8 @@
             font-weight: 600;
         }
 
-        /* Quarantine Panel */
-        .quarantine-panel {
+        /* Email List Panel - Renamed from quarantine-panel for clarity since we use it for all folders */
+        .email-list-panel {
             width: 400px;
             background: #f7f9fc;
             border-right: 1px solid #E4E8EF;
@@ -1023,9 +1023,7 @@
     </style>
 </head>
 <body class="login-mode" id="bodyElement">
-    <!-- Login Section -->
     <div id="loginSection">
-        <!-- Smart Card Login -->
         <div class="login-container" id="loginContainer">
             <div class="login-header">
                 <h1>Smile Dental Clinic Email System</h1>
@@ -1045,7 +1043,6 @@
             </div>
         </div>
 
-        <!-- Smart Card Detection -->
         <div class="login-container smart-card-container" id="smartCardContainer">
             <div class="login-header">
                 <h1>Smart Card Authentication</h1>
@@ -1087,7 +1084,6 @@
             </div>
         </div>
 
-        <!-- MFA Verification -->
         <div class="login-container mfa-container" id="mfaContainer">
             <div class="mfa-header">
                 <h1>Two-Factor Authentication</h1>
@@ -1122,15 +1118,12 @@
         </div>
     </div>
 
-    <!-- View Section -->
     <div class="view-container" id="viewSection">
         <div class="top-bar">
         <div class="user-info">
             <div class="user-name" id="userName">Dr. Martinez (Dental Lead)</div>
         </div>
         <div class="nav-tabs">
-            <button class="nav-tab active" onclick="switchTab('quarantine')">Quarantine Queue</button>
-            <button class="nav-tab" onclick="switchTab('statistics')">Statistics</button>
             <button class="nav-tab" onclick="switchTab('profile')">Profile</button>
             <button class="nav-tab" onclick="goToITAdmin()" style="background: rgba(255, 255, 255, 0.15);">🔧 IT Admin</button>
             <button class="nav-tab" onclick="resetDemo()" style="background: rgba(255, 255, 255, 0.15);">🔄 Reset</button>
@@ -1139,15 +1132,10 @@
     </div>
 
     <div class="main-container">
-        <!-- Folder Panel -->
         <div class="folder-panel">
             <h3>In Basket</h3>
             <ul class="folder-list">
-                <li class="folder-item active" onclick="switchFolder('Quarantine')">
-                    <span>Quarantine</span>
-                    <span class="folder-count" id="countQuarantine">0</span>
-                </li>
-                <li class="folder-item" onclick="switchFolder('All')">
+                <li class="folder-item active" onclick="switchFolder('All')">
                     <span>All Messages</span>
                     <span class="folder-count" id="countAll">0</span>
                 </li>
@@ -1162,23 +1150,20 @@
             </ul>
         </div>
 
-        <!-- Quarantine Panel -->
-        <div class="quarantine-panel">
+        <div class="email-list-panel">
             <div class="panel-header">
-                <h2 id="folderTitle">Quarantine Queue</h2>
+                <h2 id="folderTitle">All Messages</h2>
             </div>
             <div class="email-list-container" id="emailList">
-                <!-- Emails will be rendered here -->
+                <div style="text-align: center; padding: 20px; color: #a0aec0;">Loading inbox...</div>
             </div>
         </div>
 
-        <!-- Detail Panel -->
         <div class="detail-panel empty" id="detailPanel">
             <div>Select an email to review</div>
         </div>
     </div>
 
-    <!-- Confirmation Modal -->
     <div class="modal" id="confirmModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1200,9 +1185,7 @@
         <p id="auditId"></p>
     </div>
 
-    </div> <!-- End viewSection -->
-
-    <script>
+    </div> <script>
         // Login Functions
         let currentUser = null;
         let mfaCode = '';
@@ -1433,8 +1416,7 @@
             const userName = sessionStorage.getItem('username') || 'Dr. Martinez';
             document.getElementById('userName').textContent = userName + ' (Dental Lead)';
             
-            updateFolderCounts();
-            renderEmailList();
+            fetchInbox();
         }
 
         function showLogin() {
@@ -1447,7 +1429,6 @@
         if (sessionStorage.getItem('authenticated') === 'true' && sessionStorage.getItem('role') === 'lead') {
             showView();
         } else {
-            // Check if there's a pending MFA verification
             const pendingUser = sessionStorage.getItem('pendingUser');
             if (pendingUser) {
                 const user = JSON.parse(pendingUser);
@@ -1472,90 +1453,77 @@
 
         let selectedEmailId = null;
         let pendingReleaseEmailId = null;
-        let currentFolder = 'Quarantine';
+        let currentFolder = 'All'; // Default folder
+        let inboxData = []; // Replaces hardcoded baseEmails
 
-        // Base email data - Dental Clinic Scenario
-        const baseEmails = [
-            {
-                id: 'email1',
-                sender: 'billing@brightsmilelab.com',
-                to: 'kyle.assistant@smileclinic.org',
-                subject: 'URGENT: Crown ready for pickup - Patient #4521',
-                timestamp: '2 hours ago',
-                labels: ['Urgent', 'Suspicious'],
-                confidence: 0.67,
-                rationale: 'New domain detected; unverified link contained in message body.',
-                status: 'suspicious',
-                folder: 'Lab Results',
-                patient: { name: 'Michael Chen', mrn: '4521', dob: '03/22/1975' },
-                encounter: 'Crown Prep 10/29/2025',
-                attachments: ['CrownSpec_4521.pdf'],
-                domainReputation: 'Medium Risk',
-                content: `Dear Smile Dental Clinic,
+        // ----------------------------------------------------
+        //  DATA FETCHING & MERGING
+        // ----------------------------------------------------
 
-URGENT: Crown restoration for Patient #4521 (Michael Chen, DOB: 03/22/1975) is ready for pickup.
-
-The crown has been completed and is ready for delivery. Please confirm pickup time by clicking here: [Confirm Pickup](https://brightsmilelab-verify.com/pickup?id=4521)
-
-Crown Details:
-- Material: Porcelain fused to metal
-- Shade: A2
-- Delivery Date: Today
-- Estimated Cost: $850.00
-
-Please contact us immediately to schedule pickup. Failure to confirm may delay patient treatment.
-
-Best regards,
-Bright Smile Lab Services
-billing@brightsmilelab.com`
+        async function fetchInbox() {
+            try {
+                // Fetch only emails sent to Dr Martinez that are Safe (or Allowed by HITL)
+                const res = await fetch('/api/inbox?email=dr.martinez@smileclinic.org&days=30');
+                const data = await res.json();
+                
+                if (data.success) {
+                    inboxData = data.emails;
+                    updateFolderCounts();
+                    renderEmailList();
+                } else {
+                    console.error("API Error:", data.error);
+                }
+            } catch (e) {
+                console.error("Failed to load inbox", e);
+                document.getElementById('emailList').innerHTML = `<div style="text-align: center; padding: 20px; color: #e53e3e;">Failed to load inbox connection</div>`;
             }
-        ];
+        }
 
-        // Load reported emails from localStorage
-        function loadReportedEmails() {
-            const reportedEmails = [];
-            
-            baseEmails.forEach(email => {
+        // Load reported emails from localStorage and merge with API data
+        function loadMergedEmails() {
+            // Map the API data to the frontend structure
+            const merged = inboxData.map(email => {
+                // Check if there is a local override (e.g., reported status)
                 const reportData = localStorage.getItem(`emailReport_${email.id}`);
+                
+                let localStatus = {};
                 if (reportData) {
                     const report = JSON.parse(reportData);
                     if (report.status === 'reported' || report.status === 'released') {
-                        reportedEmails.push({
-                            ...email,
+                        localStatus = {
                             status: report.status,
-                                reportedBy: report.reportedBy || 'Kyle Assistant',
-                            reportedTime: report.reportedTime || '30 minutes ago',
+                            reportedBy: report.reportedBy,
+                            reportedTime: report.reportedTime,
                             releasedBy: report.releasedBy,
                             releasedTime: report.releasedTime,
-                            auditId: report.auditId,
-                            domainReputation: email.domainReputation || 'Medium Risk'
-                        });
+                            auditId: report.auditId
+                        };
                     }
                 }
-            });
-            
-            // Also check if there are any emails reported from nurse-view
-            const allReportKeys = Object.keys(localStorage).filter(key => key.startsWith('emailReport_'));
-            allReportKeys.forEach(key => {
-                const emailId = key.replace('emailReport_', '');
-                const reportData = JSON.parse(localStorage.getItem(key));
-                if (reportData && reportData.status === 'reported') {
-                    const exists = reportedEmails.find(e => e.id === emailId);
-                    if (!exists) {
-                        const baseEmail = baseEmails.find(e => e.id === emailId);
-                        if (baseEmail) {
-                            reportedEmails.push({
-                                ...baseEmail,
-                                status: 'reported',
-                                reportedBy: reportData.reportedBy || 'Kyle Assistant',
-                                reportedTime: reportData.reportedTime || '30 minutes ago'
-                            });
-                        }
-                    }
-                }
+
+                // Format timestamp nicely
+                const tsDate = new Date(email.timestamp);
+                const timeStr = tsDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const dateStr = tsDate.toLocaleDateString();
+                const displayTime = (new Date().toDateString() === tsDate.toDateString()) ? timeStr : dateStr;
+
+                return {
+                    ...email, // id, sender, to, subject, content, folder
+                    timestamp: displayTime,
+                    fullTimestamp: email.timestamp,
+                    labels: email.labels || [],
+                    rationale: `Confidence Score: ${(email.confidence * 100).toFixed(1)}%. Deemed safe by system.`,
+                    domainReputation: 'Low Risk',
+                    ...localStatus
+                };
             });
 
-            return reportedEmails;
+            // Also check for "released" emails that might not be in the "safe" inbox stream yet 
+            // (In a real system, a released email becomes "safe", but here we might need to manually inject it 
+            // if the API doesn't return it yet, though the API logic handles HITL allows).
+            // For this demo, we assume the API returns HITL allows, so no manual injection needed.
+
+            return merged;
         }
 
         function switchFolder(folder) {
@@ -1564,7 +1532,7 @@ billing@brightsmilelab.com`
                 item.classList.remove('active');
             });
             event.target.closest('.folder-item').classList.add('active');
-            document.getElementById('folderTitle').textContent = folder === 'Quarantine' ? 'Quarantine Queue' : folder;
+            document.getElementById('folderTitle').textContent = folder;
             renderEmailList();
             renderEmptyDetail();
             selectedEmailId = null;
@@ -1575,22 +1543,16 @@ billing@brightsmilelab.com`
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            if (tab === 'quarantine') {
-                renderEmailList();
-            }
         }
 
         function updateFolderCounts() {
-            const emails = loadReportedEmails();
+            const emails = loadMergedEmails();
             const counts = {
-                'Quarantine': emails.filter(e => e.status === 'reported').length,
                 'All': emails.length,
                 'Results': emails.filter(e => e.folder === 'Results').length,
                 'Team Messages': emails.filter(e => e.folder === 'Team Messages').length
             };
 
-            document.getElementById('countQuarantine').textContent = counts['Quarantine'];
             document.getElementById('countAll').textContent = counts['All'];
             document.getElementById('countResults').textContent = counts['Results'];
             document.getElementById('countTeam').textContent = counts['Team Messages'];
@@ -1598,13 +1560,15 @@ billing@brightsmilelab.com`
 
         function renderEmailList() {
             const container = document.getElementById('emailList');
-            let emails = loadReportedEmails();
+            let emails = loadMergedEmails();
             
             // Filter by folder
-            if (currentFolder === 'Quarantine') {
-                emails = emails.filter(e => e.status === 'reported');
-            } else if (currentFolder !== 'All') {
-                emails = emails.filter(e => e.folder === currentFolder);
+            if (currentFolder !== 'All') {
+                 if (currentFolder === 'Results') {
+                    emails = emails.filter(e => e.folder === 'Lab Results' || e.folder === 'Results');
+                 } else {
+                    emails = emails.filter(e => e.folder === currentFolder);
+                 }
             }
             
             if (emails.length === 0) {
@@ -1622,6 +1586,9 @@ billing@brightsmilelab.com`
                 const isReported = email.status === 'reported';
                 const isReleased = email.status === 'released';
                 
+                // Determine if urgent based on subject keywords if no explicit label
+                const isUrgent = email.subject.toLowerCase().includes('urgent') || email.subject.toLowerCase().includes('stat');
+                
                 return `
                     <div class="email-card ${isReported ? 'reported' : ''} ${isReleased ? 'released' : ''} ${isSelected ? 'selected' : ''}" 
                          onclick="selectEmail('${email.id}')">
@@ -1632,16 +1599,16 @@ billing@brightsmilelab.com`
                         <div class="email-subject">${email.subject}</div>
                         ${email.patient ? `
                             <div class="email-patient-info">
-                                Patient: ${email.patient.name} (MRN: ${email.patient.mrn})
+                                Patient: ${email.patient.name}
                             </div>
                         ` : ''}
                         <div class="email-labels">
-                            ${email.labels.includes('Urgent') ? `<span class="label urgent">Urgent</span>` : ''}
+                            ${isUrgent ? `<span class="label urgent">Urgent</span>` : ''}
                             ${isReported ? `<span class="label reported">Reported</span>` : ''}
                             ${isReleased ? `<span class="label released">Released ✅</span>` : ''}
                         </div>
                         <div class="status-info ${email.status}">
-                            ${isReported ? `📋 Status: Reported by ${email.reportedBy}` : ''}
+                            ${isReported ? `📋 Status: Reported by ${email.reportedBy || 'Staff'}` : ''}
                             ${isReleased ? `✅ Status: Released by ${email.releasedBy || userName}` : ''}
                         </div>
                     </div>
@@ -1651,9 +1618,10 @@ billing@brightsmilelab.com`
 
         function selectEmail(emailId) {
             selectedEmailId = emailId;
-            const emails = loadReportedEmails();
+            const emails = loadMergedEmails();
             const email = emails.find(e => e.id === emailId);
             
+            // Re-render list to show selection highlight
             renderEmailList();
             
             if (email) {
@@ -1666,9 +1634,6 @@ billing@brightsmilelab.com`
         function renderDetailPanel(email) {
             const panel = document.getElementById('detailPanel');
             panel.className = 'detail-panel';
-            
-            const isReported = email.status === 'reported';
-            const isUrgent = email.labels.includes('Urgent');
             
             panel.innerHTML = `
                 <div class="detail-header">
@@ -1687,7 +1652,7 @@ billing@brightsmilelab.com`
 
         function renderMessageTab(email) {
             const isReported = email.status === 'reported';
-            const isUrgent = email.labels.includes('Urgent');
+            const isUrgent = email.subject.toLowerCase().includes('urgent');
             
             return `
                 <div class="email-content-section">
@@ -1706,26 +1671,8 @@ billing@brightsmilelab.com`
                         </div>
                         <div class="email-field">
                             <div class="email-field-label">Received:</div>
-                            <div class="email-field-value">${email.timestamp}</div>
+                            <div class="email-field-value">${email.fullTimestamp || email.timestamp}</div>
                         </div>
-                        ${email.patient ? `
-                            <div class="email-field">
-                                <div class="email-field-label">Patient:</div>
-                                <div class="email-field-value">${email.patient.name} (MRN: ${email.patient.mrn})</div>
-                            </div>
-                        ` : ''}
-                        ${email.encounter ? `
-                            <div class="email-field">
-                                <div class="email-field-label">Encounter:</div>
-                                <div class="email-field-value">${email.encounter}</div>
-                            </div>
-                        ` : ''}
-                        ${email.attachments && email.attachments.length > 0 ? `
-                            <div class="email-field">
-                                <div class="email-field-label">Attachments:</div>
-                                <div class="email-field-value">${email.attachments.map(att => `<span style="color: #0072CE; cursor: pointer;">${att}</span>`).join(', ')}</div>
-                            </div>
-                        ` : ''}
                     </div>
                     <div class="email-body">
 ${email.content || 'No content available.'}
@@ -1735,17 +1682,13 @@ ${email.content || 'No content available.'}
                     <div class="info-row">
                         <div class="info-label">Sender Domain Reputation:</div>
                         <div class="info-value">
-                            <span class="risk-badge medium">${email.domainReputation || 'Medium Risk'}</span>
+                            <span class="risk-badge medium">${email.domainReputation || 'Low Risk'}</span>
                         </div>
                     </div>
-                    <div class="info-row">
-                        <div class="info-label">Confidence Score:</div>
-                        <div class="info-value">${email.confidence}</div>
-                    </div>
                 </div>
-                <div class="detection-rationale">
-                    <strong>Why flagged?</strong><br>
-                    ${email.rationale}
+                <div class="detection-rationale" style="background: #f0fff4; border-left-color: #38a169;">
+                    <strong>AI Assessment:</strong><br>
+                    ${email.rationale || 'This email has been scanned and deemed safe.'}
                 </div>
                 ${email.reportedBy ? `
                     <div class="comment-section">
@@ -1767,31 +1710,31 @@ ${email.content || 'No content available.'}
         }
 
         function renderPatientTab(email) {
-            if (!email.patient) {
-                return '<div style="padding: 20px; color: #718096;">No patient information available.</div>';
+            // Since we are pulling real logs, we might not have specific patient objects unless we synthesized them.
+            // Check if there are patient-like keywords in subject
+            const subject = email.subject || "";
+            const hasPatientContext = subject.includes("Patient") || subject.includes("MRN") || subject.includes("Results");
+
+            if (!hasPatientContext && !email.patient) {
+                return '<div style="padding: 20px; color: #718096;">No structured patient data found in this message metadata.</div>';
             }
+            
+            // If we had a specific object from a known demo set, we'd use it, otherwise generic:
             return `
                 <div class="info-section">
                     <div class="info-row">
-                        <div class="info-label">Patient Name:</div>
-                        <div class="info-value">${email.patient.name}</div>
+                        <div class="info-label">Context:</div>
+                        <div class="info-value">Extracted from email subject/body</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">MRN:</div>
-                        <div class="info-value">${email.patient.mrn}</div>
+                        <div class="info-label">Potential Patient Ref:</div>
+                        <div class="info-value">${subject}</div>
                     </div>
-                    ${email.patient.dob ? `
-                        <div class="info-row">
-                            <div class="info-label">Date of Birth:</div>
-                            <div class="info-value">${email.patient.dob}</div>
-                        </div>
-                    ` : ''}
-                    ${email.encounter ? `
-                        <div class="info-row">
-                            <div class="info-label">Encounter:</div>
-                            <div class="info-value">${email.encounter}</div>
-                        </div>
-                    ` : ''}
+                    <div class="info-row">
+                         <div style="font-size:11px; color:#aaa; margin-top:10px;">
+                            * Note: For this demo, patient data is inferred from the real email subject line if not explicitly mocked.
+                         </div>
+                    </div>
                 </div>
             `;
         }
@@ -1800,12 +1743,20 @@ ${email.content || 'No content available.'}
             const reportData = localStorage.getItem(`emailReport_${email.id}`);
             let auditLog = [];
             
+            // System Entry (The timestamp of the email)
+            auditLog.push({
+                time: email.fullTimestamp || email.timestamp,
+                action: 'Email Received & Scanned',
+                actor: 'System',
+                role: 'AI Defense'
+            });
+
             if (reportData) {
                 const report = JSON.parse(reportData);
                 if (report.reportedBy) {
                     auditLog.push({
                         time: report.reportedTime || new Date().toISOString(),
-                        action: 'Reported',
+                        action: 'Reported as Suspicious',
                         actor: report.reportedBy,
                         role: 'nurse'
                     });
@@ -1813,16 +1764,12 @@ ${email.content || 'No content available.'}
                 if (report.releasedBy) {
                     auditLog.push({
                         time: report.releasedTime || new Date().toISOString(),
-                        action: 'Released',
+                        action: 'Released from Quarantine',
                         actor: report.releasedBy,
                         role: 'lead',
                         auditId: report.auditId
                     });
                 }
-            }
-            
-            if (auditLog.length === 0) {
-                return '<div style="padding: 20px; color: #718096;">No audit trail available.</div>';
             }
             
             return `
@@ -1842,7 +1789,7 @@ ${email.content || 'No content available.'}
         }
 
         function switchDetailTab(tab, emailId) {
-            const emails = loadReportedEmails();
+            const emails = loadMergedEmails();
             const email = emails.find(e => e.id === emailId);
             if (!email) return;
             
@@ -1939,7 +1886,7 @@ ${email.content || 'No content available.'}
 
         function resetDemo() {
             if (confirm('Reset all report records? This will clear all reported and released email statuses.')) {
-                // 清除所有报告记录
+                // Clear report records
                 const keys = Object.keys(localStorage);
                 keys.forEach(key => {
                     if (key.startsWith('emailReport_') || key === 'emailState') {
@@ -1947,21 +1894,17 @@ ${email.content || 'No content available.'}
                     }
                 });
                 
-                // 重新渲染
+                // Re-fetch
                 selectedEmailId = null;
-                renderEmailList();
+                fetchInbox();
                 renderEmptyDetail();
-                updateFolderCounts();
                 
                 showToast('All report records cleared. Demo reset.');
             }
         }
 
         function goToITAdmin() {
-            // Show notification
             showToast('Redirecting to IT Admin Portal...');
-            
-            // Redirect to IT admin login page after a short delay
             setTimeout(() => {
                 window.location.href = 'it-admin-view.html';
             }, 1500);
@@ -1981,10 +1924,6 @@ ${email.content || 'No content available.'}
                 closeModal();
             }
         }
-
-        // Initialize
-        updateFolderCounts();
-        renderEmailList();
     </script>
 </body>
 </html>

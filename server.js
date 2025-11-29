@@ -461,7 +461,6 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
   }
 });
 
-// NEW: Endpoint to update notes ONLY (Retrospective Feedback)
 app.post("/api/hitl/:id/notes", async (req, res) => {
   const { id } = req.params;
   const { notes, actor } = req.body;
@@ -471,7 +470,6 @@ app.post("/api/hitl/:id/notes", async (req, res) => {
   }
 
   try {
-    // Update DynamoDB
     await dynamo.update({
       TableName: HITL_TABLE,
       Key: { id },
@@ -481,7 +479,6 @@ app.post("/api/hitl/:id/notes", async (req, res) => {
       }
     }).promise();
 
-    // Also fetch and update S3 logs if possible (Best Effort)
     const getResp = await dynamo.get({ TableName: HITL_TABLE, Key: { id } }).promise();
     const item = getResp.Item;
     
@@ -490,7 +487,7 @@ app.post("/api/hitl/:id/notes", async (req, res) => {
        const doc = JSON.parse(obj.Body.toString("utf8"));
        
        if (!doc.hitl) doc.hitl = {};
-       doc.hitl.notes = notes; // Update notes in S3
+       doc.hitl.notes = notes; 
        
        await s3.putObject({
          Bucket: item.log_bucket,
@@ -507,10 +504,6 @@ app.post("/api/hitl/:id/notes", async (req, res) => {
   }
 });
 
-
-// ----------------------
-// HITL DASHBOARD METRICS
-// ----------------------
 app.get("/api/hitl/stats", async (req, res) => {
   try {
     const now = dayjs().utc();
@@ -535,14 +528,11 @@ app.get("/api/hitl/stats", async (req, res) => {
 
     for (const item of items) {
       const status = item.status || "";
-      
       if (status === "pending") {
         pending++;
         continue;
       }
-
       if (status !== "resolved") continue;
-      
       totalResolved++;
 
       const resolvedTs = item.resolved_ts ? dayjs(item.resolved_ts) : null;
@@ -550,7 +540,6 @@ app.get("/api/hitl/stats", async (req, res) => {
         if (resolvedTs.format("YYYY-MM-DD") === todayStr) {
           reviewedToday++;
         }
-
         const createdTs = item.created_ts ? dayjs(item.created_ts) : null;
         if (createdTs && createdTs.isValid()) {
           const diff = resolvedTs.diff(createdTs, "second");
@@ -560,11 +549,9 @@ app.get("/api/hitl/stats", async (req, res) => {
 
       const aiDec = (item.decision || "").toUpperCase();
       const humDec = (item.verdict || "").toLowerCase();
-
       let agreed = false;
       if (aiDec === "ALLOW" && humDec === "allow") agreed = true;
       else if (aiDec === "QUARANTINE" && humDec === "block") agreed = true;
-      
       if (agreed) agreements++;
     }
 
@@ -586,8 +573,100 @@ app.get("/api/hitl/stats", async (req, res) => {
 });
 
 // ----------------------
-// METRICS API
+// INBOX API (For Lead View)
 // ----------------------
+app.get("/api/inbox", async (req, res) => {
+  try {
+    const { email, days } = req.query;
+    if (!email) return res.status(400).json({ error: "Email required" });
+    
+    // Default lookback of 14 days for the demo
+    const lookbackDays = parseInt(days || "14", 10);
+    const now = dayjs().utc();
+    const prefixes = [];
+    
+    for (let i = 0; i < lookbackDays; i++) {
+      const d = now.subtract(i, "day");
+      const year = d.year();
+      const month = pad2(d.month() + 1);
+      const day = pad2(d.date());
+      prefixes.push(`${METRICS_PREFIX}/${year}/${month}/${day}/`);
+    }
+
+    const inbox = [];
+
+    for (const prefix of prefixes) {
+        let continuationToken;
+        do {
+            const listResp = await s3.listObjectsV2({
+                Bucket: METRICS_BUCKET,
+                Prefix: prefix,
+                ContinuationToken: continuationToken
+            }).promise();
+
+            for (const obj of listResp.Contents || []) {
+                if (!obj.Key.endsWith(".json")) continue;
+
+                const data = await s3.getObject({ Bucket: METRICS_BUCKET, Key: obj.Key }).promise();
+                const doc = JSON.parse(data.Body.toString("utf8"));
+
+                // 1. Recipient Filter: Match the requested email (e.g., dr.martinez)
+                const toAddr = doc.compact?.to || "";
+                if (!toAddr.toLowerCase().includes(email.toLowerCase())) continue;
+
+                // 2. Safety Filter: 
+                //    - Show if AI decided ALLOW
+                //    - OR if Human (HITL) decided ALLOW
+                //    - AND filter out anything that is currently Blocked/Quarantined (unless released)
+                const isAiAllowed = doc.decision === "ALLOW";
+                const isHitlAllowed = doc.hitl?.verdict === "allow";
+                const isBlocked = doc.decision === "QUARANTINE" || doc.hitl?.verdict === "block";
+
+                // Logic: It appears in the inbox if it was allowed by AI or Human, AND it is not effectively blocked.
+                // (If AI allowed but Human later blocked it, it shouldn't show. If AI blocked but Human allowed, it SHOULD show).
+                const showInInbox = (isAiAllowed && !isBlocked) || isHitlAllowed;
+
+                if (showInInbox) {
+                    const subject = doc.compact?.subject || "(No Subject)";
+                    
+                    inbox.push({
+                        id: doc.id || doc.compact?.message_id || obj.Key,
+                        sender: doc.compact?.from?.addr || "Unknown",
+                        to: toAddr,
+                        subject: subject,
+                        timestamp: doc.timestamp || doc.compact?.date_iso,
+                        content: extractBodyPreview(doc),
+                        confidence: doc.summary?.confidence || 0,
+                        labels: [],
+                        status: 'safe',
+                        read: false,
+                        // Helper to sort into demo folders
+                        folder: inferFolder(subject)
+                    });
+                }
+            }
+            continuationToken = listResp.IsTruncated ? listResp.NextContinuationToken : undefined;
+        } while (continuationToken);
+    }
+    
+    // Sort by Date Descending
+    inbox.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    res.json({ success: true, emails: inbox });
+  } catch (e) {
+      console.error("Inbox fetch failed:", e);
+      res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+function inferFolder(subject) {
+    const s = subject.toLowerCase();
+    if (s.includes("lab") || s.includes("result") || s.includes("x-ray") || s.includes("scan") || s.includes("pathology")) return "Results";
+    if (s.includes("schedule") || s.includes("meeting") || s.includes("hr") || s.includes("staff") || s.includes("shift")) return "Team Messages";
+    if (s.includes("order") || s.includes("supply") || s.includes("invoice") || s.includes("shipment")) return "Supplies";
+    if (s.includes("insurance") || s.includes("claim") || s.includes("auth") || s.includes("billing")) return "Insurance";
+    return "All";
+}
 
 app.get("/api/metrics", async (req, res) => {
   const windowDays = parseInt(req.query.windowDays || "7", 10);
@@ -708,9 +787,6 @@ app.get("/api/metrics", async (req, res) => {
   }
 });
 
-// ----------------------
-// RECOMMENDATIONS API
-// ----------------------
 app.get("/api/recommendations", async (req, res) => {
   try {
     console.log("🤖 Invoking Feedback Agent...");

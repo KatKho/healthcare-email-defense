@@ -1,0 +1,55 @@
+From: "Marcus Thorne" <billling@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: URGENT: Update Patient Refund Details
+Date: Wed, 19 Nov 2025 10:20:00 -0800
+Message-ID: 20251119000271@smileclinic.org
+Return-Path: billling@smileclinic.org
+Reply-To: billling@smileclinic.org
+Received: from unknown.smileclinic-mail.com (unknown.smileclinic-mail.com [203.0.113.51])
+    by gateway.smileclinic.org with ESMTP id abc1271
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 10:20:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=smileclinic.org;
+    dmarc=fail (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-271"
+
+--boundary-271
+Content-Type: multipart/alternative; boundary="boundary-alt-271"
+
+--boundary-alt-271
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Sarah,
+
+We had an error posting refunds for several patients including Emily Carter (DOB 03/14/1989)
+and Sophia Nguyen (DOB 11/22/2010).
+
+To avoid chargebacks, log in to the temporary billing portal and confirm the account numbers:
+
+https://smileclnic-billing.com/refunds
+
+Use your regular email and password to sign in.
+
+I need this done in the next 30 minutes.
+
+Marcus
+
+--boundary-alt-271
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Sarah,</p>
+<p>We had an error posting refunds for several patients including <strong>Emily Carter</strong> (DOB 03/14/1989)
+and <strong>Sophia Nguyen</strong> (DOB 11/22/2010).</p>
+<p>To avoid chargebacks, log in to the temporary billing portal and confirm the account numbers:</p>
+<p><a href="https://smileclnic-billing.com/refunds">https://smileclnic-billing.com/refunds</a></p>
+<p>Use your regular email and password to sign in.</p>
+<p>I need this done in the next 30 minutes.</p>
+<p>Marcus</p>
+</body></html>
+--boundary-alt-271--
+
+--boundary-271--

@@ -1,0 +1,57 @@
+From: "Dentrix Cloud Support" <cloud@dentrxcloud.com>
+To: it@smileclinic.org
+Subject: Multi-Factor Disabled for Smile Clinic Tenant
+Date: Wed, 19 Nov 2025 10:36:00 -0800
+Message-ID: 20251119000279@smileclinic.org
+Return-Path: cloud@dentrxcloud.com
+Reply-To: cloud@dentrxcloud.com
+Received: from smtp.dentrxcloud.com (smtp.dentrxcloud.com [203.0.113.126])
+    by gateway.smileclinic.org with ESMTP id abc1279
+    for it@smileclinic.org; Wed, 19 Nov 2025 10:36:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@dentrxcloud.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=dentrxcloud.com;
+    dmarc=fail (p=REJECT) header.from=dentrxcloud.com
+Content-Type: multipart/mixed; boundary="boundary-279"
+
+--boundary-279
+Content-Type: multipart/alternative; boundary="boundary-alt-279"
+
+--boundary-alt-279
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+Our logs show that multi-factor authentication was disabled for one or more Dentrix Cloud
+admin users associated with Smile Clinic.
+
+This can expose PHI such as treatment plans, billing records, and patient demographics for
+Emily Carter, Michael Rivera, Sophia Nguyen, and others.
+
+Restore secure access by confirming your tenant configuration at:
+
+https://dentrxcloud-secure.com/admin
+
+Sign in with your existing administrator username and password.
+
+Dentrix Cloud Support
+
+--boundary-alt-279
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi David,</p>
+<p>Our logs show that multi-factor authentication was disabled for one or more Dentrix Cloud
+admin users associated with Smile Clinic.</p>
+<p>This can expose PHI such as treatment plans, billing records, and patient demographics for
+<strong>Emily Carter</strong>, <strong>Michael Rivera</strong>, <strong>Sophia Nguyen</strong>, and others.</p>
+<p>Restore secure access by confirming your tenant configuration at:</p>
+<p><a href="https://dentrxcloud-secure.com/admin">https://dentrxcloud-secure.com/admin</a></p>
+<p>Sign in with your existing administrator username and password.</p>
+<p>Dentrix Cloud Support</p>
+</body></html>
+--boundary-alt-279--
+
+--boundary-279--

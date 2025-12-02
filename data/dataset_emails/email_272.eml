@@ -1,0 +1,57 @@
+From: "Delta Dental Security" <secure@deltadenta1-insurance.com>
+To: billing@smileclinic.org
+Subject: Action Required: Provider Portal Multi-Factor Reset
+Date: Wed, 19 Nov 2025 10:22:00 -0800
+Message-ID: 20251119000272@smileclinic.org
+Return-Path: secure@deltadenta1-insurance.com
+Reply-To: secure@deltadenta1-insurance.com
+Received: from smtp.deltadenta1-insurance.com (smtp.deltadenta1-insurance.com [203.0.113.62])
+    by gateway.smileclinic.org with ESMTP id abc1272
+    for billing@smileclinic.org; Wed, 19 Nov 2025 10:22:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@deltadenta1-insurance.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=deltadenta1-insurance.com;
+    dmarc=fail (p=REJECT) header.from=deltadenta1-insurance.com
+Content-Type: multipart/mixed; boundary="boundary-272"
+
+--boundary-272
+Content-Type: multipart/alternative; boundary="boundary-alt-272"
+
+--boundary-alt-272
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Provider,
+
+Due to a recent security review, your Delta Dental provider portal access associated with
+Smile Clinic must be re-validated.
+
+This affects claim history and pre-treatment estimates for patients including Emily Carter,
+Michael Rivera, and other members attached to your NPI.
+
+To keep access, complete the multi-factor reset at the secure link below within 24 hours:
+
+https://deltadental-provider-verify.com/login
+
+If you do not complete this step, all claims processing privileges will be temporarily suspended.
+
+Delta Dental Security Team
+
+--boundary-alt-272
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Dear Provider,</p>
+<p>Due to a recent security review, your Delta Dental provider portal access associated with
+Smile Clinic must be re-validated.</p>
+<p>This affects claim history and pre-treatment estimates for patients including
+<strong>Emily Carter</strong>, <strong>Michael Rivera</strong>, and other members attached to your NPI.</p>
+<p>To keep access, complete the multi-factor reset at the secure link below within 24 hours:</p>
+<p><a href="https://deltadental-provider-verify.com/login">https://deltadental-provider-verify.com/login</a></p>
+<p>If you do not complete this step, all claims processing privileges will be temporarily suspended.</p>
+<p>Delta Dental Security Team</p>
+</body></html>
+--boundary-alt-272--
+
+--boundary-272--

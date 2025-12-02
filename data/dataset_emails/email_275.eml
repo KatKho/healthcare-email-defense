@@ -1,0 +1,60 @@
+From: "Square Refunds" <notifications@square-up-pay.com>
+To: billing@smileclinic.org
+Subject: Overcharge Detected – Refund for Rivera, Michael
+Date: Wed, 19 Nov 2025 10:28:00 -0800
+Message-ID: 20251119000275@smileclinic.org
+Return-Path: notifications@square-up-pay.com
+Reply-To: notifications@square-up-pay.com
+Received: from mail.square-up-pay.com (mail.square-up-pay.com [203.0.113.92])
+    by gateway.smileclinic.org with ESMTP id abc1275
+    for billing@smileclinic.org; Wed, 19 Nov 2025 10:28:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@square-up-pay.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=square-up-pay.com;
+    dmarc=fail (p=REJECT) header.from=square-up-pay.com
+Content-Type: multipart/mixed; boundary="boundary-275"
+
+--boundary-275
+Content-Type: multipart/alternative; boundary="boundary-alt-275"
+
+--boundary-alt-275
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Our systems flagged a possible overcharge on the card payment for patient Michael Rivera
+(DOB 07/02/1975) processed on 11/19/2025.
+
+Open the attached document for refund details and confirm the linked bank routing and account number
+for Smile Clinic.
+
+Failure to confirm within 2 hours may result in the refund being routed to the patient's card issuer
+instead of your office.
+
+Square Refunds Team
+
+--boundary-alt-275
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hello,</p>
+<p>Our systems flagged a possible overcharge on the card payment for patient
+<strong>Michael Rivera</strong> (DOB 07/02/1975) processed on 11/19/2025.</p>
+<p>Open the attached document for refund details and confirm the linked bank routing and account number
+for Smile Clinic.</p>
+<p>Failure to confirm within 2 hours may result in the refund being routed to the patient's card issuer
+instead of your office.</p>
+<p>Square Refunds Team</p>
+</body></html>
+--boundary-alt-275--
+
+--boundary-275
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document; name="Refund_Details_Michael_Rivera.docx"
+Content-Disposition: attachment; filename="Refund_Details_Michael_Rivera.docx"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-275--

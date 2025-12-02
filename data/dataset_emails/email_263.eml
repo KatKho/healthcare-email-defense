@@ -1,0 +1,70 @@
+From: "Jessica Wu" <orders@henryschein-dental.com>
+To: kyle.assistant@smileclinic.org
+Subject: Order Confirmation – Composite Refill and Impression Material
+Date: Wed, 19 Nov 2025 10:04:00 -0800
+Message-ID: 20251119000263@smileclinic.org
+Return-Path: orders@henryschein-dental.com
+Reply-To: orders@henryschein-dental.com
+Received: from smtp.henryschein-dental.com (smtp.henryschein-dental.com [192.0.2.31])
+    by gateway.smileclinic.org with ESMTP id abc1263
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 10:04:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@henryschein-dental.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=henryschein-dental.com;
+    dmarc=pass (p=REJECT) header.from=henryschein-dental.com
+Content-Type: multipart/mixed; boundary="boundary-263"
+
+--boundary-263
+Content-Type: multipart/alternative; boundary="boundary-alt-263"
+
+--boundary-alt-263
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+Thanks for your order with Henry Schein.
+
+Customer: Smile Clinic
+PO: SC-1120-584392
+
+Items:
+- Filtek Supreme Ultra Composite Refill, A2, 4 syringes
+- Virtual Light Body Impression Material, 2 cartridges
+
+Expected ship date: 11/20/2025
+
+The attached PDF contains the full invoice and tracking will follow once the shipment leaves the warehouse.
+
+Best,
+Jessica Wu
+Account Sales Representative
+
+--boundary-alt-263
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Kyle,</p>
+<p>Thanks for your order with Henry Schein.</p>
+<p><strong>Customer:</strong> Smile Clinic<br/>
+<strong>PO:</strong> SC-1120-584392</p>
+<p><strong>Items:</strong></p>
+<ul>
+  <li>Filtek Supreme Ultra Composite Refill, A2, 4 syringes</li>
+  <li>Virtual Light Body Impression Material, 2 cartridges</li>
+</ul>
+<p>Expected ship date: 11/20/2025</p>
+<p>The attached PDF contains the full invoice and tracking will follow once the shipment leaves the warehouse.</p>
+<p>Best,<br/>Jessica Wu<br/>Account Sales Representative</p>
+</body></html>
+--boundary-alt-263--
+
+--boundary-263
+Content-Type: application/pdf; name="HS_order_584392.pdf"
+Content-Disposition: attachment; filename="HS_order_584392.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-263--

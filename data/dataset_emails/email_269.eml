@@ -1,0 +1,56 @@
+From: "Square Receipts" <receipts@squareup.com>
+To: billing@smileclinic.org
+Subject: Patient Card Payment – Nguyen, Sophia – Receipt Copy
+Date: Wed, 19 Nov 2025 10:16:00 -0800
+Message-ID: 20251119000269@smileclinic.org
+Return-Path: receipts@squareup.com
+Reply-To: receipts@squareup.com
+Received: from smtp.squareup.com (smtp.squareup.com [192.0.2.56])
+    by gateway.smileclinic.org with ESMTP id abc1269
+    for billing@smileclinic.org; Wed, 19 Nov 2025 10:16:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@squareup.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=squareup.com;
+    dmarc=pass (p=REJECT) header.from=squareup.com
+Content-Type: multipart/mixed; boundary="boundary-269"
+
+--boundary-269
+Content-Type: multipart/alternative; boundary="boundary-alt-269"
+
+--boundary-alt-269
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Marcus,
+
+This is a copy of the card payment receipt for patient Sophia Nguyen (DOB 11/22/2010).
+
+Amount: $85.00
+Date: 11/19/2025
+Last 4 digits: 4821
+
+You can view the full receipt and export a CSV report from your Square dashboard:
+https://dashboard.squareup.com.
+
+Thanks for using Square.
+
+Squareup Payments
+
+--boundary-alt-269
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Marcus,</p>
+<p>This is a copy of the card payment receipt for patient <strong>Sophia Nguyen</strong> (DOB 11/22/2010).</p>
+<p>Amount: $85.00<br/>
+Date: 11/19/2025<br/>
+Last 4 digits: 4821</p>
+<p>You can view the full receipt and export a CSV report from your Square dashboard:<br/>
+<a href="https://dashboard.squareup.com">https://dashboard.squareup.com</a>.</p>
+<p>Thanks for using Square.</p>
+<p>Squareup Payments</p>
+</body></html>
+--boundary-alt-269--
+
+--boundary-269--

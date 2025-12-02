@@ -1,0 +1,52 @@
+From: "MedWaste Alerts" <alerts@medwaste-dispose.com>
+To: it@smileclinic.org
+Subject: Secure Portal Verification Required
+Date: Wed, 19 Nov 2025 10:30:00 -0800
+Message-ID: 20251119000276@smileclinic.org
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.100])
+    by gateway.smileclinic.org with ESMTP id abc1276
+    for it@smileclinic.org; Wed, 19 Nov 2025 10:30:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@medwaste-dispose.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=medwaste-dispose.com;
+    dmarc=fail (p=REJECT) header.from=medwaste-dispose.com
+Content-Type: multipart/mixed; boundary="boundary-276"
+
+--boundary-276
+Content-Type: multipart/alternative; boundary="boundary-alt-276"
+
+--boundary-alt-276
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon David,
+
+Service access for your biohazard pickup records, including manifests containing patient
+treatment dates and chair numbers, will pause unless the secure portal is validated.
+
+Use the link below to confirm your admin credentials:
+
+https://medwaste-portal-verify.com/session
+
+Do not share this link; it is tied to Smile Clinic.
+
+MedWaste Alerts
+
+--boundary-alt-276
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Good afternoon David,</p>
+<p>Service access for your biohazard pickup records, including manifests containing patient
+treatment dates and chair numbers, will pause unless the secure portal is validated.</p>
+<p>Use the link below to confirm your admin credentials:</p>
+<p><a href="https://medwaste-portal-verify.com/session">https://medwaste-portal-verify.com/session</a></p>
+<p>Do not share this link; it is tied to Smile Clinic.</p>
+<p>MedWaste Alerts</p>
+</body></html>
+--boundary-alt-276--
+
+--boundary-276--

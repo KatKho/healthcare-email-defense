@@ -1,0 +1,59 @@
+From: "Kevin James" <provider.support@deltadental-insurance.com>
+To: billing@smileclinic.org
+Subject: Pre-Treatment Estimate Update – Carter, Emily
+Date: Wed, 19 Nov 2025 10:14:00 -0800
+Message-ID: 20251119000268@smileclinic.org
+Return-Path: provider.support@deltadental-insurance.com
+Reply-To: provider.support@deltadental-insurance.com
+Received: from mail.deltadental-insurance.com (mail.deltadental-insurance.com [192.0.2.90])
+    by gateway.smileclinic.org with ESMTP id abc1268
+    for billing@smileclinic.org; Wed, 19 Nov 2025 10:14:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@deltadental-insurance.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=deltadental-insurance.com;
+    dmarc=pass (p=REJECT) header.from=deltadental-insurance.com
+Content-Type: multipart/mixed; boundary="boundary-268"
+
+--boundary-268
+Content-Type: multipart/alternative; boundary="boundary-alt-268"
+
+--boundary-alt-268
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+We have completed the pre-treatment estimate review for Emily Carter (DOB 03/14/1989),
+Delta Dental Member ID DD-4829910.
+
+The attached document shows the allowed amount, patient responsibility, and remaining annual maximum.
+
+Please review the estimate before scheduling additional restorative visits.
+
+Sincerely,
+Kevin James
+Provider Relations Representative
+Delta Dental
+
+--boundary-alt-268
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hello Marcus,</p>
+<p>We have completed the pre-treatment estimate review for <strong>Emily Carter</strong> (DOB 03/14/1989),
+Delta Dental Member ID DD-4829910.</p>
+<p>The attached document shows the allowed amount, patient responsibility, and remaining annual maximum.</p>
+<p>Please review the estimate before scheduling additional restorative visits.</p>
+<p>Sincerely,<br/>Kevin James<br/>Provider Relations Representative<br/>Delta Dental</p>
+</body></html>
+--boundary-alt-268--
+
+--boundary-268
+Content-Type: application/pdf; name="PTE_Emily_Carter.pdf"
+Content-Disposition: attachment; filename="PTE_Emily_Carter.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-268--

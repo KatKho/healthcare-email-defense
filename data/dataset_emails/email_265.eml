@@ -1,0 +1,56 @@
+From: "Kenji Sato" <lab@evergreendp.com>
+To: dr.martinez@smileclinic.org
+Subject: Shade Confirmation – Rivera, Michael – E.max Crown
+Date: Wed, 19 Nov 2025 10:08:00 -0800
+Message-ID: 20251119000265@smileclinic.org
+Return-Path: lab@evergreendp.com
+Reply-To: lab@evergreendp.com
+Received: from mail.evergreendp.com (mail.evergreendp.com [192.0.2.71])
+    by gateway.smileclinic.org with ESMTP id abc1265
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 10:08:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@evergreendp.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=evergreendp.com;
+    dmarc=pass (p=REJECT) header.from=evergreendp.com
+Content-Type: multipart/mixed; boundary="boundary-265"
+
+--boundary-265
+Content-Type: multipart/alternative; boundary="boundary-alt-265"
+
+--boundary-alt-265
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Dr. Martinez,
+
+For patient Michael Rivera (DOB 07/02/1975), case #58310, we received the photos and prescription
+for an E.max crown on tooth #14.
+
+We planned shade A3 with slight translucency increase on the incisal third based on your notes.
+If you prefer A2.5 to better match the adjacent #13, please let us know before pressing.
+
+You can also review the case details in our secure portal at
+https://portal.evergreendp.com/login.
+
+Best regards,
+Kenji Sato
+Senior Ceramist / Lab Tech
+Evergreen Dental Lab
+
+--boundary-alt-265
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Dr. Martinez,</p>
+<p>For patient <strong>Michael Rivera</strong> (DOB 07/02/1975), case #58310, we received the photos and prescription
+for an E.max crown on tooth #14.</p>
+<p>We planned shade A3 with slight translucency increase on the incisal third based on your notes.
+If you prefer A2.5 to better match the adjacent #13, please let us know before pressing.</p>
+<p>You can also review the case details in our secure portal at
+<a href="https://portal.evergreendp.com/login">https://portal.evergreendp.com/login</a>.</p>
+<p>Best regards,<br/>Kenji Sato<br/>Senior Ceramist / Lab Tech<br/>Evergreen Dental Lab</p>
+</body></html>
+--boundary-alt-265--
+
+--boundary-265--

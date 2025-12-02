@@ -1,4 +1,88 @@
-# Healthcare Email Defense Agent Demo
+# Healthcare Email Defense Agent — Healthcare — Defense
+Course: INFO 492 — Agentic Cybersecurity with AI & LLMs  
+Team 6 — Kat, Jack, Kaibo, Mina  
+An agentic email screener that automatically quarantines suspicious messages for IT review, reducing healthcare staff risk without deleting legitimate messages.
+
+## 1) Live Demo
+- Synthetic Industry: `<URL>` — status: `<Up/Down>` — test creds (fake): `<user/pass>`
+- Agentic System: `<URL>` — status: `<Up/Down>` — notes: ran continuously during Demo #4; processes emails every 15 minutes
+- Logs/Observability: AWS CloudWatch — `/<log-group>`
+
+## 2) Thesis & Outcome
+- **Original thesis (week 2):**  
+  A safe, low-cost way to handle healthcare email threats is to use an agentic system that automatically quarantines suspicious emails for IT review, reducing user risk without deleting legitimate messages.
+
+- **Final verdict:** **True**
+
+- **Why (top evidence):**  
+  - System ran ~48 hours continuously with no crashes  
+  - Logs showed correct PHI detection, processing-time tracking, and quarantine decisions  
+  - AWS costs remained extremely low, supporting the “low-cost” claim  
+
+## 3) What We Built
+- **Synthetic industry:**  
+  Dentistry clinic with defined roles (dentist, assistant, receptionist, IT admin), synthetic MIME email generator, and timed email delivery every 15 minutes.
+
+- **Agentic system:**  
+  Controller agent orchestrating workflow, classification/content agents, AWS Lambda + S3 + EventBridge timers, dashboard interface, and caching for performance improvement.
+
+- **Key risks addressed:**  
+  - Phishing attacks  
+  - Social engineering  
+  - PHI exposure  
+  - Alert fatigue  
+
+## 4) Roles, Auth, Data
+- **Roles & permissions:**  
+  - Dentist/Assistant/Receptionist → view inbox only  
+  - IT Admin → view quarantine, review decisions, examine logs  
+
+- **Authentication:** fake credentials in front-end; role-based dashboard views  
+
+- **Data:** synthetic-only dataset; MIME structure (sender, body, PHI markers, attachments, confidence, etc.)
+
+## 5) Experiments Summary (Demos #3–#5)
+- **Demo #3:**  
+  Hypothesis: system can classify & quarantine suspicious emails — Setup: manual tests —  
+  **Result:** Pass — Evidence: classification results + logs
+
+- **Demo #4 (continuous run):**  
+  Uptime: ~100% — Incidents: 0 —  
+  Improvement: yes, caching improved repeated-pattern handling
+
+- **Demo #5 (final):**  
+  Validated deployability & product framing —  
+  **Result:** fully functional end-to-end system — Evidence: dashboard + cloud logs
+
+## 6) Key Results (plain text)
+- **Effectiveness:** consistent classification accuracy; PHI detection successful  
+- **Reliability:** stable 48-hour run; no Lambda failures; no downtime  
+- **Safety:** no legitimate email deletion; quarantine-first policy; PHI scrubbed  
+
+## 7) How to Use / Deploy
+- **Prereqs:** AWS account, S3 buckets, Lambda functions, EventBridge scheduler, model API keys, environment variables  
+- **Deploy steps:** see `docs/deploy.md`  
+- **Test steps:** see `docs/test-plan.md`
+
+## 8) Safety, Ethics, Limits
+- Synthetic data only; no real credentials used  
+- Controls: quarantine-first, role gating, sandboxed LLM calls  
+- Known limits: confidence scores inconsistent, early caching, synthetic emails not fully realistic  
+
+## 9) Final Deliverables
+- 1000-word paper: `<link>`  
+- Slides: `<link>`  
+- Evidence folder: `/evidence/`  
+
+## 10) Next Steps
+- Package the system for real clinic deployment  
+- Improve caching + model scoring  
+- Expand industry scenarios beyond dentistry  
+- Add more robust observability & monitoring  
+
+---
+
+# Healthcare Email Defense Agent Demo - old readme file
 
 A web-based demo for an AI Email Defense Agent designed for healthcare organizations. This tool analyzes incoming emails to classify them as Safe, Suspicious, or Phishing using AI models via OpenRouter API, with agentic capabilities and human-in-the-loop feedback.
 

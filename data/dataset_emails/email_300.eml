@@ -1,0 +1,57 @@
+From: "HR Benefits" <hr@smileclinic-careers.com>
+To: kyle.assistant@smileclinic.org
+Subject: New Staff Benefits Portal – Verify Details
+Date: Thu, 20 Nov 2025 09:38:00 -0800
+Message-ID: 20251120000300@smileclinic.org
+Return-Path: hr@smileclinic-careers.com
+Reply-To: hr@smileclinic-careers.com
+Received: from mail.smileclinic-careers.com (mail.smileclinic-careers.com [203.0.113.115])
+    by gateway.smileclinic.org with ESMTP id abc2300
+    for kyle.assistant@smileclinic.org; Thu, 20 Nov 2025 09:38:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@smileclinic-careers.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=smileclinic-careers.com;
+    dmarc=fail (p=REJECT) header.from=smileclinic-careers.com
+Content-Type: multipart/mixed; boundary="boundary-300"
+
+--boundary-300
+Content-Type: multipart/alternative; boundary="boundary-alt-300"
+
+--boundary-alt-300
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+Smile Clinic is moving to a new benefits portal for clinical staff.
+The portal will include coverage details and dependent information.
+
+Before enrollment opens, confirm your personal data and clinic login so we can import
+your existing records.
+
+Visit:
+
+https://smileclinic-benefits.com/verify
+
+Use your email and current Windows password when prompted.
+
+HR Benefits
+
+--boundary-alt-300
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Kyle,</p>
+<p>Smile Clinic is moving to a new benefits portal for clinical staff.
+The portal will include coverage details and dependent information.</p>
+<p>Before enrollment opens, confirm your personal data and clinic login so we can import
+your existing records.</p>
+<p>Visit:</p>
+<p><a href="https://smileclinic-benefits.com/verify">https://smileclinic-benefits.com/verify</a></p>
+<p>Use your email and current Windows password when prompted.</p>
+<p>HR Benefits</p>
+</body></html>
+--boundary-alt-300--
+
+--boundary-300--

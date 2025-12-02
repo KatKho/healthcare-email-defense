@@ -1,0 +1,58 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: claims@delta-insurance.com
+Subject: Claim Submission – Jason Kim
+Date: Thu, 20 Nov 2025 09:56:00 -0800
+Message-ID: 20251120000309@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.100])
+    by gateway.smileclinic.org with ESMTP id abc2309
+    for claims@delta-insurance.com; Thu, 20 Nov 2025 09:56:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-309"
+
+--boundary-309
+Content-Type: multipart/alternative; boundary="boundary-alt-309"
+
+--boundary-alt-309
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Attached is the claim package for Jason Kim (DOB 06/28/1987) for recent restorative treatment.
+Member ID: DD-5930421, Plan: Delta Dental.
+
+The PDF includes the ADA claim form, narrative, and radiographs for the date of service.
+
+If any additional documentation is needed, please reply to this email.
+
+Regards,
+Marcus
+Insurance & Billing – Smile Clinic
+
+--boundary-alt-309
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hello,</p>
+<p>Attached is the claim package for <strong>Jason Kim</strong> (DOB 06/28/1987) for recent restorative treatment.<br/>
+Member ID: DD-5930421, Plan: Delta Dental.</p>
+<p>The PDF includes the ADA claim form, narrative, and radiographs for the date of service.</p>
+<p>If any additional documentation is needed, please reply to this email.</p>
+<p>Regards,<br/>Marcus<br/>Insurance &amp; Billing – Smile Clinic</p>
+</body></html>
+--boundary-alt-309--
+
+--boundary-309
+Content-Type: application/pdf; name="Jason_Kim_claim.pdf"
+Content-Disposition: attachment; filename="Jason_Kim_claim.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-309--

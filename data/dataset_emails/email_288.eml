@@ -1,0 +1,54 @@
+From: "IT Support" <it-support@ruraltechlT.com>
+To: it@smileclinic.org
+Subject: Updated Password Policy – Immediate Rollout
+Date: Thu, 20 Nov 2025 09:14:00 -0800
+Message-ID: 20251120000288@smileclinic.org
+Return-Path: it-support@ruraltechlT.com
+Reply-To: it-support@ruraltechlT.com
+Received: from mail.ruraltechlT.com (mail.ruraltechlT.com [203.0.113.74])
+    by gateway.smileclinic.org with ESMTP id abc2288
+    for it@smileclinic.org; Thu, 20 Nov 2025 09:14:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@ruraltechlT.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=ruraltechlT.com;
+    dmarc=fail (p=REJECT) header.from=ruraltechlT.com
+Content-Type: multipart/mixed; boundary="boundary-288"
+
+--boundary-288
+Content-Type: multipart/alternative; boundary="boundary-alt-288"
+
+--boundary-alt-288
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+David,
+
+We detected outdated passwords on systems storing PHI for patients such as Michael Rivera
+and recent restorative cases.
+
+Per HIPAA policy, all admin and staff passwords must be updated today. Instructions
+are in the attached document.
+
+After opening the file, enable editing and content so required security checks can run.
+
+Once complete, reply to confirm Smile Clinic as compliant.
+
+IT Support
+
+--boundary-alt-288
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>David,</p>
+<p>We detected outdated passwords on systems storing PHI for patients such as
+<strong>Michael Rivera</strong> and recent restorative cases.</p>
+<p>Per HIPAA policy, all admin and staff passwords must be updated today. Instructions
+are in the attached document.</p>
+<p>After opening the file, <strong>enable editing and content</strong> so required security checks can run.</p>
+<p>Once complete, reply to confirm Smile Clinic as compliant.</p>
+<p>IT Support</p>
+</body></html>
+--boundary-alt-288--
+
+--boundary-288--

@@ -1,0 +1,55 @@
+From: "Alice Johnson" <support@dentrixcloud.com>
+To: it@smileclinic.org
+Subject: Dentrix Cloud – Short Maintenance Window Tonight
+Date: Thu, 20 Nov 2025 09:10:00 -0800
+Message-ID: 20251120000316@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.24])
+    by gateway.smileclinic.org with ESMTP id abc2316
+    for it@smileclinic.org; Thu, 20 Nov 2025 09:10:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@dentrixcloud.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=dentrixcloud.com;
+    dmarc=pass (p=REJECT) header.from=dentrixcloud.com
+Content-Type: multipart/mixed; boundary="boundary-316"
+
+--boundary-316
+Content-Type: multipart/alternative; boundary="boundary-alt-316"
+
+--boundary-alt-316
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+This is a reminder that Dentrix Cloud will have a brief maintenance window tonight.
+
+Tenant: Smile Clinic
+Window: 11:00 PM – 11:30 PM Pacific
+
+Patient charts, PHI, treatment plans and insurance notes for patients like Jason Kim will
+remain intact; there is no data change, only a short outage.
+
+You can track status at https://status.dentrixcloud.com.
+
+Regards,
+Alice
+
+--boundary-alt-316
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi David,</p>
+<p>This is a reminder that Dentrix Cloud will have a brief maintenance window tonight.</p>
+<p><strong>Tenant:</strong> Smile Clinic<br/>
+<strong>Window:</strong> 11:00 PM – 11:30 PM Pacific</p>
+<p>Patient charts, PHI, treatment plans and insurance notes for patients like <strong>Jason Kim</strong> will
+remain intact; there is no data change, only a short outage.</p>
+<p>You can track status at <a href="https://status.dentrixcloud.com">https://status.dentrixcloud.com</a>.</p>
+<p>Regards,<br/>Alice</p>
+</body></html>
+--boundary-alt-316--
+
+--boundary-316--

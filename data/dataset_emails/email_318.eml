@@ -1,0 +1,52 @@
+From: "Tony Vercetti" <pickups@medwastedisposal.com>
+To: frontdesk@smileclinic.org
+Subject: Biohazard Pickup Window Confirmation
+Date: Thu, 20 Nov 2025 09:14:00 -0800
+Message-ID: 20251120000318@smileclinic.org
+Return-Path: pickups@medwastedisposal.com
+Reply-To: pickups@medwastedisposal.com
+Received: from smtp.medwastedisposal.com (smtp.medwastedisposal.com [192.0.2.83])
+    by gateway.smileclinic.org with ESMTP id abc2318
+    for frontdesk@smileclinic.org; Thu, 20 Nov 2025 09:14:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@medwastedisposal.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=medwastedisposal.com;
+    dmarc=pass (p=REJECT) header.from=medwastedisposal.com
+Content-Type: multipart/mixed; boundary="boundary-318"
+
+--boundary-318
+Content-Type: multipart/alternative; boundary="boundary-alt-318"
+
+--boundary-alt-318
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Sarah,
+
+This confirms tomorrow's sharps and biohazard pickup for Smile Clinic.
+
+Please make sure all containers from operatories that saw Daniel Brooks and other restorative
+patients today are sealed and staged near the back door.
+
+Route and times are available in your portal at https://portal.medwastedisposal.com.
+
+Thanks,
+Tony
+MedWaste
+
+--boundary-alt-318
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Sarah,</p>
+<p>This confirms tomorrow's sharps and biohazard pickup for Smile Clinic.</p>
+<p>Please make sure all containers from operatories that saw <strong>Daniel Brooks</strong> and other restorative
+patients today are sealed and staged near the back door.</p>
+<p>Route and times are available in your portal at
+<a href="https://portal.medwastedisposal.com">https://portal.medwastedisposal.com</a>.</p>
+<p>Thanks,<br/>Tony<br/>MedWaste</p>
+</body></html>
+--boundary-alt-318--
+
+--boundary-318--

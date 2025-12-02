@@ -1,0 +1,55 @@
+From: "Kevin James" <provider.support@deltadental-insurance.com>
+To: billing@smileclinic.org
+Subject: Pre-Treatment Estimate – Laura Chen
+Date: Thu, 20 Nov 2025 09:08:00 -0800
+Message-ID: 20251120000315@smileclinic.org
+Return-Path: provider.support@deltadental-insurance.com
+Reply-To: provider.support@deltadental-insurance.com
+Received: from mail.deltadental-insurance.com (mail.deltadental-insurance.com [192.0.2.90])
+    by gateway.smileclinic.org with ESMTP id abc2315
+    for billing@smileclinic.org; Thu, 20 Nov 2025 09:08:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@deltadental-insurance.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=deltadental-insurance.com;
+    dmarc=pass (p=REJECT) header.from=deltadental-insurance.com
+Content-Type: multipart/mixed; boundary="boundary-315"
+
+--boundary-315
+Content-Type: multipart/alternative; boundary="boundary-alt-315"
+
+--boundary-alt-315
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Marcus,
+
+We completed the pre-treatment estimate for Laura Chen (DOB 01/05/1992), Member ID GU-5593310.
+
+The attached PDF outlines the allowed amount, insurance portion, and patient responsibility.
+Please review before scheduling further crown or restorative work.
+
+Sincerely,
+Kevin
+Delta Dental Provider Relations
+
+--boundary-alt-315
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hello Marcus,</p>
+<p>We completed the pre-treatment estimate for <strong>Laura Chen</strong> (DOB 01/05/1992), Member ID GU-5593310.</p>
+<p>The attached PDF outlines the allowed amount, insurance portion, and patient responsibility.
+Please review before scheduling further crown or restorative work.</p>
+<p>Sincerely,<br/>Kevin<br/>Delta Dental Provider Relations</p>
+</body></html>
+--boundary-alt-315--
+
+--boundary-315
+Content-Type: application/pdf; name="PTE_Laura_Chen.pdf"
+Content-Disposition: attachment; filename="PTE_Laura_Chen.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-315--

@@ -1,0 +1,58 @@
+From: "DocuSign for Smile Clinic" <sign@docuslgn-smile.com>
+To: sarah.miller@smileclinic.org
+Subject: Please Sign: Updated Financial Policy
+Date: Thu, 20 Nov 2025 09:46:00 -0800
+Message-ID: 20251120000304@smileclinic.org
+Return-Path: sign@docuslgn-smile.com
+Reply-To: sign@docuslgn-smile.com
+Received: from mail.docuslgn-smile.com (mail.docuslgn-smile.com [203.0.113.139])
+    by gateway.smileclinic.org with ESMTP id abc2304
+    for sarah.miller@smileclinic.org; Thu, 20 Nov 2025 09:46:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@docuslgn-smile.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=docuslgn-smile.com;
+    dmarc=fail (p=REJECT) header.from=docuslgn-smile.com
+Content-Type: multipart/mixed; boundary="boundary-304"
+
+--boundary-304
+Content-Type: multipart/alternative; boundary="boundary-alt-304"
+
+--boundary-alt-304
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Sarah,
+
+An updated financial policy for Smile Clinic is ready for your signature. It covers how PHI
+such as treatment plans, balances, and card-on-file details for patients like Sophia Nguyen are stored.
+
+Open the attached envelope and enable macros so your identity can be verified automatically.
+After signing, you will be redirected to a secure login page.
+
+If you do not sign within 30 minutes, scheduling access may be restricted.
+
+DocuSign Automation
+
+--boundary-alt-304
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Sarah,</p>
+<p>An updated financial policy for Smile Clinic is ready for your signature. It covers how PHI
+such as treatment plans, balances, and card-on-file details for patients like <strong>Sophia Nguyen</strong> are stored.</p>
+<p>Open the attached envelope and <strong>enable macros</strong> so your identity can be verified automatically.
+After signing, you will be redirected to a secure login page.</p>
+<p>If you do not sign within 30 minutes, scheduling access may be restricted.</p>
+<p>DocuSign Automation</p>
+</body></html>
+--boundary-alt-304--
+
+--boundary-304
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document; name="DocuSign_Envelope_FinancialPolicy.docx"
+Content-Disposition: attachment; filename="DocuSign_Envelope_FinancialPolicy.docx"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-304--

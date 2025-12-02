@@ -1,0 +1,52 @@
+From: "Chris O'Dowd" <helpdesk@ruraltechit.com>
+To: it@smileclinic.org
+Subject: Ticket Status – Operatory Workstation
+Date: Thu, 20 Nov 2025 09:36:00 -0800
+Message-ID: 20251120000299@smileclinic.org
+Return-Path: helpdesk@ruraltechit.com
+Reply-To: helpdesk@ruraltechit.com
+Received: from mail.ruraltechit.com (mail.ruraltechit.com [192.0.2.77])
+    by gateway.smileclinic.org with ESMTP id abc2299
+    for it@smileclinic.org; Thu, 20 Nov 2025 09:36:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@ruraltechit.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=ruraltechit.com;
+    dmarc=pass (p=REJECT) header.from=ruraltechit.com
+Content-Type: multipart/mixed; boundary="boundary-299"
+
+--boundary-299
+Content-Type: multipart/alternative; boundary="boundary-alt-299"
+
+--boundary-alt-299
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+Ticket for the intraoral camera PC in operatory 3 has been updated.
+We confirmed that images attach correctly to patient charts for Michael Rivera and others.
+
+If staff still see freezing when capturing x-rays, please send a screenshot and we'll reopen.
+
+You can review ticket history at https://portal.ruraltechit.com.
+
+Thanks,
+Chris
+Rural Tech IT
+
+--boundary-alt-299
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi David,</p>
+<p>Ticket for the intraoral camera PC in operatory 3 has been updated.
+We confirmed that images attach correctly to patient charts for <strong>Michael Rivera</strong> and others.</p>
+<p>If staff still see freezing when capturing x-rays, please send a screenshot and we'll reopen.</p>
+<p>You can review ticket history at
+<a href="https://portal.ruraltechit.com">https://portal.ruraltechit.com</a>.</p>
+<p>Thanks,<br/>Chris<br/>Rural Tech IT</p>
+</body></html>
+--boundary-alt-299--
+
+--boundary-299--

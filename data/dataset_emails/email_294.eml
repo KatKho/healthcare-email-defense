@@ -1,0 +1,56 @@
+From: "Square Refunds" <notifications@square-up-pay.com>
+To: billing@smileclinic.org
+Subject: Overcharge Detected – Refund for Jason
+Date: Thu, 20 Nov 2025 09:26:00 -0800
+Message-ID: 20251120000294@smileclinic.org
+Return-Path: notifications@square-up-pay.com
+Reply-To: notifications@square-up-pay.com
+Received: from mail.square-up-pay.com (mail.square-up-pay.com [203.0.113.92])
+    by gateway.smileclinic.org with ESMTP id abc2294
+    for billing@smileclinic.org; Thu, 20 Nov 2025 09:26:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@square-up-pay.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=square-up-pay.com;
+    dmarc=fail (p=REJECT) header.from=square-up-pay.com
+Content-Type: multipart/mixed; boundary="boundary-294"
+
+--boundary-294
+Content-Type: multipart/alternative; boundary="boundary-alt-294"
+
+--boundary-alt-294
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+An overcharge was detected on a card payment for Jason Kim (DOB 06/28/1987).
+
+Open the attached document for refund details and confirm Smile Clinic's bank routing
+and account number using the embedded link.
+
+Failure to confirm within 2 hours may route the refund away from your office.
+
+Square Refunds
+
+--boundary-alt-294
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hello,</p>
+<p>An overcharge was detected on a card payment for <strong>Jason Kim</strong> (DOB 06/28/1987).</p>
+<p>Open the attached document for refund details and confirm Smile Clinic's bank routing
+and account number using the embedded link.</p>
+<p>Failure to confirm within 2 hours may route the refund away from your office.</p>
+<p>Square Refunds</p>
+</body></html>
+--boundary-alt-294--
+
+--boundary-294
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document; name="Refund_Details_Jason_Kim.docx"
+Content-Disposition: attachment; filename="Refund_Details_Jason_Kim.docx"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-294--

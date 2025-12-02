@@ -1,0 +1,58 @@
+From: "Bright Smile Lab Cases" <cases@bright5milelab.com>
+To: kyle.assistant@smileclinic.org
+Subject: Remake Authorization – Laura Chen
+Date: Thu, 20 Nov 2025 09:06:00 -0800
+Message-ID: 20251120000284@smileclinic.org
+Return-Path: cases@bright5milelab.com
+Reply-To: cases@bright5milelab.com
+Received: from smtp.bright5milelab.com (smtp.bright5milelab.com [203.0.113.81])
+    by gateway.smileclinic.org with ESMTP id abc2284
+    for kyle.assistant@smileclinic.org; Thu, 20 Nov 2025 09:06:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@bright5milelab.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=bright5milelab.com;
+    dmarc=fail (p=REJECT) header.from=bright5milelab.com
+Content-Type: multipart/mixed; boundary="boundary-284"
+
+--boundary-284
+Content-Type: multipart/alternative; boundary="boundary-alt-284"
+
+--boundary-alt-284
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+We determined that the crown for Laura Chen (DOB 01/05/1992) must be remade and need a new
+authorization on file.
+
+Open the attached remake form and provide the patient's full address, phone number,
+and insurance ID, then send it back urgently.
+
+Missing information may delay insurance payment.
+
+Bright Smile Lab Cases
+
+--boundary-alt-284
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Kyle,</p>
+<p>We determined that the crown for <strong>Laura Chen</strong> (DOB 01/05/1992) must be remade and need a new
+authorization on file.</p>
+<p>Open the attached remake form and provide the patient's full address, phone number,
+and insurance ID, then send it back urgently.</p>
+<p>Missing information may delay insurance payment.</p>
+<p>Bright Smile Lab Cases</p>
+</body></html>
+--boundary-alt-284--
+
+--boundary-284
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document; name="Remake_Form_Laura_Chen.docx"
+Content-Disposition: attachment; filename="Remake_Form_Laura_Chen.docx"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-284--

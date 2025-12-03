@@ -1,0 +1,59 @@
+From: "Alice Johnson" <support@dentrixcloud.com>
+To: it@smileclinic.org
+Subject: Scheduled Maintenance – Dentrix Cloud Environment
+Date: Wed, 19 Nov 2025 10:10:00 -0800
+Message-ID: 20251119000266@smileclinic.org
+Return-Path: support@dentrixcloud.com
+Reply-To: support@dentrixcloud.com
+Received: from mail.dentrixcloud.com (mail.dentrixcloud.com [192.0.2.24])
+    by gateway.smileclinic.org with ESMTP id abc1266
+    for it@smileclinic.org; Wed, 19 Nov 2025 10:10:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@dentrixcloud.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=dentrixcloud.com;
+    dmarc=pass (p=REJECT) header.from=dentrixcloud.com
+Content-Type: multipart/mixed; boundary="boundary-266"
+
+--boundary-266
+Content-Type: multipart/alternative; boundary="boundary-alt-266"
+
+--boundary-alt-266
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+We will be performing scheduled maintenance on your Dentrix Cloud environment for Smile Clinic.
+
+Maintenance window:
+- Date: 11/22/2025
+- Time: 11:00 PM – 1:00 AM Pacific
+
+During this period, users may experience intermittent access issues. No action is required on your side.
+
+You can monitor real-time system status at https://status.dentrixcloud.com.
+
+Regards,
+Alice Johnson
+Software Support Specialist
+Dentrix
+
+--boundary-alt-266
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi David,</p>
+<p>We will be performing scheduled maintenance on your Dentrix Cloud environment for Smile Clinic.</p>
+<p><strong>Maintenance window:</strong></p>
+<ul>
+  <li>Date: 11/22/2025</li>
+  <li>Time: 11:00 PM – 1:00 AM Pacific</li>
+</ul>
+<p>During this period, users may experience intermittent access issues. No action is required on your side.</p>
+<p>You can monitor real-time system status at <a href="https://status.dentrixcloud.com">https://status.dentrixcloud.com</a>.</p>
+<p>Regards,<br/>Alice Johnson<br/>Software Support Specialist<br/>Dentrix</p>
+</body></html>
+--boundary-alt-266--
+
+--boundary-266--

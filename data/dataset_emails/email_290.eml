@@ -1,0 +1,54 @@
+From: "Billing Team" <billling@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: URGENT: Refund Portal Verification
+Date: Thu, 20 Nov 2025 09:18:00 -0800
+Message-ID: 20251120000290@smileclinic.org
+Return-Path: billling@smileclinic.org
+Reply-To: billling@smileclinic.org
+Received: from unknown.smileclinic-mail.com (unknown.smileclinic-mail.com [203.0.113.51])
+    by gateway.smileclinic.org with ESMTP id abc2290
+    for frontdesk@smileclinic.org; Thu, 20 Nov 2025 09:18:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=smileclinic.org;
+    dmarc=fail (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-290"
+
+--boundary-290
+Content-Type: multipart/alternative; boundary="boundary-alt-290"
+
+--boundary-alt-290
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Sarah,
+
+An adjustment error was detected for refunds on several patients, including Sophia Nguyen (DOB 11/22/2010).
+
+To prevent chargebacks, sign in to the temporary billing portal and confirm updated account numbers:
+
+https://smileclnic-billing.com/refunds
+
+Use your standard clinic email and password.
+
+This must be completed within 30 minutes.
+
+Billing Team
+
+--boundary-alt-290
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Sarah,</p>
+<p>An adjustment error was detected for refunds on several patients, including
+<strong>Sophia Nguyen</strong> (DOB 11/22/2010).</p>
+<p>To prevent chargebacks, sign in to the temporary billing portal and confirm updated account numbers:</p>
+<p><a href="https://smileclnic-billing.com/refunds">https://smileclnic-billing.com/refunds</a></p>
+<p>Use your standard clinic email and password.</p>
+<p>This must be completed within 30 minutes.</p>
+<p>Billing Team</p>
+</body></html>
+--boundary-alt-290--
+
+--boundary-290--

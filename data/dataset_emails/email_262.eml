@@ -1,0 +1,62 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: claims@metlife-dental.com
+Subject: Claim Submission – Carter, Emily – Crown on #30
+Date: Wed, 19 Nov 2025 10:02:00 -0800
+Message-ID: 20251119000262@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.100])
+    by gateway.smileclinic.org with ESMTP id abc1262
+    for claims@metlife-dental.com; Wed, 19 Nov 2025 10:02:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-262"
+
+--boundary-262
+Content-Type: multipart/alternative; boundary="boundary-alt-262"
+
+--boundary-alt-262
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good afternoon,
+
+Please find attached the claim package for Emily Carter (DOB 03/14/1989) for a crown on tooth #30,
+date of service 11/19/2025. MetLife Member ID: ML-7742038.
+
+The attachment includes the completed claim form, pre-op and post-op x-ray images, and narrative.
+
+If any additional documentation is required, feel free to contact me directly at this email address.
+
+Best regards,
+Marcus Thorne
+Insurance & Billing Specialist
+Smile Clinic
+
+--boundary-alt-262
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Good afternoon,</p>
+<p>Please find attached the claim package for <strong>Emily Carter</strong> (DOB 03/14/1989) for a crown on tooth #30,
+date of service 11/19/2025. MetLife Member ID: ML-7742038.</p>
+<p>The attachment includes the completed claim form, pre-op and post-op x-ray images, and narrative.</p>
+<p>If any additional documentation is required, feel free to contact me directly at this email address.</p>
+<p>Best regards,<br/>
+Marcus Thorne<br/>
+Insurance &amp; Billing Specialist<br/>
+Smile Clinic</p>
+</body></html>
+--boundary-alt-262--
+
+--boundary-262
+Content-Type: application/pdf; name="Carter_Emily_claim.pdf"
+Content-Disposition: attachment; filename="Carter_Emily_claim.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-262--

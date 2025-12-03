@@ -1,0 +1,51 @@
+From: "Marcus Thorne" <billing@smileclinic.org>
+To: claims@metlife-insurance.com
+Subject: Claim Submission – Sophia Nguyen
+Date: Thu, 20 Nov 2025 09:18:00 -0800
+Message-ID: 20251120000320@smileclinic.org
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.100])
+    by gateway.smileclinic.org with ESMTP id abc2320
+    for claims@metlife-insurance.com; Thu, 20 Nov 2025 09:18:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-320"
+
+--boundary-320
+Content-Type: multipart/alternative; boundary="boundary-alt-320"
+
+--boundary-alt-320
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Attached is the claim package for Sophia Nguyen (DOB 11/22/2010) for recent restorative treatment.
+Member ID: ML-7742038, Plan: MetLife Dental.
+
+The PDF includes the ADA claim form, narrative, and radiographs for the date of service.
+
+If any additional documentation is needed, please reply to this email.
+
+Regards,
+Marcus
+Insurance & Billing – Smile Clinic
+
+--boundary-alt-320
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hello,</p>
+<p>Attached is the claim package for <strong>Sophia Nguyen</strong> (DOB 11/22/2010) for recent restorative treatment.<br/>
+Member ID: ML-7742038, Plan: MetLife Dental.</p>
+<p>The PDF includes the ADA claim form, narrative, and radiographs for the date of service.</p>
+<p>If any additional documentation is needed, please reply to this email.</p>
+<p>Regards,<br/>Marcus<br/>Insurance &amp; Billing – Smile Clinic</p>
+</body></html>
+--boundary-alt-320--
+
+--boundary-320--

@@ -1,0 +1,59 @@
+From: "Tony Vercetti" <pickups@medwastedisposal.com>
+To: frontdesk@smileclinic.org
+Subject: Sharps and Biohazard Pickup Confirmation – 11/21/2025
+Date: Wed, 19 Nov 2025 10:12:00 -0800
+Message-ID: 20251119000267@smileclinic.org
+Return-Path: pickups@medwastedisposal.com
+Reply-To: pickups@medwastedisposal.com
+Received: from smtp.medwastedisposal.com (smtp.medwastedisposal.com [192.0.2.83])
+    by gateway.smileclinic.org with ESMTP id abc1267
+    for frontdesk@smileclinic.org; Wed, 19 Nov 2025 10:12:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@medwastedisposal.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=medwastedisposal.com;
+    dmarc=pass (p=REJECT) header.from=medwastedisposal.com
+Content-Type: multipart/mixed; boundary="boundary-267"
+
+--boundary-267
+Content-Type: multipart/alternative; boundary="boundary-alt-267"
+
+--boundary-alt-267
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Sarah,
+
+This is a confirmation for your scheduled sharps and biohazard waste pickup.
+
+Customer: Smile Clinic
+Service date: 11/21/2025
+Window: 2:00 PM – 4:00 PM
+
+Please make sure all red bags and sharps containers are sealed and staged near the back entrance.
+
+If anything changes, you can update the stop from your customer portal at
+https://portal.medwastedisposal.com.
+
+Thank you,
+Tony Vercetti
+Route Logistics Manager
+MedWaste
+
+--boundary-alt-267
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Sarah,</p>
+<p>This is a confirmation for your scheduled sharps and biohazard waste pickup.</p>
+<p><strong>Customer:</strong> Smile Clinic<br/>
+<strong>Service date:</strong> 11/21/2025<br/>
+<strong>Window:</strong> 2:00 PM – 4:00 PM</p>
+<p>Please make sure all red bags and sharps containers are sealed and staged near the back entrance.</p>
+<p>If anything changes, you can update the stop from your customer portal at
+<a href="https://portal.medwastedisposal.com">https://portal.medwastedisposal.com</a>.</p>
+<p>Thank you,<br/>Tony Vercetti<br/>Route Logistics Manager<br/>MedWaste</p>
+</body></html>
+--boundary-alt-267--
+
+--boundary-267--

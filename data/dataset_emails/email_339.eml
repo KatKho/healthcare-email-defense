@@ -1,0 +1,50 @@
+From: Benefits Center <hr@smileclnic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Update Your Open Enrollment Elections Today
+Date: Thu, 20 Nov 2025 09:41:00 -0000
+Message-ID: <20251120094100.32018@smileclinic.org>
+Return-Path: hr@smileclnic.org
+Reply-To: hr@smileclnic.org
+Received: from smtp.smileclnic.org (smtp.smileclnic.org [203.0.113.200]) by
+ gateway.smileclinic.org with ESMTP id abc338 for
+ kyle.assistant@smileclinic.org; Thu, 20 Nov 2025 09:41:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=fail
+ header.i=@smileclnic.org header.s=s2025 header.b=xyz; spf=fail
+ smtp.mailfrom=smileclnic.org; dmarc=fail (p=REJECT)
+ header.from=smileclnic.org
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5846938747952164976=="
+
+--===============5846938747952164976==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Kyle Bennett,
+
+Our records show you have not finalized your 2026 benefits elections.
+If you do not submit choices today, your coverage will be reduced.
+
+Use the secure HR link below and confirm your personal details and dependents:
+
+https://smileclinic-hrportal.com/enrollment
+
+HR Benefits Processing
+
+--===============5846938747952164976==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Dear Kyle Bennett,</p>
+<p>Our records show you have not finalized your 2026 benefits elections.
+If you do not submit choices today, your coverage will be reduced.</p>
+<p>Use the secure HR link below and confirm your personal details and depende=
+nts:</p>
+<p><a href=3D"https://smileclinic-hrportal.com/enrollment">
+https://smileclinic-hrportal.com/enrollment</a></p>
+<p>HR Benefits Processing</p>
+</body></html>
+
+--===============5846938747952164976==--

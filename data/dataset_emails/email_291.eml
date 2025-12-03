@@ -1,0 +1,54 @@
+From: "Square Receipts" <receipts@squareup.com>
+To: billing@smileclinic.org
+Subject: Payment Receipt Copy – Daniel Brooks
+Date: Thu, 20 Nov 2025 09:20:00 -0800
+Message-ID: 20251120000291@smileclinic.org
+Return-Path: receipts@squareup.com
+Reply-To: receipts@squareup.com
+Received: from smtp.squareup.com (smtp.squareup.com [192.0.2.56])
+    by gateway.smileclinic.org with ESMTP id abc2291
+    for billing@smileclinic.org; Thu, 20 Nov 2025 09:20:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@squareup.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=squareup.com;
+    dmarc=pass (p=REJECT) header.from=squareup.com
+Content-Type: multipart/mixed; boundary="boundary-291"
+
+--boundary-291
+Content-Type: multipart/alternative; boundary="boundary-alt-291"
+
+--boundary-alt-291
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Marcus,
+
+This is a copy of the card payment receipt for Daniel Brooks (DOB 09/10/1983).
+
+Amount: $120.00
+Date: 11/20/2025
+Card: Visa, last 4 digits 4821
+
+You can see the full transaction history for Smile Clinic at
+https://dashboard.squareup.com.
+
+Thanks,
+Square
+
+--boundary-alt-291
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi Marcus,</p>
+<p>This is a copy of the card payment receipt for <strong>Daniel Brooks</strong> (DOB 09/10/1983).</p>
+<p>Amount: $120.00<br/>
+Date: 11/20/2025<br/>
+Card: Visa, last 4 digits 4821</p>
+<p>You can see the full transaction history for Smile Clinic at
+<a href="https://dashboard.squareup.com">https://dashboard.squareup.com</a>.</p>
+<p>Thanks,<br/>Square</p>
+</body></html>
+--boundary-alt-291--
+
+--boundary-291--

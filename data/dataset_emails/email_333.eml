@@ -1,0 +1,49 @@
+From: Kyle Bennett <kyle.assistant@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: PTO Request =?utf-8?b?4oCT?= December 12 Afternoon
+Date: Thu, 20 Nov 2025 09:29:00 -0000
+Message-ID: <20251120092900.32012@smileclinic.org>
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.66]) by
+ gateway.smileclinic.org with ESMTP id abc332 for frontdesk@smileclinic.org;
+ Thu, 20 Nov 2025 09:29:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@smileclinic.org header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=smileclinic.org; dmarc=pass (p=REJECT)
+ header.from=smileclinic.org
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5712860750814065844=="
+
+--===============5712860750814065844==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Sarah,
+
+Can I take PTO after 1:00 p.m. on December 12?
+I'm happy to stay through the morning crown seat and turn over op 2 before I =
+head out.
+
+If that throws the schedule off, I can switch with Jen for a different day.
+
+Thanks,
+Kyle
+
+--===============5712860750814065844==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Sarah,</p>
+<p>Can I take PTO after 1:00 p.m. on December 12?
+I'm happy to stay through the morning crown seat and turn over op 2 before I =
+head out.</p>
+<p>If that throws the schedule off, I can switch with Jen for a different day=
+.</p>
+<p>Thanks,<br/>Kyle</p>
+</body></html>
+
+--===============5712860750814065844==--

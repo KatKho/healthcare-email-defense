@@ -1,0 +1,63 @@
+From: Sarah Miller <frontdesk@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: Adjustments for Tomorrow's Crown Schedule
+Date: Thu, 20 Nov 2025 09:05:00 -0000
+Message-ID: <20251120090500.32000@smileclinic.org>
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.66]) by
+ gateway.smileclinic.org with ESMTP id abc320 for dr.martinez@smileclinic.org;
+ Thu, 20 Nov 2025 09:05:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@smileclinic.org header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=smileclinic.org; dmarc=pass (p=REJECT)
+ header.from=smileclinic.org
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============8468603448205766963=="
+
+--===============8468603448205766963==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Good morning Dr. Martinez,
+
+Just a quick update for tomorrow:
+
+- I moved Emma Larson (crown seat) to 8:30 a.m.
+- Kept Michael Patel at 9:15 a.m. so Kyle can assist.
+- Left a message with Daniel Brooks about confirming insurance.
+
+Updated schedule is visible in Dentrix, and I noted that op 2 will need extra=
+ A2 composite on hand.
+
+You can double-check in the provider view here:
+https://portal.dentrixcloud.com/schedule
+
+Best,
+Sarah
+
+--===============8468603448205766963==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Good morning Dr. Martinez,</p>
+<p>Just a quick update for tomorrow:</p>
+<ul>
+  <li>Moved <strong>Emma Larson</strong> (crown seat) to 8:30 a.m.</li>
+  <li>Kept <strong>Michael Patel</strong> at 9:15 a.m. so Kyle can assist.</l=
+i>
+  <li>Left a message with <strong>Daniel Brooks</strong> about confirming ins=
+urance.</li>
+</ul>
+<p>Updated schedule is visible in Dentrix, and I noted that op 2 will need ex=
+tra A2 composite on hand.</p>
+<p>You can double-check in the provider view here:
+<a href=3D"https://portal.dentrixcloud.com/schedule">https://portal.dentrixcl=
+oud.com/schedule</a>.</p>
+<p>Best,<br/>Sarah</p>
+</body></html>
+
+--===============8468603448205766963==--

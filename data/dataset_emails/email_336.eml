@@ -1,0 +1,49 @@
+From: Marcus Thorne <billing@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Copay Follow-up =?utf-8?b?4oCT?= Brooks & Larson
+Date: Thu, 20 Nov 2025 09:35:00 -0000
+Message-ID: <20251120093500.32015@smileclinic.org>
+Return-Path: billing@smileclinic.org
+Reply-To: billing@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.66]) by
+ gateway.smileclinic.org with ESMTP id abc335 for frontdesk@smileclinic.org;
+ Thu, 20 Nov 2025 09:35:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@smileclinic.org header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=smileclinic.org; dmarc=pass (p=REJECT)
+ header.from=smileclinic.org
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5607886427455540251=="
+
+--===============5607886427455540251==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+SGkgU2FyYWgsCgpXaGVuIHlvdSBoYXZlIGEgbWludXRlLCBjYW4geW91IGNhbGwgdGhlc2UgdHdv
+IGFib3V0IHRoZWlyIHJlbWFpbmluZyBiYWxhbmNlcz8KCi0gRGFuaWVsIEJyb29rcyDigJMgY3Jv
+d24gb24gIzMwLCBwYXRpZW50IHBvcnRpb24gJDE4NS4yMAotIEVtbWEgTGFyc29uIOKAkyBjcm93
+biBzZWF0IHRvZGF5LCBlc3RpbWF0ZSBzaG93ZWQgJDkyIGR1ZSBhdCBjaGVjay1vdXQKClBsZWFz
+ZSBkb2N1bWVudCB0aGUgY2FsbCBub3RlcyBpbiB0aGVpciBsZWRnZXJzLgoKVGhhbmtzLApNYXJj
+dXMK
+
+--===============5607886427455540251==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Sarah,</p>
+<p>When you have a minute, can you call these two about their remaining balan=
+ces?</p>
+<ul>
+  <li><strong>Daniel Brooks</strong> =E2=80=93 crown on #30, patient portion =
+$185.20</li>
+  <li><strong>Emma Larson</strong> =E2=80=93 crown seat today, estimate showe=
+d $92 due at check-out</li>
+</ul>
+<p>Please document the call notes in their ledgers.</p>
+<p>Thanks,<br/>Marcus</p>
+</body></html>
+
+--===============5607886427455540251==--

@@ -1,0 +1,60 @@
+From: "DocuSign for Smile Clinic" <sign@docuslgn-smile.com>
+To: sarah.miller@smileclinic.org
+Subject: Please Sign: Updated Financial Policy for Patients
+Date: Wed, 19 Nov 2025 10:38:00 -0800
+Message-ID: 20251119000280@smileclinic.org
+Return-Path: sign@docuslgn-smile.com
+Reply-To: sign@docuslgn-smile.com
+Received: from mail.docuslgn-smile.com (mail.docuslgn-smile.com [203.0.113.139])
+    by gateway.smileclinic.org with ESMTP id abc1280
+    for sarah.miller@smileclinic.org; Wed, 19 Nov 2025 10:38:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@docuslgn-smile.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=docuslgn-smile.com;
+    dmarc=fail (p=REJECT) header.from=docuslgn-smile.com
+Content-Type: multipart/mixed; boundary="boundary-280"
+
+--boundary-280
+Content-Type: multipart/alternative; boundary="boundary-alt-280"
+
+--boundary-alt-280
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Sarah,
+
+An updated financial policy for Smile Clinic is ready for your signature. The policy covers
+how we store and transmit PHI such as treatment plans, balances, and card-on-file details
+for patients including Emily Carter and Michael Rivera.
+
+Open the attached envelope and enable macros so your identity can be verified automatically.
+After signing, you will be redirected to a secure login page.
+
+If you do not sign within 30 minutes, patient scheduling access may be restricted.
+
+DocuSign Automation
+
+--boundary-alt-280
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Sarah,</p>
+<p>An updated financial policy for Smile Clinic is ready for your signature. The policy covers
+how we store and transmit PHI such as treatment plans, balances, and card-on-file details
+for patients including <strong>Emily Carter</strong> and <strong>Michael Rivera</strong>.</p>
+<p>Open the attached envelope and <strong>enable macros</strong> so your identity can be verified automatically.
+After signing, you will be redirected to a secure login page.</p>
+<p>If you do not sign within 30 minutes, patient scheduling access may be restricted.</p>
+<p>DocuSign Automation</p>
+</body></html>
+--boundary-alt-280--
+
+--boundary-280
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document; name="DocuSign_Envelope_FinancialPolicy.docx"
+Content-Disposition: attachment; filename="DocuSign_Envelope_FinancialPolicy.docx"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-280--

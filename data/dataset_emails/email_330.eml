@@ -1,0 +1,66 @@
+From: Janice Vance <scheduling@filterprohvac.com>
+To: it@smileclinic.org
+Subject: Filter Change Service Window =?utf-8?b?4oCT?= December
+Date: Thu, 20 Nov 2025 09:23:00 -0000
+Message-ID: <20251120092300.32009@smileclinic.org>
+Return-Path: scheduling@filterprohvac.com
+Reply-To: scheduling@filterprohvac.com
+Received: from mail.filterprohvac.com (mail.filterprohvac.com [198.51.100.88])
+ by gateway.smileclinic.org with ESMTP id abc329 for it@smileclinic.org; Thu,
+ 20 Nov 2025 09:23:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@filterprohvac.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=filterprohvac.com; dmarc=pass (p=REJECT)
+ header.from=filterprohvac.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============9125128107141738474=="
+
+--===============9125128107141738474==
+Content-Type: multipart/alternative;
+ boundary="===============6265588318029478971=="
+
+--===============6265588318029478971==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi David,
+
+We're scheduled to replace filters and check airflow in operatories and steri=
+lization on December 8
+between 7:30=E2=80=939:30 a.m.
+
+No action needed, just make sure we can access the mechanical closet and roof=
+ hatch.
+
+I've attached the work order PDF for your records.
+
+Thanks,
+Janice
+
+--===============6265588318029478971==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi David,</p>
+<p>We're scheduled to replace filters and check airflow in operatories and st=
+erilization on December 8
+between 7:30=E2=80=939:30 a.m.</p>
+<p>No action needed, just make sure we can access the mechanical closet and r=
+oof hatch.</p>
+<p>I've attached the work order PDF for your records.</p>
+<p>Thanks,<br/>Janice</p>
+</body></html>
+
+--===============6265588318029478971==--
+
+--===============9125128107141738474==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="WorkOrder_Clinic_HVAC.pdf"
+MIME-Version: 1.0
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--===============9125128107141738474==--

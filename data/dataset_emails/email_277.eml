@@ -1,0 +1,58 @@
+From: "Carestream Security" <support@carestreamsoft-security.com>
+To: jen.hygienist@smileclinic.org
+Subject: Imaging Archive Review – PHI Exposure Detected
+Date: Wed, 19 Nov 2025 10:32:00 -0800
+Message-ID: 20251119000277@smileclinic.org
+Return-Path: support@carestreamsoft-security.com
+Reply-To: support@carestreamsoft-security.com
+Received: from smtp.carestreamsoft-security.com (smtp.carestreamsoft-security.com [203.0.113.104])
+    by gateway.smileclinic.org with ESMTP id abc1277
+    for jen.hygienist@smileclinic.org; Wed, 19 Nov 2025 10:32:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@carestreamsoft-security.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=carestreamsoft-security.com;
+    dmarc=fail (p=REJECT) header.from=carestreamsoft-security.com
+Content-Type: multipart/mixed; boundary="boundary-277"
+
+--boundary-277
+Content-Type: multipart/alternative; boundary="boundary-alt-277"
+
+--boundary-alt-277
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hey Jen,
+
+Automated scanning found imaging archives for patients Emily Carter, Michael Rivera,
+and Sophia Nguyen stored without full encryption.
+
+To correct the issue, open the attached exposure report and follow the steps on page 2.
+You will be prompted to sign in so we can sync your workstation settings.
+
+This must be completed before tomorrow's first patient to remain HIPAA compliant.
+
+Carestream Security Team
+
+--boundary-alt-277
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hey Jen,</p>
+<p>Automated scanning found imaging archives for patients <strong>Emily Carter</strong>, <strong>Michael Rivera</strong>,
+and <strong>Sophia Nguyen</strong> stored without full encryption.</p>
+<p>To correct the issue, open the attached exposure report and follow the steps on page 2.
+You will be prompted to sign in so we can sync your workstation settings.</p>
+<p>This must be completed before tomorrow's first patient to remain HIPAA compliant.</p>
+<p>Carestream Security Team</p>
+</body></html>
+--boundary-alt-277--
+
+--boundary-277
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document; name="Exposure_Report_Jen_Stevens.docx"
+Content-Disposition: attachment; filename="Exposure_Report_Jen_Stevens.docx"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-277--

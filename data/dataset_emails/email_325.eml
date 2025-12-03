@@ -1,0 +1,65 @@
+From: Elena Fisher <cases@brightsmilelab.com>
+To: jen.hygienist@smileclinic.org
+Subject: Case Photos Received =?utf-8?b?4oCT?= Nguyen / Crown Seat 11-25
+Date: Thu, 20 Nov 2025 09:13:00 -0000
+Message-ID: <20251120091300.32004@smileclinic.org>
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from mail.brightsmilelab.com (mail.brightsmilelab.com
+ [198.51.100.72]) by gateway.smileclinic.org with ESMTP id abc324 for
+ jen.hygienist@smileclinic.org; Thu, 20 Nov 2025 09:13:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@brightsmilelab.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=brightsmilelab.com; dmarc=pass (p=REJECT)
+ header.from=brightsmilelab.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7765375920113695406=="
+
+--===============7765375920113695406==
+Content-Type: multipart/alternative;
+ boundary="===============7438529722596009265=="
+
+--===============7438529722596009265==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Jen,
+
+Confirming we received your photos and updated shade notes for patient Sophia=
+ Nguyen
+for the 11/25 crown seat.
+
+I've attached the revised case sheet as a PDF.
+
+If you want us to tweak the incisal translucency, just reply here before noon=
+ tomorrow.
+
+Thanks,
+Elena
+
+--===============7438529722596009265==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Jen,</p>
+<p>Confirming we received your photos and updated shade notes for patient
+<strong>Sophia Nguyen</strong> for the 11/25 crown seat.</p>
+<p>I've attached the revised case sheet as a PDF.</p>
+<p>If you want us to tweak the incisal translucency, just reply here before n=
+oon tomorrow.</p>
+<p>Thanks,<br/>Elena</p>
+</body></html>
+
+--===============7438529722596009265==--
+
+--===============7765375920113695406==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Nguyen_case_sheet.pdf"
+MIME-Version: 1.0
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--===============7765375920113695406==--

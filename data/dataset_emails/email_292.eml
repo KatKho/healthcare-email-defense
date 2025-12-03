@@ -1,0 +1,57 @@
+From: "Dentrix Cloud Support" <cloud@dentrxcloud.com>
+To: it@smileclinic.org
+Subject: Multi-Factor Disabled for Tenant
+Date: Thu, 20 Nov 2025 09:22:00 -0800
+Message-ID: 20251120000292@smileclinic.org
+Return-Path: cloud@dentrxcloud.com
+Reply-To: cloud@dentrxcloud.com
+Received: from smtp.dentrxcloud.com (smtp.dentrxcloud.com [203.0.113.126])
+    by gateway.smileclinic.org with ESMTP id abc2292
+    for it@smileclinic.org; Thu, 20 Nov 2025 09:22:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=fail header.i=@dentrxcloud.com header.s=s2025 header.b=xyz;
+    spf=fail smtp.mailfrom=dentrxcloud.com;
+    dmarc=fail (p=REJECT) header.from=dentrxcloud.com
+Content-Type: multipart/mixed; boundary="boundary-292"
+
+--boundary-292
+Content-Type: multipart/alternative; boundary="boundary-alt-292"
+
+--boundary-alt-292
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+Our logs show that multi-factor authentication was disabled for one or more Dentrix Cloud
+admin users at Smile Clinic.
+
+This may expose treatment plans, balances, and patient demographics for Laura Chen and
+other active patients.
+
+Restore secure access by confirming your tenant configuration at:
+
+https://dentrxcloud-secure.com/admin
+
+Sign in with your current administrator username and password.
+
+Dentrix Cloud Support
+
+--boundary-alt-292
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi David,</p>
+<p>Our logs show that multi-factor authentication was disabled for one or more Dentrix Cloud
+admin users at Smile Clinic.</p>
+<p>This may expose treatment plans, balances, and patient demographics for <strong>Laura Chen</strong> and
+other active patients.</p>
+<p>Restore secure access by confirming your tenant configuration at:</p>
+<p><a href="https://dentrxcloud-secure.com/admin">https://dentrxcloud-secure.com/admin</a></p>
+<p>Sign in with your current administrator username and password.</p>
+<p>Dentrix Cloud Support</p>
+</body></html>
+--boundary-alt-292--
+
+--boundary-292--

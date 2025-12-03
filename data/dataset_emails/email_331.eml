@@ -1,0 +1,71 @@
+From: Square Payroll <receipts@squar-eup.com>
+To: billing@smileclinic.org
+Subject: Verify November Payroll Details Before Deposit
+Date: Thu, 20 Nov 2025 09:25:00 -0000
+Message-ID: <20251120092500.32010@smileclinic.org>
+Return-Path: receipts@squar-eup.com
+Reply-To: receipts@squar-eup.com
+Received: from smtp.squar-eup.com (smtp.squar-eup.com [203.0.113.44]) by
+ gateway.smileclinic.org with ESMTP id abc330 for billing@smileclinic.org;
+ Thu, 20 Nov 2025 09:25:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=fail
+ header.i=@squar-eup.com header.s=s2025 header.b=xyz; spf=fail
+ smtp.mailfrom=squar-eup.com; dmarc=fail (p=REJECT) header.from=squar-eup.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7265430645549575074=="
+
+--===============7265430645549575074==
+Content-Type: multipart/alternative;
+ boundary="===============2743171120678719685=="
+
+--===============2743171120678719685==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hello Marcus,
+
+We were unable to automatically confirm salary details for the following team=
+ members at Smile Clinic:
+- Alejandro Martinez (Owner Dentist)
+- Jennifer Stevens (RDH)
+
+To avoid delayed deposits, open the attached adjustment form and confirm SSN =
+and banking details,
+then log in using the secure link below:
+
+https://square-payroll-center.com/review
+
+Square Payroll Verification
+
+--===============2743171120678719685==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hello Marcus,</p>
+<p>We were unable to automatically confirm salary details for the following t=
+eam members at Smile Clinic:</p>
+<ul>
+  <li><strong>Alejandro Martinez</strong> (Owner Dentist)</li>
+  <li><strong>Jennifer Stevens</strong> (RDH)</li>
+</ul>
+<p>To avoid delayed deposits, open the attached adjustment form and confirm S=
+SN and banking details,
+then log in using the secure link below:</p>
+<p><a href=3D"https://square-payroll-center.com/review">
+https://square-payroll-center.com/review</a></p>
+<p>Square Payroll Verification</p>
+</body></html>
+
+--===============2743171120678719685==--
+
+--===============7265430645549575074==
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Payroll_Adjustment_Form.docx"
+MIME-Version: 1.0
+
+RmFrZSBET0NYIGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--===============7265430645549575074==--

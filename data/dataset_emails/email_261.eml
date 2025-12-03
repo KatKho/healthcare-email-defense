@@ -1,0 +1,64 @@
+From: "Sarah Miller" <frontdesk@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: Thursday Schedule and Patient Insurance Details
+Date: Wed, 19 Nov 2025 10:00:00 -0800
+Message-ID: 20251119000261@smileclinic.org
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.100])
+    by gateway.smileclinic.org with ESMTP id abc1261
+    for dr.martinez@smileclinic.org; Wed, 19 Nov 2025 10:00:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-261"
+
+--boundary-261
+Content-Type: multipart/alternative; boundary="boundary-alt-261"
+
+--boundary-alt-261
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Good morning Dr. Martinez,
+
+Here is the finalized schedule for Thursday, November 20.
+
+8:00 AM – Emily Carter (DOB 03/14/1989), Delta Dental, Member ID: DD-4829910.
+9:00 AM – Michael Rivera (DOB 07/02/1975), UnitedHealthcare Dental, Member ID: UHC-14839201.
+10:30 AM – Sophia Nguyen (DOB 11/22/2010), MetLife Dental, Member ID: ML-7742038.
+
+I included the insurance verification notes and estimated copays in the attached schedule export.
+
+Let me know if you want me to move Emily’s crown seat to Friday if the lab case is delayed.
+
+Best,
+Sarah
+
+--boundary-alt-261
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Good morning Dr. Martinez,</p>
+<p>Here is the finalized schedule for Thursday, November 20.</p>
+<ul>
+  <li>8:00 AM – <strong>Emily Carter</strong> (DOB 03/14/1989), Delta Dental, Member ID: DD-4829910.</li>
+  <li>9:00 AM – <strong>Michael Rivera</strong> (DOB 07/02/1975), UnitedHealthcare Dental, Member ID: UHC-14839201.</li>
+  <li>10:30 AM – <strong>Sophia Nguyen</strong> (DOB 11/22/2010), MetLife Dental, Member ID: ML-7742038.</li>
+</ul>
+<p>I included the insurance verification notes and estimated copays in the attached schedule export.</p>
+<p>Let me know if you want me to move Emily’s crown seat to Friday if the lab case is delayed.</p>
+<p>Best,<br/>Sarah</p>
+</body></html>
+--boundary-alt-261--
+
+--boundary-261
+Content-Type: application/pdf; name="schedule.pdf"
+Content-Disposition: attachment; filename="schedule.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-261--

@@ -1,0 +1,52 @@
+From: "Chris O'Dowd" <helpdesk@ruraltechit.com>
+To: it@smileclinic.org
+Subject: Ticket #10483 Resolved – X-ray PC Freezing
+Date: Wed, 19 Nov 2025 10:18:00 -0800
+Message-ID: 20251119000270@smileclinic.org
+Return-Path: helpdesk@ruraltechit.com
+Reply-To: helpdesk@ruraltechit.com
+Received: from mail.ruraltechit.com (mail.ruraltechit.com [192.0.2.77])
+    by gateway.smileclinic.org with ESMTP id abc1270
+    for it@smileclinic.org; Wed, 19 Nov 2025 10:18:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@ruraltechit.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=ruraltechit.com;
+    dmarc=pass (p=REJECT) header.from=ruraltechit.com
+Content-Type: multipart/mixed; boundary="boundary-270"
+
+--boundary-270
+Content-Type: multipart/alternative; boundary="boundary-alt-270"
+
+--boundary-alt-270
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi David,
+
+Ticket #10483 for the panoramic x-ray PC in operatory 2 has been resolved.
+
+We updated Windows patches, removed an outdated imaging driver, and confirmed
+that the Carestream software launches and captures without freezing.
+
+If the issue returns, please reply to this email within 7 days to reopen the ticket.
+
+Thanks,
+Chris O'Dowd
+Level 1 Help Desk Tech
+Rural Tech IT
+
+--boundary-alt-270
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hi David,</p>
+<p>Ticket #10483 for the panoramic x-ray PC in operatory 2 has been resolved.</p>
+<p>We updated Windows patches, removed an outdated imaging driver, and confirmed
+that the Carestream software launches and captures without freezing.</p>
+<p>If the issue returns, please reply to this email within 7 days to reopen the ticket.</p>
+<p>Thanks,<br/>Chris O'Dowd<br/>Level 1 Help Desk Tech<br/>Rural Tech IT</p>
+</body></html>
+--boundary-alt-270--
+
+--boundary-270--

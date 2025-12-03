@@ -1,0 +1,63 @@
+From: "Elena Fisher" <cases@brightsmilelab.com>
+To: kyle.assistant@smileclinic.org
+Subject: Lab Case Shipped – Nguyen, Sophia – Zirconia Crown
+Date: Wed, 19 Nov 2025 10:06:00 -0800
+Message-ID: 20251119000264@smileclinic.org
+Return-Path: cases@brightsmilelab.com
+Reply-To: cases@brightsmilelab.com
+Received: from mail.brightsmilelab.com (mail.brightsmilelab.com [192.0.2.45])
+    by gateway.smileclinic.org with ESMTP id abc1264
+    for kyle.assistant@smileclinic.org; Wed, 19 Nov 2025 10:06:00 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@brightsmilelab.com header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=brightsmilelab.com;
+    dmarc=pass (p=REJECT) header.from=brightsmilelab.com
+Content-Type: multipart/mixed; boundary="boundary-264"
+
+--boundary-264
+Content-Type: multipart/alternative; boundary="boundary-alt-264"
+
+--boundary-alt-264
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello Kyle,
+
+This is to confirm shipment of lab case #479221 for patient Sophia Nguyen (DOB 11/22/2010),
+Rx: zirconia crown on tooth #19.
+
+Carrier: UPS Ground
+Tracking: 1Z479221US2025
+Scheduled delivery: 11/20/2025 by end of day.
+
+The attached slip has shade, margin, and contact notes from the ceramist.
+
+Thank you,
+Elena Fisher
+Lab Case Manager
+Bright Smile Lab
+
+--boundary-alt-264
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body>
+<p>Hello Kyle,</p>
+<p>This is to confirm shipment of lab case #479221 for patient <strong>Sophia Nguyen</strong> (DOB 11/22/2010),
+Rx: zirconia crown on tooth #19.</p>
+<p><strong>Carrier:</strong> UPS Ground<br/>
+   <strong>Tracking:</strong> 1Z479221US2025<br/>
+   <strong>Scheduled delivery:</strong> 11/20/2025 by end of day.</p>
+<p>The attached slip has shade, margin, and contact notes from the ceramist.</p>
+<p>Thank you,<br/>Elena Fisher<br/>Lab Case Manager<br/>Bright Smile Lab</p>
+</body></html>
+--boundary-alt-264--
+
+--boundary-264
+Content-Type: application/pdf; name="Case_479221_shipping.pdf"
+Content-Disposition: attachment; filename="Case_479221_shipping.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhdHRhY2htZW50IGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--boundary-264--

@@ -1,0 +1,61 @@
+From: Kenji Sato <lab@evergreendp.com>
+To: dr.martinez@smileclinic.org
+Subject: Case Shipped =?utf-8?b?4oCT?= Brooks / A2 Crown
+Date: Thu, 20 Nov 2025 09:39:00 -0000
+Message-ID: <20251120093900.32017@smileclinic.org>
+Return-Path: lab@evergreendp.com
+Reply-To: lab@evergreendp.com
+Received: from mail.evergreendp.com (mail.evergreendp.com [198.51.100.131]) by
+ gateway.smileclinic.org with ESMTP id abc337 for dr.martinez@smileclinic.org;
+ Thu, 20 Nov 2025 09:39:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@evergreendp.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=evergreendp.com; dmarc=pass (p=REJECT)
+ header.from=evergreendp.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6748851300355902929=="
+
+--===============6748851300355902929==
+Content-Type: multipart/alternative;
+ boundary="===============2159216011014929304=="
+
+--===============2159216011014929304==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Dr. Martinez,
+
+The A2 full-contour crown for patient Daniel Brooks has shipped via UPS Groun=
+d.
+Scheduled delivery is tomorrow before 10:30 a.m.
+
+Tracking number and photos are in the attached PDF.
+
+Best,
+Kenji
+
+--===============2159216011014929304==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Dr. Martinez,</p>
+<p>The A2 full-contour crown for patient <strong>Daniel Brooks</strong> has s=
+hipped via UPS Ground.
+Scheduled delivery is tomorrow before 10:30 a.m.</p>
+<p>Tracking number and photos are in the attached PDF.</p>
+<p>Best,<br/>Kenji</p>
+</body></html>
+
+--===============2159216011014929304==--
+
+--===============6748851300355902929==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Brooks_crown_shipping.pdf"
+MIME-Version: 1.0
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--===============6748851300355902929==--

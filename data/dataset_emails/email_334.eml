@@ -1,0 +1,56 @@
+From: Gary Oak <service@panoramic-imaging.com>
+To: dr.martinez@smileclinic.org
+Subject: Lunch & Learn =?utf-8?b?4oCT?= CBCT Positioning Tips
+Date: Thu, 20 Nov 2025 09:31:00 -0000
+Message-ID: <20251120093100.32013@smileclinic.org>
+Return-Path: service@panoramic-imaging.com
+Reply-To: service@panoramic-imaging.com
+Received: from mail.panoramic-imaging.com (mail.panoramic-imaging.com
+ [198.51.100.101]) by gateway.smileclinic.org with ESMTP id abc333 for
+ dr.martinez@smileclinic.org; Thu, 20 Nov 2025 09:31:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@panoramic-imaging.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=panoramic-imaging.com; dmarc=pass (p=REJECT)
+ header.from=panoramic-imaging.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============1795176910787430454=="
+
+--===============1795176910787430454==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Dr. Martinez,
+
+We're offering a complimentary lunch & learn on CBCT positioning and dose opt=
+imization
+for small practices.
+
+If you'd like us to stop by Smile Clinic in December, pick a date that works =
+here:
+https://events.panoramic-imaging.com/lunchandlearn
+
+No obligation; it's mainly tips and Q&A.
+
+Best,
+Gary
+
+--===============1795176910787430454==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Dr. Martinez,</p>
+<p>We're offering a complimentary lunch &amp; learn on CBCT positioning and d=
+ose optimization
+for small practices.</p>
+<p>If you'd like us to stop by Smile Clinic in December, pick a date that wor=
+ks here:<br/>
+<a href=3D"https://events.panoramic-imaging.com/lunchandlearn">
+https://events.panoramic-imaging.com/lunchandlearn</a></p>
+<p>No obligation; it's mainly tips and Q&amp;A.</p>
+<p>Best,<br/>Gary</p>
+</body></html>
+
+--===============1795176910787430454==--

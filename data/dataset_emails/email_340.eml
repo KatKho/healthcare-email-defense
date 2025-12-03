@@ -1,0 +1,63 @@
+From: Sarah Miller <frontdesk@smileclinic.org>
+To: allstaff@smileclinic.org
+Subject: Draft Holiday Hours for Review
+Date: Thu, 20 Nov 2025 09:43:00 -0000
+Message-ID: <20251120094300.32019@smileclinic.org>
+Return-Path: frontdesk@smileclinic.org
+Reply-To: frontdesk@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.66]) by
+ gateway.smileclinic.org with ESMTP id abc339 for allstaff@smileclinic.org;
+ Thu, 20 Nov 2025 09:43:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@smileclinic.org header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=smileclinic.org; dmarc=pass (p=REJECT)
+ header.from=smileclinic.org
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5440953922061891046=="
+
+--===============5440953922061891046==
+Content-Type: multipart/alternative;
+ boundary="===============4202824148396805577=="
+
+--===============4202824148396805577==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi team,
+
+Attached is a draft of our holiday hours and on-call coverage for the last tw=
+o weeks of December.
+Please reply by Friday if you see any conflicts.
+
+Once Dr. Martinez signs off, I'll post the final version at the front desk an=
+d in the break room.
+
+Thanks,
+Sarah
+
+--===============4202824148396805577==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi team,</p>
+<p>Attached is a draft of our holiday hours and on-call coverage for the last=
+ two weeks of December.
+Please reply by Friday if you see any conflicts.</p>
+<p>Once Dr. Martinez signs off, I'll post the final version at the front desk=
+ and in the break room.</p>
+<p>Thanks,<br/>Sarah</p>
+</body></html>
+
+--===============4202824148396805577==--
+
+--===============5440953922061891046==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Holiday_Hours_Draft.pdf"
+MIME-Version: 1.0
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--===============5440953922061891046==--

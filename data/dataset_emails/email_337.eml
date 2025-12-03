@@ -1,0 +1,51 @@
+From: Peter Lewis <provider@uhcdental.com>
+To: dr.martinez@smileclinic.org
+Subject: Reminder: Fee Schedule Review Window
+Date: Thu, 20 Nov 2025 09:37:00 -0000
+Message-ID: <20251120093700.32016@smileclinic.org>
+Return-Path: provider@uhcdental.com
+Reply-To: provider@uhcdental.com
+Received: from mail.uhcdental.com (mail.uhcdental.com [198.51.100.111]) by
+ gateway.smileclinic.org with ESMTP id abc336 for dr.martinez@smileclinic.org;
+ Thu, 20 Nov 2025 09:37:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@uhcdental.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=uhcdental.com; dmarc=pass (p=REJECT) header.from=uhcdental.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============2305035535903162378=="
+
+--===============2305035535903162378==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Dr. Martinez,
+
+This is a reminder that the annual review window for your UnitedHealthcare De=
+ntal fee schedule
+closes on December 15.
+
+To review and acknowledge, sign in to the provider portal:
+https://dentalproviders.uhcdental.com/login
+
+Sincerely,
+Peter Lewis
+Network Manager
+
+--===============2305035535903162378==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Dear Dr. Martinez,</p>
+<p>This is a reminder that the annual review window for your UnitedHealthcare=
+ Dental fee schedule
+closes on December 15.</p>
+<p>To review and acknowledge, sign in to the provider portal:<br/>
+<a href=3D"https://dentalproviders.uhcdental.com/login">
+https://dentalproviders.uhcdental.com/login</a></p>
+<p>Sincerely,<br/>Peter Lewis<br/>Network Manager</p>
+</body></html>
+
+--===============2305035535903162378==--

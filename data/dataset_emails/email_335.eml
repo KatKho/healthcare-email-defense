@@ -1,0 +1,67 @@
+From: MedWaste Alerts <alerts@medwaste-dispose.com>
+To: it@smileclinic.org
+Subject: Urgent: Pickup Suspension Notice
+Date: Thu, 20 Nov 2025 09:33:00 -0000
+Message-ID: <20251120093300.32014@smileclinic.org>
+Return-Path: alerts@medwaste-dispose.com
+Reply-To: alerts@medwaste-dispose.com
+Received: from smtp.medwaste-dispose.com (smtp.medwaste-dispose.com
+ [203.0.113.33]) by gateway.smileclinic.org with ESMTP id abc334 for
+ it@smileclinic.org; Thu, 20 Nov 2025 09:33:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=fail
+ header.i=@medwaste-dispose.com header.s=s2025 header.b=xyz; spf=fail
+ smtp.mailfrom=medwaste-dispose.com; dmarc=fail (p=REJECT)
+ header.from=medwaste-dispose.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============4422318476509554788=="
+
+--===============4422318476509554788==
+Content-Type: multipart/alternative;
+ boundary="===============3329197514498047893=="
+
+--===============3329197514498047893==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Good afternoon,
+
+Your medical waste pickups for Smile Clinic will be suspended due to missing =
+compliance documents.
+
+Download the attached notice and upload signed forms at the secure link below=
+ within 3 hours:
+
+https://medwaste-secure-docs.com/update
+
+Failure to act may result in service interruption and additional fees.
+
+MedWaste Compliance Desk
+
+--===============3329197514498047893==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Good afternoon,</p>
+<p>Your medical waste pickups for Smile Clinic will be suspended due to missi=
+ng compliance documents.</p>
+<p>Download the attached notice and upload signed forms at the secure link be=
+low within 3 hours:</p>
+<p><a href=3D"https://medwaste-secure-docs.com/update">
+https://medwaste-secure-docs.com/update</a></p>
+<p>Failure to act may result in service interruption and additional fees.</p>
+<p>MedWaste Compliance Desk</p>
+</body></html>
+
+--===============3329197514498047893==--
+
+--===============4422318476509554788==
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Compliance_Notice.docx"
+MIME-Version: 1.0
+
+RmFrZSBET0NYIGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--===============4422318476509554788==--

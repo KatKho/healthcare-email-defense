@@ -1,0 +1,73 @@
+From: Susan Storm <claims@metlife-dental.com>
+To: billing@smileclinic.org
+Subject: Claims Status Update =?utf-8?b?4oCT?= November Batch
+Date: Thu, 20 Nov 2025 09:07:00 -0000
+Message-ID: <20251120090700.32001@smileclinic.org>
+Return-Path: claims@metlife-dental.com
+Reply-To: claims@metlife-dental.com
+Received: from mail.metlife-dental.com (mail.metlife-dental.com
+ [198.51.100.45]) by gateway.smileclinic.org with ESMTP id abc321 for
+ billing@smileclinic.org; Thu, 20 Nov 2025 09:07:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@metlife-dental.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=metlife-dental.com; dmarc=pass (p=REJECT)
+ header.from=metlife-dental.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7934745724734402484=="
+
+--===============7934745724734402484==
+Content-Type: multipart/alternative;
+ boundary="===============8586733257483102912=="
+
+--===============8586733257483102912==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Marcus,
+
+We've completed processing on the 11/10 claims batch from Smile Clinic.
+
+Approved and releasing payment:
+- Claim 842193 for patient Olivia Chen (DOB 03/19/1991)
+- Claim 842227 for patient Marco Rivera (DOB 07/02/1984)
+
+Remittance details are in the attached PDF and available in the provider port=
+al:
+https://providers.metlife-dental.com/login
+
+Regards,
+Susan
+
+--===============8586733257483102912==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Marcus,</p>
+<p>We've completed processing on the 11/10 claims batch from Smile Clinic.</p>
+<p>Approved and releasing payment:</p>
+<ul>
+  <li>Claim 842193 for patient <strong>Olivia Chen</strong> (DOB 03/19/1991)<=
+/li>
+  <li>Claim 842227 for patient <strong>Marco Rivera</strong> (DOB 07/02/1984)=
+</li>
+</ul>
+<p>Remittance details are in the attached PDF and available in the provider p=
+ortal:<br/>
+<a href=3D"https://providers.metlife-dental.com/login">https://providers.metl=
+ife-dental.com/login</a></p>
+<p>Regards,<br/>Susan</p>
+</body></html>
+
+--===============8586733257483102912==--
+
+--===============7934745724734402484==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="remittance_1110.pdf"
+MIME-Version: 1.0
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--===============7934745724734402484==--

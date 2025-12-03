@@ -1,0 +1,66 @@
+From: Linda Gray <invoices@henryschein-dental.com>
+To: kyle.assistant@smileclinic.org
+Subject: OSHA Training Webinar =?utf-8?b?4oCT?= Registration Confirmation
+Date: Thu, 20 Nov 2025 09:21:00 -0000
+Message-ID: <20251120092100.32008@smileclinic.org>
+Return-Path: invoices@henryschein-dental.com
+Reply-To: invoices@henryschein-dental.com
+Received: from mail.henryschein-dental.com (mail.henryschein-dental.com
+ [198.51.100.30]) by gateway.smileclinic.org with ESMTP id abc328 for
+ kyle.assistant@smileclinic.org; Thu, 20 Nov 2025 09:21:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@henryschein-dental.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=henryschein-dental.com; dmarc=pass (p=REJECT)
+ header.from=henryschein-dental.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============0031923060657959054=="
+
+--===============0031923060657959054==
+Content-Type: multipart/alternative;
+ boundary="===============6439923705033511031=="
+
+--===============6439923705033511031==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Kyle,
+
+You're registered for the OSHA & infection control webinar on December 3 at 1=
+2:00 p.m.
+
+Join link and calendar file are available in your Henry Schein CE dashboard:
+https://ce.henryschein-dental.com/dashboard
+
+Attached is a PDF with the agenda for the session.
+
+Best regards,
+Linda
+
+--===============6439923705033511031==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Kyle,</p>
+<p>You're registered for the OSHA &amp; infection control webinar on December=
+ 3 at 12:00 p.m.</p>
+<p>Join link and calendar file are available in your Henry Schein CE dashboar=
+d:<br/>
+<a href=3D"https://ce.henryschein-dental.com/dashboard">
+https://ce.henryschein-dental.com/dashboard</a></p>
+<p>Attached is a PDF with the agenda for the session.</p>
+<p>Best regards,<br/>Linda</p>
+</body></html>
+
+--===============6439923705033511031==--
+
+--===============0031923060657959054==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="OSHA_webinar_agenda.pdf"
+MIME-Version: 1.0
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--===============0031923060657959054==--

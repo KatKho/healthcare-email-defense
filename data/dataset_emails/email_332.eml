@@ -1,0 +1,64 @@
+From: Maria Gonzalez <claims@deltadental-insurance.com>
+To: billing@smileclinic.org
+Subject: Pre-Authorization Approved =?utf-8?b?4oCT?= Case #992341 (Lopez)
+Date: Thu, 20 Nov 2025 09:27:00 -0000
+Message-ID: <20251120092700.32011@smileclinic.org>
+Return-Path: claims@deltadental-insurance.com
+Reply-To: claims@deltadental-insurance.com
+Received: from mail.deltadental-insurance.com (mail.deltadental-insurance.com
+ [198.51.100.61]) by gateway.smileclinic.org with ESMTP id abc331 for
+ billing@smileclinic.org; Thu, 20 Nov 2025 09:27:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=pass
+ header.i=@deltadental-insurance.com header.s=s2025 header.b=xyz; spf=pass
+ smtp.mailfrom=deltadental-insurance.com; dmarc=pass (p=REJECT)
+ header.from=deltadental-insurance.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5206061328066492791=="
+
+--===============5206061328066492791==
+Content-Type: multipart/alternative;
+ boundary="===============6742786391663555509=="
+
+--===============6742786391663555509==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Marcus,
+
+Pre-authorization 992341 for patient Diego Lopez (DOB 05/11/1990) has been ap=
+proved.
+Coverage applies to crown on #19 with standard co-insurance.
+
+Details are in the attached PDF and visible in the portal:
+https://providers.deltadental-insurance.com/login
+
+Best,
+Maria
+
+--===============6742786391663555509==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi Marcus,</p>
+<p>Pre-authorization 992341 for patient <strong>Diego Lopez</strong> (DOB 05/=
+11/1990) has been approved.
+Coverage applies to crown on #19 with standard co-insurance.</p>
+<p>Details are in the attached PDF and visible in the portal:<br/>
+<a href=3D"https://providers.deltadental-insurance.com/login">
+https://providers.deltadental-insurance.com/login</a></p>
+<p>Best,<br/>Maria</p>
+</body></html>
+
+--===============6742786391663555509==--
+
+--===============5206061328066492791==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="PreAuth_992341.pdf"
+MIME-Version: 1.0
+
+RmFrZSBQREYgY29udGVudCBmb3IgZGVudGFsIGNsaW5pYyBlbWFpbCBkYXRhc2V0Lg==
+
+--===============5206061328066492791==--

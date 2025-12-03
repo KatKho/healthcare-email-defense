@@ -1,0 +1,66 @@
+From: Rural Tech Cloud <security@ruraltech1t.com>
+To: it@smileclinic.org
+Subject: Action Needed: OneDrive Storage Over Limit
+Date: Thu, 20 Nov 2025 09:17:00 -0000
+Message-ID: <20251120091700.32006@smileclinic.org>
+Return-Path: security@ruraltech1t.com
+Reply-To: security@ruraltech1t.com
+Received: from smtp.ruraltech1t.com (smtp.ruraltech1t.com [203.0.113.121]) by
+ gateway.smileclinic.org with ESMTP id abc326 for it@smileclinic.org; Thu, 20
+ Nov 2025 09:17:00 -0000
+Authentication-Results: gateway.smileclinic.org; dkim=fail
+ header.i=@ruraltech1t.com header.s=s2025 header.b=xyz; spf=fail
+ smtp.mailfrom=ruraltech1t.com; dmarc=fail (p=REJECT)
+ header.from=ruraltech1t.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============1885012855021255102=="
+
+--===============1885012855021255102==
+Content-Type: multipart/alternative;
+ boundary="===============6311872956152150502=="
+
+--===============6311872956152150502==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi David,
+
+Your Microsoft OneDrive storage associated with Smile Clinic backups has exce=
+eded the safety threshold.
+
+To avoid automatic deletion of synced folders, review and approve the attache=
+d policy summary
+and re-authenticate storage at the link below:
+
+https://ruraltech-cloudsync.com/onedrive/auth
+
+Cloud Security Automation
+
+--===============6311872956152150502==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body>
+<p>Hi David,</p>
+<p>Your Microsoft OneDrive storage associated with Smile Clinic backups has e=
+xceeded the safety threshold.</p>
+<p>To avoid automatic deletion of synced folders, review and approve the atta=
+ched policy summary
+and re-authenticate storage at the link below:</p>
+<p><a href=3D"https://ruraltech-cloudsync.com/onedrive/auth">
+https://ruraltech-cloudsync.com/onedrive/auth</a></p>
+<p>Cloud Security Automation</p>
+</body></html>
+
+--===============6311872956152150502==--
+
+--===============1885012855021255102==
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="CloudPolicy_Summary.docx"
+MIME-Version: 1.0
+
+RmFrZSBET0NYIGNvbnRlbnQgZm9yIGRlbnRhbCBjbGluaWMgZW1haWwgZGF0YXNldC4=
+
+--===============1885012855021255102==--

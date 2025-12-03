@@ -573,6 +573,197 @@ app.get("/api/hitl/stats", async (req, res) => {
 });
 
 // ----------------------
+// HITL API: USER REPORT → IT REVIEW
+// ----------------------
+
+app.post("/api/hitl/report", async (req, res) => {
+  try {
+    const {
+      run_id,
+      s3_bucket,
+      s3_key,
+      report_reason,
+      reported_by,
+      report_source,
+    } = req.body || {};
+
+    if (!s3_key) {
+      return res.status(400).json({
+        success: false,
+        error: "s3_key is required (S3 decision log key)",
+      });
+    }
+
+    const bucket = s3_bucket || METRICS_BUCKET;
+    const nowIso = new Date().toISOString();
+
+    // 1) Load the decision log from S3
+    const obj = await s3
+      .getObject({
+        Bucket: bucket,
+        Key: s3_key,
+      })
+      .promise();
+
+    const doc = JSON.parse(obj.Body.toString("utf8"));
+
+    // 2) Extract identifiers & email fields
+    const fromAddr =
+      doc.compact?.from?.addr ||
+      doc.sender_intel?.raw?.ids?.from_addr ||
+      "unknown";
+
+    const fromDomain =
+      doc.sender_intel?.raw?.ids?.from_domain ||
+      (fromAddr.includes("@") ? fromAddr.split("@")[1] : "unknown");
+
+    const subject = doc.compact?.subject || "(no subject)";
+    const decision = doc.decision || doc.decision_agent?.decision || "UNKNOWN";
+
+    const risk =
+      typeof doc.summary?.sender_risk === "number"
+        ? doc.summary.sender_risk
+        : 0;
+
+    const hasPhi = !!(
+      doc.summary?.has_phi ||
+      (doc.phi && typeof doc.phi.entities_detected === "number"
+        ? doc.phi.entities_detected > 0
+        : false)
+    );
+
+    // Use provided run_id if given, otherwise derive from doc / key
+    const queueId =
+      run_id ||
+      doc.sender_intel?.raw?.ids?.message_id ||
+      doc.compact?.message_id ||
+      s3_key;
+
+    const queueKey = { id: queueId };
+
+    // 3) Check if queue item already exists
+    const existing = await dynamo
+      .get({
+        TableName: HITL_TABLE,
+        Key: queueKey,
+      })
+      .promise();
+
+    const baseReportSource = report_source || "user_report";
+
+    if (!existing.Item) {
+      // 3a) Create new HITL queue item
+      const newItem = {
+        id: queueId,
+        from_addr: fromAddr,
+        from_domain: fromDomain,
+        subject,
+        decision,
+        risk,
+        has_phi: hasPhi,
+        log_bucket: bucket,
+        log_key: s3_key,
+        status: "pending",
+        created_ts: nowIso,
+
+        // NEW user report metadata
+        user_reported: true,
+        report_source: baseReportSource,
+        report_reason: report_reason || "",
+        reported_by: reported_by || null,
+        report_ts: nowIso,
+      };
+
+      await dynamo
+        .put({
+          TableName: HITL_TABLE,
+          Item: newItem,
+        })
+        .promise();
+
+      console.log("[HITL] Created new user-reported queue item:", newItem.id);
+    } else {
+      // 3b) Update existing HITL queue item
+      await dynamo
+        .update({
+          TableName: HITL_TABLE,
+          Key: queueKey,
+          UpdateExpression:
+            "SET #status = :pending, user_reported = :true, report_source = :rs, report_reason = :rr, reported_by = :rb, report_ts = :rt",
+          ExpressionAttributeNames: {
+            "#status": "status",
+          },
+          ExpressionAttributeValues: {
+            ":pending": "pending",
+            ":true": true,
+            ":rs": baseReportSource,
+            ":rr": report_reason || "",
+            ":rb": reported_by || null,
+            ":rt": nowIso,
+          },
+        })
+        .promise();
+
+      console.log("[HITL] Updated existing queue item as user-reported:", queueId);
+    }
+
+    // 4) Patch S3 decision log to mark as user-reported + HITL-required
+    doc.user_reported = true;
+
+    const existingHitl = doc.hitl || {};
+    const newHitl = {
+      status: "required",
+      actor: existingHitl.actor || "",
+      verdict: existingHitl.verdict || "",
+      notes: existingHitl.notes || "",
+      ts: existingHitl.ts || null,
+
+      // NEW metadata for user report
+      trigger: "user_reported",
+      report_source: baseReportSource,
+      report_reason: report_reason || "",
+      reported_by: reported_by || null,
+      report_ts: nowIso,
+    };
+
+    // Top-level hitl
+    doc.hitl = newHitl;
+
+    // Mirror into decision_agent.hitl if present
+    if (doc.decision_agent && doc.decision_agent.hitl) {
+      doc.decision_agent.hitl = newHitl;
+    }
+
+    // Write updated JSON back to S3
+    await s3
+      .putObject({
+        Bucket: bucket,
+        Key: s3_key,
+        Body: JSON.stringify(doc),
+        ContentType: "application/json",
+      })
+      .promise();
+
+    console.log("[HITL] Patched S3 decision log as user-reported:", s3_key);
+
+    // 5) Respond to frontend
+    res.json({
+      success: true,
+      queue_id: queueId,
+      s3_bucket: bucket,
+      s3_key,
+    });
+  } catch (err) {
+    console.error("[HITL] User report → IT review failed:", err);
+    res.status(500).json({
+      success: false,
+      error: "Failed to process user report",
+      details: err.message,
+    });
+  }
+});
+
+// ----------------------
 // INBOX API (For Lead View)
 // ----------------------
 app.get("/api/inbox", async (req, res) => {

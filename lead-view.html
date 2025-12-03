@@ -1508,7 +1508,7 @@
                 const displayTime = (new Date().toDateString() === tsDate.toDateString()) ? timeStr : dateStr;
 
                 return {
-                    ...email, // id, sender, to, subject, content, folder
+                    ...email, // id, sender, to, subject, content, folder, s3_key, s3_bucket
                     timestamp: displayTime,
                     fullTimestamp: email.timestamp,
                     labels: email.labels || [],
@@ -1696,6 +1696,18 @@ ${email.content || 'No content available.'}
                         Reported by ${email.reportedBy} – requires review.
                     </div>
                 ` : ''}
+
+                ${!isReported ? `
+                    <div class="action-buttons" style="margin-top: 20px; border-top: 1px solid #e2e8f0; padding-top: 15px;">
+                        <div style="font-size: 13px; color: #4a5568; margin-bottom: 10px;">
+                            Suspicious? Report this email to IT Security for analysis.
+                        </div>
+                        <button class="btn" style="background: #e53e3e; color: white; width: fit-content;" onclick="reportToIT('${email.id}')">
+                            🚩 Report Phishing to IT
+                        </button>
+                    </div>
+                ` : ''}
+
                 ${isReported && isUrgent ? `
                     <div class="action-buttons">
                         <button class="btn btn-release" onclick="showReleaseModal('${email.id}')">
@@ -1914,6 +1926,61 @@ ${email.content || 'No content available.'}
             if (confirm('Sign out?')) {
                 sessionStorage.clear();
                 showLogin();
+            }
+        }
+
+        async function reportToIT(emailId) {
+            if (!confirm("Are you sure you want to report this email to IT Security?")) return;
+
+            const emails = loadMergedEmails();
+            const email = emails.find(e => e.id === emailId);
+            
+            if (!email) {
+                showToast("Error: Email not found.");
+                return;
+            }
+
+            // 1. Optimistic UI Update (using your existing localStorage demo logic)
+            const report = {
+                status: 'reported',
+                reportedBy: sessionStorage.getItem('username') || 'Dr. Martinez',
+                reportedTime: new Date().toISOString(),
+                auditId: '#REP-' + Math.floor(1000 + Math.random() * 9000)
+            };
+            localStorage.setItem(`emailReport_${emailId}`, JSON.stringify(report));
+
+            // Update UI immediately
+            renderEmailList();
+            selectEmail(emailId);
+            showToast("Report submitted to IT Queue.");
+            showAuditNotification(report.auditId);
+
+            // 2. Call the Real Backend API
+            try {
+                const payload = {
+                    s3_bucket: email.s3_bucket,
+                    s3_key: email.s3_key,
+                    report_reason: "User reported from Inbox",
+                    reported_by: report.reportedBy,
+                    report_source: "lead_inbox"
+                };
+
+                const resp = await fetch("/api/hitl/report", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await resp.json();
+                
+                if (!data.success) {
+                    console.error("Backend report failed:", data.error);
+                    // Optionally revert local storage or show error, but keeping it simple for demo
+                    showToast("Report logged locally (Server sync failed).");
+                }
+            } catch (err) {
+                console.error("Network error reporting email:", err);
+                showToast("Report logged locally (Network error).");
             }
         }
 

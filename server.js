@@ -832,7 +832,10 @@ app.get("/api/inbox", async (req, res) => {
                         status: 'safe',
                         read: false,
                         // Helper to sort into demo folders
-                        folder: inferFolder(subject)
+                        folder: inferFolder(subject),
+                        // *** UPDATED: Pass S3 metadata for reporting ***
+                        s3_key: obj.Key,
+                        s3_bucket: METRICS_BUCKET
                     });
                 }
             }

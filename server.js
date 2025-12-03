@@ -1,4 +1,3 @@
-// server.js (ESM)
 import express from "express";
 import path from "path";
 import fetch from "node-fetch";
@@ -195,7 +194,8 @@ app.get("/api/demo/status", (req, res) => {
   });
 });
 
-async function applyLearningFromVerdict(item, verdict, actor, ts) {
+// *** UPDATED: Records feedback. Note field is optional. ***
+async function applyLearningFromVerdict(item, verdict, actor, ts, notes) {
   try {
     const fromAddr = item.from_addr || item.from || "";
     const fromDomain =
@@ -217,6 +217,9 @@ async function applyLearningFromVerdict(item, verdict, actor, ts) {
       trust_tier: verdict === "allow" ? "trusted" : "blocked",
       log_bucket: item.log_bucket || null,
       log_key: item.log_key || null,
+      // Pass notes if present, else empty string.
+      // Lambda will ignore empty string.
+      notes: notes || "" 
     };
 
     await dynamo
@@ -296,6 +299,8 @@ app.get("/api/hitl/pending", async (req, res) => {
             doc.hitl?.status || doc.decision_agent?.hitl?.status || item.status;
             
           const hitlNotes = doc.hitl?.notes || item.notes || "";
+          
+          const isUserReported = item.user_reported === true || doc.user_reported === true;
 
           return {
             ...item,
@@ -318,6 +323,7 @@ app.get("/api/hitl/pending", async (req, res) => {
             log_hitl: doc.hitl || doc.decision_agent?.hitl || null,
             s3_bucket: logBucket,
             s3_key: logKey,
+            user_reported: isUserReported
           };
         } catch (err) {
           console.error(
@@ -362,6 +368,9 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
 
   const actorName = actor || "unknown";
   const ts = new Date().toISOString();
+  
+  // Optional: defaults to empty string if undefined
+  const safeNotes = notes || "";
 
   try {
     const getResp = await dynamo
@@ -392,7 +401,7 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
           ":resolved": "resolved",
           ":verdict": verdict,
           ":actor": actorName,
-          ":notes": notes || "",
+          ":notes": safeNotes, 
           ":ts": ts,
         },
       })
@@ -414,7 +423,7 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
         status: "resolved",
         actor: actorName,
         verdict,
-        notes: notes || "",
+        notes: safeNotes, 
         ts,
       };
 
@@ -440,7 +449,8 @@ app.post("/api/hitl/:id/verdict", async (req, res) => {
       s3Location = { bucket: item.log_bucket, key: item.log_key };
     }
 
-    await applyLearningFromVerdict(item, verdict, actorName, ts);
+    // Pass the optional notes to the learning table
+    await applyLearningFromVerdict(item, verdict, actorName, ts, safeNotes);
 
     res.json({
       success: true,
@@ -465,8 +475,8 @@ app.post("/api/hitl/:id/notes", async (req, res) => {
   const { id } = req.params;
   const { notes, actor } = req.body;
 
-  if (!notes) {
-    return res.status(400).json({ success: false, error: "Notes required" });
+  if (notes === undefined) {
+    return res.status(400).json({ success: false, error: "Notes field required" });
   }
 
   try {
@@ -572,10 +582,6 @@ app.get("/api/hitl/stats", async (req, res) => {
   }
 });
 
-// ----------------------
-// HITL API: USER REPORT → IT REVIEW
-// ----------------------
-
 app.post("/api/hitl/report", async (req, res) => {
   try {
     const {
@@ -597,7 +603,6 @@ app.post("/api/hitl/report", async (req, res) => {
     const bucket = s3_bucket || METRICS_BUCKET;
     const nowIso = new Date().toISOString();
 
-    // 1) Load the decision log from S3
     const obj = await s3
       .getObject({
         Bucket: bucket,
@@ -607,7 +612,6 @@ app.post("/api/hitl/report", async (req, res) => {
 
     const doc = JSON.parse(obj.Body.toString("utf8"));
 
-    // 2) Extract identifiers & email fields
     const fromAddr =
       doc.compact?.from?.addr ||
       doc.sender_intel?.raw?.ids?.from_addr ||
@@ -632,7 +636,6 @@ app.post("/api/hitl/report", async (req, res) => {
         : false)
     );
 
-    // Use provided run_id if given, otherwise derive from doc / key
     const queueId =
       run_id ||
       doc.sender_intel?.raw?.ids?.message_id ||
@@ -641,7 +644,6 @@ app.post("/api/hitl/report", async (req, res) => {
 
     const queueKey = { id: queueId };
 
-    // 3) Check if queue item already exists
     const existing = await dynamo
       .get({
         TableName: HITL_TABLE,
@@ -652,7 +654,6 @@ app.post("/api/hitl/report", async (req, res) => {
     const baseReportSource = report_source || "user_report";
 
     if (!existing.Item) {
-      // 3a) Create new HITL queue item
       const newItem = {
         id: queueId,
         from_addr: fromAddr,
@@ -666,7 +667,6 @@ app.post("/api/hitl/report", async (req, res) => {
         status: "pending",
         created_ts: nowIso,
 
-        // NEW user report metadata
         user_reported: true,
         report_source: baseReportSource,
         report_reason: report_reason || "",
@@ -683,7 +683,6 @@ app.post("/api/hitl/report", async (req, res) => {
 
       console.log("[HITL] Created new user-reported queue item:", newItem.id);
     } else {
-      // 3b) Update existing HITL queue item
       await dynamo
         .update({
           TableName: HITL_TABLE,
@@ -707,7 +706,6 @@ app.post("/api/hitl/report", async (req, res) => {
       console.log("[HITL] Updated existing queue item as user-reported:", queueId);
     }
 
-    // 4) Patch S3 decision log to mark as user-reported + HITL-required
     doc.user_reported = true;
 
     const existingHitl = doc.hitl || {};
@@ -718,7 +716,6 @@ app.post("/api/hitl/report", async (req, res) => {
       notes: existingHitl.notes || "",
       ts: existingHitl.ts || null,
 
-      // NEW metadata for user report
       trigger: "user_reported",
       report_source: baseReportSource,
       report_reason: report_reason || "",
@@ -726,15 +723,12 @@ app.post("/api/hitl/report", async (req, res) => {
       report_ts: nowIso,
     };
 
-    // Top-level hitl
     doc.hitl = newHitl;
 
-    // Mirror into decision_agent.hitl if present
     if (doc.decision_agent && doc.decision_agent.hitl) {
       doc.decision_agent.hitl = newHitl;
     }
 
-    // Write updated JSON back to S3
     await s3
       .putObject({
         Bucket: bucket,
@@ -746,7 +740,6 @@ app.post("/api/hitl/report", async (req, res) => {
 
     console.log("[HITL] Patched S3 decision log as user-reported:", s3_key);
 
-    // 5) Respond to frontend
     res.json({
       success: true,
       queue_id: queueId,
@@ -763,15 +756,11 @@ app.post("/api/hitl/report", async (req, res) => {
   }
 });
 
-// ----------------------
-// INBOX API (For Lead View)
-// ----------------------
 app.get("/api/inbox", async (req, res) => {
   try {
     const { email, days } = req.query;
     if (!email) return res.status(400).json({ error: "Email required" });
     
-    // Default lookback of 14 days for the demo
     const lookbackDays = parseInt(days || "14", 10);
     const now = dayjs().utc();
     const prefixes = [];
@@ -801,20 +790,13 @@ app.get("/api/inbox", async (req, res) => {
                 const data = await s3.getObject({ Bucket: METRICS_BUCKET, Key: obj.Key }).promise();
                 const doc = JSON.parse(data.Body.toString("utf8"));
 
-                // 1. Recipient Filter: Match the requested email (e.g., dr.martinez)
                 const toAddr = doc.compact?.to || "";
                 if (!toAddr.toLowerCase().includes(email.toLowerCase())) continue;
 
-                // 2. Safety Filter: 
-                //    - Show if AI decided ALLOW
-                //    - OR if Human (HITL) decided ALLOW
-                //    - AND filter out anything that is currently Blocked/Quarantined (unless released)
                 const isAiAllowed = doc.decision === "ALLOW";
                 const isHitlAllowed = doc.hitl?.verdict === "allow";
                 const isBlocked = doc.decision === "QUARANTINE" || doc.hitl?.verdict === "block";
 
-                // Logic: It appears in the inbox if it was allowed by AI or Human, AND it is not effectively blocked.
-                // (If AI allowed but Human later blocked it, it shouldn't show. If AI blocked but Human allowed, it SHOULD show).
                 const showInInbox = (isAiAllowed && !isBlocked) || isHitlAllowed;
 
                 if (showInInbox) {
@@ -831,9 +813,7 @@ app.get("/api/inbox", async (req, res) => {
                         labels: [],
                         status: 'safe',
                         read: false,
-                        // Helper to sort into demo folders
                         folder: inferFolder(subject),
-                        // *** UPDATED: Pass S3 metadata for reporting ***
                         s3_key: obj.Key,
                         s3_bucket: METRICS_BUCKET
                     });
@@ -843,7 +823,6 @@ app.get("/api/inbox", async (req, res) => {
         } while (continuationToken);
     }
     
-    // Sort by Date Descending
     inbox.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
     res.json({ success: true, emails: inbox });
@@ -1225,6 +1204,9 @@ app.post("/api/history/feedback", async (req, res) => {
     return res.status(400).json({ success: false, error: "Missing required fields" });
   }
 
+  // Handle optional notes
+  const safeNotes = notes || "";
+
   try {
     const obj = await s3.getObject({ Bucket: bucket, Key: key }).promise();
     const doc = JSON.parse(obj.Body.toString("utf8"));
@@ -1244,7 +1226,7 @@ app.post("/api/history/feedback", async (req, res) => {
       actor: actor || "admin",
       run_id: runId,
       from_addr: fromAddr,
-      notes: notes || "Manual history correction",
+      notes: safeNotes, // Pass optional notes
       created_ts: ts,
       source: "history_review"
     };

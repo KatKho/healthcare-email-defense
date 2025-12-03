@@ -1196,6 +1196,7 @@
   function normalizeQueueItem(raw) {
     const base = normalizeCommonFields(raw);
 
+    // ... existing status logic ...
     let status = "pending";
     if (base.hitlStatus === "completed" || base.hitlStatus === "resolved") {
       status = (base.queueStatus === "quarantined" || base.decisionCode === "QUARANTINE" || base.hitlVerdict === "block") 
@@ -1231,12 +1232,14 @@
       queueStatus: base.queueStatus,
       hitlStatus: base.hitlStatus,
       hitlVerdict: base.hitlVerdict,
-      notes: base.hitlNotes, // normalized notes
+      notes: base.hitlNotes,
       bodyPreview: base.bodyPreview,
       reasoning: base.reasoning,
-      senderRiskNotes: base.senderRiskNotes, // Pass through
+      senderRiskNotes: base.senderRiskNotes,
       rawLog: base.log,
       _backend: raw,
+      // *** NEW LINE BELOW ***
+      isUserReported: raw.user_reported === true
     };
   }
 
@@ -1545,24 +1548,56 @@
    ************************************************************/
   function renderItQueue() {
     const tbody = document.getElementById("itReviewTableBody");
+    
+    // --- 1. Get Filter Values ---
     const classFilter = document.getElementById("reviewFilterClass").value;
     const statusFilter = document.getElementById("reviewFilterStatus").value;
 
-    const filtered = itQueue.filter((item) => {
+    // --- 2. Filter the Data ---
+    const filtered = itQueue.filter(item => {
+      // Filter by Classification
       if (classFilter !== "all" && item.classification !== classFilter) return false;
-      if (statusFilter !== "all" && item.status !== statusFilter) return false;
+      
+      // Filter by Status
+      if (statusFilter !== "all") {
+        // "pending" matches "pending" status
+        // "quarantined" matches "quarantined" status
+        // "released" matches "released" status
+        if (item.status !== statusFilter) return false;
+      }
+      
       return true;
     });
 
+    // --- 3. Sort the Data (Defines 'sorted') ---
     const sorted = getSortedData(filtered, 'review');
 
+    // --- 4. Render ---
     if (!sorted.length) {
-      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:16px; color:#6b7280;">No emails match current filters.</td></tr>';
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" style="text-align:center; padding:16px; color: var(--text-secondary);">
+            No emails match the current filters.
+          </td>
+        </tr>`;
       return;
     }
 
     tbody.innerHTML = sorted.map((item) => {
       const confidencePct = typeof item.confidence === "number" ? Math.round(item.confidence * 100) + "%" : "–";
+      
+      let statusHtml = `<span class="badge badge-pending">${item.status === "pending" ? "Pending review" : item.status}</span>`;
+      
+      // If user reported, append a distinct label below the status
+      if (item.isUserReported) {
+        statusHtml += `
+          <div style="margin-top:4px;">
+            <span class="badge" style="background:#fff7ed; color:#ea580c; border:1px solid #fdba74; font-size:0.65rem;">
+              User Reported
+            </span>
+          </div>`;
+      }
+
       return `
       <tr>
         <td>${item.sender}</td>
@@ -1570,7 +1605,9 @@
         <td>${item.subject}</td>
         <td>${renderClassificationBadge(item.classification, item.confidence)}</td>
         <td>${confidencePct}</td>
-        <td><span class="badge badge-pending">${item.status === "pending" ? "Pending review" : item.status}</span></td>
+        
+        <td>${statusHtml}</td>
+        
         <td>${item.receivedAt}</td>
         <td>
           <button class="btn btn-primary btn-sm" onclick="openReviewModal('${item.id}')">Review</button>

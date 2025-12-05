@@ -4,8 +4,8 @@ Team 6 — Kat, Jack, Kaibo, Mina
 An agentic email screener that automatically quarantines suspicious messages for IT review, reducing healthcare staff risk without deleting legitimate messages.
 
 ## 1) Live Demo
- - Synthetic Industry: http://44.220.92.119:3000/nurse-view.html — status: Up — test creds (fake): `<user/pass>`
- - Agentic System: http://44.220.92.119:3000/demo-combined.html — status: Up — notes: running continuously since 11/19/25; processes emails every 15 minutes
+ - Synthetic Industry: http://44.220.92.119:3000/nurse-view.html — status: `<Up>` — test creds (fake): `<None>`
+ - Agentic System: http://44.220.92.119:3000/demo-combined.html — status: `<Up>`— notes: running continuously since 11/19/25; processes emails every 15 minutes
 - Logs/Observability: AWS CloudWatch — `/<log-group>`
 
 ## 2) Thesis & Outcome

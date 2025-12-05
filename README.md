@@ -6,7 +6,7 @@ An agentic email screener that automatically quarantines suspicious messages for
 ## 1) Live Demo
  - Synthetic Industry: [Healthcare Staff View](http://44.220.92.119:3000/nurse-view.html) — status: Up — test creds (fake): `<None>`
  - Agentic System: [IT Review / Agentic System](http://44.220.92.119:3000/demo-combined.html) — status: Up — notes: running continuously since 11/19/25; processes emails every 15 minutes
-- Logs/Observability: AWS CloudWatch — `/<log-group>`
+- Logs/Observability: AWS CloudWatch — see `evidence/` for log group details
 
 ## 2) Thesis & Outcome
 - **Original thesis (week 2):**  

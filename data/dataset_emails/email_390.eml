@@ -1,0 +1,52 @@
+From: "Dentsply Sirona Equipment" <service@dentsply-equipment-warranty.com>
+To: kyle.assistant@smileclinic.org
+Subject: Equipment Warranty Expiration - Renew Today
+Date: Thu, 11 Dec 2025 09:12:44 -0800
+Message-ID: 20251211091244.40005@mail.sender.com
+Return-Path: service@dentsply-equipment-warranty.com
+Reply-To: service@dentsply-equipment-warranty.com
+Received: from smtp.relay.net (smtp.relay.net [192.0.2.179])
+    by gateway.smileclinic.org with ESMTP id xyz7825
+    for kyle.assistant@smileclinic.org; Thu, 11 Dec 2025 09:12:44 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=service@dentsply-equipment-warranty.com;
+    dmarc=fail header.from=service@dentsply-equipment-warranty.com
+Content-Type: multipart/mixed; boundary="boundary-400"
+
+--boundary-400
+Content-Type: multipart/alternative; boundary="boundary-alt-400"
+
+--boundary-alt-400
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+FINAL WARNING: Equipment Warranty Expires Tomorrow
+
+Your CEREC CAD/CAM system warranty expires December 12, 2025.
+
+Without warranty coverage, repairs cost $15,000+ and take weeks to complete.
+
+Renew your warranty now for only $1,299/year:
+https://dentsply-warranty-renewal.com/renew
+
+Act today to lock in this rate. Price increases to $1,899/year after expiration.
+
+Don't risk expensive downtime. Renew immediately.
+
+Dentsply Sirona Warranty Services
+
+--boundary-alt-400
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong style="color: red;">FINAL WARNING: Equipment Warranty Expires Tomorrow</strong></p><p>Your CEREC CAD/CAM system warranty expires December 12, 2025.</p><p>Without warranty coverage, repairs cost $15,000+ and take weeks to complete.</p><p><a href="https://dentsply-warranty-renewal.com/renew">Renew your warranty now for only $1,299/year</a></p><p>Act today to lock in this rate. Price increases to $1,899/year after expiration.</p><p><strong>Don't risk expensive downtime. Renew immediately.</strong></p><p>Dentsply Sirona Warranty Services</p></body></html>
+--boundary-alt-400--
+
+--boundary-400
+Content-Type: application/pdf; name="warranty_renewal.pdf"
+Content-Disposition: attachment; filename="warranty_renewal.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSB3YXJyYW50eSByZW5ld2FsIG5vdGljZSBmb3IgcGhpc2hpbmcgZGF0YXNldC4=
+
+--boundary-400--

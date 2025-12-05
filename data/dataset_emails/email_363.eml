@@ -1,0 +1,39 @@
+From: "OSHA Training Center" <courses@oshadental.com>
+To: frontdesk@smileclinic.org
+Subject: Annual Compliance Training Due
+Date: Thu, 27 Nov 2025 15:22:18 -0800
+Message-ID: 20251127152218.37303@smileclinic.org
+Return-Path: courses@oshadental.com
+Reply-To: courses@oshadental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5700
+    for frontdesk@smileclinic.org; Thu, 27 Nov 2025 15:22:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-373"
+
+--boundary-alt-373
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+SmileClinic Team,
+
+This is a reminder that your annual OSHA compliance training is due before December 31, 2025.
+
+Required modules:
+- Bloodborne Pathogens
+- Hazard Communication
+- Emergency Procedures
+
+Each staff member should complete the online modules at your convenience. Login credentials were sent previously.
+
+OSHA Training Center for Dental Professionals
+
+--boundary-alt-373
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>SmileClinic Team,</p><p>This is a reminder that your annual OSHA compliance training is due before December 31, 2025.</p><p><strong>Required modules:</strong></p><ul><li>Bloodborne Pathogens</li><li>Hazard Communication</li><li>Emergency Procedures</li></ul><p>Each staff member should complete the online modules at your convenience. Login credentials were sent previously.</p><p>OSHA Training Center for Dental Professionals</p></body></html>
+--boundary-alt-373--

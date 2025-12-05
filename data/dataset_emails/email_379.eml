@@ -1,0 +1,37 @@
+From: "Carestream Software" <licensing@carestream-dental-update.com>
+To: jen.hygienist@smileclinic.org
+Subject: License Verification Failed
+Date: Fri, 5 Dec 2025 11:18:37 -0800
+Message-ID: 20251205111837.38904@mail.sender.com
+Return-Path: licensing@carestream-dental-update.com
+Reply-To: licensing@carestream-dental-update.com
+Received: from relay.external.org (relay.external.org [192.0.2.169])
+    by gateway.smileclinic.org with ESMTP id xyz7814
+    for jen.hygienist@smileclinic.org; Fri, 5 Dec 2025 11:18:37 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=licensing@carestream-dental-update.com;
+    dmarc=none header.from=licensing@carestream-dental-update.com
+Content-Type: multipart/alternative; boundary="boundary-alt-389"
+
+--boundary-alt-389
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Carestream License Verification Failed
+
+We were unable to verify your Carestream Dental imaging software license.
+
+Your software will stop functioning in 12 hours unless you re-verify your license immediately.
+
+Verify license: https://carestream-license-verify.com/check
+
+This will affect your ability to take and view patient x-rays. Immediate action required.
+
+Carestream Licensing Department
+
+--boundary-alt-389
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Carestream License Verification Failed</strong></p><p>We were unable to verify your Carestream Dental imaging software license.</p><p>Your software will stop functioning in 12 hours unless you re-verify your license immediately.</p><p><a href="https://carestream-license-verify.com/check">Verify license</a></p><p><strong>This will affect your ability to take and view patient x-rays. Immediate action required.</strong></p><p>Carestream Licensing Department</p></body></html>
+--boundary-alt-389--

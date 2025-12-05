@@ -1,0 +1,35 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: Schedule Change for Friday
+Date: Thu, 20 Nov 2025 13:27:45 -0800
+Message-ID: 20251120132745.35303@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5680
+    for dr.martinez@smileclinic.org; Thu, 20 Nov 2025 13:27:45 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-353"
+
+--boundary-alt-353
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dr. Martinez,
+
+Mr. Thompson called to reschedule his Friday 2pm appointment. I moved him to next Tuesday at 10am.
+
+Your Friday afternoon is now open if you want to leave early or take additional patients.
+
+Best,
+Kyle
+
+--boundary-alt-353
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dr. Martinez,</p><p>Mr. Thompson called to reschedule his Friday 2pm appointment. I moved him to next Tuesday at 10am.</p><p>Your Friday afternoon is now open if you want to leave early or take additional patients.</p><p>Best,<br>Kyle</p></body></html>
+--boundary-alt-353--

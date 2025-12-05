@@ -1,0 +1,46 @@
+From: "Dr. Sofia Martinez" <dr.martinez@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Post-Op Instructions – Patient Williams
+Date: Fri, 21 Nov 2025 17:02:14 -0800
+Message-ID: 20251121170214.36010@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5687
+    for frontdesk@smileclinic.org; Fri, 21 Nov 2025 17:02:14 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-360"
+
+--boundary-360
+Content-Type: multipart/alternative; boundary="boundary-alt-360"
+
+--boundary-alt-360
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Team,
+
+Mrs. Williams just had an extraction. Please give her the standard post-op care sheet when she checks out.
+
+Called in pain medication to her pharmacy. She should take it easy for 48 hours.
+
+Dr. Martinez
+
+--boundary-alt-360
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Team,</p><p>Mrs. Williams just had an extraction. Please give her the standard post-op care sheet when she checks out.</p><p>Called in pain medication to her pharmacy. She should take it easy for 48 hours.</p><p>Dr. Martinez</p></body></html>
+--boundary-alt-360--
+
+--boundary-360
+Content-Type: application/pdf; name="postop_instructions.pdf"
+Content-Disposition: attachment; filename="postop_instructions.pdf"
+Content-Transfer-Encoding: base64
+
+UG9zdC1vcCBpbnN0cnVjdGlvbnMgZm9yIGRlbnRhbCBleHRyYWN0aW9uIGRhdGFzZXQu
+
+--boundary-360--

@@ -1,0 +1,38 @@
+From: "Adobe Creative Cloud" <subscriptions@adobe-billing-services.com>
+To: kyle.assistant@smileclinic.org
+Subject: Payment Method Declined – Update Required
+Date: Thu, 4 Dec 2025 13:27:49 -0800
+Message-ID: 20251204132749.38702@mail.sender.com
+Return-Path: subscriptions@adobe-billing-services.com
+Reply-To: subscriptions@adobe-billing-services.com
+Received: from mail.external.net (mail.external.net [192.0.2.194])
+    by gateway.smileclinic.org with ESMTP id xyz7812
+    for kyle.assistant@smileclinic.org; Thu, 4 Dec 2025 13:27:49 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=subscriptions@adobe-billing-services.com;
+    dmarc=none header.from=subscriptions@adobe-billing-services.com
+Content-Type: multipart/alternative; boundary="boundary-alt-387"
+
+--boundary-alt-387
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Adobe Creative Cloud - Payment Failed
+
+We were unable to process your monthly subscription payment. Your credit card was declined.
+
+Current balance due: $54.99
+
+Update your payment method now to continue using Photoshop and design tools:
+https://adobe-subscription-update.com/billing
+
+Your account will be canceled and all files deleted if not updated within 48 hours.
+
+Adobe Subscription Services
+
+--boundary-alt-387
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Adobe Creative Cloud - Payment Failed</strong></p><p>We were unable to process your monthly subscription payment. Your credit card was declined.</p><p><strong>Current balance due:</strong> $54.99</p><p><a href="https://adobe-subscription-update.com/billing">Update your payment method now to continue using Photoshop and design tools</a></p><p>Your account will be canceled and all files deleted if not updated within 48 hours.</p><p>Adobe Subscription Services</p></body></html>
+--boundary-alt-387--

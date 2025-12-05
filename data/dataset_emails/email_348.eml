@@ -1,0 +1,34 @@
+From: "Kyle Bennett" <kyle.assistant@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Protocol Update – COVID Screening
+Date: Fri, 21 Nov 2025 13:45:29 -0800
+Message-ID: 20251121134529.35808@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5685
+    for frontdesk@smileclinic.org; Fri, 21 Nov 2025 13:45:29 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-358"
+
+--boundary-alt-358
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Front Desk Team,
+
+Reminder: We're updating our COVID screening protocol starting Monday. Temperature checks are now optional, but symptom questionnaire remains mandatory.
+
+Updated forms are in the supply cabinet.
+
+Kyle
+
+--boundary-alt-358
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Front Desk Team,</p><p>Reminder: We're updating our COVID screening protocol starting Monday. Temperature checks are now optional, but symptom questionnaire remains mandatory.</p><p>Updated forms are in the supply cabinet.</p><p>Kyle</p></body></html>
+--boundary-alt-358--

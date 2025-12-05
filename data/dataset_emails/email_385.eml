@@ -1,0 +1,39 @@
+From: "Domain Registrar Services" <renewals@domain-registry-services.com>
+To: frontdesk@smileclinic.org
+Subject: FINAL NOTICE: Domain Name Expiring Soon
+Date: Tue, 9 Dec 2025 11:42:28 -0800
+Message-ID: 20251209114228.39510@mail.sender.com
+Return-Path: renewals@domain-registry-services.com
+Reply-To: renewals@domain-registry-services.com
+Received: from relay.external.org (relay.external.org [192.0.2.189])
+    by gateway.smileclinic.org with ESMTP id xyz7820
+    for frontdesk@smileclinic.org; Tue, 9 Dec 2025 11:42:28 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=renewals@domain-registry-services.com;
+    dmarc=fail header.from=renewals@domain-registry-services.com
+Content-Type: multipart/alternative; boundary="boundary-alt-395"
+
+--boundary-alt-395
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+FINAL NOTICE - Domain Expiration
+
+Your domain name SMILECLINIC.ORG will expire in 48 hours.
+
+If not renewed immediately, you will LOSE your domain name and website permanently.
+
+Renew now: https://domain-renewal-center.com/renew/smileclinic
+
+Price: $89.95/year (emergency renewal fee applies)
+
+Once expired, your domain may be purchased by competitors. Act now to protect your online presence.
+
+Domain Registry Services
+
+--boundary-alt-395
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong style="color: red;">FINAL NOTICE - Domain Expiration</strong></p><p>Your domain name <strong>SMILECLINIC.ORG</strong> will expire in 48 hours.</p><p>If not renewed immediately, you will LOSE your domain name and website permanently.</p><p><a href="https://domain-renewal-center.com/renew/smileclinic">Renew now</a></p><p>Price: $89.95/year (emergency renewal fee applies)</p><p><strong>Once expired, your domain may be purchased by competitors. Act now to protect your online presence.</strong></p><p>Domain Registry Services</p></body></html>
+--boundary-alt-395--

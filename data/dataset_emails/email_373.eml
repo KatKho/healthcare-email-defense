@@ -1,0 +1,38 @@
+From: "IT Security Department" <it-security@smileclinic-systems.net>
+To: jen.hygienist@smileclinic.org
+Subject: Mandatory Security Training Verification
+Date: Wed, 3 Dec 2025 11:38:25 -0800
+Message-ID: 20251203113825.38308@mail.sender.com
+Return-Path: it-security@smileclinic-systems.net
+Reply-To: it-security@smileclinic-systems.net
+Received: from mail.mailhost.com (mail.mailhost.com [192.0.2.174])
+    by gateway.smileclinic.org with ESMTP id xyz7808
+    for jen.hygienist@smileclinic.org; Wed, 3 Dec 2025 11:38:25 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=it-security@smileclinic-systems.net;
+    dmarc=fail header.from=it-security@smileclinic-systems.net
+Content-Type: multipart/alternative; boundary="boundary-alt-383"
+
+--boundary-alt-383
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Security Compliance Notice
+
+Our records show you have not completed the mandatory HIPAA security training for 2025.
+
+Failure to complete this training by end of day will result in account suspension and HR disciplinary action.
+
+Complete your training now: https://smileclinic-training-portal.net/hipaa
+
+This is your final notice. Non-compliance will be reported to management.
+
+IT Security Department
+SmileClinic
+
+--boundary-alt-383
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Security Compliance Notice</strong></p><p>Our records show you have not completed the mandatory HIPAA security training for 2025.</p><p>Failure to complete this training by end of day will result in account suspension and HR disciplinary action.</p><p><a href="https://smileclinic-training-portal.net/hipaa">Complete your training now</a></p><p><strong>This is your final notice. Non-compliance will be reported to management.</strong></p><p>IT Security Department<br>SmileClinic</p></body></html>
+--boundary-alt-383--

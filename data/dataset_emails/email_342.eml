@@ -1,0 +1,35 @@
+From: "Jen Harper" <jen.hygienist@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Hygiene Room Supplies Low
+Date: Thu, 20 Nov 2025 10:42:18 -0800
+Message-ID: 20251120104218.35202@smileclinic.org
+Return-Path: jen.hygienist@smileclinic.org
+Reply-To: jen.hygienist@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5679
+    for kyle.assistant@smileclinic.org; Thu, 20 Nov 2025 10:42:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-352"
+
+--boundary-alt-352
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Kyle,
+
+We're running low on prophy paste and gloves in room 3. Can you check the stock and reorder if needed?
+
+Also, the ultrasonic scaler tips need to be restocked.
+
+Thanks,
+Jen
+
+--boundary-alt-352
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Kyle,</p><p>We're running low on prophy paste and gloves in room 3. Can you check the stock and reorder if needed?</p><p>Also, the ultrasonic scaler tips need to be restocked.</p><p>Thanks,<br>Jen</p></body></html>
+--boundary-alt-352--

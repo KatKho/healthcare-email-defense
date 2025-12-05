@@ -1,0 +1,53 @@
+From: "Microsoft Security Team" <security@office365-smileclinic.com>
+To: frontdesk@smileclinic.org
+Subject: Security Alert: Suspicious Sign-In Detected
+Date: Mon, 1 Dec 2025 10:42:18 -0800
+Message-ID: 20251201104218.37803@mail.sender.com
+Return-Path: security@office365-smileclinic.com
+Reply-To: security@office365-smileclinic.com
+Received: from smtp.external.net (smtp.external.net [192.0.2.199])
+    by gateway.smileclinic.org with ESMTP id xyz7803
+    for frontdesk@smileclinic.org; Mon, 1 Dec 2025 10:42:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=security@office365-smileclinic.com;
+    dmarc=none header.from=security@office365-smileclinic.com
+Content-Type: multipart/mixed; boundary="boundary-378"
+
+--boundary-378
+Content-Type: multipart/alternative; boundary="boundary-alt-378"
+
+--boundary-alt-378
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Microsoft Security Alert
+
+We detected a suspicious sign-in attempt to your Office 365 account from Russia.
+
+Location: Moscow, Russia
+Device: Unknown Windows PC
+Time: December 1, 2025 at 10:15 AM
+
+If this was not you, secure your account immediately by clicking below:
+
+https://office365-security-check.com/verify
+
+Your account may be compromised. Act now to prevent unauthorized access.
+
+Microsoft Security Team
+
+--boundary-alt-378
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Microsoft Security Alert</strong></p><p>We detected a suspicious sign-in attempt to your Office 365 account from Russia.</p><p><strong>Location:</strong> Moscow, Russia<br><strong>Device:</strong> Unknown Windows PC<br><strong>Time:</strong> December 1, 2025 at 10:15 AM</p><p>If this was not you, secure your account immediately by clicking below:</p><p><a href="https://office365-security-check.com/verify">https://office365-security-check.com/verify</a></p><p>Your account may be compromised. Act now to prevent unauthorized access.</p><p>Microsoft Security Team</p></body></html>
+--boundary-alt-378--
+
+--boundary-378
+Content-Type: application/pdf; name="security_report.pdf"
+Content-Disposition: attachment; filename="security_report.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBNaWNyb3NvZnQgc2VjdXJpdHkgcmVwb3J0IGZvciBwaGlzaGluZyBkYXRhc2V0Lg==
+
+--boundary-378--

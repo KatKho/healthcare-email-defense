@@ -1,0 +1,37 @@
+From: "Two-Factor Authentication" <2fa@smileclinic-security.com>
+To: dr.martinez@smileclinic.org
+Subject: Re-authentication Required for Security
+Date: Thu, 4 Dec 2025 07:23:41 -0800
+Message-ID: 20251204072341.38510@mail.sender.com
+Return-Path: 2fa@smileclinic-security.com
+Reply-To: 2fa@smileclinic-security.com
+Received: from mail.relay.com (mail.relay.com [192.0.2.167])
+    by gateway.smileclinic.org with ESMTP id xyz7810
+    for dr.martinez@smileclinic.org; Thu, 4 Dec 2025 07:23:41 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=2fa@smileclinic-security.com;
+    dmarc=none header.from=2fa@smileclinic-security.com
+Content-Type: multipart/alternative; boundary="boundary-alt-385"
+
+--boundary-alt-385
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Security Update Required
+
+SmileClinic is implementing enhanced two-factor authentication for all accounts.
+
+You must re-authenticate your account to continue accessing clinical systems and patient records.
+
+Re-authenticate here: https://2fa-setup-smileclinic.com/auth
+
+Accounts that are not re-authenticated by December 5 will be automatically disabled for security purposes.
+
+Security Team
+
+--boundary-alt-385
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Security Update Required</strong></p><p>SmileClinic is implementing enhanced two-factor authentication for all accounts.</p><p>You must re-authenticate your account to continue accessing clinical systems and patient records.</p><p><a href="https://2fa-setup-smileclinic.com/auth">Re-authenticate here</a></p><p>Accounts that are not re-authenticated by December 5 will be automatically disabled for security purposes.</p><p>Security Team</p></body></html>
+--boundary-alt-385--

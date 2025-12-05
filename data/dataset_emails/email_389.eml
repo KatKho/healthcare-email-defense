@@ -1,0 +1,39 @@
+From: "Benco Dental Account Services" <billing@benco-account-services.com>
+To: frontdesk@smileclinic.org
+Subject: Account Suspended - Immediate Payment Required
+Date: Wed, 10 Dec 2025 14:47:31 -0800
+Message-ID: 20251210144731.39904@mail.sender.com
+Return-Path: billing@benco-account-services.com
+Reply-To: billing@benco-account-services.com
+Received: from mail.external.org (mail.external.org [192.0.2.164])
+    by gateway.smileclinic.org with ESMTP id xyz7824
+    for frontdesk@smileclinic.org; Wed, 10 Dec 2025 14:47:31 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=billing@benco-account-services.com;
+    dmarc=none header.from=billing@benco-account-services.com
+Content-Type: multipart/alternative; boundary="boundary-alt-399"
+
+--boundary-alt-399
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+ACCOUNT SUSPENDED
+
+Your Benco Dental account has been suspended due to non-payment.
+
+Outstanding balance: $4,127.50
+Days overdue: 45
+
+Pay now to restore ordering privileges:
+https://benco-payment-center.com/paynow
+
+You cannot place new orders until this balance is cleared. Your practice operations may be affected.
+
+Benco Dental Collections Department
+
+--boundary-alt-399
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong style="color: red;">ACCOUNT SUSPENDED</strong></p><p>Your Benco Dental account has been suspended due to non-payment.</p><p><strong>Outstanding balance:</strong> $4,127.50<br><strong>Days overdue:</strong> 45</p><p><a href="https://benco-payment-center.com/paynow">Pay now to restore ordering privileges</a></p><p><strong>You cannot place new orders until this balance is cleared. Your practice operations may be affected.</strong></p><p>Benco Dental Collections Department</p></body></html>
+--boundary-alt-399--

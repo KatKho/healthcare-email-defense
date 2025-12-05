@@ -1,0 +1,51 @@
+From: "PayPal Business Services" <service@paypal-business-verify.com>
+To: frontdesk@smileclinic.org
+Subject: Unusual Account Activity Detected
+Date: Fri, 5 Dec 2025 14:33:51 -0800
+Message-ID: 20251205143351.39005@mail.sender.com
+Return-Path: service@paypal-business-verify.com
+Reply-To: service@paypal-business-verify.com
+Received: from mail.relay.net (mail.relay.net [192.0.2.152])
+    by gateway.smileclinic.org with ESMTP id xyz7815
+    for frontdesk@smileclinic.org; Fri, 5 Dec 2025 14:33:51 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=service@paypal-business-verify.com;
+    dmarc=fail header.from=service@paypal-business-verify.com
+Content-Type: multipart/mixed; boundary="boundary-390"
+
+--boundary-390
+Content-Type: multipart/alternative; boundary="boundary-alt-390"
+
+--boundary-alt-390
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+PayPal Security Alert
+
+We've detected unusual activity on your PayPal Business account.
+
+Recent transaction: $1,247.00 to unknown recipient
+Location: Nigeria
+
+If you did not authorize this transaction, verify your account immediately:
+https://paypal-security-center.com/verify
+
+Your account has been temporarily limited to prevent fraud. Verify within 24 hours to restore access.
+
+PayPal Security Team
+
+--boundary-alt-390
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>PayPal Security Alert</strong></p><p>We've detected unusual activity on your PayPal Business account.</p><p><strong>Recent transaction:</strong> $1,247.00 to unknown recipient<br><strong>Location:</strong> Nigeria</p><p>If you did not authorize this transaction, verify your account immediately:<br><a href="https://paypal-security-center.com/verify">https://paypal-security-center.com/verify</a></p><p>Your account has been temporarily limited to prevent fraud. Verify within 24 hours to restore access.</p><p>PayPal Security Team</p></body></html>
+--boundary-alt-390--
+
+--boundary-390
+Content-Type: application/pdf; name="transaction_alert.pdf"
+Content-Disposition: attachment; filename="transaction_alert.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSB0cmFuc2FjdGlvbiBhbGVydCBmb3IgcGhpc2hpbmcgZW1haWwgZGF0YXNldC4=
+
+--boundary-390--

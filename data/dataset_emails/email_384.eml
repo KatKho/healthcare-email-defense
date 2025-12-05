@@ -1,0 +1,49 @@
+From: "Amazon Web Services" <billing@aws-dental-services.com>
+To: kyle.assistant@smileclinic.org
+Subject: AWS Bill Past Due – Service Suspension Warning
+Date: Tue, 9 Dec 2025 08:17:35 -0800
+Message-ID: 20251209081735.39409@mail.sender.com
+Return-Path: billing@aws-dental-services.com
+Reply-To: billing@aws-dental-services.com
+Received: from smtp.relay.com (smtp.relay.com [192.0.2.177])
+    by gateway.smileclinic.org with ESMTP id xyz7819
+    for kyle.assistant@smileclinic.org; Tue, 9 Dec 2025 08:17:35 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=billing@aws-dental-services.com;
+    dmarc=none header.from=billing@aws-dental-services.com
+Content-Type: multipart/mixed; boundary="boundary-394"
+
+--boundary-394
+Content-Type: multipart/alternative; boundary="boundary-alt-394"
+
+--boundary-alt-394
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Amazon Web Services - Past Due Notice
+
+Your AWS account has an overdue balance of $347.82.
+
+Payment is now 14 days past due. Your cloud services will be suspended in 24 hours if payment is not received.
+
+Pay your bill now: https://aws-payment-portal.com/pay
+
+All hosted applications and databases will be terminated if payment is not made immediately.
+
+AWS Billing Department
+
+--boundary-alt-394
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Amazon Web Services - Past Due Notice</strong></p><p>Your AWS account has an overdue balance of $347.82.</p><p>Payment is now 14 days past due. Your cloud services will be suspended in 24 hours if payment is not received.</p><p><a href="https://aws-payment-portal.com/pay">Pay your bill now</a></p><p><strong>All hosted applications and databases will be terminated if payment is not made immediately.</strong></p><p>AWS Billing Department</p></body></html>
+--boundary-alt-394--
+
+--boundary-394
+Content-Type: application/pdf; name="aws_invoice.pdf"
+Content-Disposition: attachment; filename="aws_invoice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBBV1MgaW52b2ljZSBmb3IgcGhpc2hpbmcgZW1haWwgZGF0YXNldC4=
+
+--boundary-394--

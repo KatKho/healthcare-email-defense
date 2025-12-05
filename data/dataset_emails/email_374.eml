@@ -1,0 +1,49 @@
+From: "Dropbox Business Support" <alerts@dropbox-smileclinic.com>
+To: kyle.assistant@smileclinic.org
+Subject: File Sharing Permissions Expired
+Date: Wed, 3 Dec 2025 14:52:18 -0800
+Message-ID: 20251203145218.38409@mail.sender.com
+Return-Path: alerts@dropbox-smileclinic.com
+Reply-To: alerts@dropbox-smileclinic.com
+Received: from smtp.external.org (smtp.external.org [192.0.2.191])
+    by gateway.smileclinic.org with ESMTP id xyz7809
+    for kyle.assistant@smileclinic.org; Wed, 3 Dec 2025 14:52:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=alerts@dropbox-smileclinic.com;
+    dmarc=none header.from=alerts@dropbox-smileclinic.com
+Content-Type: multipart/mixed; boundary="boundary-384"
+
+--boundary-384
+Content-Type: multipart/alternative; boundary="boundary-alt-384"
+
+--boundary-alt-384
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dropbox Business Alert
+
+The file sharing permissions for your practice documents have expired. Your team can no longer access shared patient files.
+
+To restore access, verify your account credentials immediately.
+
+Restore Access: https://dropbox-business-verify.com/restore
+
+Important patient records and x-ray images are currently inaccessible. Act quickly to prevent workflow disruption.
+
+Dropbox Business Support Team
+
+--boundary-alt-384
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Dropbox Business Alert</strong></p><p>The file sharing permissions for your practice documents have expired. Your team can no longer access shared patient files.</p><p>To restore access, verify your account credentials immediately.</p><p><a href="https://dropbox-business-verify.com/restore">Restore Access</a></p><p>Important patient records and x-ray images are currently inaccessible. Act quickly to prevent workflow disruption.</p><p>Dropbox Business Support Team</p></body></html>
+--boundary-alt-384--
+
+--boundary-384
+Content-Type: application/pdf; name="access_notice.pdf"
+Content-Disposition: attachment; filename="access_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBhY2Nlc3Mgbm90aWNlIGZvciBwaGlzaGluZyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-384--

@@ -1,0 +1,52 @@
+From: "Henry Schein Dental" <orders@henryschein.com>
+To: kyle.assistant@smileclinic.org
+Subject: Order Confirmation #HS-982456
+Date: Mon, 24 Nov 2025 09:23:18 -0800
+Message-ID: 20251124092318.36101@smileclinic.org
+Return-Path: orders@henryschein.com
+Reply-To: orders@henryschein.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5688
+    for kyle.assistant@smileclinic.org; Mon, 24 Nov 2025 09:23:18 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-361"
+
+--boundary-361
+Content-Type: multipart/alternative; boundary="boundary-alt-361"
+
+--boundary-alt-361
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear SmileClinic,
+
+Thank you for your order. Your supplies will ship today and arrive within 2-3 business days.
+
+Order #HS-982456
+- Composite resin kits (3)
+- Nitrile gloves size M (10 boxes)
+- Prophy paste assorted (5 boxes)
+
+Tracking information will be sent separately.
+
+Best regards,
+Henry Schein Dental
+
+--boundary-alt-361
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear SmileClinic,</p><p>Thank you for your order. Your supplies will ship today and arrive within 2-3 business days.</p><p><strong>Order #HS-982456</strong></p><ul><li>Composite resin kits (3)</li><li>Nitrile gloves size M (10 boxes)</li><li>Prophy paste assorted (5 boxes)</li></ul><p>Tracking information will be sent separately.</p><p>Best regards,<br>Henry Schein Dental</p></body></html>
+--boundary-alt-361--
+
+--boundary-361
+Content-Type: application/pdf; name="order_confirmation.pdf"
+Content-Disposition: attachment; filename="order_confirmation.pdf"
+Content-Transfer-Encoding: base64
+
+T3JkZXIgY29uZmlybWF0aW9uIGZvciBkZW50YWwgc3VwcGxpZXMgZGF0YXNldC4=
+
+--boundary-361--

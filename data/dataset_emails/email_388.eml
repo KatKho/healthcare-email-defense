@@ -1,0 +1,49 @@
+From: "BrightSmile Lab Express" <cases@brightsmile-labexpress.com>
+To: dr.martinez@smileclinic.org
+Subject: URGENT: Case Photos Required Immediately
+Date: Wed, 10 Dec 2025 11:18:55 -0800
+Message-ID: 20251210111855.39803@mail.sender.com
+Return-Path: cases@brightsmile-labexpress.com
+Reply-To: cases@brightsmile-labexpress.com
+Received: from relay.mailhost.com (relay.mailhost.com [192.0.2.186])
+    by gateway.smileclinic.org with ESMTP id xyz7823
+    for dr.martinez@smileclinic.org; Wed, 10 Dec 2025 11:18:55 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=cases@brightsmile-labexpress.com;
+    dmarc=fail header.from=cases@brightsmile-labexpress.com
+Content-Type: multipart/mixed; boundary="boundary-398"
+
+--boundary-398
+Content-Type: multipart/alternative; boundary="boundary-alt-398"
+
+--boundary-alt-398
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+URGENT LAB CASE ALERT
+
+Dr. Martinez, we cannot proceed with the crown fabrication for patient Anderson without updated case photos.
+
+The deadline is TODAY at 3:00 PM or the case will be canceled and you'll be charged a $500 restocking fee.
+
+Upload photos now: https://brightsmile-case-upload.com/urgent
+
+Patient is scheduled for delivery next week. Upload immediately to avoid delays and fees.
+
+BrightSmile Lab Priority Cases
+
+--boundary-alt-398
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong style="color: red;">URGENT LAB CASE ALERT</strong></p><p>Dr. Martinez, we cannot proceed with the crown fabrication for patient Anderson without updated case photos.</p><p>The deadline is TODAY at 3:00 PM or the case will be canceled and you'll be charged a $500 restocking fee.</p><p><a href="https://brightsmile-case-upload.com/urgent">Upload photos now</a></p><p>Patient is scheduled for delivery next week. Upload immediately to avoid delays and fees.</p><p>BrightSmile Lab Priority Cases</p></body></html>
+--boundary-alt-398--
+
+--boundary-398
+Content-Type: application/pdf; name="urgent_notice.pdf"
+Content-Disposition: attachment; filename="urgent_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSB1cmdlbnQgbGFiIGNhc2Ugbm90aWNlIGZvciBwaGlzaGluZyBkYXRhc2V0Lg==
+
+--boundary-398--

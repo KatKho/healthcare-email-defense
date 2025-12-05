@@ -1,0 +1,39 @@
+From: "Dental Economics Magazine" <subscription@dentaleconomics.com>
+To: dr.martinez@smileclinic.org
+Subject: Your December Issue is Ready
+Date: Fri, 28 Nov 2025 11:15:47 -0800
+Message-ID: 20251128111547.37505@smileclinic.org
+Return-Path: subscription@dentaleconomics.com
+Reply-To: subscription@dentaleconomics.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5702
+    for dr.martinez@smileclinic.org; Fri, 28 Nov 2025 11:15:47 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-375"
+
+--boundary-alt-375
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dr. Martinez,
+
+Your December 2025 issue of Dental Economics is now available online.
+
+Featured articles:
+- Practice management trends for 2026
+- New implant techniques and materials
+- Staff retention strategies
+
+Access your digital issue at dentaleconomics.com/members
+
+Dental Economics Editorial Team
+
+--boundary-alt-375
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dr. Martinez,</p><p>Your December 2025 issue of Dental Economics is now available online.</p><p><strong>Featured articles:</strong></p><ul><li>Practice management trends for 2026</li><li>New implant techniques and materials</li><li>Staff retention strategies</li></ul><p>Access your digital issue at dentaleconomics.com/members</p><p>Dental Economics Editorial Team</p></body></html>
+--boundary-alt-375--

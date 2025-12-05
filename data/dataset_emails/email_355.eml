@@ -1,0 +1,38 @@
+From: "American Dental Association" <info@ada.org>
+To: dr.martinez@smileclinic.org
+Subject: CE Course Reminder – December Webinar
+Date: Tue, 25 Nov 2025 08:55:14 -0800
+Message-ID: 20251125085514.36505@smileclinic.org
+Return-Path: info@ada.org
+Reply-To: info@ada.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5692
+    for dr.martinez@smileclinic.org; Tue, 25 Nov 2025 08:55:14 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-365"
+
+--boundary-alt-365
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dr. Martinez,
+
+This is a reminder that you're registered for our December 5th webinar: "Advanced Periodontal Techniques in General Practice"
+
+Date: December 5, 2025
+Time: 6:00 PM EST
+Credits: 2 CE hours
+
+A Zoom link will be sent 24 hours before the event.
+
+American Dental Association
+
+--boundary-alt-365
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dr. Martinez,</p><p>This is a reminder that you're registered for our December 5th webinar: "Advanced Periodontal Techniques in General Practice"</p><p><strong>Date:</strong> December 5, 2025<br><strong>Time:</strong> 6:00 PM EST<br><strong>Credits:</strong> 2 CE hours</p><p>A Zoom link will be sent 24 hours before the event.</p><p>American Dental Association</p></body></html>
+--boundary-alt-365--

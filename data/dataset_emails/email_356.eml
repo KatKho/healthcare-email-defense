@@ -1,0 +1,48 @@
+From: "Patterson Dental" <support@pattersondental.com>
+To: kyle.assistant@smileclinic.org
+Subject: Product Update – New Suction System Available
+Date: Tue, 25 Nov 2025 10:22:47 -0800
+Message-ID: 20251125102247.36606@smileclinic.org
+Return-Path: support@pattersondental.com
+Reply-To: support@pattersondental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5693
+    for kyle.assistant@smileclinic.org; Tue, 25 Nov 2025 10:22:47 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-366"
+
+--boundary-366
+Content-Type: multipart/alternative; boundary="boundary-alt-366"
+
+--boundary-alt-366
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello SmileClinic,
+
+We're excited to announce the new Vacutech Pro 3000 high-volume suction system now available for your practice.
+
+Features include reduced noise, better efficiency, and a 5-year warranty.
+
+Contact your account rep for a demo and pricing.
+
+Patterson Dental Equipment Team
+
+--boundary-alt-366
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello SmileClinic,</p><p>We're excited to announce the new Vacutech Pro 3000 high-volume suction system now available for your practice.</p><p>Features include reduced noise, better efficiency, and a 5-year warranty.</p><p>Contact your account rep for a demo and pricing.</p><p>Patterson Dental Equipment Team</p></body></html>
+--boundary-alt-366--
+
+--boundary-366
+Content-Type: application/pdf; name="product_brochure.pdf"
+Content-Disposition: attachment; filename="product_brochure.pdf"
+Content-Transfer-Encoding: base64
+
+UHJvZHVjdCBicm9jaHVyZSBmb3IgZGVudGFsIGVxdWlwbWVudCBkYXRhc2V0Lg==
+
+--boundary-366--

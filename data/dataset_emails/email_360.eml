@@ -1,0 +1,48 @@
+From: "Kyle Rivera" <kyle.assistant@smileclinic.org>
+To: dr.martinez@smileclinic.org
+Subject: X-Ray Equipment Service Complete
+Date: Wed, 26 Nov 2025 14:38:42 -0800
+Message-ID: 20251126143842.37010@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5697
+    for dr.martinez@smileclinic.org; Wed, 26 Nov 2025 14:38:42 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-370"
+
+--boundary-370
+Content-Type: multipart/alternative; boundary="boundary-alt-370"
+
+--boundary-alt-370
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dr. Martinez,
+
+The technician finished servicing the panoramic x-ray machine. Everything is calibrated and working perfectly.
+
+They also updated the software and ran test images. Service report is attached.
+
+Next scheduled maintenance: May 2026.
+
+Kyle
+
+--boundary-alt-370
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dr. Martinez,</p><p>The technician finished servicing the panoramic x-ray machine. Everything is calibrated and working perfectly.</p><p>They also updated the software and ran test images. Service report is attached.</p><p>Next scheduled maintenance: May 2026.</p><p>Kyle</p></body></html>
+--boundary-alt-370--
+
+--boundary-370
+Content-Type: application/pdf; name="service_report.pdf"
+Content-Disposition: attachment; filename="service_report.pdf"
+Content-Transfer-Encoding: base64
+
+WC1yYXkgZXF1aXBtZW50IHNlcnZpY2UgcmVwb3J0IGZvciBkYXRhc2V0Lg==
+
+--boundary-370--

@@ -1,0 +1,39 @@
+From: "Norton Security" <alerts@norton-antivirus-renewal.com>
+To: kyle.assistant@smileclinic.org
+Subject: Your Antivirus Protection Has Expired
+Date: Mon, 8 Dec 2025 07:52:16 -0800
+Message-ID: 20251208075216.39106@mail.sender.com
+Return-Path: alerts@norton-antivirus-renewal.com
+Reply-To: alerts@norton-antivirus-renewal.com
+Received: from smtp.external.com (smtp.external.com [192.0.2.198])
+    by gateway.smileclinic.org with ESMTP id xyz7816
+    for kyle.assistant@smileclinic.org; Mon, 8 Dec 2025 07:52:16 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@norton-antivirus-renewal.com;
+    dmarc=fail header.from=alerts@norton-antivirus-renewal.com
+Content-Type: multipart/alternative; boundary="boundary-alt-391"
+
+--boundary-alt-391
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Norton Antivirus - EXPIRED
+
+WARNING: Your Norton Antivirus subscription expired 3 days ago.
+
+Your computers are now UNPROTECTED and vulnerable to viruses, ransomware, and data theft.
+
+Renew immediately: https://norton-renewal-secure.com/renew
+
+Special offer: Renew now for only $49.99 (regular price $89.99)
+
+Act fast - your practice data is at risk every minute you remain unprotected.
+
+Norton Security Center
+
+--boundary-alt-391
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Norton Antivirus - EXPIRED</strong></p><p style="color: red;"><strong>WARNING:</strong> Your Norton Antivirus subscription expired 3 days ago.</p><p>Your computers are now UNPROTECTED and vulnerable to viruses, ransomware, and data theft.</p><p><a href="https://norton-renewal-secure.com/renew">Renew immediately</a></p><p>Special offer: Renew now for only $49.99 (regular price $89.99)</p><p>Act fast - your practice data is at risk every minute you remain unprotected.</p><p>Norton Security Center</p></body></html>
+--boundary-alt-391--

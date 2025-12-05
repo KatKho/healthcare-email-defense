@@ -1,0 +1,47 @@
+From: "Dr. Sofia Martinez" <dr.martinez@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Patient Follow-up – Mrs. Chen Root Canal
+Date: Thu, 20 Nov 2025 09:15:32 -0800
+Message-ID: 20251120091532.35101@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5678
+    for frontdesk@smileclinic.org; Thu, 20 Nov 2025 09:15:32 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-351"
+
+--boundary-351
+Content-Type: multipart/alternative; boundary="boundary-alt-351"
+
+--boundary-alt-351
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi Team,
+
+Please schedule Mrs. Chen for a follow-up appointment in two weeks. Her root canal treatment went well, but I want to check the healing progress and finalize the crown preparation.
+
+Add a note in her chart about the temporary filling placement.
+
+Thanks,
+Dr. Martinez
+
+--boundary-alt-351
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hi Team,</p><p>Please schedule Mrs. Chen for a follow-up appointment in two weeks. Her root canal treatment went well, but I want to check the healing progress and finalize the crown preparation.</p><p>Add a note in her chart about the temporary filling placement.</p><p>Thanks,<br>Dr. Martinez</p></body></html>
+--boundary-alt-351--
+
+--boundary-351
+Content-Type: application/pdf; name="treatment_notes.pdf"
+Content-Disposition: attachment; filename="treatment_notes.pdf"
+Content-Transfer-Encoding: base64
+
+UGF0aWVudCBmb2xsb3ctdXAgbm90ZXMgZm9yIGRlbnRhbCBjbGluaWMgZGF0YXNldC4=
+
+--boundary-351--

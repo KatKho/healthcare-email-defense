@@ -1,0 +1,51 @@
+From: "BrightSmile Dental Lab" <invoices@brightsmilelab.com>
+To: frontdesk@smileclinic.org
+Subject: Invoice #BSL-7823 – November Cases
+Date: Wed, 26 Nov 2025 11:12:58 -0800
+Message-ID: 20251126111258.36909@smileclinic.org
+Return-Path: invoices@brightsmilelab.com
+Reply-To: invoices@brightsmilelab.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5696
+    for frontdesk@smileclinic.org; Wed, 26 Nov 2025 11:12:58 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-369"
+
+--boundary-369
+Content-Type: multipart/alternative; boundary="boundary-alt-369"
+
+--boundary-alt-369
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+SmileClinic Billing,
+
+Attached is your invoice for November lab cases. Total: $2,847.00
+
+Cases included:
+- 3 crowns
+- 1 bridge (3 units)
+- 2 partial dentures
+
+Payment due within 30 days. Net 30 terms apply.
+
+BrightSmile Lab Billing Department
+
+--boundary-alt-369
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>SmileClinic Billing,</p><p>Attached is your invoice for November lab cases. Total: $2,847.00</p><p>Cases included:</p><ul><li>3 crowns</li><li>1 bridge (3 units)</li><li>2 partial dentures</li></ul><p>Payment due within 30 days. Net 30 terms apply.</p><p>BrightSmile Lab Billing Department</p></body></html>
+--boundary-alt-369--
+
+--boundary-369
+Content-Type: application/pdf; name="invoice_BSL7823.pdf"
+Content-Disposition: attachment; filename="invoice_BSL7823.pdf"
+Content-Transfer-Encoding: base64
+
+SW52b2ljZSBmcm9tIGRlbnRhbCBsYWIgZm9yIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-369--

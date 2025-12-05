@@ -1,0 +1,50 @@
+From: "Microsoft Office Billing" <billing@office365-subscriptions.com>
+To: dr.martinez@smileclinic.org
+Subject: Office 365 Subscription Payment Failed
+Date: Mon, 8 Dec 2025 10:28:44 -0800
+Message-ID: 20251208102844.39207@mail.sender.com
+Return-Path: billing@office365-subscriptions.com
+Reply-To: billing@office365-subscriptions.com
+Received: from relay.mailhost.org (relay.mailhost.org [192.0.2.181])
+    by gateway.smileclinic.org with ESMTP id xyz7817
+    for dr.martinez@smileclinic.org; Mon, 8 Dec 2025 10:28:44 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=billing@office365-subscriptions.com;
+    dmarc=none header.from=billing@office365-subscriptions.com
+Content-Type: multipart/mixed; boundary="boundary-392"
+
+--boundary-392
+Content-Type: multipart/alternative; boundary="boundary-alt-392"
+
+--boundary-alt-392
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Microsoft Office 365 - Payment Failed
+
+We were unable to charge your payment method for Office 365 subscription.
+
+Amount due: $12.50/month
+Status: PAYMENT FAILED
+
+Update payment information: https://office-billing-update.com/payment
+
+Your Office applications (Word, Excel, Outlook) will stop working in 48 hours if payment is not updated.
+
+Microsoft Billing Services
+
+--boundary-alt-392
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Microsoft Office 365 - Payment Failed</strong></p><p>We were unable to charge your payment method for Office 365 subscription.</p><p><strong>Amount due:</strong> $12.50/month<br><strong>Status:</strong> PAYMENT FAILED</p><p><a href="https://office-billing-update.com/payment">Update payment information</a></p><p>Your Office applications (Word, Excel, Outlook) will stop working in 48 hours if payment is not updated.</p><p>Microsoft Billing Services</p></body></html>
+--boundary-alt-392--
+
+--boundary-392
+Content-Type: application/pdf; name="payment_notice.pdf"
+Content-Disposition: attachment; filename="payment_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBwYXltZW50IG5vdGljZSBmb3IgcGhpc2hpbmcgZW1haWwgZGF0YXNldC4=
+
+--boundary-392--

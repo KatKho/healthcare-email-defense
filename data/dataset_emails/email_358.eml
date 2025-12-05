@@ -1,0 +1,37 @@
+From: "California Dental Association" <newsletter@cda.org>
+To: dr.martinez@smileclinic.org
+Subject: CDA Newsletter – November 2025
+Date: Wed, 26 Nov 2025 07:45:33 -0800
+Message-ID: 20251126074533.36808@smileclinic.org
+Return-Path: newsletter@cda.org
+Reply-To: newsletter@cda.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5695
+    for dr.martinez@smileclinic.org; Wed, 26 Nov 2025 07:45:33 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-368"
+
+--boundary-alt-368
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dr. Martinez,
+
+Your monthly CDA newsletter is here with updates on:
+- Legislative changes affecting dental practices
+- New infection control guidelines
+- Upcoming conferences and CE opportunities
+
+Visit our member portal for the full newsletter and resources.
+
+California Dental Association
+
+--boundary-alt-368
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dr. Martinez,</p><p>Your monthly CDA newsletter is here with updates on:</p><ul><li>Legislative changes affecting dental practices</li><li>New infection control guidelines</li><li>Upcoming conferences and CE opportunities</li></ul><p>Visit our member portal for the full newsletter and resources.</p><p>California Dental Association</p></body></html>
+--boundary-alt-368--

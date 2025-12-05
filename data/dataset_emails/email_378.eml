@@ -1,0 +1,50 @@
+From: "Zoom Business Support" <billing@zoom-business-portal.com>
+To: dr.martinez@smileclinic.org
+Subject: Annual Subscription Renewal Notice
+Date: Fri, 5 Dec 2025 08:45:22 -0800
+Message-ID: 20251205084522.38803@mail.sender.com
+Return-Path: billing@zoom-business-portal.com
+Reply-To: billing@zoom-business-portal.com
+Received: from smtp.mailhost.com (smtp.mailhost.com [192.0.2.176])
+    by gateway.smileclinic.org with ESMTP id xyz7813
+    for dr.martinez@smileclinic.org; Fri, 5 Dec 2025 08:45:22 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=billing@zoom-business-portal.com;
+    dmarc=fail header.from=billing@zoom-business-portal.com
+Content-Type: multipart/mixed; boundary="boundary-388"
+
+--boundary-388
+Content-Type: multipart/alternative; boundary="boundary-alt-388"
+
+--boundary-alt-388
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Zoom Business Account Renewal
+
+Your annual Zoom Business subscription expires in 3 days. Renew now to avoid service interruption.
+
+Annual Plan: $149.90
+Auto-renewal failed - manual payment required
+
+Renew your subscription: https://zoom-renewal-portal.com/renew
+
+Without renewal, you will lose access to video conferencing and all meeting recordings will be deleted.
+
+Zoom Billing Team
+
+--boundary-alt-388
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Zoom Business Account Renewal</strong></p><p>Your annual Zoom Business subscription expires in 3 days. Renew now to avoid service interruption.</p><p><strong>Annual Plan:</strong> $149.90<br>Auto-renewal failed - manual payment required</p><p><a href="https://zoom-renewal-portal.com/renew">Renew your subscription</a></p><p>Without renewal, you will lose access to video conferencing and all meeting recordings will be deleted.</p><p>Zoom Billing Team</p></body></html>
+--boundary-alt-388--
+
+--boundary-388
+Content-Type: application/pdf; name="renewal_invoice.pdf"
+Content-Disposition: attachment; filename="renewal_invoice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSByZW5ld2FsIGludm9pY2UgZm9yIHBoaXNoaW5nIGVtYWlsIGRhdGFzZXQu
+
+--boundary-388--

@@ -1,0 +1,41 @@
+From: "Google Workspace Admin" <admin@workspace-smileclinic.com>
+To: frontdesk@smileclinic.org
+Subject: Storage Quota Exceeded – Action Required
+Date: Wed, 3 Dec 2025 08:17:52 -0800
+Message-ID: 20251203081752.38207@mail.sender.com
+Return-Path: admin@workspace-smileclinic.com
+Reply-To: admin@workspace-smileclinic.com
+Received: from relay.external.net (relay.external.net [192.0.2.158])
+    by gateway.smileclinic.org with ESMTP id xyz7807
+    for frontdesk@smileclinic.org; Wed, 3 Dec 2025 08:17:52 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=admin@workspace-smileclinic.com;
+    dmarc=fail header.from=admin@workspace-smileclinic.com
+Content-Type: multipart/alternative; boundary="boundary-alt-382"
+
+--boundary-alt-382
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Google Workspace Alert
+
+Your organization's cloud storage has exceeded its quota limit.
+
+Current usage: 98% of 100GB
+Status: CRITICAL
+
+Immediate action required to prevent email delivery failures and data loss.
+
+Upgrade your storage plan now:
+https://workspace-upgrade-portal.com/storage
+
+Failure to upgrade within 6 hours will result in service suspension.
+
+Google Workspace Administrator
+
+--boundary-alt-382
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Google Workspace Alert</strong></p><p>Your organization's cloud storage has exceeded its quota limit.</p><p><strong>Current usage:</strong> 98% of 100GB<br><strong>Status:</strong> CRITICAL</p><p>Immediate action required to prevent email delivery failures and data loss.</p><p><a href="https://workspace-upgrade-portal.com/storage">Upgrade your storage plan now</a></p><p>Failure to upgrade within 6 hours will result in service suspension.</p><p>Google Workspace Administrator</p></body></html>
+--boundary-alt-382--

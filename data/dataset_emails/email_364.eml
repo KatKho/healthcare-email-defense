@@ -1,0 +1,48 @@
+From: "Blue Cross Insurance" <provider.relations@bcbs.com>
+To: frontdesk@smileclinic.org
+Subject: Provider Network Update – 2026 Contracts
+Date: Fri, 28 Nov 2025 08:38:52 -0800
+Message-ID: 20251128083852.37404@smileclinic.org
+Return-Path: provider.relations@bcbs.com
+Reply-To: provider.relations@bcbs.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5701
+    for frontdesk@smileclinic.org; Fri, 28 Nov 2025 08:38:52 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-374"
+
+--boundary-374
+Content-Type: multipart/alternative; boundary="boundary-alt-374"
+
+--boundary-alt-374
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear SmileClinic Provider,
+
+Your 2026 provider contract with Blue Cross has been renewed. No changes to reimbursement rates or terms.
+
+Your contract is attached for your records. Please contact us if you have any questions.
+
+Thank you for being a valued network provider.
+
+Blue Cross Provider Relations
+
+--boundary-alt-374
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear SmileClinic Provider,</p><p>Your 2026 provider contract with Blue Cross has been renewed. No changes to reimbursement rates or terms.</p><p>Your contract is attached for your records. Please contact us if you have any questions.</p><p>Thank you for being a valued network provider.</p><p>Blue Cross Provider Relations</p></body></html>
+--boundary-alt-374--
+
+--boundary-374
+Content-Type: application/pdf; name="provider_contract_2026.pdf"
+Content-Disposition: attachment; filename="provider_contract_2026.pdf"
+Content-Transfer-Encoding: base64
+
+UHJvdmlkZXIgY29udHJhY3QgZm9yIGluc3VyYW5jZSBuZXR3b3JrIGRhdGFzZXQu
+
+--boundary-374--

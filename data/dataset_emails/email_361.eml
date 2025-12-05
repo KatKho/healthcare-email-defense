@@ -1,0 +1,36 @@
+From: "Dentsply Sirona" <updates@dentsplysirona.com>
+To: dr.martinez@smileclinic.org
+Subject: Software Update – CEREC System v5.2
+Date: Thu, 27 Nov 2025 09:18:27 -0800
+Message-ID: 20251127091827.37101@smileclinic.org
+Return-Path: updates@dentsplysirona.com
+Reply-To: updates@dentsplysirona.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5698
+    for dr.martinez@smileclinic.org; Thu, 27 Nov 2025 09:18:27 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/alternative; boundary="boundary-alt-371"
+
+--boundary-alt-371
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Dr. Martinez,
+
+A new software update (v5.2) is now available for your CEREC system. This update includes improved shade matching and faster rendering.
+
+The update can be installed during your next scheduled maintenance or remotely by our support team.
+
+Contact us to schedule the update.
+
+Dentsply Sirona Support Team
+
+--boundary-alt-371
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear Dr. Martinez,</p><p>A new software update (v5.2) is now available for your CEREC system. This update includes improved shade matching and faster rendering.</p><p>The update can be installed during your next scheduled maintenance or remotely by our support team.</p><p>Contact us to schedule the update.</p><p>Dentsply Sirona Support Team</p></body></html>
+--boundary-alt-371--

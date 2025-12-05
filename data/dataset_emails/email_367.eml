@@ -1,0 +1,37 @@
+From: "Dentrix Cloud Support" <alerts@dentrix-cloudservices.net>
+To: dr.martinez@smileclinic.org
+Subject: Action Required: Software License Expiration
+Date: Mon, 1 Dec 2025 08:15:29 -0800
+Message-ID: 20251201081529.37702@mail.sender.com
+Return-Path: alerts@dentrix-cloudservices.net
+Reply-To: alerts@dentrix-cloudservices.net
+Received: from relay.mailhost.net (relay.mailhost.net [192.0.2.187])
+    by gateway.smileclinic.org with ESMTP id xyz7802
+    for dr.martinez@smileclinic.org; Mon, 1 Dec 2025 08:15:29 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=alerts@dentrix-cloudservices.net;
+    dmarc=fail header.from=alerts@dentrix-cloudservices.net
+Content-Type: multipart/alternative; boundary="boundary-alt-377"
+
+--boundary-alt-377
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dr. Martinez,
+
+Your Dentrix Cloud license will expire in 48 hours. Immediate renewal is required to avoid service interruption.
+
+Your patient data and practice management system will become inaccessible if not renewed immediately.
+
+Renew now: https://dentrix-renewal-center.com/license/renew
+
+This is a time-sensitive matter. Do not delay.
+
+Dentrix Cloud Licensing Department
+
+--boundary-alt-377
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dr. Martinez,</p><p>Your Dentrix Cloud license will expire in 48 hours. Immediate renewal is required to avoid service interruption.</p><p>Your patient data and practice management system will become inaccessible if not renewed immediately.</p><p><a href="https://dentrix-renewal-center.com/license/renew">Renew now</a></p><p><strong>This is a time-sensitive matter. Do not delay.</strong></p><p>Dentrix Cloud Licensing Department</p></body></html>
+--boundary-alt-377--

@@ -1,0 +1,49 @@
+From: "Kyle Rivera" <kyle.assistant@smileclinic.org>
+To: frontdesk@smileclinic.org
+Subject: Staff Meeting Notes – November 20
+Date: Thu, 20 Nov 2025 16:30:22 -0800
+Message-ID: 20251120163022.35505@smileclinic.org
+Return-Path: kyle.assistant@smileclinic.org
+Reply-To: kyle.assistant@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5682
+    for frontdesk@smileclinic.org; Thu, 20 Nov 2025 16:30:22 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-355"
+
+--boundary-355
+Content-Type: multipart/alternative; boundary="boundary-alt-355"
+
+--boundary-alt-355
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Team,
+
+Quick notes from today's staff meeting:
+- Holiday schedule will be posted by Monday
+- New patient intake forms are now digital
+- Remember to update insurance verification process
+
+Meeting notes attached for reference.
+
+Kyle
+
+--boundary-alt-355
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Team,</p><p>Quick notes from today's staff meeting:</p><ul><li>Holiday schedule will be posted by Monday</li><li>New patient intake forms are now digital</li><li>Remember to update insurance verification process</li></ul><p>Meeting notes attached for reference.</p><p>Kyle</p></body></html>
+--boundary-alt-355--
+
+--boundary-355
+Content-Type: application/pdf; name="meeting_notes.pdf"
+Content-Disposition: attachment; filename="meeting_notes.pdf"
+Content-Transfer-Encoding: base64
+
+U3RhZmYgbWVldGluZyBub3RlcyBmb3IgZGVudGFsIGNsaW5pYyBkYXRhc2V0Lg==
+
+--boundary-355--

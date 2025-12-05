@@ -1,0 +1,51 @@
+From: "QuickBooks Billing" <billing@quickbooks-dental.com>
+To: frontdesk@smileclinic.org
+Subject: Invoice Payment Overdue – Immediate Action Required
+Date: Thu, 4 Dec 2025 10:14:33 -0800
+Message-ID: 20251204101433.38601@mail.sender.com
+Return-Path: billing@quickbooks-dental.com
+Reply-To: billing@quickbooks-dental.com
+Received: from relay.external.com (relay.external.com [192.0.2.183])
+    by gateway.smileclinic.org with ESMTP id xyz7811
+    for frontdesk@smileclinic.org; Thu, 4 Dec 2025 10:14:33 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=billing@quickbooks-dental.com;
+    dmarc=fail header.from=billing@quickbooks-dental.com
+Content-Type: multipart/mixed; boundary="boundary-386"
+
+--boundary-386
+Content-Type: multipart/alternative; boundary="boundary-alt-386"
+
+--boundary-alt-386
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+URGENT: Payment Overdue
+
+Your QuickBooks subscription payment of $299.00 is 7 days overdue.
+
+Account Status: SUSPENDED
+Invoice #: QB-78934
+
+Pay immediately to avoid service termination and late fees:
+https://quickbooks-payment-center.com/pay-now
+
+Your billing data and financial records will be deleted if payment is not received within 24 hours.
+
+QuickBooks Billing Department
+
+--boundary-alt-386
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>URGENT: Payment Overdue</strong></p><p>Your QuickBooks subscription payment of $299.00 is 7 days overdue.</p><p><strong>Account Status:</strong> SUSPENDED<br><strong>Invoice #:</strong> QB-78934</p><p><a href="https://quickbooks-payment-center.com/pay-now">Pay immediately to avoid service termination and late fees</a></p><p>Your billing data and financial records will be deleted if payment is not received within 24 hours.</p><p>QuickBooks Billing Department</p></body></html>
+--boundary-alt-386--
+
+--boundary-386
+Content-Type: application/pdf; name="invoice.pdf"
+Content-Disposition: attachment; filename="invoice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBpbnZvaWNlIGZvciBwaGlzaGluZyBlbWFpbCBkYXRhc2V0Lg==
+
+--boundary-386--

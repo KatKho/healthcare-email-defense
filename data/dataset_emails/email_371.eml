@@ -1,0 +1,49 @@
+From: "Eaglesoft Support Team" <support@eaglesoft-cloud-update.com>
+To: dr.martinez@smileclinic.org
+Subject: Mandatory Database Migration Notice
+Date: Tue, 2 Dec 2025 13:22:36 -0800
+Message-ID: 20251202132236.38106@mail.sender.com
+Return-Path: support@eaglesoft-cloud-update.com
+Reply-To: support@eaglesoft-cloud-update.com
+Received: from smtp.external.net (smtp.external.net [192.0.2.145])
+    by gateway.smileclinic.org with ESMTP id xyz7806
+    for dr.martinez@smileclinic.org; Tue, 2 Dec 2025 13:22:36 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=support@eaglesoft-cloud-update.com;
+    dmarc=none header.from=support@eaglesoft-cloud-update.com
+Content-Type: multipart/mixed; boundary="boundary-381"
+
+--boundary-381
+Content-Type: multipart/alternative; boundary="boundary-alt-381"
+
+--boundary-alt-381
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Important Notice: Database Migration
+
+Your Eaglesoft database is scheduled for mandatory cloud migration on December 5, 2025.
+
+You must verify your practice credentials to ensure a smooth transition. Patient records will be lost if verification is not completed.
+
+Verify your account here: https://eaglesoft-migration-portal.com/verify
+
+Complete this process within 24 hours to avoid data loss.
+
+Eaglesoft Technical Support
+
+--boundary-alt-381
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Important Notice: Database Migration</strong></p><p>Your Eaglesoft database is scheduled for mandatory cloud migration on December 5, 2025.</p><p>You must verify your practice credentials to ensure a smooth transition. Patient records will be lost if verification is not completed.</p><p><a href="https://eaglesoft-migration-portal.com/verify">Verify your account here</a></p><p>Complete this process within 24 hours to avoid data loss.</p><p>Eaglesoft Technical Support</p></body></html>
+--boundary-alt-381--
+
+--boundary-381
+Content-Type: application/pdf; name="migration_notice.pdf"
+Content-Disposition: attachment; filename="migration_notice.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBkYXRhYmFzZSBtaWdyYXRpb24gbm90aWNlIGZvciBwaGlzaGluZyBkYXRhc2V0Lg==
+
+--boundary-381--

@@ -1,0 +1,47 @@
+From: "Dr. Sofia Martinez" <dr.martinez@smileclinic.org>
+To: kyle.assistant@smileclinic.org
+Subject: Referral to Endodontist – Patient Davis
+Date: Fri, 21 Nov 2025 11:38:47 -0800
+Message-ID: 20251121113847.35707@smileclinic.org
+Return-Path: dr.martinez@smileclinic.org
+Reply-To: dr.martinez@smileclinic.org
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5684
+    for kyle.assistant@smileclinic.org; Fri, 21 Nov 2025 11:38:47 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-357"
+
+--boundary-357
+Content-Type: multipart/alternative; boundary="boundary-alt-357"
+
+--boundary-alt-357
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Kyle,
+
+Please send a referral to Dr. Chang's endodontic office for Sarah Davis. She needs a complex root canal on tooth #14 that's beyond my comfort level.
+
+Referral form is attached. Patient has been informed.
+
+Thanks,
+Dr. Martinez
+
+--boundary-alt-357
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Kyle,</p><p>Please send a referral to Dr. Chang's endodontic office for Sarah Davis. She needs a complex root canal on tooth #14 that's beyond my comfort level.</p><p>Referral form is attached. Patient has been informed.</p><p>Thanks,<br>Dr. Martinez</p></body></html>
+--boundary-alt-357--
+
+--boundary-357
+Content-Type: application/pdf; name="referral_form.pdf"
+Content-Disposition: attachment; filename="referral_form.pdf"
+Content-Transfer-Encoding: base64
+
+UmVmZXJyYWwgZm9ybSBmb3IgZW5kb2RvbnRpYyB0cmVhdG1lbnQgZGF0YXNldC4=
+
+--boundary-357--

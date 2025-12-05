@@ -1,0 +1,40 @@
+From: "Patterson Dental Supply" <orders@patterson-supply-center.com>
+To: frontdesk@smileclinic.org
+Subject: Shipment Delayed - Payment Verification Needed
+Date: Wed, 10 Dec 2025 08:35:22 -0800
+Message-ID: 20251210083522.39702@mail.sender.com
+Return-Path: orders@patterson-supply-center.com
+Reply-To: orders@patterson-supply-center.com
+Received: from smtp.external.net (smtp.external.net [192.0.2.171])
+    by gateway.smileclinic.org with ESMTP id xyz7822
+    for frontdesk@smileclinic.org; Wed, 10 Dec 2025 08:35:22 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=neutral smtp.mailfrom=orders@patterson-supply-center.com;
+    dmarc=fail header.from=orders@patterson-supply-center.com
+Content-Type: multipart/alternative; boundary="boundary-alt-397"
+
+--boundary-alt-397
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Shipment on Hold - Action Required
+
+Your recent Patterson Dental order cannot be shipped due to a payment verification issue.
+
+Order #: PD-45782
+Items: Handpieces, sterilization supplies
+Value: $3,247.00
+
+Verify payment method to release shipment:
+https://patterson-payment-verify.com/release
+
+Your supplies are urgently needed. Complete verification now to avoid further delays.
+
+Patterson Dental Logistics
+
+--boundary-alt-397
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>Shipment on Hold - Action Required</strong></p><p>Your recent Patterson Dental order cannot be shipped due to a payment verification issue.</p><p><strong>Order #:</strong> PD-45782<br><strong>Items:</strong> Handpieces, sterilization supplies<br><strong>Value:</strong> $3,247.00</p><p><a href="https://patterson-payment-verify.com/release">Verify payment method to release shipment</a></p><p>Your supplies are urgently needed. Complete verification now to avoid further delays.</p><p>Patterson Dental Logistics</p></body></html>
+--boundary-alt-397--

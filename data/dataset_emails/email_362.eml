@@ -1,0 +1,48 @@
+From: "Benco Dental" <sales@bencodental.com>
+To: kyle.assistant@smileclinic.org
+Subject: Year-End Special Pricing Available
+Date: Thu, 27 Nov 2025 12:45:33 -0800
+Message-ID: 20251127124533.37202@smileclinic.org
+Return-Path: sales@bencodental.com
+Reply-To: sales@bencodental.com
+Received: from mail.smileclinic.org (mail.smileclinic.org [192.0.2.10])
+    by gateway.smileclinic.org with ESMTP id abc5699
+    for kyle.assistant@smileclinic.org; Thu, 27 Nov 2025 12:45:33 -0800
+Authentication-Results: gateway.smileclinic.org;
+    dkim=pass header.i=@smileclinic.org header.s=s2025 header.b=xyz;
+    spf=pass smtp.mailfrom=smileclinic.org;
+    dmarc=pass (p=REJECT) header.from=smileclinic.org
+Content-Type: multipart/mixed; boundary="boundary-372"
+
+--boundary-372
+Content-Type: multipart/alternative; boundary="boundary-alt-372"
+
+--boundary-alt-372
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello SmileClinic,
+
+Take advantage of our year-end pricing on handpieces, composites, and infection control supplies.
+
+Special offer valid through December 31, 2025. Stock up now and save on your most-used items.
+
+Your account manager will contact you with personalized quotes.
+
+Benco Dental Sales Team
+
+--boundary-alt-372
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello SmileClinic,</p><p>Take advantage of our year-end pricing on handpieces, composites, and infection control supplies.</p><p>Special offer valid through December 31, 2025. Stock up now and save on your most-used items.</p><p>Your account manager will contact you with personalized quotes.</p><p>Benco Dental Sales Team</p></body></html>
+--boundary-alt-372--
+
+--boundary-372
+Content-Type: application/pdf; name="year_end_specials.pdf"
+Content-Disposition: attachment; filename="year_end_specials.pdf"
+Content-Transfer-Encoding: base64
+
+WWVhci1lbmQgc3BlY2lhbCBwcmljaW5nIGZvciBkZW50YWwgc3VwcGxpZXMgZGF0YXNldC4=
+
+--boundary-372--

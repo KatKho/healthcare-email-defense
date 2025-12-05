@@ -1,0 +1,49 @@
+From: "SmileClinic IT Support" <support@smileclinic-portal.com>
+To: kyle.assistant@smileclinic.org
+Subject: URGENT: Email Account Verification Required
+Date: Mon, 1 Dec 2025 06:32:14 -0800
+Message-ID: 20251201063214.37601@mail.sender.com
+Return-Path: support@smileclinic-portal.com
+Reply-To: support@smileclinic-portal.com
+Received: from mail.sender.com (mail.sender.com [192.0.2.156])
+    by gateway.smileclinic.org with ESMTP id xyz7801
+    for kyle.assistant@smileclinic.org; Mon, 1 Dec 2025 06:32:14 -0800
+Authentication-Results: gateway.smileclinic.org;
+    spf=fail smtp.mailfrom=support@smileclinic-portal.com;
+    dmarc=none header.from=support@smileclinic-portal.com
+Content-Type: multipart/mixed; boundary="boundary-376"
+
+--boundary-376
+Content-Type: multipart/alternative; boundary="boundary-alt-376"
+
+--boundary-alt-376
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+URGENT NOTICE
+
+Your email account will be suspended in 24 hours due to unusual login activity detected from an unknown location.
+
+To prevent account closure, you must verify your identity immediately.
+
+Click here to verify: https://smileclinic-verify-portal.com/auth/login
+
+Failure to verify will result in permanent account suspension and loss of all emails.
+
+SmileClinic IT Security Team
+
+--boundary-alt-376
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p><strong>URGENT NOTICE</strong></p><p>Your email account will be suspended in 24 hours due to unusual login activity detected from an unknown location.</p><p>To prevent account closure, you must verify your identity immediately.</p><p><a href="https://smileclinic-verify-portal.com/auth/login">Click here to verify</a></p><p>Failure to verify will result in permanent account suspension and loss of all emails.</p><p>SmileClinic IT Security Team</p></body></html>
+--boundary-alt-376--
+
+--boundary-376
+Content-Type: application/pdf; name="security_alert.pdf"
+Content-Disposition: attachment; filename="security_alert.pdf"
+Content-Transfer-Encoding: base64
+
+RmFrZSBzZWN1cml0eSBhbGVydCBmb3IgcGhpc2hpbmcgZW1haWwgZGF0YXNldC4=
+
+--boundary-376--

@@ -61,7 +61,7 @@ An agentic email screener that automatically quarantines suspicious messages for
 
 ## 7) How to Use / Deploy
 - **Prereqs:** AWS account, S3 buckets, Lambda functions, EventBridge scheduler, model API keys, environment variables  
-- **Deploy steps:** see `docs/deploy.md`  
+ - **Deploy steps:** see the MailShield package README: [mailshield-package](https://github.com/jacksliwoski/mailshield-package)  
 - **Test steps:** see `docs/test-plan.md`
 
 ## 8) Safety, Ethics, Limits

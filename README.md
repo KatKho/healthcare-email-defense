@@ -4,8 +4,8 @@ Team 6 — Kat, Jack, Kaibo, Mina
 An agentic email screener that automatically quarantines suspicious messages for IT review, reducing healthcare staff risk without deleting legitimate messages.
 
 ## 1) Live Demo
- - Synthetic Industry: http://44.220.92.119:3000/nurse-view.html — status: `<Up>` — test creds (fake): `<None>`
- - Agentic System: http://44.220.92.119:3000/demo-combined.html — status: `<Up>`— notes: running continuously since 11/19/25; processes emails every 15 minutes
+ - Synthetic Industry: [Healthcare Staff View](http://44.220.92.119:3000/nurse-view.html) — status: Up — test creds (fake): `<None>`
+ - Agentic System: [IT Review / Agentic System](http://44.220.92.119:3000/demo-combined.html) — status: Up — notes: running continuously since 11/19/25; processes emails every 15 minutes
 - Logs/Observability: AWS CloudWatch — `/<log-group>`
 
 ## 2) Thesis & Outcome
@@ -70,8 +70,8 @@ An agentic email screener that automatically quarantines suspicious messages for
 - Known limits: confidence scores inconsistent, early caching, synthetic emails not fully realistic  
 
 ## 9) Final Deliverables
-- 1000-word paper: `<link>`  
-- Slides: `<link>`  
+- 1000-word paper: [Healthcare Email Defense Paper](https://docs.google.com/document/d/1PFtlzoywoqE4lVeUKv91vRib7RB2Eziy7k0bfER1UO4/edit?usp=sharing)  
+- Slides: [Healthcare Email Defense Slides](https://www.canva.com/design/DAG6l5-b8HM/8xpulxzHTfCslX_ZfVH_Xw/edit?utm_content=DAG6l5-b8HM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
 - Evidence folder: `/evidence/`  
 
 ## 10) Next Steps

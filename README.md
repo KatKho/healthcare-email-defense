@@ -72,7 +72,7 @@ An agentic email screener that automatically quarantines suspicious messages for
 ## 9) Final Deliverables
 - 1000-word paper: [Healthcare Email Defense Paper](https://docs.google.com/document/d/1PFtlzoywoqE4lVeUKv91vRib7RB2Eziy7k0bfER1UO4/edit?usp=sharing)  
 - Slides: [Healthcare Email Defense Slides](https://www.canva.com/design/DAG6l5-b8HM/8xpulxzHTfCslX_ZfVH_Xw/edit?utm_content=DAG6l5-b8HM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
-- Evidence folder: `/evidence/`  
+- Evidence folder: [`evidence/`](./evidence/)  
 
 ## 10) Next Steps
 - Package the system for real clinic deployment  
